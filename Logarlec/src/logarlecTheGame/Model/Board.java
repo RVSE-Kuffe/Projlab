@@ -15,12 +15,12 @@ public class Board {
     }
 public
     void init(){System.out.println(sk.names.get(this) + "init");}
-    void gameOver(){System.out.println("Meghívtak");}
-    void modify(){System.out.println("Meghívtak");}
-    void addRoom(Room r1){System.out.println("Meghívtak");}
-    void removeRoom(Room r1){System.out.println("Meghívtak");}
-    boolean forceMerge(Room r1, Room r2){System.out.println("Meghívtak");return true;}
-    void forcesplit(Room r){System.out.println("Meghívtak");}
-    void win(){System.out.println("Meghívtak");}
+    void gameOver(){System.out.println(sk.names.get(this) + "gameOver");}
+    void modify(){System.out.println(sk.names.get(this) + "modify");}
+    void addRoom(Room r1){System.out.println(sk.names.get(this) + "addRoom");}
+    void removeRoom(Room r1){System.out.println(sk.names.get(this) + "removeRoom");}
+    boolean forceMerge(Room r1, Room r2){System.out.println(sk.names.get(this) + "forceMerge");return true;}
+    void forcesplit(Room r){System.out.println(sk.names.get(this) + "forceSplit");}
+    void win(){System.out.println(sk.names.get(this) + "win");}
 
 }
