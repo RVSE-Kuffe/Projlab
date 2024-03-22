@@ -1,5 +1,7 @@
 package logarlecTheGame.Model.Interfaces;
 
-public interface StudentProtection {  
+import logarlecTheGame.Model.Tvsz;
 
+public interface StudentProtection {  
+    boolean protect(Item i);
 }
