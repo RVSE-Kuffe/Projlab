@@ -1,6 +1,14 @@
 package logarlecTheGame.Skeleton;
+import logarlecTheGame.Model.*;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import logarlecTheGame.*;
 
 public class Skeleton {
+    public Map<Object, String> names = new HashMap<>();
+
     public void mainMenu(){
         //kilistázza az öt tesztbeli menüpontot
         //meghívja a kiválasztott menüponthoz tartozó listázó függvényt.
@@ -26,5 +34,9 @@ public class Skeleton {
 
     public void listItemPickUp(){
 
+    }
+
+    public void studentMove1(){
+       
     }
 }
