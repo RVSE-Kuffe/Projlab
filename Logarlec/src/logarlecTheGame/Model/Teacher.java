@@ -24,4 +24,12 @@ public class Teacher extends Player {
         System.out.println(sk.names.get(this) + " return kill");
         return;
     }
+
+    public void stunTeacher(){
+
+    }
+
+    public void pickUp(Logarlec l){
+        
+    }
 }
