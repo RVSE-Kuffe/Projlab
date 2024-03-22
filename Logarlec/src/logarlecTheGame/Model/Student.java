@@ -62,5 +62,14 @@ public
         return false;
     }
 
-    boolean protect(Item i){}
+    /**
+     * A hallgató védelmét kezdeményezi
+     * @param i     A tárgy, amivel megpróbálja magát megvédeni
+     * @return      Igaz, ha sikerült a tárgynak megvédenie a játékost, különben hamis.
+     */
+    boolean protect(Item i){
+        if(i.durabminus())
+            return true;
+        return false;
+    }
 }
