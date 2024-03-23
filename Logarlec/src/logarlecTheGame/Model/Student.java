@@ -7,8 +7,8 @@ import logarlecTheGame.Model.Item.*;
 import logarlecTheGame.Model.Interfaces.*;
 
 public class Student extends Player implements StudentProtection, PutDown, Pairing {
-    public Student(Skeleton s, String oName){
-        s.names.put(this,oName);
+    public Student(Skeleton s, String n, int i, Room r){
+        super(s,n,i,r);
     }
 
     /**
@@ -17,7 +17,7 @@ public class Student extends Player implements StudentProtection, PutDown, Pairi
      * @return      Hamis, ha sikerült valamelyik tárgynak megvédenie a hallgatót, ellenkező esetben igaz
      */
     public boolean die(){
-        for (Item item : itemList) {
+        for (Item item : this.itemList) {
             if(item.acceptSP(this))
                 return false;
         }
@@ -92,7 +92,9 @@ public class Student extends Player implements StudentProtection, PutDown, Pairi
     public void use(Transistor i) {
         dropItem(i);
         this.location.removePlayer(this);
-        i.getPair().teleportPlayer(this);
+        if(i.getPair().teleportPlayer(this))
+            return;
+        else this.location.addPlayer(this);
     }
 
     public void use(Camambert i) {
@@ -115,13 +117,13 @@ public class Student extends Player implements StudentProtection, PutDown, Pairi
     }
 
 
-    public boolean protect(Tvsz tvsz) {
+    public boolean protect(Tvsz i) {
         if(i.durabminus())
             return true;
         return false;
     }
 
-    public boolean protect(Beer b) {
+    public boolean protect(Beer i) {
         if(i.durabminus())
             return true;
         return false;
