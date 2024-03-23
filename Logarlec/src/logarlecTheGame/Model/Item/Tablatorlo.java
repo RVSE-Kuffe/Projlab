@@ -1,11 +1,14 @@
 package logarlecTheGame.Model.Item;
+import java.rmi.server.Skeleton;
 import java.util.ArrayList;
 import java.util.List;
 import logarlecTheGame.*;
 import logarlecTheGame.Model.Player;
 import logarlecTheGame.Model.Student;
+import logarlecTheGame.Model.Item.Item;
 
-public class Tablatorlo implements CycleBased {
+
+public class Tablatorlo extends Item implements CycleBased {
     private int durability;
     private Skeleton sk;
 
@@ -14,8 +17,12 @@ public class Tablatorlo implements CycleBased {
         sk.names.put(this, n);
         durability=durab;
     }
-
-    public void acceptPutDown(Student s){}    
+    
+    @Override
+    public void acceptPutDown(Student s){
+        System.out.println(sk.names.get(this) + "acceptPutDown");
+        s.use(this);
+    }    
 
     boolean durabminus(){}
 

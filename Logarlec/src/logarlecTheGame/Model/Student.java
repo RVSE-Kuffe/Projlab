@@ -1,11 +1,17 @@
 package logarlecTheGame.Model;
+import javax.swing.plaf.basic.BasicComboBoxUI.ItemHandler;
+import logarlecTheGame.Model.Item.Item;
 
+<<<<<<< HEAD
+import logarlecTheGame.*;
+=======
 import logarlecTheGame.Skeleton.Skeleton;
 
 import logarlecTheGame.Model.Item.*;
 
 import logarlecTheGame.Model.Interfaces.*;
 
+>>>>>>> 778dc8218be7c15129f02d320c7dbc4d76232261
 public class Student extends Player implements StudentProtection, PutDown, Pairing {
     public Student(Skeleton s, String n, int i, Room r){
         super(s,n,i,r);

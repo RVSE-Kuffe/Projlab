@@ -1,13 +1,19 @@
 package logarlecTheGame.Model.Item;
+import java.rmi.server.Skeleton;
 import java.util.ArrayList;
 import java.util.List;
 import logarlecTheGame.Skeleton.*;
 import logarlecTheGame.*;
 import logarlecTheGame.Model.Player;
 import logarlecTheGame.Model.Student;
+<<<<<<< HEAD
+import logarlecTheGame.Model.Item.Item;
+=======
 import logarlecTheGame.Model.Interfaces.*;
+>>>>>>> 778dc8218be7c15129f02d320c7dbc4d76232261
 
-public class Beer implements CycleBased {
+
+public class Beer extends Item implements CycleBased {
     private int durability;
     private boolean active;
     private Skeleton sk;
@@ -18,11 +24,30 @@ public class Beer implements CycleBased {
         durability=durab;
         active=b;
     }
-
-    public boolean AcceptSP(Student s){}
-
-    public void AcceptPickUp(Player p){}    
+    /**
+     * A hallgatót próbálja megvédeni
+     * @param s     a student aki használni akarja (visitor)
+     * @return      Hamis, true ha sikerült megvédeni, hamis egyébként
+     */
+    @Override
+     public boolean acceptSP(Student s){
+        System.out.println(sk.names.get(this) + "acceptSP");
+        if(s.protect(this))return true;
+        return false;   
+    }
+    /**
+     * A tárgyat fel akarja venni játékos
+     * speciális, mert felvételtől aktiválódik
+     * @param p     a player aki fel akarja venni (visitor)
+     */
+    @Override
+    public void acceptPickUp(Player p){
+        p.pickUp(this);
+        System.out.println(sk.names.get(this) + "acceptPickUp");
+    }    
 
     boolean durabminus(){}
+
+    void iterate(){}
     
 }

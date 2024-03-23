@@ -6,6 +6,8 @@ import logarlecTheGame.*;
 import logarlecTheGame.Model.Player;
 import logarlecTheGame.Model.Student;
 import logarlecTheGame.Model.Item.Transistor;
+import logarlecTheGame.Model.Item.Item;
+
 
 public class Tvsz extends Item {
     private int durability;
@@ -17,12 +19,32 @@ public class Tvsz extends Item {
         durability=durab;
     }
 
+    /**
+     * A hallgatót próbálja megvédeni
+     * @param s     a student aki használni akarja (visitor)
+     * @return      Hamis, true ha sikerült megvédeni, hamis egyébként
+     */
+   @Override
     public boolean acceptSP(Student s){
         System.out.println(sk.names.get(this) + "acceptSP");
         if(s.protect(this))return true;
-        return false;}
+        return false;
+    }
 
-    boolean durabminus(){}
+    /**
+     * Használatonként 1-el csökken a durability
+     * @return true ha sikerül, false egyébként
+     */
+    boolean durabminus(){
+        System.out.println(sk.names.get(this) + "durabminus");
+        if(this.durability>0){
+            durability-=1;
+            System.out.println(sk.names.get(this) + "durabminus return true");
+            return true;
+        }
+        System.out.println(sk.names.get(this) + "durabminus return false");
+        return false;
+    }
 
     
 }
