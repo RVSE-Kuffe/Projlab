@@ -1,5 +1,9 @@
 package logarlecTheGame.Model.Interfaces;
 
-public interface StudentProtection {  
+import logarlecTheGame.Model.Item.*;;
 
+public interface StudentProtection {  
+    boolean protect(Item i);
+    boolean protect(Tvsz tvsz);
+    boolean protect(Beer b);
 }
