@@ -1,4 +1,4 @@
-import java.rmi.server.Skeleton;
+import logarlecTheGame.Skeleton.*;
 import java.util.ArrayList;
 import java.util.List;
 import logarlecTheGame.Skeleton.*;
