@@ -21,6 +21,8 @@ public class Transistor extends Item  {
         sk.names.put(this, n);
     }
 
+    public Transistor getPair(){return pair;}
+
     public boolean makePair(Transistor t2){
         if(this.pair==null){
             this.pair=t2;

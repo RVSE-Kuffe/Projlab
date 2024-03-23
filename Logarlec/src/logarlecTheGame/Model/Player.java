@@ -8,15 +8,13 @@ import logarlecTheGame.Model.Item.*;
 import logarlecTheGame.Skeleton.*;
 
 public class Player implements PickUp, GasProtect{
-    private int id;
-    private boolean stunned;
-    private boolean isProtected;    //Simán protected-nek nem nevezhetem el a változót, mert rinyál a fordító
-    private Room location;
-    private List<Item> itemList;
-    private Skeleton sk;
+    protected int id;
+    protected boolean stunned;
+    protected boolean isProtected;    //Simán protected-nek nem nevezhetem el a változót, mert rinyál a fordító
+    protected Room location;
+    protected List<Item> itemList;
 
-    public Player(Skeleton s, String n, int i, Room l){
-        sk = s;
+    public Player(Skeleton sk, String n, int i, Room l){
         sk.names.put(this, n);
         id = i;
         location = l;
@@ -39,11 +37,11 @@ public class Player implements PickUp, GasProtect{
         return;
     }
 
-    public void stun(){
+    public boolean stun(){
         System.out.println(sk.names.get(this) + " stun");
 
         System.out.println(sk.names.get(this) + " return stun");
-        return;
+        return false;;
     }
 
     public void dropItem(Item i){
@@ -60,11 +58,11 @@ public class Player implements PickUp, GasProtect{
         return;
     }
 
-    public void die(){
+    public boolean die(){
         System.out.println(sk.names.get(this) + " die");
 
         System.out.println(sk.names.get(this) + " return die");
-        return;
+        return false;;
     }
 
     public void turn(){
