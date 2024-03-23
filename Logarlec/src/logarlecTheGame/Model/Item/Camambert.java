@@ -1,4 +1,3 @@
-import java.rmi.server.Skeleton;
 import java.util.ArrayList;
 import java.util.List;
 import logarlecTheGame.Skeleton.*;
@@ -9,6 +8,7 @@ import logarlecTheGame.Model.Item.Item;
 
 
 public class Camambert extends Item {
+    private Skeleton sk;
 
     public Camambert(Skeleton s, String n) {
         sk = s;

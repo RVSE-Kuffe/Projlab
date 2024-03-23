@@ -1,12 +1,12 @@
 package logarlecTheGame.Model.Item;
-import java.rmi.server.Skeleton;
 import java.util.ArrayList;
 import java.util.List;
 import logarlecTheGame.*;
 import logarlecTheGame.Model.Player;
 import logarlecTheGame.Model.Student;
+import logarlecTheGame.Model.Interfaces.CycleBased;
 import logarlecTheGame.Model.Item.Item;
-
+import logarlecTheGame.Skeleton.*;
 
 public class Tablatorlo extends Item implements CycleBased {
     private int durability;

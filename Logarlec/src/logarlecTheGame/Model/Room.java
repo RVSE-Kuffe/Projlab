@@ -14,7 +14,7 @@ public class Room {
         sk.names.put(this, n);
     }
 
-    List<Door> door = new ArrayList<>();
+    List<Door> doorlist = new ArrayList<>();
     Boolean gassed;
     int roomid;
     int capacity;
@@ -27,10 +27,11 @@ public
     void addPlayer(Player p){System.out.println(sk.names.get(this) + "addPlayer");}
     boolean mergeRoom(Room r1, Room r2){System.out.println(sk.names.get(this) + "mergeRoom");return true;}
     void Split(Room r1, Room r2){System.out.println(sk.names.get(this) + "Split");}
-    void addDoor(Door d){System.out.println(sk.names.get(this) + "addDoor");}
+    public void addDoor(Door d){System.out.println(sk.names.get(this) + "addDoor");}
     void pickupItem(int i, Player p){System.out.println(sk.names.get(this) + "pickUpItem");}
     boolean killPlayer(Player p){System.out.println(sk.names.get(this) + "killPlayer");return true;}
     void enough(){System.out.println(sk.names.get(this) + "enough");}
+    
     void win(){System.out.println(sk.names.get(this) + "win");}
     boolean changeRoom(Player p, Room r){System.out.println(sk.names.get(this) + "changeRoom"); return true;}
     Room newRoom(){System.out.println(sk.names.get(this) + "newRoom");return room;}

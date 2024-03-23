@@ -5,6 +5,8 @@ import java.util.logging.Logger;
 import logarlecTheGame.*;
 import logarlecTheGame.Model.Item.*;
 import logarlecTheGame.Model.Interfaces.*;
+import logarlecTheGame.Skeleton.*;
+
 
 public class Student extends Player implements StudentProtection, PutDown, Pairing {
     Logger logger = Logger.getLogger(getClass().getName());
