@@ -15,6 +15,8 @@ public class Logarlec {
         sk.names.put(this, n);
     }
 
-    void AcceptPickUp(Player p){}
+    void acceptPickUp(Player p){
+        p.pickUp(this);
+    }
     
 }
