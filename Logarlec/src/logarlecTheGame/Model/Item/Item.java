@@ -19,5 +19,7 @@ public abstract class Item {
 
     public boolean acceptPairing(Player p, Item i){}
 
+    public boolean makePair(Item i){}
+
     
 }

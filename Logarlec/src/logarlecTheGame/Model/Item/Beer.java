@@ -43,7 +43,7 @@ public class Beer extends Item implements CycleBased {
         System.out.println(sk.names.get(this) + "acceptPickUp");
     }    
 
-    boolean durabminus(){}
+    public boolean durabminus(){}
 
     public void iterate(){}
     
