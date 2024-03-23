@@ -61,5 +61,5 @@ public class Skeleton {
         Room r=new Room(this, "r");
         Student s=new Student(this, "s",1,r);
         Camambert c=new Camambert(this,"c");
-}
+    }
 }
