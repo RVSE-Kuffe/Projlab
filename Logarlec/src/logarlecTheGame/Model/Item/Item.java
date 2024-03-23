@@ -9,10 +9,7 @@ import logarlecTheGame.Model.Item.Transistor;
 public abstract class Item {
     public void acceptPutDown(Student s){}
 
-    public boolean acceptSP(Student s){
-        System.out.println(sk.names.get(this) + "acceptSP");
-        if(s.protect(this))return true;
-    }
+    public boolean acceptSP(Student s){}
 
     public boolean acceptGasProtect(Player p){}
 

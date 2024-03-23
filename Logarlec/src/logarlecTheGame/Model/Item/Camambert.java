@@ -5,14 +5,24 @@ import logarlecTheGame.Skeleton.*;
 import logarlecTheGame.*;
 import logarlecTheGame.Model.Player;
 import logarlecTheGame.Model.Student;
+import logarlecTheGame.Model.Item.Item;
 
-public class Camambert {
+
+public class Camambert extends Item {
 
     public Camambert(Skeleton s, String n) {
         sk = s;
         sk.names.put(this, n);
     }
-
-     public void AcceptPutDown(Student s){}
+    /**
+     * A tárgyat le akarja tenni(és használni) hallgató
+     * speciális, mert letételre képessége van(gázosítás)
+     * @param s     a student aki fel akarja venni (visitor)
+     */
+    @Override
+     public void acceptPutDown(Student s){
+        System.out.println(sk.names.get(this) + "acceptPutDown");
+        s.use(this);
+     }
     
 }
