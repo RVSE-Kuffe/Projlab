@@ -5,6 +5,7 @@ import logarlecTheGame.Skeleton.*;
 import logarlecTheGame.*;
 import logarlecTheGame.Model.Player;
 import logarlecTheGame.Model.Student;
+import logarlecTheGame.Interfaces.*;
 
 public class Beer implements CycleBased {
     private int durability;
