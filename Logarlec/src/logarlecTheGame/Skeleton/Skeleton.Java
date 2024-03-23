@@ -1,10 +1,10 @@
 package logarlecTheGame.Skeleton;
 import logarlecTheGame.Model.*;
 import logarlecTheGame.Model.Item.*;
+import logarlecTheGame.Skeleton.test_hallgato.TestHallgato;
+
 import java.util.HashMap;
 import java.util.Map;
-
-import logarlecTheGame.*;
 
 public class Skeleton {
     public Map<Object, String> names = new HashMap<>();
@@ -18,6 +18,8 @@ public class Skeleton {
     public void listStudentMoves(){
         //kilisázza a hallgató lépéseivel kapcsolatos teszteket
         //elinditja a felhasznál által kiválasztott tesztet (beolvas egy betűt, stb.)
+        //Tesztjeim meghívására példa:
+        hallgatolep1(this);
     }
 
     public void listTeacherMoves(){
