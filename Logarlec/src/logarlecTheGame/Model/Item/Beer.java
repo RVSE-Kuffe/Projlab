@@ -6,11 +6,8 @@ import logarlecTheGame.Skeleton.*;
 import logarlecTheGame.*;
 import logarlecTheGame.Model.Player;
 import logarlecTheGame.Model.Student;
-<<<<<<< HEAD
 import logarlecTheGame.Model.Item.Item;
-=======
 import logarlecTheGame.Model.Interfaces.*;
->>>>>>> 778dc8218be7c15129f02d320c7dbc4d76232261
 
 
 public class Beer extends Item implements CycleBased {
@@ -48,6 +45,6 @@ public class Beer extends Item implements CycleBased {
 
     boolean durabminus(){}
 
-    void iterate(){}
+    public void iterate(){}
     
 }
