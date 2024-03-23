@@ -26,6 +26,6 @@ public class Tablatorlo extends Item implements CycleBased {
 
     boolean durabminus(){}
 
-    void iterate(){}
+    public void iterate(){}
     
 }
