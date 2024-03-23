@@ -1,3 +1,4 @@
+import java.rmi.server.Skeleton;
 import java.util.ArrayList;
 import java.util.List;
 import logarlecTheGame.Skeleton.*;
@@ -16,7 +17,10 @@ public class Tvsz extends Item {
         durability=durab;
     }
 
-    public boolean AcceptSP(Student s){}
+    public boolean acceptSP(Student s){
+        System.out.println(sk.names.get(this) + "acceptSP");
+        if(s.protect(this))return true;
+        return false;}
 
     boolean durabminus(){}
 

@@ -1,5 +1,4 @@
 package logarlecTheGame.Model.Interfaces;
-
 import logarlecTheGame.Model.Item.Logarlec;
 import logarlecTheGame.Model.Item.Item;
 import logarlecTheGame.Model.Item.Beer;

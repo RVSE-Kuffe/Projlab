@@ -16,9 +16,17 @@ public class Mask extends Item {
         durability=durab;
     }
 
-    public boolean AcceptGasProtect(Player p){}
+    public boolean acceptGasProtect(Player p){
+        if(p.maskProtect(this)) return true;
+        return false;
+    }
 
-    boolean durabminus(){}
+    boolean durabminus(){
+        if(this.durability>0){
+            durability-=1;
+            return true;
+        }
+    }
 
     
 }

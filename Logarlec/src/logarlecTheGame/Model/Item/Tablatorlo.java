@@ -1,7 +1,6 @@
 package logarlecTheGame.Model.Item;
 import java.util.ArrayList;
 import java.util.List;
-import logarlecTheGame.Skeleton.Skeleton;
 import logarlecTheGame.*;
 import logarlecTheGame.Model.Player;
 import logarlecTheGame.Model.Student;
@@ -16,8 +15,10 @@ public class Tablatorlo implements CycleBased {
         durability=durab;
     }
 
-    public void AcceptPutDown(Student s){}    
+    public void acceptPutDown(Student s){}    
 
     boolean durabminus(){}
+
+    void iterate(){}
     
 }
