@@ -27,6 +27,11 @@ public
     boolean transferPlayer(){System.out.println(sk.names.get(this) + "transferPlayer");return true;}
     void changeVisibility(){System.out.println(sk.names.get(this) + "changeVisibility");}
     void changeRoom(){System.out.println(sk.names.get(this) + "changeRoom");}
-    void acceptOpenDoor(){System.out.println(sk.names.get(this) + "acceptOpenDoor");}
+    void acceptOpenDoor(){
+        System.out.println(sk.names.get(this) + "acceptOpenDoor");
+        this.closed=false;
+        System.out.println(sk.names.get(this) + "acceptOpenDoor returned with void");
+        return;
+    }
 
 }

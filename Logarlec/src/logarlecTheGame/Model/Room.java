@@ -8,17 +8,19 @@ import logarlecTheGame.Model.Item.Item;
 
 public class Room {
     private Skeleton sk;
-
-    public Room(Skeleton s, String n) {
-        sk = s;
-        sk.names.put(this, n);
-    }
-
     List<Door> doorlist = new ArrayList<>();
-    Boolean gassed;
+    Boolean gassed=false;
     int roomid;
     int capacity;
-    boolean cleaner;
+    boolean cleaner=false;
+    public Room(Skeleton s, String n,int rid, int cap) {
+        sk = s;
+        sk.names.put(this, n);
+        roomid=rid;
+        capacity=cap;
+    }
+
+    
 
 public
     void removeItem(Item i){System.out.println(sk.names.get(this) + "removeItem");}
@@ -37,8 +39,18 @@ public
     Room newRoom(){System.out.println(sk.names.get(this) + "newRoom");return room;}
     void stunRoom(){System.out.println(sk.names.get(this) + "stunRoom");}
     void pvp(Player p){System.out.println(sk.names.get(this) + "pvp");}
-    void makeGassed(){System.out.println(sk.names.get(this) + "makeGassed");}
-    void makeClean(){System.out.println(sk.names.get(this) + "makeClean");}
+    public void makeGassed(){
+        System.out.println(sk.names.get(this) + "makeGassed");
+        gassed=true;
+        System.out.println(sk.names.get(this) + "makeGassed returned with void");
+        return;
+    }
+    void makeClean(){
+        System.out.println(sk.names.get(this) + "makeClean");
+        cleaner=true;
+        System.out.println(sk.names.get(this) + "makeClean returned with void");
+        return;
+    }
     void killAll(Player p){System.out.println(sk.names.get(this) + "killAll");}
     boolean acceptPairing(Board b,Room r){System.out.println(sk.names.get(this) + "acceptPairing");return true;}
 

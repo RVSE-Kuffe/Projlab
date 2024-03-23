@@ -22,6 +22,8 @@ public class Tablatorlo extends Item implements CycleBased {
     public void acceptPutDown(Student s){
         System.out.println(sk.names.get(this) + "acceptPutDown");
         s.use(this);
+        System.out.println(sk.names.get(this) + "acceptPutDown returned with void");
+        return;
     }    
 
     boolean durabminus(){}

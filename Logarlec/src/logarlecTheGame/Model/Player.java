@@ -8,6 +8,7 @@ import logarlecTheGame.Model.Item.*;
 import logarlecTheGame.Skeleton.*;
 
 public class Player implements PickUp, GasProtect{
+    protected Skeleton sk;
     protected int id;
     protected boolean stunned;
     protected boolean isProtected;    //Simán protected-nek nem nevezhetem el a változót, mert rinyál a fordító
@@ -41,7 +42,7 @@ public class Player implements PickUp, GasProtect{
         System.out.println(sk.names.get(this) + " stun");
 
         System.out.println(sk.names.get(this) + " return stun");
-        return false;;
+        return false;
     }
 
     public void dropItem(Item i){
@@ -62,7 +63,7 @@ public class Player implements PickUp, GasProtect{
         System.out.println(sk.names.get(this) + " die");
 
         System.out.println(sk.names.get(this) + " return die");
-        return false;;
+        return false;
     }
 
     public void turn(){

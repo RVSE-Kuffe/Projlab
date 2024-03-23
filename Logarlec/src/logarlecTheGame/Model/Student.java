@@ -11,6 +11,7 @@ import logarlecTheGame.Skeleton.*;
 public class Student extends Player implements StudentProtection, PutDown, Pairing {
     Logger logger = Logger.getLogger(getClass().getName());
     
+    
     public Student(Skeleton s, String n, int i, Room r){
         super(s,n,i,r);
     }
@@ -22,7 +23,7 @@ public class Student extends Player implements StudentProtection, PutDown, Pairi
      */
     @Override
     public boolean die(){
-        logger.info(s.names.get(this) + " move");
+        logger.info(sk.names.get(this) + " move");
         for (Item item : this.itemList) {
             if(item.acceptSP(this))
                 return false;
@@ -71,8 +72,11 @@ public class Student extends Player implements StudentProtection, PutDown, Pairi
      * Tárgyak letételét/használatát kezdeményezi
      * @param i A tárgy amit használunk
      */
-    void putDown(Item i){
+    public void putDown(Item i){
+        System.out.println(sk.names.get(this) + "putDown");
         i.acceptPutDown(this);
+        System.out.println(sk.names.get(this) + "putDown returned with void");
+        return;
     }
 
     /**
@@ -80,8 +84,11 @@ public class Student extends Player implements StudentProtection, PutDown, Pairi
      * @param i     Az a tárgy amivel szeretnénk dolgozni
      */
     public void use(Item i) {
+        System.out.println(sk.names.get(this) + "use");
         dropItem(i);
         this.location.addItem(i);
+        System.out.println(sk.names.get(this) + "use returned with void");
+        return;
     }
 
     public void use(Transistor i) {
@@ -92,13 +99,19 @@ public class Student extends Player implements StudentProtection, PutDown, Pairi
     }
 
     public void use(Camambert i) {
+        System.out.println(sk.names.get(this) + "use");
         dropItem(i);
         this.location.makeGassed();
+        System.out.println(sk.names.get(this) + "use returned with void");
+        return;
     }
 
     public void use(Tablatorlo i) {
+        System.out.println(sk.names.get(this) + "use");
         dropItem(i);
         this.location.makeClean();
+        System.out.println(sk.names.get(this) + "use returned with void");
+        return;
     }
 
     /**

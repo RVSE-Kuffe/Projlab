@@ -6,8 +6,8 @@ import logarlecTheGame.*;
 public class CursedRoom extends Room {
     private Skeleton sk;
 
-    public CursedRoom(Skeleton s, String n) {
-        super(s,n);
+    public CursedRoom(Skeleton s, String n,int i, int c) {
+        super(s,n,i,c);
     }
 public
     
@@ -19,7 +19,15 @@ public
         System.out.println(sk.names.get(this) + "closeDoor returned with void");
         return;
     }
-    void openDoor(){System.out.println(sk.names.get(this) + "openDoor");}
-    void acceptPairing(Board b, Room r){System.out.println(sk.names.get(this) + "acceptPairing");}
+    void openDoor(){
+        System.out.println(sk.names.get(this) + "openDoor");
+        for(Door d : doorlist){
+            d.acceptOpenDoor();
+        }
+        System.out.println(sk.names.get(this) + "openDoor returned with void");
+        return;
+    }
+    boolean acceptPairing(Board b, Room r){System.out.println(sk.names.get(this) + "acceptPairing");
+    return true;}
 
 }

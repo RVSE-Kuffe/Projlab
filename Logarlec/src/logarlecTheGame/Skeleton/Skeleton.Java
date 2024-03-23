@@ -45,8 +45,8 @@ public class Skeleton {
        
     }
     public void testCloseDoor(){
-        CursedRoom r1=new CursedRoom(this, "r");
-        Room r2=new Room(this, "r");
+        CursedRoom r1=new CursedRoom(this, "r",2,4);
+        Room r2=new Room(this, "r",1,4);
         Door d=new Door(this, "d",r1,r2);
         r1.addDoor(d);
         r2.addDoor(d);
@@ -54,12 +54,24 @@ public class Skeleton {
         System.out.println();
     }
     public void testOpenDoor(){
-        Room r=new Room(this, "r");
-        Door d=new Door(this, "d");
+        CursedRoom r1=new CursedRoom(this, "r",2,4);
+        Room r2=new Room(this, "r",1,4);
+        Door d=new Door(this, "d",r1,r2);
+        r1.addDoor(d);
+        r2.addDoor(d);
+        r1.closeDoor();
+        System.out.println();
     }
     public void testMakeGassed(){
-        Room r=new Room(this, "r");
+        Room r=new Room(this, "r",3,5);
         Student s=new Student(this, "s",1,r);
         Camambert c=new Camambert(this,"c");
-}
+        s.putDown(c);
+    }
+    public void testMakeClean(){
+        Room r=new Room(this, "r",3,5);
+        Student s=new Student(this, "s",1,r);
+        Tablatorlo t=new Tablatorlo(this,"t",6);
+        s.putDown(t);
+    }
 }
