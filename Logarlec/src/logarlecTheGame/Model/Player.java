@@ -15,7 +15,8 @@ public class Player implements PickUp, GasProtect{
     protected Room location;
     protected List<Item> itemList;
 
-    public Player(Skeleton sk, String n, int i, Room l){
+    public Player(Skeleton s, String n, int i, Room l){
+        sk = s;
         sk.names.put(this, n);
         id = i;
         location = l;
@@ -80,11 +81,10 @@ public class Player implements PickUp, GasProtect{
         return;
     }
 
-    public void changeR(Room r){
+    public boolean changeR(Room r){
         System.out.println(sk.names.get(this) + " changeR(" + sk.names.get(r) + ")");
-
         System.out.println(sk.names.get(this) + " return changeR(" + sk.names.get(r) + ")");
-        return;
+        return this.location.changeRoom(this, r);
     }
 
     public void destroyItem(Item i){
@@ -127,6 +127,10 @@ public class Player implements PickUp, GasProtect{
 
         System.out.println(sk.names.get(this) + " return destroyItem(" + sk.names.get(r) + ")");
         return;
+    }
+
+    public void addItem(Item i){
+        itemList.add(i);
     }
 
     public void pickUp(Logarlec l){
