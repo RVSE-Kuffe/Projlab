@@ -31,18 +31,12 @@ public class Player implements PickUp, GasProtect{
      * @param i     Felvenni kívánt tárgy
      */
     public void pickUpItem(Item i){
-<<<<<<< HEAD
-        System.out.println(sk.names.get(this) + ".pickUpItem(" + sk.names.get(i) + ")");
-        i.acceptPickUp(this);
-        System.out.println(sk.names.get(this) + ".pickUpItem(" + sk.names.get(i) + ") returned");
-=======
         System.out.println(sk.names.get(this) + " pickUpItem(" + sk.names.get(i) + ")");
 
         i.acceptPickUp(this);
 
         System.out.println(sk.names.get(this) + " return pickUpItem(" + sk.names.get(i) + ")");
         return;
->>>>>>> e1900923b58351629ff5b3defa34ede9206883fb
     }
 
     /**
@@ -126,16 +120,14 @@ public class Player implements PickUp, GasProtect{
      * Az Oktatók bénítását végzi
      * @return  Hamissal tér vissza, ha az Oktatót egy tárgya megvédte, különben Igaz
      */
-    public boolean stunTeacher(){
+    public void stunTeacher(){
         System.out.println(sk.names.get(this) + ".stunTeacher()");
         for(Item i: itemList){
             if(i.acceptGasProtect(this)){
                 System.out.println(sk.names.get(this) + ".stunTeacher() returned False");
-                return false;
             }
         }
         System.out.println(sk.names.get(this) + ".stunTeacher() returned True");
-        return true;
     }
 
     /**
@@ -154,16 +146,14 @@ public class Player implements PickUp, GasProtect{
      * @param p     A játékos, akit próbálunk megölni
      * @return      Igazzal tér vissza, ha a játékos meghalt, különben hamis
      */
-    public boolean kill(Player p){
+    public void kill(Player p){
         System.out.println(sk.names.get(this) + ".kill(" + sk.names.get(p) + ")");
         if(!p.equals(this)){
             if(p.die()){
                 System.out.println(sk.names.get(this) + ".kill(" + sk.names.get(p) + ") returned True");
-                return true;
             }
         }
         System.out.println(sk.names.get(this) + ".kill(" + sk.names.get(p) + ") returned False");
-        return false;
     }
 
     /**

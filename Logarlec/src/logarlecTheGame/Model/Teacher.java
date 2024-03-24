@@ -7,9 +7,8 @@ import logarlecTheGame.Model.Item.*;
 public class Teacher extends Player {
     private Skeleton sk;
 
-    public Teacher(Skeleton s, String n){
-        sk = s;
-        sk.names.put(this, n);
+    public Teacher(Skeleton s, String n, int i, Room l){
+        super(s, n, i, l)
     }
 
     public void kill(Player p){
