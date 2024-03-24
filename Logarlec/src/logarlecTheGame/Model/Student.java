@@ -102,7 +102,6 @@ public class Student extends Player implements StudentProtection, PutDown, Pairi
     public void use(Item i) {
         logger.info(sk.names.get(this) + ".use()\n");
         dropItem(i);
-        this.location.addItem(i);
     }
 
     public void use(Transistor i) {

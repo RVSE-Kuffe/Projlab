@@ -32,7 +32,7 @@ public class Player implements PickUp, GasProtect{
     public void pickUpItem(Item i){
         System.out.println(sk.names.get(this) + ".pickUpItem(" + sk.names.get(i) + ")");
         i.acceptPickUp(this);
-        System.out.println(sk.names.get(this) + ".pickUpItem() returned");
+        System.out.println(sk.names.get(this) + ".pickUpItem(" + sk.names.get(i) + ") returned");
     }
 
     /**
@@ -43,7 +43,7 @@ public class Player implements PickUp, GasProtect{
         System.out.println(sk.names.get(this) + ".pickUp(" + sk.names.get(i) + ")");
         location.removeItem(i);
         this.addItem(i);
-        System.out.println(sk.names.get(this) + ".pickUp() returned");
+        System.out.println(sk.names.get(this) + ".pickUp(" + sk.names.get(i) + ") returned");
     }
 
     /**
@@ -53,7 +53,7 @@ public class Player implements PickUp, GasProtect{
     public void pickUp(Logarlec i){
         System.out.println(sk.names.get(this) + ".pickUp(" + sk.names.get(i) + ")");
         location.win();
-        System.out.println(sk.names.get(this) + ".pickUp() returned");
+        System.out.println(sk.names.get(this) + ".pickUp(" + sk.names.get(i) + ") returned");
     }
 
     public void pickUp(Beer i){
@@ -93,11 +93,15 @@ public class Player implements PickUp, GasProtect{
         return true;
     }
 
+    /**
+     * A tárgyak eldobását végzi
+     * @param i     Az eldobott tárgy
+     */
     public void dropItem(Item i){
-        System.out.println(sk.names.get(this) + " dropItem(" + sk.names.get(i) + ")");
-
-        System.out.println(sk.names.get(this) + " return dropItem(" + sk.names.get(i) + ")");
-        return;
+        System.out.println(sk.names.get(this) + ".dropItem(" + sk.names.get(i) + ")");
+        this.location.addItem(i);
+        itemList.remove(i);
+        System.out.println(sk.names.get(this) + ".dropItem(" + sk.names.get(i) + ") returned");
     }
 
     public void kill(Player p){
