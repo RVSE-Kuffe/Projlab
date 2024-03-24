@@ -48,8 +48,9 @@ public class Beer extends Item implements CycleBased {
     }
 
     private void csokkent(){
-        if(durability>0&&)
-        durability-=1;
+        if(durability>0 && this.active){
+            this.durability-=1;
+        }
     }
 
     public void iterate(){
