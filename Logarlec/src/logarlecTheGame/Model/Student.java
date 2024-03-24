@@ -21,11 +21,7 @@ public class Student extends Player implements StudentProtection, PutDown, Pairi
      */
     @Override
     public boolean die(){
-<<<<<<< HEAD
-        logger.info(sk.names.get(this) + " move");
-=======
         logger.info(sk.names.get(this) + ".die()\n");
->>>>>>> e07a787602d64e731d83e800e29ad961445b214f
         for (Item item : this.itemList) {
             if(item.acceptSP(this)){
                 logger.info(sk.names.get(this) + ".die() returned with False\n");
@@ -33,7 +29,6 @@ public class Student extends Player implements StudentProtection, PutDown, Pairi
             }
         }
         logger.info(sk.names.get(this) + ".die() returned with True\n");
-        this.location.removePlayer(this);
         return true;
     } 
     
@@ -99,12 +94,7 @@ public class Student extends Player implements StudentProtection, PutDown, Pairi
     public void putDown(Item i){
         System.out.println(sk.names.get(this) + "putDown");
         i.acceptPutDown(this);
-<<<<<<< HEAD
-        System.out.println(sk.names.get(this) + "putDown returned with void");
-        return;
-=======
         logger.info(sk.names.get(this) + ".putDown()\n");
->>>>>>> e07a787602d64e731d83e800e29ad961445b214f
     }
 
     /**
@@ -112,15 +102,9 @@ public class Student extends Player implements StudentProtection, PutDown, Pairi
      * @param i     Az a tárgy amivel szeretnénk dolgozni
      */
     public void use(Item i) {
-<<<<<<< HEAD
-        System.out.println(sk.names.get(this) + "use");
-=======
         logger.info(sk.names.get(this) + ".use()\n");
->>>>>>> e07a787602d64e731d83e800e29ad961445b214f
         dropItem(i);
-        this.location.addItem(i);
-        System.out.println(sk.names.get(this) + "use returned with void");
-        return;
+        System.out.println(sk.names.get(this) + ".use() returned with void");
     }
 
     public void use(Transistor i) {
@@ -132,11 +116,7 @@ public class Student extends Player implements StudentProtection, PutDown, Pairi
     }
 
     public void use(Camambert i) {
-<<<<<<< HEAD
-        System.out.println(sk.names.get(this) + "use");
-=======
         logger.info(sk.names.get(this) + ".use()\n");
->>>>>>> e07a787602d64e731d83e800e29ad961445b214f
         dropItem(i);
         this.location.makeGassed();
         System.out.println(sk.names.get(this) + "use returned with void");
@@ -144,11 +124,7 @@ public class Student extends Player implements StudentProtection, PutDown, Pairi
     }
 
     public void use(Tablatorlo i) {
-<<<<<<< HEAD
-        System.out.println(sk.names.get(this) + "use");
-=======
         logger.info(sk.names.get(this) + ".use()\n");
->>>>>>> e07a787602d64e731d83e800e29ad961445b214f
         dropItem(i);
         this.location.makeClean();
         System.out.println(sk.names.get(this) + "use returned with void");
@@ -167,24 +143,22 @@ public class Student extends Player implements StudentProtection, PutDown, Pairi
 
 
     public boolean protect(Tvsz i) {
-        logger.info(sk.names.get(this) + ".protect(tvsz)\n");
+        logger.info(sk.names.get(this) + ".protect()\n");
         if(i.durabminus()){
-            logger.info(sk.names.get(this) + ".protect(tvsz) returned with True\n");
+            logger.info(sk.names.get(this) + ".protect() returned with True\n");
             return true;
         }
-        logger.info(sk.names.get(this) + ".protect(tvsz) returned with False\n");
+        logger.info(sk.names.get(this) + ".protect() returned with False\n");
         return false;
     }
 
     public boolean protect(Beer i) {
-        logger.info(sk.names.get(this) + ".protect(beer)\n");
-        logger.info(sk.names.get(this) + ".protect(beer) returned with True\n");
-        return true;
-
-    }
-    @Override
-    public void pickUp(Logarlec l){
-        logger.info(sk.names.get(this) + ".pickup(logarlec)\n");
-        this.location.win();
+        logger.info(sk.names.get(this) + ".protect()\n");
+        if(i.durabminus()){
+            logger.info(sk.names.get(this) + ".protect() returned with True\n");
+            return true;
+        }
+        logger.info(sk.names.get(this) + ".protect() returned with False\n");
+        return false;
     }
 }
