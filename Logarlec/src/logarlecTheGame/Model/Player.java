@@ -105,7 +105,7 @@ public class Player implements PickUp, GasProtect{
     }
 
     /**
-     * Játékosok megölésével próbálkozik
+     * Játékosok megölésével próbálkozik, kezdeményezi azt
      * @param p     A játékos, akit próbálunk megölni
      * @return      Igazzal tér vissza, ha a játékos meghalt, különben hamis
      */
@@ -121,11 +121,20 @@ public class Player implements PickUp, GasProtect{
         return false;
     }
 
+    /**
+     * A játékosok megölését végzi. Megvizsgálja van-e védelme a játékosnak.
+     * @return  Hamis, ha a játékosnak sikerült magát megvédenie, különben Igaz
+     */
     public boolean die(){
-        System.out.println(sk.names.get(this) + " die");
-
-        System.out.println(sk.names.get(this) + " return die");
-        return false;
+        System.out.println(sk.names.get(this) + ".die()");
+        for(Item i : itemList){
+            if(i.acceptSP(this)){
+                System.out.println(sk.names.get(this) + ".die() returned False");
+                return false;
+            }
+        }
+        System.out.println(sk.names.get(this) + ".die() returned True");
+        return true;
     }
 
     public boolean changeR(Room r){
