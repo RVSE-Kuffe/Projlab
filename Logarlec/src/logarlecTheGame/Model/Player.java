@@ -104,11 +104,21 @@ public class Player implements PickUp, GasProtect{
         System.out.println(sk.names.get(this) + ".dropItem(" + sk.names.get(i) + ") returned");
     }
 
-    public void kill(Player p){
-        System.out.println(sk.names.get(this) + " kill(" + sk.names.get(p) + ")");
-
-        System.out.println(sk.names.get(this) + " return kill(" + sk.names.get(p) + ")");
-        return;
+    /**
+     * Játékosok megölésével próbálkozik
+     * @param p     A játékos, akit próbálunk megölni
+     * @return      Igazzal tér vissza, ha a játékos meghalt, különben hamis
+     */
+    public boolean kill(Player p){
+        System.out.println(sk.names.get(this) + ".kill(" + sk.names.get(p) + ")");
+        if(!p.equals(this)){
+            if(p.die()){
+                System.out.println(sk.names.get(this) + ".kill(" + sk.names.get(p) + ") returned True");
+                return true;
+            }
+        }
+        System.out.println(sk.names.get(this) + ".kill(" + sk.names.get(p) + ") returned False");
+        return false;
     }
 
     public boolean die(){
