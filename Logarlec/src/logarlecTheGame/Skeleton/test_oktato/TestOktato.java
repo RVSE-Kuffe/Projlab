@@ -5,6 +5,11 @@ import logarlecTheGame.Model.Item.*;
 import logarlecTheGame.Skeleton.*;
 
 public class TestOktato {
+
+    /**
+     * oktató különböző lépéseinek tesztlését végző függvények
+     */ 
+
     public void testOkatoLep1(Skeleton s){
         Room r1 = new Room(s, "r1", 0, 1);
         Room r2 = new Room(s, "r2", 1, 1);

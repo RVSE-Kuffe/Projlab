@@ -206,6 +206,12 @@ public class Skeleton {
         }
     }
 
+    
+     /**
+     * ajtók bezáródását vizsgáló függvény
+     * Átkozott szoba ajtói tudnak csak záródni
+     */ 
+
     public void testCloseDoor(){
         CursedRoom r1=new CursedRoom(this, "r",2,4);
         Room r2=new Room(this, "r",1,4);
@@ -215,6 +221,11 @@ public class Skeleton {
         r1.closeDoor();
         System.out.println();
     }
+
+    /**
+     * ajtók nyílását vizsgáló függvény
+     * Átkozott szoba ajtói tudnak csak záródni és ezután nyílni
+     */ 
     public void testOpenDoor(){
         CursedRoom r1=new CursedRoom(this, "r",2,4);
         Room r2=new Room(this, "r",1,4);
@@ -224,6 +235,11 @@ public class Skeleton {
         r1.openDoor();
         System.out.println();
     }
+
+    /**
+     * szoba gázosodását tesztelő függvény
+     * Camambert használattal valósulhat meg
+     */ 
     public void testMakeGassed(){
         Room r=new Room(this, "r",3,5);
         Student s=new Student(this, "s",1,r);
@@ -231,6 +247,11 @@ public class Skeleton {
         s.addItem(c);
         s.putDown(c);
     }
+
+    /**
+     * szoba tablatörlőssé válását tesztelő függvény
+     * Tablatorlo használattal valósulhat meg
+     */ 
     public void testMakeClean(){
         Room r=new Room(this, "r",3,5);
         Student s=new Student(this, "s",1,r);
@@ -239,6 +260,9 @@ public class Skeleton {
         s.putDown(t);
     }
 
+    /**
+     * szoba splitelődését tesztelő függvény
+     */ 
     public void testSplit(){
         Board b = new Board(this, "board");
         Room r1 = new Room(this,"r1", 0, 2);

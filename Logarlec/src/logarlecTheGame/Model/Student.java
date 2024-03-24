@@ -8,7 +8,10 @@ import logarlecTheGame.Model.Interfaces.*;
 public class Student extends Player implements StudentProtection, PutDown, Pairing {
     Logger logger = Logger.getLogger(getClass().getName());
     
-    
+    /**
+     * Student osztály konstruktora
+     * inicializálja az attribútumokat
+     */
     public Student(Skeleton s, String n, int i, Room r){
         super(s,n,i,r);
         System.out.println(n + ".ctor()");
@@ -169,7 +172,9 @@ public class Student extends Player implements StudentProtection, PutDown, Pairi
     }
 
     /**
-     * Nem csinál semmit a hallgatóval
+     * Nem csinál semmit a hallgatóval, 
+     * mivel ez csak a tanár stunolását végzi atblatorlo miatt
+     * hallgatót nem érinti
      */
     @Override
     public void stunTeacher(){

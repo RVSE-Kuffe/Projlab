@@ -6,6 +6,10 @@ import logarlecTheGame.Model.Item.*;
 
 public class TestHallgato{
 
+    /**
+     * hallgató különböző lépéseinek tesztlését végző függvények
+     */ 
+
     public void hallgatolep1(Skeleton s){
         Room r1 = new Room(s,"r1", 0, 1);
         Room r2 = new Room(s, "r2", 1, 0);

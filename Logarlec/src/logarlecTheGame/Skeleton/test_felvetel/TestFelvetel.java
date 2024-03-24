@@ -7,6 +7,9 @@ import logarlecTheGame.Model.Item.*;
 
 public class TestFelvetel {
 
+    /**
+     * logarléc felvétel testelése
+     */ 
     public void targyfelvesz1(Skeleton s){
         Room r1 = new Room(s,"r1", 0, 2);
         Student stud = new Student(s, "s", 1, r1);
@@ -19,6 +22,9 @@ public class TestFelvetel {
         stud.pickUpItem(logar);
     }
 
+    /**
+     * sima tárgy felvételének tesztelése
+     */ 
     public void targyfelvesz2(Skeleton s){
         Room r1 = new Room(s,"r1", 0, 2);
         Student stud = new Student(s, "s", 1, r1);

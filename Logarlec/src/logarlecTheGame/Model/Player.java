@@ -14,6 +14,10 @@ public class Player implements PickUp, GasProtect{
     protected Room location;
     protected List<Item> itemList;
 
+    /**
+     * player osztály konstruktora
+     * beállítja a megfelelő attribútumokat
+     */
     public Player(Skeleton s, String n, int i, Room l){
         sk = s;
         sk.names.put(this, n);
@@ -48,6 +52,8 @@ public class Player implements PickUp, GasProtect{
 
     /**
      * A Logarléc felvételét valósítja meg
+     * felvételével meg van nyerve a játék
+     * Teacher felüldefiniálja
      * @param i     Logarléc
      */
     public void pickUp(Logarlec i){
@@ -91,7 +97,7 @@ public class Player implements PickUp, GasProtect{
 
     /**
      * Az Oktatók bénítását végzi
-     * @return  Hamissal tér vissza, ha az Oktatót egy tárgya megvédte, különben Igaz
+     * Teacher felüldefiniálja, mert ez csak rá van hatással 
      */
     public void stunTeacher(){
         System.out.println(sk.names.get(this) + ".stunTeacher()");
@@ -99,6 +105,7 @@ public class Player implements PickUp, GasProtect{
 
     /**
      * A tárgyak eldobását végzi
+     * magától kiveszi a player és leteszi az adott szobába
      * @param i     Az eldobott tárgy
      */
     public void dropItem(Item i){

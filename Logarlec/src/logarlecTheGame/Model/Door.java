@@ -16,7 +16,9 @@ public class Door {
         whereTo=r2;
         sk.names.put(this, n);
     }
-    
+    /**
+     * ajtók bezárását végzi
+     */
     void acceptCloseDoor(){
         System.out.println(sk.names.get(this) + "acceptCloseDoor");
         this.closed=true;
@@ -49,6 +51,10 @@ public class Door {
     }
     void changeVisibility(){System.out.println(sk.names.get(this) + "changeVisibility");}
     void changeRoom(){System.out.println(sk.names.get(this) + "changeRoom");}
+
+    /**
+     * ajtók kinyitását végzi
+     */
     void acceptOpenDoor(){
         System.out.println(sk.names.get(this) + "acceptOpenDoor");
         this.closed=false;
