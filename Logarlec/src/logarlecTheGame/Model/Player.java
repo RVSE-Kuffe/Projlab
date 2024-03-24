@@ -110,28 +110,18 @@ public class Player implements PickUp, GasProtect{
      */
     public void kill(Player p){
         System.out.println(sk.names.get(this) + ".kill(" + sk.names.get(p) + ")");
-        if(!p.equals(this)){
-            if(p.die()){
-                System.out.println(sk.names.get(this) + ".kill(" + sk.names.get(p) + ") returned True");
-            }
+        if(!p.equals(this) && (p.die())){
+            System.out.println(sk.names.get(this) + ".kill(" + sk.names.get(p) + ") returned True");
         }
         System.out.println(sk.names.get(this) + ".kill(" + sk.names.get(p) + ") returned False");
     }
 
     /**
-     * A játékosok megölését végzi. Megvizsgálja van-e védelme a játékosnak.
+     * A játékosok megölését végzi. A student ezt felüldefiniálja, így ez csak az oktatókra hívódik, ők pedig nem tudnak meghalni
      * @return  Hamis, ha a játékosnak sikerült magát megvédenie, különben Igaz
      */
     public boolean die(){
-        System.out.println(sk.names.get(this) + ".die()");
-        for(Item i : itemList){
-            if(i.acceptSP(this)){
-                System.out.println(sk.names.get(this) + ".die() returned False");
-                return false;
-            }
-        }
-        System.out.println(sk.names.get(this) + ".die() returned True");
-        return true;
+        return false;
     }
 
     /**
@@ -180,24 +170,20 @@ public class Player implements PickUp, GasProtect{
     public void loseItem(){
         System.out.println(sk.names.get(this) + ".loseItem()");
         for(Item i : itemList){
-            i.acceptPutDown(this);
+            this.dropItem(i);
         }
         System.out.println(sk.names.get(this) + ".loseItem() returned");
     }
 
     /**
-     * Két tranzisztor párosítását kezdi
+     * Két tranzisztor párosítását kezdi. A student felülírja, ezt csak az oktatók használják, mivel ők nem tudnak párosítani
      * @param t1    Első tranzisztor
      * @param t2    Második tranzisztor
      * @return      Ha sikerrel párosította, akkor Igazzal tér vissza, különben hamis
      */
-    public bool pairing(Transistor t1, Transistor t2){
-        System.out.println(sk.names.get(this) + ".pairing("+sk.names.get(t1)+", "+sk.names.get(t2)+")");
-        if(t1.acceptPairing(this, t2)){
-            System.out.println(sk.names.get(this) + ".pairing("+sk.names.get(t1)+", "+sk.names.get(t2)+") returned True");
-            return true;
-        }
-        System.out.println(sk.names.get(this) + ".pairing("+sk.names.get(t1)+", "+sk.names.get(t2)+") returned False");
+    public boolean pairing(Transistor t1, Transistor t2){
+        System.out.println(sk.names.get(this) + ".pairing(" + sk.names.get(t1) +", " +sk.names.get(t2)+ ")");
+        
         return false;
     }
 
@@ -208,7 +194,7 @@ public class Player implements PickUp, GasProtect{
     public void addItem(Item i){
         System.out.println(sk.names.get(this) + ".addItem(" + sk.names.get(i) + ")");
         itemList.add(i);
-        System.out.println(sk.names.get(this) + ".addItem(" + sk.names.get(r) + ") returned");
+        System.out.println(sk.names.get(this) + ".addItem(" + sk.names.get(i) + ") returned");
     }
 
     /**
@@ -217,9 +203,12 @@ public class Player implements PickUp, GasProtect{
      * @return      Ha sikerült a védés, Igazzal, ha nem, akkor Hamissal tér vssza
      */
     public boolean maskProtect(Mask m){
+        System.out.println(sk.names.get(this) + ".maskProtect(" + sk.names.get(m) + ")");
         if(m.durabminus()){
+            System.out.println(sk.names.get(this) + ".maskProtect(" + sk.names.get(m) + ") returned True");
             return true;
         }
+        System.out.println(sk.names.get(this) + ".maskProtect(" + sk.names.get(m) + ") returned False");
         return false;
     }
 
@@ -229,6 +218,8 @@ public class Player implements PickUp, GasProtect{
      * @return      Ha sikerült a védés, Igazzal, ha nem, akkor Hamissal tér vssza
      */
     public boolean maskProtect(Item i){
+        System.out.println(sk.names.get(this) + ".maskProtect(" + sk.names.get(i) + ")");
+        System.out.println(sk.names.get(this) + ".maskProtect(" + sk.names.get(i) + ") returned False");
         return false;
     }
 
