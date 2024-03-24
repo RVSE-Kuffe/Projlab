@@ -39,14 +39,37 @@ public class Room {
     public boolean killPlayer(Player p){System.out.println(sk.names.get(this) + "killPlayer");return true;}
     public void enough(){System.out.println(sk.names.get(this) + "enough");}
     
-    public void win(){System.out.println(sk.names.get(this) + "win");}
-    public boolean changeRoom(Player p, Room r){System.out.println(sk.names.get(this) + "changeRoom"); return true;}
-    public Room newRoom(){System.out.println(sk.names.get(this) + "newRoom");return Room;}
-    public void stunRoom(){System.out.println(sk.names.get(this) + "stunRoom");}
-    public void pvp(Player p){System.out.println(sk.names.get(this) + "pvp");}
-    public void makeGassed(){System.out.println(sk.names.get(this) + "makeGassed");}
-    public void makeClean(){System.out.println(sk.names.get(this) + "makeClean");}
-    public void killAll(Player p){System.out.println(sk.names.get(this) + "killAll");}
-    public boolean acceptPairing(Board b,Room r){System.out.println(sk.names.get(this) + "acceptPairing");return true;}
+    void win(){System.out.println(sk.names.get(this) + "win");}
+
+    boolean changeRoom(Player p, Room r){System.out.println(sk.names.get(this) + "changeRoom"); return true;}
+
+    Room newRoom(){
+        System.out.println(sk.names.get(this) + "newRoom");
+        Room room2 =new Room(this.sk, "splitNewRoom", this.capacity);
+        Door splitDoor = new Door(this.sk, "splitDoor", this, room2);
+        this.addDoor(splitDoor);
+        room2.addDoor(splitDoor);
+
+        return room2;
+    }
+
+
+
+    void stunRoom(){System.out.println(sk.names.get(this) + "stunRoom");}
+    void pvp(Player p){System.out.println(sk.names.get(this) + "pvp");}
+    public void makeGassed(){
+        System.out.println(sk.names.get(this) + "makeGassed");
+        gassed=true;
+        System.out.println(sk.names.get(this) + "makeGassed returned with void");
+        return;
+    }
+    void makeClean(){
+        System.out.println(sk.names.get(this) + "makeClean");
+        cleaner=true;
+        System.out.println(sk.names.get(this) + "makeClean returned with void");
+        return;
+    }
+    void killAll(Player p){System.out.println(sk.names.get(this) + "killAll");}
+    boolean acceptPairing(Board b,Room r){System.out.println(sk.names.get(this) + "acceptPairing");return true;}
 
 }
