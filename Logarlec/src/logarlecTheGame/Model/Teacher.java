@@ -5,12 +5,11 @@ import logarlecTheGame.*;
 import logarlecTheGame.Model.Item.*;
 
 public class Teacher extends Player {
-    private Skeleton sk;
-
     public Teacher(Skeleton s, String n, int i, Room l){
-        super(s, n, i, l)
+        super(s, n, i, l);
     }
 
+    @Override
     public void kill(Player p){
         System.out.println(sk.names.get(this) + " kill(" + sk.names.get(p) + ")");
         p.die();
@@ -18,13 +17,15 @@ public class Teacher extends Player {
         return;
     }
 
-    public void stunTeacher(){
+    @Override
+    public boolean stunTeacher(){
         System.out.println(sk.names.get(this) + " stunTeacher");
 
         System.out.println(sk.names.get(this) + " return stunTeacher");
         return;
     }
 
+    @Override
     public void pickUp(Logarlec l){
         System.out.println(sk.names.get(this) + " pickUp(" + sk.names.get(l) + ")");
         System.out.println(sk.names.get(this) + " return pickup(" + sk.names.get(l) + ")");

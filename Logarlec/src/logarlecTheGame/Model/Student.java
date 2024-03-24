@@ -11,7 +11,7 @@ public class Student extends Player implements StudentProtection, PutDown, Pairi
     
     public Student(Skeleton s, String n, int i, Room r){
         super(s,n,i,r);
-        logger.info(sk.names.get(this) + ".ctor()");
+        logger.info(n + ".ctor()");
     }
 
     /**
@@ -122,6 +122,10 @@ public class Student extends Player implements StudentProtection, PutDown, Pairi
         System.out.println(sk.names.get(this) + ".use("+sk.names.get(i)+") returned");
     }
 
+    /**
+     * Tranzisztor használatát végzi
+     * @param i     Tranzisztor
+     */
     public void use(Transistor i) {
         logger.info(sk.names.get(this) + ".use("+sk.names.get(i)+")\n");
         if(i.teleportPlayer(this)){
@@ -131,6 +135,10 @@ public class Student extends Player implements StudentProtection, PutDown, Pairi
         System.out.println(sk.names.get(this) + ".use("+sk.names.get(i)+") returned");
     }
 
+    /**
+     * Camambertek használatát végzi
+     * @param i     Sajt
+     */
     public void use(Camambert i) {
         logger.info(sk.names.get(this) + ".use("+sk.names.get(i)+")");
         dropItem(i);
@@ -138,6 +146,10 @@ public class Student extends Player implements StudentProtection, PutDown, Pairi
         System.out.println(sk.names.get(this) + ".use("+sk.names.get(i)+") returned");
     }
 
+    /**
+     * Tablatorlok használatát végzi
+     * @param i     Tablatorlo
+     */
     public void use(Tablatorlo i) {
         logger.info(sk.names.get(this) + ".use("+sk.names.get(i)+")");
         dropItem(i);
@@ -156,7 +168,11 @@ public class Student extends Player implements StudentProtection, PutDown, Pairi
         return false;
     }
 
-
+    /**
+     * A hallgató védelmét kezdeményezi
+     * @param i     A tárgy, amivel megpróbálja magát megvédeni, itt TVSZ
+     * @return      Igaz, ha sikerült a tárgynak megvédenie a játékost, különben hamis.
+     */
     public boolean protect(Tvsz i) {
         logger.info(sk.names.get(this) + ".protect("+sk.names.get(i)+")");
         if(i.durabminus()){
@@ -167,8 +183,12 @@ public class Student extends Player implements StudentProtection, PutDown, Pairi
         return false;
     }
 
+    /**
+     * A hallgató védelmét kezdeményezi
+     * @param i     A tárgy, amivel megpróbálja magát megvédeni, itt Sör
+     * @return      Minden esetben igaz, köszönhetően a sör tulajdonságainak.
+     */
     public boolean protect(Beer i) {
-        //TODO
         return true;
     }
 }
