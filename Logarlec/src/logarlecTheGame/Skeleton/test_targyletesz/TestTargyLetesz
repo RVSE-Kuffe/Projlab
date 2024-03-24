@@ -1,0 +1,37 @@
+package logarlecTheGame.Skeleton.test_hallgato;
+
+import logarlecTheGame.Model.*;
+import logarlecTheGame.Skeleton.*;
+import logarlecTheGame.Model.Item.*;
+
+public class TestTargyLetesz {
+
+    public static void testTargyLetesz(Skeleton s){
+        Room r1 = new Room(s,"r1", 2);
+        Student stud = new Student(s, "s", 1, r1);
+        Beer beer = new Beer(s, "beer");
+
+        r1.addPlayer(stud);
+        stud.addItem(beer);
+        stud.setRoom(r1);
+
+      stud.putDown(beer);
+    }
+
+
+    public void testTransistorPairing(){
+        Room r1 = new Room(s,"r1", 2);
+        Student stud = new Student(s, "s", 1, r1);
+        Transistor t1 = new Transistor(s, "transistor1");
+        Transistor t2 = new Transistor(s, "transistor2");
+
+
+        r1.addPlayer(stud);
+        stud.addItem(t1);
+        stud.addItem(t2);
+        stud.setRoom(r1);
+        stud.pairing(t1,t2);
+     
+
+    }
+}

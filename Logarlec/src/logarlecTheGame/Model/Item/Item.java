@@ -10,7 +10,7 @@ import logarlecTheGame.Model.Item.Transistor;
 
 public abstract class Item {
     public void acceptPutDown(Student s){
-        s.putDown(this);
+        s.use(this);
     }
 
     public boolean acceptSP(Student s){
