@@ -1,10 +1,21 @@
 package logarlecTheGame.Skeleton.test_targyletesz;
 
+import java.rmi.server.Skeleton;
+
 import logarlecTheGame.Model.*;
 import logarlecTheGame.Skeleton.*;
 import logarlecTheGame.Model.Item.*;
 
+
+  /**
+     *Különböző esetek tesztelésére lévő osztály
+     */
 public class TestTargyLetesz {
+      /**
+       *Teszt tárgyak letételére
+       *inicializálja a mindenképp kellő attribútumokat, objektumokat,
+       *majd ezekkel végigfuttatja a tesztet
+     */
 
     public void testTargyLetesz(Skeleton s){
         Room r1 = new Room(s,"r1", 0, 2);
@@ -18,7 +29,11 @@ public class TestTargyLetesz {
       stud.putDown(beer);
     }
 
-
+  /**
+       *Teszt a transistor párosítás tesztelésére,
+       *inicializálja a mindenképp kellő attribútumokat, objektumokat,
+       *majd ezekkel végigfuttatja a tesztet
+     */
     public void testTransistorPairing(Skeleton s){
         Room r1 = new Room(s,"r1", 0, 2);
         Student stud = new Student(s, "s", 1, r1);
@@ -34,6 +49,11 @@ public class TestTargyLetesz {
      
 
     }
+      /**
+       *Teszt a transistor használat tesztelésére,
+       *inicializálja a mindenképp kellő attribútumokat, objektumokat,
+       *majd ezekkel végigfuttatja a tesztet
+     */
     public void testTransistorUsage(Skeleton s){
         Room r1 = new Room(s,"r1", 0, 2);
         Room r2 = new Room(s,"r2", 1, 2);

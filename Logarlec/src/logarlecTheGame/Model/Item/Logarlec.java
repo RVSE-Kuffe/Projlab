@@ -1,4 +1,5 @@
 package logarlecTheGame.Model.Item;
+import java.rmi.server.Skeleton;
 import java.util.ArrayList;
 import java.util.List;
 import logarlecTheGame.Skeleton.*;
@@ -10,7 +11,9 @@ import logarlecTheGame.Model.Item.Item;
 
 public class Logarlec extends Item {
     private Skeleton sk;
-
+/**
+ * Logarléc konstruktor
+     */
     public Logarlec(Skeleton s, String n) {
         sk = s;
         sk.names.put(this, n);
