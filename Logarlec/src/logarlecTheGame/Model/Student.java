@@ -71,6 +71,7 @@ public class Student extends Player implements StudentProtection, PutDown, Pairi
     }
 
     public boolean pair(Item i1, Item i2) {
+        logger.info(sk.names.get(this) + ".pairing completed()\n");
         return (i2.makePair(i1) && (i1.makePair(i2)));
     }
 

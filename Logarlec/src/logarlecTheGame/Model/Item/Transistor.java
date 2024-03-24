@@ -1,4 +1,5 @@
 package logarlecTheGame.Model.Item;
+import java.rmi.server.Skeleton;
 import java.util.ArrayList;
 import java.util.List;
 import logarlecTheGame.Skeleton.*;
@@ -21,10 +22,20 @@ public class Transistor extends Item  {
         sk.names.put(this, n);
     }
 
-    public Transistor getPair(){return pair;}
+    public Transistor(Skeleton s, String n, Transistor p) {//teszteléshez kell csak, hogy legyen alapvető párja, amúgy nem használandó, amúgy túl hosszú teszt lenne
+        sk = s;
+        sk.names.put(this, n);
+        this.pair=p;
+    }
+
+    public Transistor getPair(){
+         System.out.println(sk.names.get(this) + "getPair");
+        return pair;}
 
     public boolean makePair(Transistor t2){
-        if(this.pair==null){
+        System.out.println(sk.names.get(this) + "makePair");
+        if((this.pair==null&&t2.getPair()==null)||this.pair==t2){
+            this.pair=t2;
          return true;
         }
          return false;
@@ -32,23 +43,34 @@ public class Transistor extends Item  {
     }
 
     public void activate(){
+        System.out.println(sk.names.get(this) + "activate");
         this.active=true;
     }
 
     @Override
-    public void acceptPutDown(Student s){}
+    public void acceptPutDown(Student s){
+        System.out.println(sk.names.get(this) + "acceptPutDown");
+    }
 
     public boolean teleportPlayer(Student s){
+        System.out.println(sk.names.get(this) + "teleportPlayer");
         
     }
 
     public void setRoom(Room r){
+        System.out.println(sk.names.get(this) + "setRoom");
         this.location=r;
     }
     @Override
-    public boolean acceptPairing(Student s, Transistor t){}
+    public boolean acceptPairing(Student s, Transistor t){
+        System.out.println(sk.names.get(this) + "acceptPairing");
+        s.pair(this, t)
+    }
 
     @Override
-    public boolean acceptPairing(Student s, Item i){}
+    public boolean acceptPairing(Student s, Item i){
+        System.out.println(sk.names.get(this) + "acceptPairing");
+
+    }
     
 }
