@@ -19,7 +19,6 @@ public class Skeleton {
         //kilisázza a hallgató lépéseivel kapcsolatos teszteket
         //elinditja a felhasznál által kiválasztott tesztet (beolvas egy betűt, stb.)
         //Tesztjeim meghívására példa:
-        hallgatolep1(this);
     }
 
     public void listTeacherMoves(){
@@ -29,10 +28,6 @@ public class Skeleton {
     public void listRoomChange(){
         System.out.println("a: testclosedoor");
 
-
-        bekérbetű
-        switchcase
-        testCloseDoor()
     }
 
     public void listItemUse(){
@@ -68,7 +63,6 @@ public class Skeleton {
         Room r=new Room(this, "r",3,5);
         Student s=new Student(this, "s",1,r);
         Camambert c=new Camambert(this,"c");
-<<<<<<< HEAD
         s.putDown(c);
     }
     public void testMakeClean(){
@@ -76,7 +70,5 @@ public class Skeleton {
         Student s=new Student(this, "s",1,r);
         Tablatorlo t=new Tablatorlo(this,"t",6);
         s.putDown(t);
-=======
->>>>>>> e07a787602d64e731d83e800e29ad961445b214f
     }
 }
