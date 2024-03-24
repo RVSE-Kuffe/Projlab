@@ -25,19 +25,35 @@ public class Player implements PickUp, GasProtect{
         isProtected = false;
     }
 
-    public void pickUp(Item i){
+    /**
+     * Tárgyak felvételét kezdeményezi
+     * @param i     Felvenni kívánt tárgy
+     */
+    public void pickUpItem(Item i){
         System.out.println(sk.names.get(this) + " pickUpItem(" + sk.names.get(i) + ")");
+        i.acceptPickUp(this);
+        System.out.println(sk.names.get(this) + " return pickUpItem()");
+    }
 
-        System.out.println(sk.names.get(this) + " return pickUpItem(" + sk.names.get(i) + ")");
-        return;
+    /**
+     * Tárgyak felvételét valósítja meg
+     * @param i     A felvenni kívánt tárgy
+     */
+    public void pickUp(Item i){
+        System.out.println(sk.names.get(this) + " pickUp(" + sk.names.get(i) + ")");
+        location.removeItem(i);
+        this.addItem(i);
+        System.out.println(sk.names.get(this) + " return pickUp()");
     }
 
     public void pickUp(Logarlec i){
-
+        System.out.println(sk.names.get(this) + ".pickUp(" + sk.names.get(i) + ")");
+        location.win();
+        System.out.println(sk.names.get(this) + " return pickUp()");
     }
 
     public void pickUp(Beer i){
-
+        //TODO
     }
 
     public boolean stun(){
