@@ -161,7 +161,7 @@ public class Player implements PickUp, GasProtect{
 
     public void win(){
         System.out.println(sk.names.get(this) + " win");
-
+        
         System.out.println(sk.names.get(this) + " return win");
         return;
     }
@@ -198,11 +198,30 @@ public class Player implements PickUp, GasProtect{
         itemList.add(i);
     }
 
-    @Override
-    public boolean maskProtect(Mask m) {
+    public void pickUp(Beer b){
+        this.addItem(b);
+        this.location.removeItem(b);
+        b.activate();
     }
 
-    @Override
-    public boolean maskProtect(Item i) {
+    public void pickUp(Item i){
+        this.addItem(i);
+        this.location.removeItem(i);
     }
+
+    public boolean maskProtect(Mask m){
+        if(m.durabminus()){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean maskProtect(Item i){
+        return false;
+    }
+
+    public void setRoom(Room r){
+        this.location=r;
+    }
+
 }

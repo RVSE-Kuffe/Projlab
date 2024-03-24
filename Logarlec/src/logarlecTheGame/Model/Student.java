@@ -8,6 +8,7 @@ import logarlecTheGame.Model.Interfaces.*;
 public class Student extends Player implements StudentProtection, PutDown, Pairing {
     Logger logger = Logger.getLogger(getClass().getName());
     
+    
     public Student(Skeleton s, String n, int i, Room r){
         super(s,n,i,r);
         logger.info(sk.names.get(this) + ".ctor()\n");
@@ -20,7 +21,11 @@ public class Student extends Player implements StudentProtection, PutDown, Pairi
      */
     @Override
     public boolean die(){
+<<<<<<< HEAD
+        logger.info(sk.names.get(this) + " move");
+=======
         logger.info(sk.names.get(this) + ".die()\n");
+>>>>>>> e07a787602d64e731d83e800e29ad961445b214f
         for (Item item : this.itemList) {
             if(item.acceptSP(this)){
                 logger.info(sk.names.get(this) + ".die() returned with False\n");
@@ -90,9 +95,15 @@ public class Student extends Player implements StudentProtection, PutDown, Pairi
      * Tárgyak letételét/használatát kezdeményezi
      * @param i A tárgy amit használunk
      */
-    void putDown(Item i){
+    public void putDown(Item i){
+        System.out.println(sk.names.get(this) + "putDown");
         i.acceptPutDown(this);
+<<<<<<< HEAD
+        System.out.println(sk.names.get(this) + "putDown returned with void");
+        return;
+=======
         logger.info(sk.names.get(this) + ".putDown()\n");
+>>>>>>> e07a787602d64e731d83e800e29ad961445b214f
     }
 
     /**
@@ -100,8 +111,18 @@ public class Student extends Player implements StudentProtection, PutDown, Pairi
      * @param i     Az a tárgy amivel szeretnénk dolgozni
      */
     public void use(Item i) {
+<<<<<<< HEAD
+        System.out.println(sk.names.get(this) + "use");
+=======
         logger.info(sk.names.get(this) + ".use()\n");
+>>>>>>> e07a787602d64e731d83e800e29ad961445b214f
         dropItem(i);
+<<<<<<< HEAD
+=======
+        this.location.addItem(i);
+        System.out.println(sk.names.get(this) + "use returned with void");
+        return;
+>>>>>>> 8e44deebcd2c4cabf9ca94198c95687b88346960
     }
 
     public void use(Transistor i) {
@@ -113,15 +134,27 @@ public class Student extends Player implements StudentProtection, PutDown, Pairi
     }
 
     public void use(Camambert i) {
+<<<<<<< HEAD
+        System.out.println(sk.names.get(this) + "use");
+=======
         logger.info(sk.names.get(this) + ".use()\n");
+>>>>>>> e07a787602d64e731d83e800e29ad961445b214f
         dropItem(i);
         this.location.makeGassed();
+        System.out.println(sk.names.get(this) + "use returned with void");
+        return;
     }
 
     public void use(Tablatorlo i) {
+<<<<<<< HEAD
+        System.out.println(sk.names.get(this) + "use");
+=======
         logger.info(sk.names.get(this) + ".use()\n");
+>>>>>>> e07a787602d64e731d83e800e29ad961445b214f
         dropItem(i);
         this.location.makeClean();
+        System.out.println(sk.names.get(this) + "use returned with void");
+        return;
     }
 
     /**

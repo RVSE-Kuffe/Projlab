@@ -7,12 +7,24 @@ import logarlecTheGame.*;
 import logarlecTheGame.Model.Item.Item;
 
 public class Room {
+<<<<<<< HEAD
+    private Skeleton sk;
+=======
     Skeleton sk;
+>>>>>>> e07a787602d64e731d83e800e29ad961445b214f
     List<Door> doorlist = new ArrayList<>();
-    Boolean gassed;
+    Boolean gassed=false;
     int roomid;
     int capacity;
-    boolean cleaner;
+    boolean cleaner=false;
+    public Room(Skeleton s, String n,int rid, int cap) {
+        sk = s;
+        sk.names.put(this, n);
+        roomid=rid;
+        capacity=cap;
+    }
+
+    
 
     public Room(Skeleton s, String n, int c) {
         sk = s;
@@ -31,6 +43,27 @@ public class Room {
     public boolean killPlayer(Player p){System.out.println(sk.names.get(this) + "killPlayer");return true;}
     public void enough(){System.out.println(sk.names.get(this) + "enough");}
     
+<<<<<<< HEAD
+    void win(){System.out.println(sk.names.get(this) + "win");}
+    boolean changeRoom(Player p, Room r){System.out.println(sk.names.get(this) + "changeRoom"); return true;}
+    Room newRoom(){System.out.println(sk.names.get(this) + "newRoom");return room;}
+    void stunRoom(){System.out.println(sk.names.get(this) + "stunRoom");}
+    void pvp(Player p){System.out.println(sk.names.get(this) + "pvp");}
+    public void makeGassed(){
+        System.out.println(sk.names.get(this) + "makeGassed");
+        gassed=true;
+        System.out.println(sk.names.get(this) + "makeGassed returned with void");
+        return;
+    }
+    void makeClean(){
+        System.out.println(sk.names.get(this) + "makeClean");
+        cleaner=true;
+        System.out.println(sk.names.get(this) + "makeClean returned with void");
+        return;
+    }
+    void killAll(Player p){System.out.println(sk.names.get(this) + "killAll");}
+    boolean acceptPairing(Board b,Room r){System.out.println(sk.names.get(this) + "acceptPairing");return true;}
+=======
     public void win(){System.out.println(sk.names.get(this) + "win");}
     public boolean changeRoom(Player p, Room r){System.out.println(sk.names.get(this) + "changeRoom"); return true;}
     public Room newRoom(){System.out.println(sk.names.get(this) + "newRoom");return Room;}
@@ -40,5 +73,6 @@ public class Room {
     public void makeClean(){System.out.println(sk.names.get(this) + "makeClean");}
     public void killAll(Player p){System.out.println(sk.names.get(this) + "killAll");}
     public boolean acceptPairing(Board b,Room r){System.out.println(sk.names.get(this) + "acceptPairing");return true;}
+>>>>>>> e07a787602d64e731d83e800e29ad961445b214f
 
 }

@@ -1,4 +1,3 @@
-import java.rmi.server.Skeleton;
 import java.util.ArrayList;
 import java.util.List;
 import logarlecTheGame.Skeleton.*;
@@ -35,7 +34,7 @@ public class Mask extends Item {
      * Használatonként 1-el csökken a durability
      * @return true ha sikerül, false egyébként
      */
-    boolean durabminus(){
+    public boolean durabminus(){
         System.out.println(sk.names.get(this) + "durabminus");
         if(this.durability>0){
             durability-=1;
