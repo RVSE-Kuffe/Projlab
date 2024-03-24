@@ -22,6 +22,7 @@ public class Player implements PickUp, GasProtect{
         itemList = new ArrayList<>();
         stunned = false;
         isProtected = false;
+        System.out.println(n + ".ctor()");
     }
 
     /**
@@ -55,8 +56,16 @@ public class Player implements PickUp, GasProtect{
         System.out.println(sk.names.get(this) + ".pickUp(" + sk.names.get(i) + ") returned");
     }
 
+    /**
+     * A sör felvételét kezeli, mivel ez egy speckó eset
+     * @param i Sör
+     */
     public void pickUp(Beer i){
-        //TODO
+        System.out.println(sk.names.get(this) + ".pickUp(" + sk.names.get(i) + ")");
+        location.removeItem(i);
+        this.addItem(i);
+        i.activate();
+        System.out.println(sk.names.get(this) + ".pickUp(" + sk.names.get(i) + ") returned");
     }
 
 
@@ -167,6 +176,9 @@ public class Player implements PickUp, GasProtect{
         System.out.println(sk.names.get(this) + ".heal() returned");
     }
 
+    /**
+     * A játékos összes tárgyának az elvesztését kezeli
+     */
     public void loseItem(){
         System.out.println(sk.names.get(this) + ".loseItem()");
         for(Item i : itemList){
