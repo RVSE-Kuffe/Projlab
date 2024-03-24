@@ -22,8 +22,9 @@ public class Board {
 
     public void addRoom(Room r1){
         roomList.add(r1);
-        System.out.println(sk.names.get(this) + "addRoom");
+        System.out.println(sk.names.get(this) + " addRoom(" + sk.names.get(r1) + ")");
 
+        System.out.println(sk.names.get(this) + " addRoom returned");
     }
 
     public void removeRoom(Room r1){
@@ -33,10 +34,11 @@ public class Board {
     public boolean forceMerge(Room r1, Room r2){System.out.println(sk.names.get(this) + "forceMerge");return true;}
 
     public void forceSplit(Room r){
-        System.out.println(sk.names.get(this) + "forceSplit");
+        System.out.println(sk.names.get(this) + "forceSplit(" + sk.names.get(r) + ")");
         Room newRoom= r.newRoom();
     
         addRoom(newRoom);
+        System.out.println(sk.names.get(this) + " return forceSplit(" + sk.names.get(r) + ")");
     }
 
     public void win(){System.out.println(sk.names.get(this) + "win");}

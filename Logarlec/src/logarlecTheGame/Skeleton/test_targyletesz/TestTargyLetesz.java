@@ -1,4 +1,4 @@
-package logarlecTheGame.Skeleton.test_hallgato;
+package logarlecTheGame.Skeleton.test_targyletesz;
 
 import logarlecTheGame.Model.*;
 import logarlecTheGame.Skeleton.*;
@@ -6,10 +6,10 @@ import logarlecTheGame.Model.Item.*;
 
 public class TestTargyLetesz {
 
-    public static void testTargyLetesz(Skeleton s){
-        Room r1 = new Room(s,"r1", 2);
+    public void testTargyLetesz(Skeleton s){
+        Room r1 = new Room(s,"r1", 0, 2);
         Student stud = new Student(s, "s", 1, r1);
-        Beer beer = new Beer(s, "beer");
+        Beer beer = new Beer(s, "beer", 3);
 
         r1.addPlayer(stud);
         stud.addItem(beer);
@@ -19,8 +19,8 @@ public class TestTargyLetesz {
     }
 
 
-    public void testTransistorPairing(){
-        Room r1 = new Room(s,"r1", 2);
+    public void testTransistorPairing(Skeleton s){
+        Room r1 = new Room(s,"r1", 0, 2);
         Student stud = new Student(s, "s", 1, r1);
         Transistor t1 = new Transistor(s, "transistor1");
         Transistor t2 = new Transistor(s, "transistor2");
@@ -30,25 +30,27 @@ public class TestTargyLetesz {
         stud.addItem(t1);
         stud.addItem(t2);
         stud.setRoom(r1);
-        stud.pairing(t1,t2);
+        stud.pair(t1,t2);
      
 
     }
-    public void testTransistorUsage(){
-        Room r1 = new Room(s,"r1", 2);
-        Room r2 = new Room(s,"r2", 2);
+    public void testTransistorUsage(Skeleton s){
+        Room r1 = new Room(s,"r1", 0, 2);
+        Room r2 = new Room(s,"r2", 1, 2);
 
         Student stud = new Student(s, "s", 1, r1);
+        Transistor t2 = new Transistor(s, null, null);
         Transistor t1 = new Transistor(s, "transistor1",t2);
-        Transistor t2 = new Transistor(s, "transistor2",t1);
+        t2 = new Transistor(s, "transistor2",t1);
 
 
         r1.addPlayer(stud);
         stud.addItem(t1);
-        stud.addItem(t2);
+        //stud.addItem(t2);
+        stud.pair(t1, t2);
         stud.setRoom(r1);
-        t2.setRoom(r2)
-        stud.putDown(t1)
+        t2.setRoom(r2);
+        stud.putDown(t1);
 
     }
 }

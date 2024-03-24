@@ -70,7 +70,7 @@ public class Player implements PickUp, GasProtect{
 
 
     /**
-     * A Hallgatók bénítását végzi
+     * A Hallgatók bénítását végzi (stunned = true és itemek eldobása)
      * @return  Hamissal tér vissza, ha a Hallgatót egy tárgya megvédte, különben Igaz
      */
     public boolean stun(){
@@ -81,6 +81,10 @@ public class Player implements PickUp, GasProtect{
                 return false;
             }
         }
+        stunned = true;
+        for(Item i : itemList){
+            dropItem(i);
+        }
         System.out.println(sk.names.get(this) + ".stun() returned True");
         return true;
     }
@@ -89,16 +93,8 @@ public class Player implements PickUp, GasProtect{
      * Az Oktatók bénítását végzi
      * @return  Hamissal tér vissza, ha az Oktatót egy tárgya megvédte, különben Igaz
      */
-    public boolean stunTeacher(){
+    public void stunTeacher(){
         System.out.println(sk.names.get(this) + ".stunTeacher()");
-        for(Item i: itemList){
-            if(i.acceptGasProtect(this)){
-                System.out.println(sk.names.get(this) + ".stunTeacher() returned False");
-                return false;
-            }
-        }
-        System.out.println(sk.names.get(this) + ".stunTeacher() returned True");
-        return true;
     }
 
     /**
@@ -138,13 +134,13 @@ public class Player implements PickUp, GasProtect{
      * @param r     A szoba, ahová lépünk
      * @return      Igaz, ha az 'r' szobába van elég hely, tehát át lehet lépni. Különben Hamis
      */
-    public boolean changeR(Room r){
-        System.out.println(sk.names.get(this) + " changeR(" + sk.names.get(r) + ")");
-        if(this.location.changeRoom(this, r)){
-            System.out.println(sk.names.get(this) + ".changeR(" + sk.names.get(r) + ") returned True");
+    public boolean changeR(Door d){
+        System.out.println(sk.names.get(this) + " changeR(" + sk.names.get(d) + ")");
+        if(this.location.changeRoom(this, d)){
+            System.out.println(sk.names.get(this) + ".changeR(" + sk.names.get(d) + ") returned True");
             return true;
         }
-        System.out.println(sk.names.get(this) + ".changeR(" + sk.names.get(r) + ") returned False");
+        System.out.println(sk.names.get(this) + ".changeR(" + sk.names.get(d) + ") returned False");
         return false;
     }
 

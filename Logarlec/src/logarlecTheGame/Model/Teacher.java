@@ -17,12 +17,19 @@ public class Teacher extends Player {
         return;
     }
 
+
+    /**
+     * Lestunnolja az oktatót, aki elejti minden tárgyát
+     */
     @Override
-    public boolean stunTeacher(){
+    public void stunTeacher(){
         System.out.println(sk.names.get(this) + " stunTeacher");
 
+        stunned = true;
+        for(Item i : itemList){
+            dropItem(i);
+        }
         System.out.println(sk.names.get(this) + " return stunTeacher");
-        return;
     }
 
     @Override

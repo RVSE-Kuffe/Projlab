@@ -34,7 +34,9 @@ public abstract class Item {
         return false;
     }
 
-    public boolean makePair(Item i){}
+    public boolean makePair(Item i){
+        return false;
+    }
 
     
 }

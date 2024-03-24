@@ -6,9 +6,9 @@ import logarlecTheGame.Model.Item.*;
 
 public class TestHallgato{
 
-    public static void hallgatolep1(Skeleton s){
-        Room r1 = new Room(s,"r1", 1);
-        Room r2 = new Room(s, "r2",0);
+    public void hallgatolep1(Skeleton s){
+        Room r1 = new Room(s,"r1", 0, 1);
+        Room r2 = new Room(s, "r2", 1, 0);
         Student stud = new Student(s, "s", 1, r1);
         Door d = new Door(s, "d", r1, r2);
 
@@ -17,12 +17,12 @@ public class TestHallgato{
 
         r1.addPlayer(stud);
 
-        stud.changeR(r2);
+        stud.changeR(d);
     }
 
-    public static void hallgatolep2(Skeleton s){
-        Room r1 = new Room(s,"r1", 1);
-        Room r2 = new Room(s, "r2",1);
+    public void hallgatolep2(Skeleton s){
+        Room r1 = new Room(s,"r1", 0, 1);
+        Room r2 = new Room(s, "r2", 1, 1);
         Student stud = new Student(s, "s", 1, r1);
         Door d = new Door(s, "d", r1, r2);
 
@@ -37,12 +37,12 @@ public class TestHallgato{
         
         stud.addItem(mask);
 
-        stud.changeR(r2);
+        stud.changeR(d);
     }
 
-    public static void hallgatolep3(Skeleton s){
-        Room r1 = new Room(s,"r1", 1);
-        Room r2 = new Room(s, "r2",1);
+    public void hallgatolep3(Skeleton s){
+        Room r1 = new Room(s,"r1", 0, 1);
+        Room r2 = new Room(s, "r2", 0, 1);
         Student stud = new Student(s, "s", 1, r1);
         Door d = new Door(s, "d", r1, r2);
 
@@ -53,12 +53,12 @@ public class TestHallgato{
 
         r2.makeGassed();
 
-        stud.changeR(r2);
+        stud.changeR(d);
     }
     
-    public static void hallgatolep4(Skeleton s){
-        Room r1 = new Room(s,"r1", 1);
-        Room r2 = new Room(s, "r2",2);
+    public void hallgatolep4(Skeleton s){
+        Room r1 = new Room(s,"r1", 0, 1);
+        Room r2 = new Room(s, "r2",1, 2);
         Student stud = new Student(s, "s", 1, r1);
         Door d = new Door(s, "d", r1, r2);
 
@@ -75,12 +75,12 @@ public class TestHallgato{
 
         r2.addPlayer(t);
 
-        stud.changeR(r2);
+        stud.changeR(d);
     }
 
-    public static void hallgatolep5(Skeleton s){
-        Room r1 = new Room(s,"r1", 1);
-        Room r2 = new Room(s, "r2",0);
+    public void hallgatolep5(Skeleton s){
+        Room r1 = new Room(s,"r1", 0, 1);
+        Room r2 = new Room(s, "r2", 1, 2);
         Student stud = new Student(s, "s", 1, r1);
         Door d = new Door(s, "d", r1, r2);
 
@@ -93,12 +93,12 @@ public class TestHallgato{
 
         r2.addPlayer(t);
 
-        stud.changeR(r2);
+        stud.changeR(d);
     }
 
-    public static void hallgatolep6(Skeleton s){
-        Room r1 = new Room(s,"r1", 1);
-        Room r2 = new Room(s, "r2",2);
+    public void hallgatolep6(Skeleton s){
+        Room r1 = new Room(s,"r1", 0, 1);
+        Room r2 = new Room(s, "r2", 1, 2);
         Student stud = new Student(s, "s", 1, r1);
         Door d = new Door(s, "d", r1, r2);
 
@@ -117,12 +117,12 @@ public class TestHallgato{
         r2.addPlayer(t1);
         r2.addPlayer(t2);
 
-        stud.changeR(r2);
+        stud.changeR(d);
     }
 
-    public static void hallgatolep7(Skeleton s){
-        Room r1 = new Room(s,"r1", 1);
-        Room r2 = new Room(s, "r2",2);
+    public void hallgatolep7(Skeleton s){
+        Room r1 = new Room(s,"r1", 0, 1);
+        Room r2 = new Room(s, "r2", 1, 3);
         Student stud = new Student(s, "s", 1, r1);
         Door d = new Door(s, "d", r1, r2);
 
@@ -141,6 +141,6 @@ public class TestHallgato{
         r2.addPlayer(t1);
         r2.addPlayer(t2);
 
-        stud.changeR(r2);
+        stud.changeR(d);
     }
 }

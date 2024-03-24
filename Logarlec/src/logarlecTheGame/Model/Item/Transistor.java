@@ -1,5 +1,5 @@
 package logarlecTheGame.Model.Item;
-import java.rmi.server.Skeleton;
+
 import java.util.ArrayList;
 import java.util.List;
 import logarlecTheGame.Skeleton.*;
@@ -34,7 +34,7 @@ public class Transistor extends Item  {
 
     public boolean makePair(Transistor t2){
         System.out.println(sk.names.get(this) + "makePair");
-        if((this.pair==null&&t2.getPair()==null)||this.pair==t2){
+        if((this.pair==null&&t2.getPair()==null)||(this.pair==null && t2.getPair().equals(this))){
             this.pair=t2;
          return true;
         }
@@ -55,11 +55,11 @@ public class Transistor extends Item  {
 
     public boolean teleportPlayer(Student s){
         System.out.println(sk.names.get(this) + "teleportPlayer");
-       return this.pair.arrivingPlayer(s);
+       return this.arrivingPlayer(s);
         
     }
     public boolean arrivingPlayer(Student s){  //meg kell írni a Addplayert booleanra
-        return this.location.addPlayer(s);
+        return this.pair.location.addPlayer(s);
         
     }
 
@@ -70,13 +70,13 @@ public class Transistor extends Item  {
     @Override
     public boolean acceptPairing(Student s, Transistor t){
         System.out.println(sk.names.get(this) + "acceptPairing");
-        s.pair(this, t);
+        return s.pair(this, t);
     }
 
     @Override
     public boolean acceptPairing(Student s, Item i){
         System.out.println(sk.names.get(this) + "acceptPairing");
-
+        return true;
     }
     
 }

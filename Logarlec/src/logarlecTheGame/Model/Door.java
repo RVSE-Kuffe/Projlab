@@ -5,15 +5,15 @@ import logarlecTheGame.*;
 
 public class Door {
     private Skeleton sk;
-    boolean validTo;
+    boolean validTo = true;
     Room whereTo;
     Room whereFrom;
-    boolean validFrom;
+    boolean validFrom = true;
     boolean closed=false;
     public Door(Skeleton s, String n,Room r1,Room r2) {
         sk = s;
-        whereTo=r1;
-        whereFrom=r2;
+        whereFrom=r1;
+        whereTo=r2;
         sk.names.put(this, n);
     }
     
@@ -23,14 +23,29 @@ public class Door {
         System.out.println(sk.names.get(this) + "acceptCloseDoor returned with void");
         return;
     }
-    public void transferPlayer(Player p, Room from, Room to){
+
+    /**
+     * Intézi a játékos eltávolítását az előző és hozzáadását a következő szobához
+     * @param p     a karakter, akit át kell léptetni 
+     * @return      Igaz, ha a whereTo szobába van elég hely, tehát át lehet lépni. Különben Hamis
+     */
+    public boolean transferPlayer(Player p){
         System.out.println(sk.names.get(this) + "transferPlayer");
 
-        if(whereFrom.equals(from) && whereTo.equals(to) && validFrom && validTo){
-           System.out.println("ez torlheto");
-        }
+        if(! closed){
+            if(whereTo.addPlayer(p)){
 
-        
+                whereFrom.removePlayer(p);
+
+                whereTo.killAll(p);
+                whereTo.pvp(p);
+
+                System.out.println(sk.names.get(this) + " transferplayer returned true");
+                return true;
+            }
+        }       
+        System.out.println(sk.names.get(this) + " transferplayer returned false");
+        return false;
     }
     void changeVisibility(){System.out.println(sk.names.get(this) + "changeVisibility");}
     void changeRoom(){System.out.println(sk.names.get(this) + "changeRoom");}

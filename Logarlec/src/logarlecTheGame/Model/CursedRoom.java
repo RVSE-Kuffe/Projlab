@@ -4,14 +4,12 @@ import logarlecTheGame.Skeleton.*;
 import logarlecTheGame.*;
 
 public class CursedRoom extends Room {
-    private Skeleton sk;
 
     public CursedRoom(Skeleton s, String n,int i, int c) {
         super(s,n,i,c);
     }
-public
     
-    void closeDoor(){
+    public void closeDoor(){
         System.out.println(sk.names.get(this) + "closeDoor");
         for(Door d : doorList){
             d.acceptCloseDoor();
@@ -19,15 +17,15 @@ public
         System.out.println(sk.names.get(this) + "closeDoor returned with void");
         return;
     }
-    void openDoor(){
+    public void openDoor(){
         System.out.println(sk.names.get(this) + "openDoor");
-        for(Door d : doorlist){
+        for(Door d : doorList){
             d.acceptOpenDoor();
         }
         System.out.println(sk.names.get(this) + "openDoor returned with void");
         return;
     }
-    boolean acceptPairing(Board b, Room r){System.out.println(sk.names.get(this) + "acceptPairing");
+    public boolean acceptPairing(Board b, Room r){System.out.println(sk.names.get(this) + "acceptPairing");
     return true;}
 
 }
