@@ -17,14 +17,21 @@ public class Door {
         sk.names.put(this, n);
     }
     
-public
     void acceptCloseDoor(){
         System.out.println(sk.names.get(this) + "acceptCloseDoor");
         this.closed=true;
         System.out.println(sk.names.get(this) + "acceptCloseDoor returned with void");
         return;
     }
-    boolean transferPlayer(){System.out.println(sk.names.get(this) + "transferPlayer");return true;}
+    public void transferPlayer(Player p, Room from, Room to){
+        System.out.println(sk.names.get(this) + "transferPlayer");
+
+        if(whereFrom.equals(from) && whereTo.equals(to) && validFrom && validTo){
+           System.out.println("ez torlheto");
+        }
+
+        
+    }
     void changeVisibility(){System.out.println(sk.names.get(this) + "changeVisibility");}
     void changeRoom(){System.out.println(sk.names.get(this) + "changeRoom");}
     void acceptOpenDoor(){
