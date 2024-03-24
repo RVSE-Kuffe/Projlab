@@ -30,9 +30,9 @@ public class Player implements PickUp, GasProtect{
      * @param i     Felvenni kívánt tárgy
      */
     public void pickUpItem(Item i){
-        System.out.println(sk.names.get(this) + " pickUpItem(" + sk.names.get(i) + ")");
+        System.out.println(sk.names.get(this) + ".pickUpItem(" + sk.names.get(i) + ")");
         i.acceptPickUp(this);
-        System.out.println(sk.names.get(this) + " return pickUpItem()");
+        System.out.println(sk.names.get(this) + ".pickUpItem() returned");
     }
 
     /**
@@ -40,31 +40,57 @@ public class Player implements PickUp, GasProtect{
      * @param i     A felvenni kívánt tárgy
      */
     public void pickUp(Item i){
-        System.out.println(sk.names.get(this) + " pickUp(" + sk.names.get(i) + ")");
+        System.out.println(sk.names.get(this) + ".pickUp(" + sk.names.get(i) + ")");
         location.removeItem(i);
         this.addItem(i);
-        System.out.println(sk.names.get(this) + " return pickUp()");
+        System.out.println(sk.names.get(this) + ".pickUp() returned");
     }
 
+    /**
+     * A Logarléc felvételét valósítja meg
+     * @param i     Logarléc
+     */
     public void pickUp(Logarlec i){
         System.out.println(sk.names.get(this) + ".pickUp(" + sk.names.get(i) + ")");
         location.win();
-        System.out.println(sk.names.get(this) + " return pickUp()");
+        System.out.println(sk.names.get(this) + ".pickUp() returned");
     }
 
     public void pickUp(Beer i){
         //TODO
     }
 
-    public boolean stun(){
-        System.out.println(sk.names.get(this) + " stun");
 
-        System.out.println(sk.names.get(this) + " return stun");
-        return false;;
+    /**
+     * A Hallgatók bénítását végzi
+     * @return  Hamissal tér vissza, ha a Hallgatót egy tárgya megvédte, különben Igaz
+     */
+    public boolean stun(){
+        System.out.println(sk.names.get(this) + ".stun()");
+        for(Item i: itemList){
+            if(i.acceptGasProtect(this)){
+                System.out.println(sk.names.get(this) + ".stun() returned False");
+                return false;
+            }
+        }
+        System.out.println(sk.names.get(this) + ".stun() returned True");
+        return true;
     }
 
+    /**
+     * Az Oktatók bénítását végzi
+     * @return  Hamissal tér vissza, ha az Oktatót egy tárgya megvédte, különben Igaz
+     */
     public boolean stunTeacher(){
-
+        System.out.println(sk.names.get(this) + ".stunTeacher()");
+        for(Item i: itemList){
+            if(i.acceptGasProtect(this)){
+                System.out.println(sk.names.get(this) + ".stunTeacher() returned False");
+                return false;
+            }
+        }
+        System.out.println(sk.names.get(this) + ".stunTeacher() returned True");
+        return true;
     }
 
     public void dropItem(Item i){
