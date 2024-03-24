@@ -11,7 +11,7 @@ public class Student extends Player implements StudentProtection, PutDown, Pairi
     
     public Student(Skeleton s, String n, int i, Room r){
         super(s,n,i,r);
-        logger.info(sk.names.get(this) + ".ctor()\n");
+        logger.info(sk.names.get(this) + ".ctor()");
     }
 
     /**
@@ -21,14 +21,14 @@ public class Student extends Player implements StudentProtection, PutDown, Pairi
      */
     @Override
     public boolean die(){
-        logger.info(sk.names.get(this) + ".die()\n");
+        logger.info(sk.names.get(this) + ".die()");
         for (Item item : this.itemList) {
             if(item.acceptSP(this)){
-                logger.info(sk.names.get(this) + ".die() returned with False\n");
+                logger.info(sk.names.get(this) + ".die() returned False");
                 return false;
             }
         }
-        logger.info(sk.names.get(this) + ".die() returned with True\n");
+        logger.info(sk.names.get(this) + ".die() returned True");
         return true;
     } 
     
@@ -38,14 +38,14 @@ public class Student extends Player implements StudentProtection, PutDown, Pairi
      */
     @Override
     public boolean stun(){
-        logger.info(sk.names.get(this) + ".stun()\n");
+        logger.info(sk.names.get(this) + ".stun()");
         for (Item item : itemList) {
             if(item.acceptGasProtect(this)){
-                logger.info(sk.names.get(this) + ".stun() returned with True\n");
+                logger.info(sk.names.get(this) + ".stun() returned True");
                 return true;
             }
         }
-        logger.info(sk.names.get(this) + ".stun() returned with False\n");
+        logger.info(sk.names.get(this) + ".stun() returned False");
         return false;
     }
 
@@ -55,20 +55,26 @@ public class Student extends Player implements StudentProtection, PutDown, Pairi
      * @param t2    Második tranzisztor
      * @return      Ha sikerült párosítani, akkor igazzal tér vissza, különben hamis.
      */
+    @Override
     public boolean pairing(Transistor t1, Transistor t2){
-        logger.info(sk.names.get(this) + ".pairing()\n");
+        logger.info(sk.names.get(this) + ".pairing("+ sk.names.get(t1)+", " +sk.names.get(t2)+")");
         if(t1.acceptPairing(this, t2)){
-            logger.info(sk.names.get(this) + ".pairing() returned with True\n");
+            logger.info(sk.names.get(this) + ".pairing("+ sk.names.get(t1)+", " +sk.names.get(t2)+") returned True");
             return true;
         }else{
-            logger.info(sk.names.get(this) + ".pairing() returned with False\n");
+            logger.info(sk.names.get(this) + ".pairing("+ sk.names.get(t1)+", " +sk.names.get(t2)+") returned False");
             return false;
         }
     }
 
-    public boolean pair(Item i1, Item i2) {
-        logger.info(sk.names.get(this) + ".pairing completed()\n");
-        return (i2.makePair(i1) && (i1.makePair(i2)));
+    /**
+     * Két Item párosítását kezdeményezi. Hamis, mivel csak tranziszto esetén van értelme
+     * @param i1    Első Item
+     * @param i2    Második Item
+     * @return      Ha sikerült párosítani, akkor igazzal tér vissza, különben hamis.
+     */
+    public boolean pairing(Item i1, Item i2) {
+        return false;
     }
 
     /**
@@ -78,24 +84,32 @@ public class Student extends Player implements StudentProtection, PutDown, Pairi
      * @return      Ha sikerült párosítani, akkor igazzal tér vissza, különben hamis.
      */
     public boolean pair(Transistor t1, Transistor t2) {
-        logger.info(sk.names.get(this) + ".pair()\n");
+        logger.info(sk.names.get(this) + ".pair("+ sk.names.get(t1)+", " +sk.names.get(t2)+")");
         if(t2.makePair(t1) && (t1.makePair(t2))){
-            logger.info(sk.names.get(this) + ".pairing() returned with True\n");
+            logger.info(sk.names.get(this) + ".pair("+ sk.names.get(t1)+", " +sk.names.get(t2)+") returned True");
             return true;
         }else{
-            logger.info(sk.names.get(this) + ".pairing() returned with False\n");
+            logger.info(sk.names.get(this) + ".pair("+ sk.names.get(t1)+", " +sk.names.get(t2)+") returned False");
             return false;
         }
     }
+
+    /**
+     * Két item párosítását végzi. Hamis, mert csak tranzisztoral van értelme
+     * @param t1    Első item
+     * @param t2    Második item
+     * @return      Ha sikerült párosítani, akkor igazzal tér vissza, különben hamis.
+     */
+    public boolean pair(Item t1, Item t2) {return false;}
 
     /**
      * Tárgyak letételét/használatát kezdeményezi
      * @param i A tárgy amit használunk
      */
     public void putDown(Item i){
-        System.out.println(sk.names.get(this) + "putDown");
+        logger.info(sk.names.get(this) + ".putDown("+sk.names.get(i)+")");
         i.acceptPutDown(this);
-        logger.info(sk.names.get(this) + ".putDown()\n");
+        logger.info(sk.names.get(this) + ".putDown("+sk.names.get(i)+") returned");
     }
 
     /**
@@ -103,33 +117,32 @@ public class Student extends Player implements StudentProtection, PutDown, Pairi
      * @param i     Az a tárgy amivel szeretnénk dolgozni
      */
     public void use(Item i) {
-        logger.info(sk.names.get(this) + ".use()\n");
+        logger.info(sk.names.get(this) + ".use("+sk.names.get(i)+")\n");
         dropItem(i);
-        System.out.println(sk.names.get(this) + ".use() returned with void");
+        System.out.println(sk.names.get(this) + ".use("+sk.names.get(i)+") returned");
     }
 
     public void use(Transistor i) {
-        logger.info(sk.names.get(this) + ".use()\n");
-        dropItem(i);
-        i.teleportPlayer(this);
-        if(i.teleportPlayer(this))
+        logger.info(sk.names.get(this) + ".use("+sk.names.get(i)+")\n");
+        if(i.teleportPlayer(this)){
             this.location.removePlayer(this);
+            dropItem(i);
+        }
+        System.out.println(sk.names.get(this) + ".use("+sk.names.get(i)+") returned");
     }
 
     public void use(Camambert i) {
-        logger.info(sk.names.get(this) + ".use()\n");
+        logger.info(sk.names.get(this) + ".use("+sk.names.get(i)+")");
         dropItem(i);
         this.location.makeGassed();
-        System.out.println(sk.names.get(this) + "use returned with void");
-        return;
+        System.out.println(sk.names.get(this) + ".use("+sk.names.get(i)+") returned");
     }
 
     public void use(Tablatorlo i) {
-        logger.info(sk.names.get(this) + ".use()\n");
+        logger.info(sk.names.get(this) + ".use("+sk.names.get(i)+")");
         dropItem(i);
         this.location.makeClean();
-        System.out.println(sk.names.get(this) + "use returned with void");
-        return;
+        System.out.println(sk.names.get(this) + ".use("+sk.names.get(i)+") returned ");
     }
 
     /**
@@ -138,28 +151,24 @@ public class Student extends Player implements StudentProtection, PutDown, Pairi
      * @return      Igaz, ha sikerült a tárgynak megvédenie a játékost, különben hamis.
      */
     public boolean protect(Item i){
-        logger.info(sk.names.get(this) + ".protect() returned with False\n");
+        logger.info(sk.names.get(this) + ".protect("+sk.names.get(i)+")");
+        logger.info(sk.names.get(this) + ".protect("+sk.names.get(i)+") returned False");
         return false;
     }
 
 
     public boolean protect(Tvsz i) {
-        logger.info(sk.names.get(this) + ".protect()\n");
+        logger.info(sk.names.get(this) + ".protect("+sk.names.get(i)+")");
         if(i.durabminus()){
-            logger.info(sk.names.get(this) + ".protect() returned with True\n");
+            logger.info(sk.names.get(this) + ".protect("+sk.names.get(i)+") returned True");
             return true;
         }
-        logger.info(sk.names.get(this) + ".protect() returned with False\n");
+        logger.info(sk.names.get(this) + ".protect("+sk.names.get(i)+") returned False");
         return false;
     }
 
     public boolean protect(Beer i) {
-        logger.info(sk.names.get(this) + ".protect()\n");
-        if(i.durabminus()){
-            logger.info(sk.names.get(this) + ".protect() returned with True\n");
-            return true;
-        }
-        logger.info(sk.names.get(this) + ".protect() returned with False\n");
-        return false;
+        //TODO
+        return true;
     }
 }
