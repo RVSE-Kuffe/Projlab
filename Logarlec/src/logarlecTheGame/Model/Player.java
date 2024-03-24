@@ -25,18 +25,19 @@ public class Player implements PickUp, GasProtect{
         isProtected = false;
     }
 
-    public void pickUpItem(Item i){
+    public void pickUp(Item i){
         System.out.println(sk.names.get(this) + " pickUpItem(" + sk.names.get(i) + ")");
 
         System.out.println(sk.names.get(this) + " return pickUpItem(" + sk.names.get(i) + ")");
         return;
     }
 
-    public void move(){
-        System.out.println(sk.names.get(this) + " move");
+    public void pickUp(Logarlec i){
 
-        System.out.println(sk.names.get(this) + " return move");
-        return;
+    }
+
+    public void pickUp(Beer i){
+
     }
 
     public boolean stun(){
@@ -44,6 +45,10 @@ public class Player implements PickUp, GasProtect{
 
         System.out.println(sk.names.get(this) + " return stun");
         return false;;
+    }
+
+    public boolean stunTeacher(){
+
     }
 
     public void dropItem(Item i){
@@ -64,21 +69,7 @@ public class Player implements PickUp, GasProtect{
         System.out.println(sk.names.get(this) + " die");
 
         System.out.println(sk.names.get(this) + " return die");
-        return false;;
-    }
-
-    public void turn(){
-        System.out.println(sk.names.get(this) + " turn");
-
-        System.out.println(sk.names.get(this) + " return turn");
-        return;
-    }
-
-    public void stunTeacher(){
-        System.out.println(sk.names.get(this) + " stunTeacher");
-
-        System.out.println(sk.names.get(this) + " return stunTeacher");
-        return;
+        return false;
     }
 
     public boolean changeR(Room r){
@@ -108,7 +99,7 @@ public class Player implements PickUp, GasProtect{
         return;
     }
 
-    public void loseItem(){
+    public void useItem(){
         System.out.println(sk.names.get(this) + " loseItem");
 
         System.out.println(sk.names.get(this) + " return loseItem");
@@ -133,23 +124,11 @@ public class Player implements PickUp, GasProtect{
         itemList.add(i);
     }
 
-    public void pickUp(Logarlec l){
-
+    @Override
+    public boolean maskProtect(Mask m) {
     }
 
-    public void pickUp(Beer b){
-
-    }
-
-    public void pickUp(Item i){
-
-    }
-
-    public boolean maskProtect(Mask m){
-        return true;
-    }
-
-    public boolean maskProtect(Item i){
-        return true;
+    @Override
+    public boolean maskProtect(Item i) {
     }
 }

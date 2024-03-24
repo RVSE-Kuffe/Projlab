@@ -12,13 +12,6 @@ public class Teacher extends Player {
         sk.names.put(this, n);
     }
 
-    public void move(){
-        System.out.println(sk.names.get(this) + " move");
-
-        System.out.println(sk.names.get(this) + " return move");
-        return;
-    }
-
     public void kill(Player p){
         System.out.println(sk.names.get(this) + " kill(" + sk.names.get(p) + ")");
 
