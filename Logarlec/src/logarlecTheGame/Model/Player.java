@@ -28,6 +28,8 @@ public class Player implements PickUp, GasProtect{
     public void pickUpItem(Item i){
         System.out.println(sk.names.get(this) + " pickUpItem(" + sk.names.get(i) + ")");
 
+        i.acceptPickUp(this);
+
         System.out.println(sk.names.get(this) + " return pickUpItem(" + sk.names.get(i) + ")");
         return;
     }
@@ -96,7 +98,7 @@ public class Player implements PickUp, GasProtect{
 
     public void win(){
         System.out.println(sk.names.get(this) + " win");
-
+        
         System.out.println(sk.names.get(this) + " return win");
         return;
     }

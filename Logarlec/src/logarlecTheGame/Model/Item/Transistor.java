@@ -25,12 +25,10 @@ public class Transistor extends Item  {
 
     public boolean makePair(Transistor t2){
         if(this.pair==null){
-            this.pair=t2;
-        return true;
-        }   
-        else{
-            return false;
+         return true;
         }
+         return false;
+
     }
 
     public void activate(){
@@ -40,7 +38,9 @@ public class Transistor extends Item  {
     @Override
     public void acceptPutDown(Student s){}
 
-    public boolean teleportPlayer(Student s){}
+    public boolean teleportPlayer(Student s){
+        
+    }
 
     public void setRoom(Room r){
         this.location=r;

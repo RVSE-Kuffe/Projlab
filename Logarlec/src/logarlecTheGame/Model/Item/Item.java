@@ -7,17 +7,29 @@ import logarlecTheGame.Model.Student;
 import logarlecTheGame.Model.Item.Transistor;
 
 public abstract class Item {
-    public void acceptPutDown(Student s){}
+    public void acceptPutDown(Student s){
+        s.putDown(this);
+    }
 
-    public boolean acceptSP(Student s){}
+    public boolean acceptSP(Student s){
+       return false;
+    }
 
-    public boolean acceptGasProtect(Player p){}
+    public boolean acceptGasProtect(Player p){
+       return false;
+    }
 
-    public void acceptPickUp(Player p){}
+    public void acceptPickUp(Player p){
+        p.pickUp(this);
+    }
 
-    public boolean acceptPairing(Player p, Transistor t){}
+    public boolean acceptPairing(Student s, Transistor t){
+        s.pair(this, t);
+    }
 
-    public boolean acceptPairing(Player p, Item i){}
+    public boolean acceptPairing(Student s, Item i){
+        return false;
+    }
 
     public boolean makePair(Item i){}
 

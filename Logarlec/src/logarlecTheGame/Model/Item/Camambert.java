@@ -24,7 +24,6 @@ public class Camambert extends Item {
         System.out.println(sk.names.get(this) + "acceptPutDown");
         s.use(this);
         System.out.println(sk.names.get(this) + "acceptPutDown returned with void");
-        return;
      }
     
 }
