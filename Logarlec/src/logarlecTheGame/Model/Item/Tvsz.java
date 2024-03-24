@@ -1,3 +1,5 @@
+package logarlecTheGame.Model.Item;
+
 import logarlecTheGame.Skeleton.*;
 import java.util.ArrayList;
 import java.util.List;

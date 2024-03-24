@@ -13,7 +13,7 @@ public
     
     void closeDoor(){
         System.out.println(sk.names.get(this) + "closeDoor");
-        for(Door d : doorlist){
+        for(Door d : doorList){
             d.acceptCloseDoor();
         }
         System.out.println(sk.names.get(this) + "closeDoor returned with void");

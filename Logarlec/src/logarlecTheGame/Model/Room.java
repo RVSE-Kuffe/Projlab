@@ -7,16 +7,12 @@ import logarlecTheGame.*;
 import logarlecTheGame.Model.Item.Item;
 
 public class Room {
-<<<<<<< HEAD
     private Skeleton sk;
-=======
-    Skeleton sk;
->>>>>>> e07a787602d64e731d83e800e29ad961445b214f
-    List<Door> doorlist = new ArrayList<>();
-    Boolean gassed=false;
-    int roomid;
-    int capacity;
-    boolean cleaner=false;
+    protected List<Door> doorlist = new ArrayList<>();
+    protected Boolean gassed=false;
+    protected int roomid;
+    protected int capacity;
+    protected boolean cleaner=false;
     public Room(Skeleton s, String n,int rid, int cap) {
         sk = s;
         sk.names.put(this, n);
