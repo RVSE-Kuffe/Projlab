@@ -50,10 +50,16 @@ public class Transistor extends Item  {
     @Override
     public void acceptPutDown(Student s){
         System.out.println(sk.names.get(this) + "acceptPutDown");
+        s.use(this);
     }
 
     public boolean teleportPlayer(Student s){
         System.out.println(sk.names.get(this) + "teleportPlayer");
+       return this.pair.arrivingPlayer(s);
+        
+    }
+    public boolean arrivingPlayer(Student s){  //meg kell írni a Addplayert booleanra
+        return this.location.addPlayer(s);
         
     }
 
@@ -64,7 +70,7 @@ public class Transistor extends Item  {
     @Override
     public boolean acceptPairing(Student s, Transistor t){
         System.out.println(sk.names.get(this) + "acceptPairing");
-        s.pair(this, t)
+        s.pair(this, t);
     }
 
     @Override

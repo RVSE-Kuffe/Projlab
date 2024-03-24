@@ -15,12 +15,11 @@ public class Beer extends Item implements CycleBased {
     private Skeleton sk;
 
     public Beer(Skeleton s, String n, int durab) {
-    public Beer(Skeleton s, String n, int durab) {
         sk = s;
         sk.names.put(this, n);
         durability=durab;
         active=false;
-        active=false;
+
     }
     /**
      * A hallgatót próbálja megvédeni
@@ -49,14 +48,8 @@ public class Beer extends Item implements CycleBased {
     }
 
     private void csokkent(){
-<<<<<<< HEAD
-        if(durability>0)
+        if(durability>0&&this.active==true)
         durability-=1;
-=======
-        if(durability>0 && this.active){
-            this.durability-=1;
-        }
->>>>>>> 3aba82ecbcb062eac659f7f672c4c3b9fdb614b4
     }
 
     public void iterate(){

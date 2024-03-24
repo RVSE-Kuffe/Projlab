@@ -111,9 +111,9 @@ public class Student extends Player implements StudentProtection, PutDown, Pairi
     public void use(Transistor i) {
         logger.info(sk.names.get(this) + ".use()\n");
         dropItem(i);
-        this.location.removePlayer(this);
-        if(!i.getPair().teleportPlayer(this))
-            this.location.addPlayer(this);
+        i.teleportPlayer(this);
+        if(i.teleportPlayer(this))
+            this.location.removePlayer(this);
     }
 
     public void use(Camambert i) {
