@@ -15,6 +15,11 @@ public class Room {
     protected int roomid;
     protected int capacity;
     protected boolean cleaner=false;
+
+    /**
+     * Szoba osztály konstruktora
+     * beállítja a megfelelő attribútumokat
+     */
     public Room(Skeleton s, String n,int rid, int cap) {
         sk = s;
         sk.names.put(this, n);
@@ -23,19 +28,41 @@ public class Room {
     }
 
     
-
+    /**
+     * szobából egy item eltávolítását végzi
+     * kiveszi a listából
+     * @param i az item amit ki akarunk venni
+     */
     public void removeItem(Item i){
         System.out.println(sk.names.get(this) + "removeItem");
         itemList.remove(i);
     }
-
+    /**
+     * szobából egy player eltávolítását végzi
+     * kiveszi a listából
+     * @param p az player akit el akarunk távolítani
+     */
     void removePlayer(Player p){System.out.println(sk.names.get(this) + "removePlayer");}
 
+     /**
+     * szobába hozzáad egy item-et
+     * beteszi a listájába
+     * @param i az player amit hozzá akarunk adni
+     */
     public void addItem(Item i){
         System.out.println(sk.names.get(this) + "addItem");
         itemList.add(i);
     }
 
+
+    /**
+     * szobába hozzáad egy playert
+     * beteszi a listájába
+     * vizsgálja, hogy betehető-e (kapacitás miatt)
+     * ha igen akkor állapottól függően stunol
+     * @param p az player amit hozzá akarunk adni
+     * @return true ha hozzá lehet adni, false ha nem
+     */
     public boolean addPlayer(Player p){
         System.out.println(sk.names.get(this) + "addPlayer");
         if(playerList.size()<capacity){
@@ -56,6 +83,11 @@ public class Room {
     boolean mergeRoom(Room r1, Room r2){System.out.println(sk.names.get(this) + "mergeRoom");return true;}
     void Split(Room r1, Room r2){System.out.println(sk.names.get(this) + "Split");}
 
+    /**
+     * szobába hozzáad egy door-t
+     * beteszi a listájába
+     * @param d a door amit hozzá akarunk adni
+     */
     public void addDoor(Door d){
         System.out.println(sk.names.get(this) + " addDoor");
         doorList.add(d);
@@ -66,7 +98,17 @@ public class Room {
     boolean killPlayer(Player p){System.out.println(sk.names.get(this) + "killPlayer");return true;}
     void enough(){System.out.println(sk.names.get(this) + "enough");}
     
+    /**
+     * játék megnyerését jelzi
+     */
     void win(){System.out.println(sk.names.get(this) + "win");}
+
+    /**
+     * játékos ajtón keresztül léptetését kezdeményezi
+     * @param p a játékos akit léptet
+     * @param d az ajtó amin lépteti 
+     * @return true ha sikeres a transfer, false ha sikertelen
+     */
 
     boolean changeRoom(Player p, Door d){
         System.out.println(sk.names.get(this) + "changeRoom(" + sk.names.get(p) + ", " + sk.names.get(d) + ")");
@@ -78,6 +120,12 @@ public class Room {
         return false;
     }
 
+    /**
+     * Splitelést végzi
+     * Split közben nem kerül át senki/semmi sehova csak egy új ugyanolyan szoba lesz létrehozva 
+     * létrehoz egy ajtót a két szoba közt és hozzá is adja a két szobához
+     * @return room2 a létreött szoba
+     */
     Room newRoom(){
         System.out.println(sk.names.get(this) + " newRoom");
         Room room2 =new Room(this.sk, "splitNewRoom", this.roomid + 1, this.capacity);
@@ -91,6 +139,10 @@ public class Room {
 
     void stunRoom(){System.out.println(sk.names.get(this) + "stunRoom");}
 
+    /**
+     * szobába érkező játékost megpróbálja megöletni mindenkivel
+     * @param  p player akit megpróbálnak megölni(önmagát nem próbálja)
+     */
     public void pvp(Player p){
         System.out.println(sk.names.get(this) + " pvp(" + sk.names.get(this) + ")");
         for(Player pl : playerList){
@@ -100,6 +152,10 @@ public class Room {
         }
     }
 
+    /**
+     * elgázosítja a szobát
+     * minden benne lévő játékost megpróbál stunolni is
+     */
     public void makeGassed(){
         System.out.println(sk.names.get(this) + " makeGassed");
         gassed=true;
@@ -110,6 +166,10 @@ public class Room {
         return;
     }
 
+    /**
+     * táblatörlőssé teszi a szobát
+     * minden benne lévő játékost megpróbál stunolni is a megfelelő módon
+     */
     public void makeClean(){
         System.out.println(sk.names.get(this) + "makeClean");
         cleaner=true;
