@@ -27,6 +27,9 @@ public class Skeleton {
 
     public void listRoomChange(){
         System.out.println("a: testclosedoor");
+        System.out.println("b: testopendoor");
+        System.out.println("c: testmakegassed");
+        System.out.println("d: testmakeclean");
 
     }
 
@@ -63,12 +66,14 @@ public class Skeleton {
         Room r=new Room(this, "r",3,5);
         Student s=new Student(this, "s",1,r);
         Camambert c=new Camambert(this,"c");
+        s.addItem(c);
         s.putDown(c);
     }
     public void testMakeClean(){
         Room r=new Room(this, "r",3,5);
         Student s=new Student(this, "s",1,r);
         Tablatorlo t=new Tablatorlo(this,"t",6);
+        s.addItem(t);
         s.putDown(t);
     }
 }
