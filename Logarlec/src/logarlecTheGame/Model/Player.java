@@ -26,6 +26,7 @@ public class Player implements PickUp, GasProtect{
     }
 
     /**
+<<<<<<< HEAD
      * Tárgyak felvételét kezdeményezi
      * @param i     Felvenni kívánt tárgy
      */
@@ -65,6 +66,28 @@ public class Player implements PickUp, GasProtect{
         System.out.println(sk.names.get(this) + ".pickUp(" + sk.names.get(i) + ") returned");
     }
 
+=======
+     * Tárgyak felvételét valósítja meg
+     * @param i     A felvenni kívánt tárgy
+     */
+    public void pickUp(Item i){
+        System.out.println(sk.names.get(this) + ".pickUp(" + sk.names.get(i) + ")");
+        location.removeItem(i);
+        this.addItem(i);
+        System.out.println(sk.names.get(this) + ".pickUp(" + sk.names.get(i) + ") returned");
+    }
+
+    /**
+     * A Logarléc felvételét valósítja meg
+     * @param i     Logarléc
+     */
+    public void pickUp(Logarlec i){
+        System.out.println(sk.names.get(this) + ".pickUp(" + sk.names.get(i) + ")");
+        location.win();
+        System.out.println(sk.names.get(this) + ".pickUp(" + sk.names.get(i) + ") returned");
+    }
+
+>>>>>>> foldi
     public void pickUp(Beer i){
         //TODO
     }
@@ -76,6 +99,9 @@ public class Player implements PickUp, GasProtect{
      */
     public boolean stun(){
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> foldi
         System.out.println(sk.names.get(this) + ".stun()");
         for(Item i: itemList){
             if(i.acceptGasProtect(this)){
@@ -85,12 +111,15 @@ public class Player implements PickUp, GasProtect{
         }
         System.out.println(sk.names.get(this) + ".stun() returned True");
         return true;
+<<<<<<< HEAD
 =======
         System.out.println(sk.names.get(this) + " stun");
 
         System.out.println(sk.names.get(this) + " return stun");
         return false;
 >>>>>>> e1900923b58351629ff5b3defa34ede9206883fb
+=======
+>>>>>>> foldi
     }
 
     /**
@@ -143,6 +172,9 @@ public class Player implements PickUp, GasProtect{
      */
     public boolean die(){
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> foldi
         System.out.println(sk.names.get(this) + ".die()");
         for(Item i : itemList){
             if(i.acceptSP(this)){
@@ -152,6 +184,7 @@ public class Player implements PickUp, GasProtect{
         }
         System.out.println(sk.names.get(this) + ".die() returned True");
         return true;
+<<<<<<< HEAD
 =======
         System.out.println(sk.names.get(this) + " die");
 
@@ -172,6 +205,8 @@ public class Player implements PickUp, GasProtect{
         System.out.println(sk.names.get(this) + " return stunTeacher");
         return;
 >>>>>>> e1900923b58351629ff5b3defa34ede9206883fb
+=======
+>>>>>>> foldi
     }
 
     /**
@@ -236,6 +271,7 @@ public class Player implements PickUp, GasProtect{
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     public void pickUp(Beer b){
         this.addItem(b);
@@ -249,6 +285,8 @@ public class Player implements PickUp, GasProtect{
     }
 
 >>>>>>> e1900923b58351629ff5b3defa34ede9206883fb
+=======
+>>>>>>> foldi
     public boolean maskProtect(Mask m){
         if(m.durabminus()){
             return true;

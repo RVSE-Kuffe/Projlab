@@ -16,9 +16,11 @@ public class Beer extends Item implements CycleBased {
     private Skeleton sk;
 
     public Beer(Skeleton s, String n, int durab) {
+    public Beer(Skeleton s, String n, int durab) {
         sk = s;
         sk.names.put(this, n);
         durability=durab;
+        active=false;
         active=false;
     }
     /**
