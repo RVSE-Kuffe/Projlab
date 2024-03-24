@@ -33,6 +33,7 @@ public class Student extends Player implements StudentProtection, PutDown, Pairi
             }
         }
         logger.info(sk.names.get(this) + ".die() returned with True\n");
+        this.location.removePlayer(this);
         return true;
     } 
     
@@ -166,22 +167,24 @@ public class Student extends Player implements StudentProtection, PutDown, Pairi
 
 
     public boolean protect(Tvsz i) {
-        logger.info(sk.names.get(this) + ".protect()\n");
+        logger.info(sk.names.get(this) + ".protect(tvsz)\n");
         if(i.durabminus()){
-            logger.info(sk.names.get(this) + ".protect() returned with True\n");
+            logger.info(sk.names.get(this) + ".protect(tvsz) returned with True\n");
             return true;
         }
-        logger.info(sk.names.get(this) + ".protect() returned with False\n");
+        logger.info(sk.names.get(this) + ".protect(tvsz) returned with False\n");
         return false;
     }
 
     public boolean protect(Beer i) {
-        logger.info(sk.names.get(this) + ".protect()\n");
-        if(i.durabminus()){
-            logger.info(sk.names.get(this) + ".protect() returned with True\n");
-            return true;
-        }
-        logger.info(sk.names.get(this) + ".protect() returned with False\n");
-        return false;
+        logger.info(sk.names.get(this) + ".protect(beer)\n");
+        logger.info(sk.names.get(this) + ".protect(beer) returned with True\n");
+        return true;
+
+    }
+    @Override
+    public void pickUp(Logarlec l){
+        logger.info(sk.names.get(this) + ".pickup(logarlec)\n");
+        this.location.win();
     }
 }

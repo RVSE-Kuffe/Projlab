@@ -23,11 +23,14 @@ public class Tablatorlo extends Item implements CycleBased {
         System.out.println(sk.names.get(this) + "acceptPutDown");
         s.use(this);
         System.out.println(sk.names.get(this) + "acceptPutDown returned with void");
-        return;
     }    
 
-    boolean durabminus(){}
+    private void csokkent(){
+        if(durability>0) {durability-=1;}
+    }
 
-    public void iterate(){}
+    public void iterate(){
+        this.csokkent();
+    }
     
 }
