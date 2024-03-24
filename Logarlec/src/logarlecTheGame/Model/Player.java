@@ -135,23 +135,25 @@ public class Player implements PickUp, GasProtect{
         itemList.add(i);
     }
 
-    public void pickUp(Logarlec l){
-
-    }
-
     public void pickUp(Beer b){
-
+        this.addItem(b);
+        this.location.removeItem(b);
+        b.activate();
     }
 
     public void pickUp(Item i){
-
+    this.addItem(i);
+    this.location.removeItem(i);
     }
 
     public boolean maskProtect(Mask m){
-        return true;
+        if(m.durabminus()){
+            return true;
+        }
+        return false;
     }
 
     public boolean maskProtect(Item i){
-        return true;
+        return false;
     }
 }
