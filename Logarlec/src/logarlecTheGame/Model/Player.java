@@ -137,10 +137,19 @@ public class Player implements PickUp, GasProtect{
         return true;
     }
 
+    /**
+     * A játékos szobaváltását kezdeményezi
+     * @param r     A szoba, ahová lépünk
+     * @return      Igaz, ha az 'r' szobába van elég hely, tehát át lehet lépni. Különben Hamis
+     */
     public boolean changeR(Room r){
         System.out.println(sk.names.get(this) + " changeR(" + sk.names.get(r) + ")");
-        System.out.println(sk.names.get(this) + " return changeR(" + sk.names.get(r) + ")");
-        return this.location.changeRoom(this, r);
+        if(this.location.changeRoom(this, r)){
+            System.out.println(sk.names.get(this) + ".changeR(" + sk.names.get(r) + ") returned True");
+            return true;
+        }
+        System.out.println(sk.names.get(this) + ".changeR(" + sk.names.get(r) + ") returned False");
+        return false;
     }
 
     public void destroyItem(Item i){
