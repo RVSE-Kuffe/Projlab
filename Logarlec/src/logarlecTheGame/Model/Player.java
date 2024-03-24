@@ -25,44 +25,167 @@ public class Player implements PickUp, GasProtect{
         isProtected = false;
     }
 
+    /**
+<<<<<<< HEAD
+     * Tárgyak felvételét kezdeményezi
+     * @param i     Felvenni kívánt tárgy
+     */
     public void pickUpItem(Item i){
+<<<<<<< HEAD
+        System.out.println(sk.names.get(this) + ".pickUpItem(" + sk.names.get(i) + ")");
+        i.acceptPickUp(this);
+        System.out.println(sk.names.get(this) + ".pickUpItem(" + sk.names.get(i) + ") returned");
+=======
         System.out.println(sk.names.get(this) + " pickUpItem(" + sk.names.get(i) + ")");
 
         i.acceptPickUp(this);
 
         System.out.println(sk.names.get(this) + " return pickUpItem(" + sk.names.get(i) + ")");
         return;
+>>>>>>> e1900923b58351629ff5b3defa34ede9206883fb
     }
 
-    public void move(){
-        System.out.println(sk.names.get(this) + " move");
-
-        System.out.println(sk.names.get(this) + " return move");
-        return;
+    /**
+     * Tárgyak felvételét valósítja meg
+     * @param i     A felvenni kívánt tárgy
+     */
+    public void pickUp(Item i){
+        System.out.println(sk.names.get(this) + ".pickUp(" + sk.names.get(i) + ")");
+        location.removeItem(i);
+        this.addItem(i);
+        System.out.println(sk.names.get(this) + ".pickUp(" + sk.names.get(i) + ") returned");
     }
 
+    /**
+     * A Logarléc felvételét valósítja meg
+     * @param i     Logarléc
+     */
+    public void pickUp(Logarlec i){
+        System.out.println(sk.names.get(this) + ".pickUp(" + sk.names.get(i) + ")");
+        location.win();
+        System.out.println(sk.names.get(this) + ".pickUp(" + sk.names.get(i) + ") returned");
+    }
+
+=======
+     * Tárgyak felvételét valósítja meg
+     * @param i     A felvenni kívánt tárgy
+     */
+    public void pickUp(Item i){
+        System.out.println(sk.names.get(this) + ".pickUp(" + sk.names.get(i) + ")");
+        location.removeItem(i);
+        this.addItem(i);
+        System.out.println(sk.names.get(this) + ".pickUp(" + sk.names.get(i) + ") returned");
+    }
+
+    /**
+     * A Logarléc felvételét valósítja meg
+     * @param i     Logarléc
+     */
+    public void pickUp(Logarlec i){
+        System.out.println(sk.names.get(this) + ".pickUp(" + sk.names.get(i) + ")");
+        location.win();
+        System.out.println(sk.names.get(this) + ".pickUp(" + sk.names.get(i) + ") returned");
+    }
+
+>>>>>>> foldi
+    public void pickUp(Beer i){
+        //TODO
+    }
+
+
+    /**
+     * A Hallgatók bénítását végzi
+     * @return  Hamissal tér vissza, ha a Hallgatót egy tárgya megvédte, különben Igaz
+     */
     public boolean stun(){
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> foldi
+        System.out.println(sk.names.get(this) + ".stun()");
+        for(Item i: itemList){
+            if(i.acceptGasProtect(this)){
+                System.out.println(sk.names.get(this) + ".stun() returned False");
+                return false;
+            }
+        }
+        System.out.println(sk.names.get(this) + ".stun() returned True");
+        return true;
+<<<<<<< HEAD
+=======
         System.out.println(sk.names.get(this) + " stun");
 
         System.out.println(sk.names.get(this) + " return stun");
         return false;
+>>>>>>> e1900923b58351629ff5b3defa34ede9206883fb
+=======
+>>>>>>> foldi
     }
 
+    /**
+     * Az Oktatók bénítását végzi
+     * @return  Hamissal tér vissza, ha az Oktatót egy tárgya megvédte, különben Igaz
+     */
+    public boolean stunTeacher(){
+        System.out.println(sk.names.get(this) + ".stunTeacher()");
+        for(Item i: itemList){
+            if(i.acceptGasProtect(this)){
+                System.out.println(sk.names.get(this) + ".stunTeacher() returned False");
+                return false;
+            }
+        }
+        System.out.println(sk.names.get(this) + ".stunTeacher() returned True");
+        return true;
+    }
+
+    /**
+     * A tárgyak eldobását végzi
+     * @param i     Az eldobott tárgy
+     */
     public void dropItem(Item i){
-        System.out.println(sk.names.get(this) + " dropItem(" + sk.names.get(i) + ")");
-
-        System.out.println(sk.names.get(this) + " return dropItem(" + sk.names.get(i) + ")");
-        return;
+        System.out.println(sk.names.get(this) + ".dropItem(" + sk.names.get(i) + ")");
+        this.location.addItem(i);
+        itemList.remove(i);
+        System.out.println(sk.names.get(this) + ".dropItem(" + sk.names.get(i) + ") returned");
     }
 
-    public void kill(Player p){
-        System.out.println(sk.names.get(this) + " kill(" + sk.names.get(p) + ")");
-
-        System.out.println(sk.names.get(this) + " return kill(" + sk.names.get(p) + ")");
-        return;
+    /**
+     * Játékosok megölésével próbálkozik, kezdeményezi azt
+     * @param p     A játékos, akit próbálunk megölni
+     * @return      Igazzal tér vissza, ha a játékos meghalt, különben hamis
+     */
+    public boolean kill(Player p){
+        System.out.println(sk.names.get(this) + ".kill(" + sk.names.get(p) + ")");
+        if(!p.equals(this)){
+            if(p.die()){
+                System.out.println(sk.names.get(this) + ".kill(" + sk.names.get(p) + ") returned True");
+                return true;
+            }
+        }
+        System.out.println(sk.names.get(this) + ".kill(" + sk.names.get(p) + ") returned False");
+        return false;
     }
 
+    /**
+     * A játékosok megölését végzi. Megvizsgálja van-e védelme a játékosnak.
+     * @return  Hamis, ha a játékosnak sikerült magát megvédenie, különben Igaz
+     */
     public boolean die(){
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> foldi
+        System.out.println(sk.names.get(this) + ".die()");
+        for(Item i : itemList){
+            if(i.acceptSP(this)){
+                System.out.println(sk.names.get(this) + ".die() returned False");
+                return false;
+            }
+        }
+        System.out.println(sk.names.get(this) + ".die() returned True");
+        return true;
+<<<<<<< HEAD
+=======
         System.out.println(sk.names.get(this) + " die");
 
         System.out.println(sk.names.get(this) + " return die");
@@ -81,12 +204,24 @@ public class Player implements PickUp, GasProtect{
 
         System.out.println(sk.names.get(this) + " return stunTeacher");
         return;
+>>>>>>> e1900923b58351629ff5b3defa34ede9206883fb
+=======
+>>>>>>> foldi
     }
 
+    /**
+     * A játékos szobaváltását kezdeményezi
+     * @param r     A szoba, ahová lépünk
+     * @return      Igaz, ha az 'r' szobába van elég hely, tehát át lehet lépni. Különben Hamis
+     */
     public boolean changeR(Room r){
         System.out.println(sk.names.get(this) + " changeR(" + sk.names.get(r) + ")");
-        System.out.println(sk.names.get(this) + " return changeR(" + sk.names.get(r) + ")");
-        return this.location.changeRoom(this, r);
+        if(this.location.changeRoom(this, r)){
+            System.out.println(sk.names.get(this) + ".changeR(" + sk.names.get(r) + ") returned True");
+            return true;
+        }
+        System.out.println(sk.names.get(this) + ".changeR(" + sk.names.get(r) + ") returned False");
+        return false;
     }
 
     public void destroyItem(Item i){
@@ -110,7 +245,7 @@ public class Player implements PickUp, GasProtect{
         return;
     }
 
-    public void loseItem(){
+    public void useItem(){
         System.out.println(sk.names.get(this) + " loseItem");
 
         System.out.println(sk.names.get(this) + " return loseItem");
@@ -135,6 +270,9 @@ public class Player implements PickUp, GasProtect{
         itemList.add(i);
     }
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
     public void pickUp(Beer b){
         this.addItem(b);
         this.location.removeItem(b);
@@ -146,6 +284,9 @@ public class Player implements PickUp, GasProtect{
         this.location.removeItem(i);
     }
 
+>>>>>>> e1900923b58351629ff5b3defa34ede9206883fb
+=======
+>>>>>>> foldi
     public boolean maskProtect(Mask m){
         if(m.durabminus()){
             return true;

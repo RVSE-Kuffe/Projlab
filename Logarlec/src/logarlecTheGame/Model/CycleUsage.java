@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import logarlecTheGame.Model.Interfaces.CycleBased;
-import logarlecTheGame.Skeleton.Skeleton;
+import logarlecTheGame.Skeleton.*;
 
 public class CycleUsage {
     private int cycleNumber;
