@@ -1,5 +1,6 @@
 package logarlecTheGame.Model.Item;
 
+import java.rmi.server.Skeleton;
 import java.util.ArrayList;
 import java.util.List;
 import logarlecTheGame.Skeleton.*;
@@ -14,6 +15,9 @@ public class Mask extends Item {
     private int durability;
     private Skeleton sk;
 
+    /**
+      *Mask konstruktor, inicializálja az attribútumokat
+     */
     public Mask(Skeleton s, String n, int durab) {
         sk = s;
         sk.names.put(this, n);

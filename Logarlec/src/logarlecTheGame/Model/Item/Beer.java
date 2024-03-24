@@ -14,6 +14,9 @@ public class Beer extends Item implements CycleBased {
     private boolean active;
     private Skeleton sk;
 
+    /**
+     * Sörosztály konstruktora, inicializlja az attribútumait
+     */
     public Beer(Skeleton s, String n, int durab) {
         sk = s;
         sk.names.put(this, n);
@@ -43,15 +46,27 @@ public class Beer extends Item implements CycleBased {
         System.out.println(sk.names.get(this) + "acceptPickUp");
     }    
 
+     /**
+     * Aktiválja a tárgyat, ezesetben sört a játékos, 
+     * azzal, hogy használja
+     * aktívra állítja az attribútumát
+     */
     public void activate(){
         this.active=true;
     }
-
+    /**
+     *Csökkenti a tárgy használhatóságát, 
+     hogyha aktív és még lehet
+     */
     private void csokkent(){
         if(durability>0&&this.active==true)
         durability-=1;
     }
 
+    /**
+     * Meghívja a csökkentés metódust, 
+     * amikor iterál
+     */
     public void iterate(){
         this.csokkent();
     }

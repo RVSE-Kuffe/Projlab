@@ -1,6 +1,8 @@
 package logarlecTheGame.Model.Item;
 
 import logarlecTheGame.Skeleton.*;
+
+import java.rmi.server.Skeleton;
 import java.util.ArrayList;
 import java.util.List;
 import logarlecTheGame.Skeleton.*;
@@ -15,6 +17,9 @@ public class Tvsz extends Item {
     private int durability;
     private Skeleton sk;
 
+    /**
+         *TVSZ konstruktor, inicializálja az attribútumokat
+     */
     public Tvsz(Skeleton s, String n, int durab) {
         sk = s;
         sk.names.put(this, n);

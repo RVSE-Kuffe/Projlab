@@ -1,5 +1,6 @@
 package logarlecTheGame.Model.Item;
 
+import java.rmi.server.Skeleton;
 import java.util.ArrayList;
 import java.util.List;
 import logarlecTheGame.Skeleton.*;
@@ -12,6 +13,10 @@ import logarlecTheGame.Model.Item.Item;
 public class Camambert extends Item {
     private Skeleton sk;
 
+    /**
+     * Camambert osztály konstruktora, 
+     * inicializálja az attribútumokat
+     */
     public Camambert(Skeleton s, String n) {
         sk = s;
         sk.names.put(this, n);
