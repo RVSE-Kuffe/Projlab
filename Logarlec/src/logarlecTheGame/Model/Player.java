@@ -142,8 +142,8 @@ public class Player implements PickUp, GasProtect{
     }
 
     public void pickUp(Item i){
-    this.addItem(i);
-    this.location.removeItem(i);
+        this.addItem(i);
+        this.location.removeItem(i);
     }
 
     public boolean maskProtect(Mask m){
@@ -156,4 +156,9 @@ public class Player implements PickUp, GasProtect{
     public boolean maskProtect(Item i){
         return false;
     }
+
+    public void setRoom(Room r){
+        this.location=r;
+    }
+
 }

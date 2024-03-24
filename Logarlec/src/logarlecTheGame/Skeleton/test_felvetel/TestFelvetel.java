@@ -14,6 +14,7 @@ public class TestFelvetel {
 
         r1.addPlayer(stud);
         r1.addItem(logar);
+        stud.setRoom(r1);
 
         stud.pickUpItem(logar);
     }
@@ -25,6 +26,7 @@ public class TestFelvetel {
 
         r1.addPlayer(stud);
         r1.addItem(t);
+        stud.setRoom(r1);
 
         stud.pickUpItem(t);
     }
