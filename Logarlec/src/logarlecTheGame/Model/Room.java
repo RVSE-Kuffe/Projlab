@@ -1,5 +1,6 @@
 package logarlecTheGame.Model;
 
+import java.rmi.server.Skeleton;
 import java.util.ArrayList;
 import java.util.List;
 import logarlecTheGame.Skeleton.*;
@@ -8,19 +9,12 @@ import logarlecTheGame.Model.Item.Item;
 
 public class Room {
     private Skeleton sk;
-<<<<<<< HEAD
-    protected List<Door> doorlist = new ArrayList<>();
-    protected Boolean gassed=false;
-    protected int roomid;
-    protected int capacity;
-    protected boolean cleaner=false;
-=======
-    List<Door> doorList = new ArrayList<>();
+    List<Door> doorlist = new ArrayList<>();
+    List<Player> playerlist = new ArrayList<>();
     Boolean gassed=false;
     int roomid;
     int capacity;
     boolean cleaner=false;
->>>>>>> 70b6637 (hibajavitas2)
     public Room(Skeleton s, String n,int rid, int cap) {
         sk = s;
         sk.names.put(this, n);
@@ -30,50 +24,38 @@ public class Room {
 
     
 
-    public Room(Skeleton s, String n, int c) {
-        sk = s;
-        sk.names.put(this, n);
-        capacity = c;
-    }
-
-    public void removeItem(Item i){System.out.println(sk.names.get(this) + "removeItem");}
-    public void removePlayer(Player p){System.out.println(sk.names.get(this) + "removePlayer");}
-    public void addItem(Item i){System.out.println(sk.names.get(this) + "addItem");}
-    public void addPlayer(Player p){System.out.println(sk.names.get(this) + "addPlayer");}
-    public boolean mergeRoom(Room r1, Room r2){System.out.println(sk.names.get(this) + "mergeRoom");return true;}
-    public void Split(Room r1, Room r2){System.out.println(sk.names.get(this) + "Split");}
+public
+    void removeItem(Item i){System.out.println(sk.names.get(this) + "removeItem");}
+    void removePlayer(Player p){System.out.println(sk.names.get(this) + "removePlayer");}
+    void addItem(Item i){System.out.println(sk.names.get(this) + "addItem");}
+    void addPlayer(Player p){System.out.println(sk.names.get(this) + "addPlayer");}
+    boolean mergeRoom(Room r1, Room r2){System.out.println(sk.names.get(this) + "mergeRoom");return true;}
+    void Split(Room r1, Room r2){System.out.println(sk.names.get(this) + "Split");}
     public void addDoor(Door d){System.out.println(sk.names.get(this) + "addDoor");}
-    public void pickupItem(int i, Player p){System.out.println(sk.names.get(this) + "pickUpItem");}
-    public boolean killPlayer(Player p){System.out.println(sk.names.get(this) + "killPlayer");return true;}
-    public void enough(){System.out.println(sk.names.get(this) + "enough");}
+    void pickupItem(int i, Player p){System.out.println(sk.names.get(this) + "pickUpItem");}
+    boolean killPlayer(Player p){System.out.println(sk.names.get(this) + "killPlayer");return true;}
+    void enough(){System.out.println(sk.names.get(this) + "enough");}
     
     void win(){System.out.println(sk.names.get(this) + "win");}
-
     boolean changeRoom(Player p, Room r){System.out.println(sk.names.get(this) + "changeRoom"); return true;}
-
-    Room newRoom(){
-        System.out.println(sk.names.get(this) + "newRoom");
-        Room room2 =new Room(this.sk, "splitNewRoom", this.capacity);
-        Door splitDoor = new Door(this.sk, "splitDoor", this, room2);
-        this.addDoor(splitDoor);
-        room2.addDoor(splitDoor);
-
-        return room2;
-    }
-
-
-
+    Room newRoom(){System.out.println(sk.names.get(this) + "newRoom");return room;}
     void stunRoom(){System.out.println(sk.names.get(this) + "stunRoom");}
     void pvp(Player p){System.out.println(sk.names.get(this) + "pvp");}
     public void makeGassed(){
         System.out.println(sk.names.get(this) + "makeGassed");
         gassed=true;
+        for(Player p : playerlist){
+            p.stun();
+        }
         System.out.println(sk.names.get(this) + "makeGassed returned with void");
         return;
     }
-    void makeClean(){
+    public void makeClean(){
         System.out.println(sk.names.get(this) + "makeClean");
         cleaner=true;
+        for(Player p : playerlist){
+            p.stunTeacher();
+        }
         System.out.println(sk.names.get(this) + "makeClean returned with void");
         return;
     }
