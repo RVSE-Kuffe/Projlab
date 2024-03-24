@@ -4,7 +4,6 @@ import java.util.List;
 
 import logarlecTheGame.Model.Interfaces.*;
 import logarlecTheGame.Model.Item.*;
-import logarlecTheGame.Model.Item.*;
 import logarlecTheGame.Skeleton.*;
 
 public class Player implements PickUp, GasProtect{
@@ -23,6 +22,16 @@ public class Player implements PickUp, GasProtect{
         itemList = new ArrayList<>();
         stunned = false;
         isProtected = false;
+    }
+
+    /**
+     * Tárgyak felvételét kezdeményezi
+     * @param i     Felvett tárgy
+     */
+    public void pickUpItem(Item i){
+        System.out.println(sk.names.get(this) + ".pickUpItem(" + sk.names.get(i) + ")");
+        i.acceptPickUp(this);
+        System.out.println(sk.names.get(this) + ".pickUpItem(" + sk.names.get(i) + ") returned");
     }
 
     /**
@@ -71,14 +80,16 @@ public class Player implements PickUp, GasProtect{
      * Az Oktatók bénítását végzi
      * @return  Hamissal tér vissza, ha az Oktatót egy tárgya megvédte, különben Igaz
      */
-    public void stunTeacher(){
+    public boolean stunTeacher(){
         System.out.println(sk.names.get(this) + ".stunTeacher()");
         for(Item i: itemList){
             if(i.acceptGasProtect(this)){
                 System.out.println(sk.names.get(this) + ".stunTeacher() returned False");
+                return false;
             }
         }
         System.out.println(sk.names.get(this) + ".stunTeacher() returned True");
+        return true;
     }
 
     /**
@@ -138,52 +149,73 @@ public class Player implements PickUp, GasProtect{
         return false;
     }
 
+    /**
+     * Tárgy törlése, putDownal ellentétben itt teljesen eltűnik
+     * @param i     A törölt tárgy
+     */
     public void destroyItem(Item i){
         System.out.println(sk.names.get(this) + " destroyItem(" + sk.names.get(i) + ")");
-
+        itemList.remove(i);
         System.out.println(sk.names.get(this) + " return destroyItem(" + sk.names.get(i) + ")");
-        return;
     }
 
+    /**
+     * Jelzi a szobának hogy nyertek a hallgatók
+     */
     public void win(){
-        System.out.println(sk.names.get(this) + " win");
-        
-        System.out.println(sk.names.get(this) + " return win");
-        return;
+        System.out.println(sk.names.get(this) + ".win()");
+        this.location.win();
+        System.out.println(sk.names.get(this) + ".win() returned");
     }
 
+    /**
+     * A játékos kábítását oldja fel
+     */
     public void heal(){
-        System.out.println(sk.names.get(this) + " heal");
-
-        System.out.println(sk.names.get(this) + " return heal");
-        return;
+        System.out.println(sk.names.get(this) + ".heal()");
+        stunned = false;
+        System.out.println(sk.names.get(this) + ".heal() returned");
     }
 
-    public void useItem(){
-        System.out.println(sk.names.get(this) + " loseItem");
-
-        System.out.println(sk.names.get(this) + " return loseItem");
-        return;
+    public void loseItem(){
+        System.out.println(sk.names.get(this) + ".loseItem()");
+        for(Item i : itemList){
+            i.acceptPutDown(this);
+        }
+        System.out.println(sk.names.get(this) + ".loseItem() returned");
     }
 
-    public void pairing(){
-        System.out.println(sk.names.get(this) + " pairing");
-
-        System.out.println(sk.names.get(this) + " return pairing");
-        return;
+    /**
+     * Két tranzisztor párosítását kezdi
+     * @param t1    Első tranzisztor
+     * @param t2    Második tranzisztor
+     * @return      Ha sikerrel párosította, akkor Igazzal tér vissza, különben hamis
+     */
+    public bool pairing(Transistor t1, Transistor t2){
+        System.out.println(sk.names.get(this) + ".pairing("+sk.names.get(t1)+", "+sk.names.get(t2)+")");
+        if(t1.acceptPairing(this, t2)){
+            System.out.println(sk.names.get(this) + ".pairing("+sk.names.get(t1)+", "+sk.names.get(t2)+") returned True");
+            return true;
+        }
+        System.out.println(sk.names.get(this) + ".pairing("+sk.names.get(t1)+", "+sk.names.get(t2)+") returned False");
+        return false;
     }
 
-    public void newR(Room r){
-        System.out.println(sk.names.get(this) + " destroyItem(" + sk.names.get(r) + ")");
-
-        System.out.println(sk.names.get(this) + " return destroyItem(" + sk.names.get(r) + ")");
-        return;
-    }
-
+    /**
+     * A játékos eszköztárához hozzáad egy új tárgyat
+     * @param i     A tárgy ami a játékoshoz kerül
+     */
     public void addItem(Item i){
+        System.out.println(sk.names.get(this) + ".addItem(" + sk.names.get(i) + ")");
         itemList.add(i);
+        System.out.println(sk.names.get(this) + ".addItem(" + sk.names.get(r) + ") returned");
     }
 
+    /**
+     * A játékost próbálja védeni a gáztól
+     * @param m     A maszk amivel védekezik
+     * @return      Ha sikerült a védés, Igazzal, ha nem, akkor Hamissal tér vssza
+     */
     public boolean maskProtect(Mask m){
         if(m.durabminus()){
             return true;
@@ -191,10 +223,19 @@ public class Player implements PickUp, GasProtect{
         return false;
     }
 
+     /**
+     * A játékost próbálja védeni a gáztól
+     * @param i     Az item (ami nem maszk), amivel védekezik
+     * @return      Ha sikerült a védés, Igazzal, ha nem, akkor Hamissal tér vssza
+     */
     public boolean maskProtect(Item i){
         return false;
     }
 
+    /**
+     * Beállítja a játékos szobáját
+     * @param r     A játékos új lokációja
+     */
     public void setRoom(Room r){
         this.location=r;
     }
