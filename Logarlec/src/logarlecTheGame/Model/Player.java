@@ -26,20 +26,6 @@ public class Player implements PickUp, GasProtect{
     }
 
     /**
-<<<<<<< HEAD
-     * Tárgyak felvételét kezdeményezi
-     * @param i     Felvenni kívánt tárgy
-     */
-    public void pickUpItem(Item i){
-        System.out.println(sk.names.get(this) + " pickUpItem(" + sk.names.get(i) + ")");
-
-        i.acceptPickUp(this);
-
-        System.out.println(sk.names.get(this) + " return pickUpItem(" + sk.names.get(i) + ")");
-        return;
-    }
-
-    /**
      * Tárgyak felvételét valósítja meg
      * @param i     A felvenni kívánt tárgy
      */
@@ -60,28 +46,6 @@ public class Player implements PickUp, GasProtect{
         System.out.println(sk.names.get(this) + ".pickUp(" + sk.names.get(i) + ") returned");
     }
 
-=======
-     * Tárgyak felvételét valósítja meg
-     * @param i     A felvenni kívánt tárgy
-     */
-    public void pickUp(Item i){
-        System.out.println(sk.names.get(this) + ".pickUp(" + sk.names.get(i) + ")");
-        location.removeItem(i);
-        this.addItem(i);
-        System.out.println(sk.names.get(this) + ".pickUp(" + sk.names.get(i) + ") returned");
-    }
-
-    /**
-     * A Logarléc felvételét valósítja meg
-     * @param i     Logarléc
-     */
-    public void pickUp(Logarlec i){
-        System.out.println(sk.names.get(this) + ".pickUp(" + sk.names.get(i) + ")");
-        location.win();
-        System.out.println(sk.names.get(this) + ".pickUp(" + sk.names.get(i) + ") returned");
-    }
-
->>>>>>> foldi
     public void pickUp(Beer i){
         //TODO
     }
@@ -92,10 +56,6 @@ public class Player implements PickUp, GasProtect{
      * @return  Hamissal tér vissza, ha a Hallgatót egy tárgya megvédte, különben Igaz
      */
     public boolean stun(){
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> foldi
         System.out.println(sk.names.get(this) + ".stun()");
         for(Item i: itemList){
             if(i.acceptGasProtect(this)){
@@ -105,15 +65,6 @@ public class Player implements PickUp, GasProtect{
         }
         System.out.println(sk.names.get(this) + ".stun() returned True");
         return true;
-<<<<<<< HEAD
-=======
-        System.out.println(sk.names.get(this) + " stun");
-
-        System.out.println(sk.names.get(this) + " return stun");
-        return false;
->>>>>>> e1900923b58351629ff5b3defa34ede9206883fb
-=======
->>>>>>> foldi
     }
 
     /**
@@ -161,10 +112,6 @@ public class Player implements PickUp, GasProtect{
      * @return  Hamis, ha a játékosnak sikerült magát megvédenie, különben Igaz
      */
     public boolean die(){
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> foldi
         System.out.println(sk.names.get(this) + ".die()");
         for(Item i : itemList){
             if(i.acceptSP(this)){
@@ -174,29 +121,6 @@ public class Player implements PickUp, GasProtect{
         }
         System.out.println(sk.names.get(this) + ".die() returned True");
         return true;
-<<<<<<< HEAD
-=======
-        System.out.println(sk.names.get(this) + " die");
-
-        System.out.println(sk.names.get(this) + " return die");
-        return false;
-    }
-
-    public void turn(){
-        System.out.println(sk.names.get(this) + " turn");
-
-        System.out.println(sk.names.get(this) + " return turn");
-        return;
-    }
-
-    public void stunTeacher(){
-        System.out.println(sk.names.get(this) + " stunTeacher");
-
-        System.out.println(sk.names.get(this) + " return stunTeacher");
-        return;
->>>>>>> e1900923b58351629ff5b3defa34ede9206883fb
-=======
->>>>>>> foldi
     }
 
     /**
@@ -260,23 +184,6 @@ public class Player implements PickUp, GasProtect{
         itemList.add(i);
     }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-    public void pickUp(Beer b){
-        this.addItem(b);
-        this.location.removeItem(b);
-        b.activate();
-    }
-
-    public void pickUp(Item i){
-        this.addItem(i);
-        this.location.removeItem(i);
-    }
-
->>>>>>> e1900923b58351629ff5b3defa34ede9206883fb
-=======
->>>>>>> foldi
     public boolean maskProtect(Mask m){
         if(m.durabminus()){
             return true;
