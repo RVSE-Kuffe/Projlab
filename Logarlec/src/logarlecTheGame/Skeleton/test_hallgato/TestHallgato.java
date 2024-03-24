@@ -69,7 +69,7 @@ public class TestHallgato{
 
         Tvsz tvsz = new Tvsz(s, "tvsz", 1);
 
-        Teacher t = new Teacher(s, "t");
+        Teacher t = new Teacher(s, "t", 1, r2);
 
         stud.addItem(tvsz);
 
@@ -89,7 +89,7 @@ public class TestHallgato{
 
         r1.addPlayer(stud);
 
-        Teacher t = new Teacher(s, "t");
+        Teacher t = new Teacher(s, "t", 1, r2);
 
         r2.addPlayer(t);
 
@@ -109,8 +109,8 @@ public class TestHallgato{
 
         Tvsz tvsz = new Tvsz(s, "tvsz", 1);
 
-        Teacher t1 = new Teacher(s, "t1");
-        Teacher t2 = new Teacher(s, "t2");
+        Teacher t1 = new Teacher(s, "t1", 1, r2);
+        Teacher t2 = new Teacher(s, "t2", 1, r2);
 
         stud.addItem(tvsz);
 
@@ -133,8 +133,8 @@ public class TestHallgato{
 
         Tvsz tvsz = new Tvsz(s, "tvsz", 2);
 
-        Teacher t1 = new Teacher(s, "t1");
-        Teacher t2 = new Teacher(s, "t2");
+        Teacher t1 = new Teacher(s, "t1", 1, r2);
+        Teacher t2 = new Teacher(s, "t2", 1, r2);
 
         stud.addItem(tvsz);
 
