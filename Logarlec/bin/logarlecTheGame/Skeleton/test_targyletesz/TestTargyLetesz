@@ -34,4 +34,21 @@ public class TestTargyLetesz {
      
 
     }
+    public void testTransistorUsage(){
+        Room r1 = new Room(s,"r1", 2);
+        Room r2 = new Room(s,"r2", 2);
+
+        Student stud = new Student(s, "s", 1, r1);
+        Transistor t1 = new Transistor(s, "transistor1",t2);
+        Transistor t2 = new Transistor(s, "transistor2",t1);
+
+
+        r1.addPlayer(stud);
+        stud.addItem(t1);
+        stud.addItem(t2);
+        stud.setRoom(r1);
+        t2.setRoom(r2)
+        stud.putDown(t1)
+
+    }
 }

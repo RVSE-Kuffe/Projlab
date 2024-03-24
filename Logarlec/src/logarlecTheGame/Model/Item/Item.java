@@ -27,6 +27,7 @@ public abstract class Item {
 
     public boolean acceptPairing(Student s, Transistor t){
         s.pair(this, t);
+        return true;
     }
 
     public boolean acceptPairing(Student s, Item i){
