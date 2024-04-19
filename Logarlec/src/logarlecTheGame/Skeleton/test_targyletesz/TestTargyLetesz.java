@@ -1,7 +1,5 @@
 package logarlecTheGame.Skeleton.test_targyletesz;
 
-import java.rmi.server.Skeleton;
-
 import logarlecTheGame.Model.*;
 import logarlecTheGame.Skeleton.*;
 import logarlecTheGame.Model.Item.*;
