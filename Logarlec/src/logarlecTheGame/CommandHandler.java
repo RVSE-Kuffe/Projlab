@@ -23,7 +23,7 @@ public class CommandHandler {
         String player = cmd[2];
         
 		//ide kell, hogy a hashmap vagy valami ilyesmi alapján megtalálni a névhez a referenciát
-        itemRef=...
+       // itemRef=...
 		player.pickUpItem(itemRef);
 		if(dstFile==null){
 		System.out.println(item + ": " + player + " - OK pickup");
