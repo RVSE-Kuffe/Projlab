@@ -18,10 +18,11 @@ public class Mask extends Item {
     /**
       *Mask konstruktor, inicializálja az attribútumokat
      */
-    public Mask(Skeleton s, String n, int durab) {
+    public Mask(Skeleton s, String n, int durab, boolean fake) {
         sk = s;
         sk.names.put(this, n);
         durability=durab;
+        isFake=fake;
     }
 
     /**

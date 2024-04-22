@@ -42,8 +42,10 @@ public class App {
             chooser = scanner.next().charAt(0);
 
             if(chooser == 'a'){
+                CommandHandler ch= new CommandHandler();
                 toConsole = false;
                 String testFile = "proba.txt";              //Ennek a stringnek az értékét kell majd megváltoztatni a kiválasztott teszt függvénéyben
+                String outFile= "out.txt";
                 System.out.println("Valassz teszteket");    //Itt kilistázza a választható teszteket
                 System.out.println("...tesztek");
                                                             //Ide kell majd egy switchcase, ami nevet ad a file-nak
@@ -57,7 +59,7 @@ public class App {
                 reader.close();
 
                 for(String s : commands){
-                    //CommandExecute(s)         //A stringek parseolását és végrehajtását meghívja az összes kiolvasott parancsra
+                    ch.executeCommand(s, outFile);         //A stringek parseolását és végrehajtását meghívja az összes kiolvasott parancsra
                 }
             }
             else if(chooser == 'b'){
