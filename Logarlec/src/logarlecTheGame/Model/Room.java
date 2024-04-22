@@ -206,7 +206,7 @@ public class Room {
     }
     public boolean acceptPairing(Board b,Room r){System.out.println(sk.names.get(this) + "acceptPairing");return true;}
 
-    public void cleanRoom(Janitor j){
+    public void sendOut(Janitor j){
         for(Door d : doorList){
             for(Player p : playerList){
                 if(p==j){
