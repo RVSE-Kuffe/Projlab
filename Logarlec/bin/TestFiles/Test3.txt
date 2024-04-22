@@ -1,0 +1,10 @@
+addRoom room r 1
+addPlayerToRoom student s r
+addItemToPlayer airfreshener a s
+addItemToPlayer camambert c s
+addItemToPlayer mask m s
+putDown c s
+listRoomAttribs r
+listPlayerAttribs s
+putDown a s
+listRoomAttribs r
