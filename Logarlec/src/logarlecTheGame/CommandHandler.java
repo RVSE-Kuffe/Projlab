@@ -11,7 +11,7 @@ public class CommandHandler {
         
         switch (cmd[0]) {
             case "pickUp":
-                pickUpItem(cmd);
+                pickUpItem(cmd, dstFile);
                 break;
             default:
                 System.out.println("Ismeretlen parancs: " + commandType);
