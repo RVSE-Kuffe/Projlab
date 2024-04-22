@@ -1,0 +1,12 @@
+addRoom Room r1 2
+addRoom Room r2 2
+addDoor d12 r1 r2 true true
+addPlayerToRoom student s r1
+addItemToPlayer Tablatorlo ta 3 s
+addPlayerToRoom teacher t r2
+listRoomAttribs r1
+listPlayerAttribs t
+putDown ta s
+listRoomAttribs
+useDoor d12 t
+listPlayerAttribs t

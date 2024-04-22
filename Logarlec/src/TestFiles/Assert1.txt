@@ -1,0 +1,6 @@
+d12: s – OK
+r1:
+r2: s
+d12: s – FAIL
+r1:
+r2: s

@@ -1,0 +1,3 @@
+s: b6 – FAIL
+s: r b1 putDown
+s: b6 – OK

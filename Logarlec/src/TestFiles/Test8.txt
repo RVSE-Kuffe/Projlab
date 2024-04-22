@@ -1,0 +1,9 @@
+addRoom r1 1
+addPlayerToRoom student s r1
+addItemToRoom Logarlec false L1 1 r1
+addItemToRoom Logarlec true L2 1 r1
+listRoom r1
+pickUp L1 s
+listRoom r1
+listPlayerItem s1
+pickUp L2 s
