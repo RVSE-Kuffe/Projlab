@@ -20,10 +20,11 @@ public class Tvsz extends Item {
     /**
          *TVSZ konstruktor, inicializálja az attribútumokat
      */
-    public Tvsz(Skeleton s, String n, int durab) {
+    public Tvsz(Skeleton s, String n, int durab, boolean fake) {
         sk = s;
         sk.names.put(this, n);
         durability=durab;
+        isFake=fake;
     }
 
     /**
@@ -33,9 +34,12 @@ public class Tvsz extends Item {
      */
    @Override
     public boolean acceptSP(Student s){
-        System.out.println(sk.names.get(this) + "acceptSP");
-        if(s.protect(this))return true;
-        return false;
+        if(!isFake){
+            //System.out.println(sk.names.get(this) + "acceptSP");
+            if(s.protect(this))
+                return true;
+            }
+            return false; 
     }
 
     /**
@@ -49,7 +53,8 @@ public class Tvsz extends Item {
             System.out.println(sk.names.get(this) + "durabminus return true");
             return true;
         }
-        System.out.println(sk.names.get(this) + "durabminus return false");
+        //System.out.println(sk.names.get(this) + "durabminus return false");
+        isFake=true;
         return false;
     }
 

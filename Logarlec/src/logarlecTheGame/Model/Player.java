@@ -142,11 +142,14 @@ public class Player implements PickUp, GasProtect{
      * @return      Igaz, ha az 'r' szobába van elég hely, tehát át lehet lépni. Különben Hamis
      */
     public boolean changeR(Door d){
-        System.out.println(sk.names.get(this) + " changeR(" + sk.names.get(d) + ")");
+        if(!stunned){
+        //System.out.println(sk.names.get(this) + " changeR(" + sk.names.get(d) + ")");
+        
         if(this.location.changeRoom(this, d)){
             System.out.println(sk.names.get(this) + ".changeR(" + sk.names.get(d) + ") returned True");
             return true;
         }
+    }
         System.out.println(sk.names.get(this) + ".changeR(" + sk.names.get(d) + ") returned False");
         return false;
     }

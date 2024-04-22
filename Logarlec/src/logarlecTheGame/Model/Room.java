@@ -15,6 +15,7 @@ public class Room {
     protected int roomid;
     protected int capacity;
     protected boolean cleaner=false;
+    protected int stickyCount = 0;
 
     /**
      * Szoba osztály konstruktora
@@ -42,7 +43,10 @@ public class Room {
      * kiveszi a listából
      * @param p az player akit el akarunk távolítani
      */
-    void removePlayer(Player p){System.out.println(sk.names.get(this) + "removePlayer");}
+    void removePlayer(Player p){
+        System.out.println(sk.names.get(this) + "removePlayer");
+        playerList.remove(p);
+    }
 
      /**
      * szobába hozzáad egy item-et
@@ -52,6 +56,7 @@ public class Room {
     public void addItem(Item i){
         System.out.println(sk.names.get(this) + "addItem");
         itemList.add(i);
+        //ha ragacsos vagy valami akkor removeItem, tehár törlődik, nem lezs a játékban többet
     }
 
 
@@ -64,24 +69,27 @@ public class Room {
      * @return true ha hozzá lehet adni, false ha nem
      */
     public boolean addPlayer(Player p){
-        System.out.println(sk.names.get(this) + "addPlayer");
+        //System.out.println(sk.names.get(this) + "addPlayer");
         if(playerList.size()<capacity){
             playerList.add(p);
             if(gassed){
                 p.stun();
+                //p.cleanRoom();
             }
             if(cleaner){
                 p.stunTeacher();
             }
-            System.out.println(sk.names.get(this) + " addPlayer returned true");
+
+            //p.sendPlayersOut();
+
+            //System.out.println(sk.names.get(this) + " addPlayer returned true");
             return true;
         }
-        System.out.println(sk.names.get(this) + " addPlayer returned false");
+        //System.out.println(sk.names.get(this) + " addPlayer returned false");
         return false;
     }
 
     boolean mergeRoom(Room r1, Room r2){System.out.println(sk.names.get(this) + "mergeRoom");return true;}
-    void Split(Room r1, Room r2){System.out.println(sk.names.get(this) + "Split");}
 
     /**
      * szobába hozzáad egy door-t
@@ -94,9 +102,7 @@ public class Room {
         System.out.println(sk.names.get(this) + " addDoor returned");
     }
 
-    void pickupItem(int i, Player p){System.out.println(sk.names.get(this) + "pickUpItem");}
     boolean killPlayer(Player p){System.out.println(sk.names.get(this) + "killPlayer");return true;}
-    void enough(){System.out.println(sk.names.get(this) + "enough");}
     
     /**
      * játék megnyerését jelzi
@@ -166,6 +172,10 @@ public class Room {
         return;
     }
 
+    public void makeUnGassed(){
+        gassed=false;
+    }
+
     /**
      * táblatörlőssé teszi a szobát
      * minden benne lévő játékost megpróbál stunolni is a megfelelő módon
@@ -194,6 +204,19 @@ public class Room {
             }
         }
     }
-    boolean acceptPairing(Board b,Room r){System.out.println(sk.names.get(this) + "acceptPairing");return true;}
+    public boolean acceptPairing(Board b,Room r){System.out.println(sk.names.get(this) + "acceptPairing");return true;}
+
+    public void sendOut(Janitor j){
+        for(Door d : doorList){
+            for(Player p : playerList){
+                if(p==j){
+                    continue;
+                }
+                if(!p.changeR(d)){
+                    break;
+                }
+            }
+        }
+    }
 
 }

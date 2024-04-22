@@ -24,6 +24,7 @@ public class Transistor extends Item  {
     public Transistor(Skeleton s, String n) {
         sk = s;
         sk.names.put(this, n);
+        isFake=false;
     }
   /**
    * *Transistor osztály konstruktora,

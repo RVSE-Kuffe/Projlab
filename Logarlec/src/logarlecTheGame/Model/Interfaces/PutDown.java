@@ -12,4 +12,5 @@ public interface PutDown {
     void use(Transistor i);
     void use(Camambert i);
     void use(Tablatorlo i);
+    void use(Airfreshener a);
 }
