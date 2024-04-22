@@ -19,6 +19,7 @@ public class Camambert extends Item {
     public Camambert(Skeleton s, String n) {
         sk = s;
         sk.names.put(this, n);
+        isFake=false;;
     }
     /**
      * A tárgyat le akarja tenni(és használni) hallgató

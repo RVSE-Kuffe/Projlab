@@ -149,6 +149,13 @@ public class Student extends Player implements StudentProtection, PutDown, Pairi
         System.out.println(sk.names.get(this) + ".use("+sk.names.get(i)+") returned");
     }
 
+    public void use(Airfreshener a) {
+        //System.out.println(sk.names.get(this) + ".use("+sk.names.get(i)+")");
+        itemList.remove(a);
+        this.location.makeUnGassed();
+       // System.out.println(sk.names.get(this) + ".use("+sk.names.get(i)+") returned");
+    }
+
     /**
      * Tablatorlok használatát végzi
      * @param i     Tablatorlo

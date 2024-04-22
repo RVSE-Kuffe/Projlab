@@ -13,9 +13,10 @@ public class Logarlec extends Item {
 /**
  * Logarléc konstruktor
      */
-    public Logarlec(Skeleton s, String n) {
+    public Logarlec(Skeleton s, String n, boolean fake) {
         sk = s;
         sk.names.put(this, n);
+        isFake=fake;
     }
 
     /**
@@ -26,8 +27,10 @@ public class Logarlec extends Item {
      */
     @Override
     public void acceptPickUp(Player p){
+        if(!isFake){
         p.pickUp(this);
-        System.out.println(sk.names.get(this) + "acceptPickUp");
+    }
+        //System.out.println(sk.names.get(this) + "acceptPickUp");
     }
     
 }

@@ -13,6 +13,8 @@ import logarlecTheGame.Model.Item.Transistor;
    *  akinek kell
      */
 public abstract class Item {
+    boolean isFake;
+
         /**
          * Tárgyletétel elfogadására
          * @param s a diák aki leteszi a tárgyat,

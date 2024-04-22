@@ -35,11 +35,7 @@ public class Teacher extends Player {
     @Override
     public void stunTeacher(){
         System.out.println(sk.names.get(this) + " stunTeacher");
-
         stunned = true;
-        for(Item i : itemList){
-            dropItem(i);
-        }
         System.out.println(sk.names.get(this) + " return stunTeacher");
     }
     /**

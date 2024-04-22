@@ -22,6 +22,7 @@ public class Beer extends Item implements CycleBased {
         sk.names.put(this, n);
         durability=durab;
         active=false;
+        isFake=false;
 
     }
     /**
@@ -31,8 +32,11 @@ public class Beer extends Item implements CycleBased {
      */
     @Override
      public boolean acceptSP(Student s){
-        System.out.println(sk.names.get(this) + "acceptSP");
-        if(s.protect(this))return true;
+        if(!isFake){
+        //System.out.println(sk.names.get(this) + "acceptSP");
+        if(s.protect(this))
+            return true;
+        }
         return false;   
     }
     /**
@@ -59,8 +63,12 @@ public class Beer extends Item implements CycleBased {
      hogyha aktív és még lehet
      */
     private void csokkent(){
-        if(durability>0&&this.active==true)
+        if(durability>0&&this.active==true){
         durability-=1;
+        if(durability<=0){
+            isFake=true;
+        }
+    }
     }
 
     /**
