@@ -11,6 +11,7 @@ public class Board implements CycleBased{
     List<Room> roomList = new ArrayList<>();
     private Skeleton sk;
     private static Random random=new Random();
+    List itemList = new ArrayList<>();
 
     /**
         *Board osztáy konstruktora

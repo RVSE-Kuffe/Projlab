@@ -17,8 +17,8 @@ public class Janitor extends Player {
      * @param i     Felvett tárgy
      */
     @Override
-    public void pickUpItem(Item i){
-        return;
+    public boolean pickUpItem(Item i){
+        return false;
     }
 
     /**
@@ -26,8 +26,8 @@ public class Janitor extends Player {
      * @param i     A felvenni kívánt tárgy
      */
     @Override
-    public void pickUp(Item i){
-        return;
+    public boolean pickUp(Item i){
+        return false;
     }
 
     /**
@@ -37,8 +37,8 @@ public class Janitor extends Player {
      * @param i     Logarléc
      */
     @Override
-    public void pickUp(Logarlec i){
-        return;
+    public boolean pickUp(Logarlec i){
+        return false;
     }
 
     /**
@@ -46,8 +46,8 @@ public class Janitor extends Player {
      * @param i Sör
      */
     @Override
-    public void pickUp(Beer i){
-      return;
+    public boolean pickUp(Beer i){
+      return false;
     }
 
 

@@ -45,8 +45,9 @@ public class Teacher extends Player {
      * @param l a logarlec amit fel akarna venni
      */
     @Override
-    public void pickUp(Logarlec l){
+    public boolean pickUp(Logarlec l){
         System.out.println(sk.names.get(this) + " pickUp(" + sk.names.get(l) + ")");
         System.out.println(sk.names.get(this) + " return pickup(" + sk.names.get(l) + ")");
+        return false;
     }
 }

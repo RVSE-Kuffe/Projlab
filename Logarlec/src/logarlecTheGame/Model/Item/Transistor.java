@@ -1,6 +1,5 @@
 package logarlecTheGame.Model.Item;
 
-import java.rmi.server.Skeleton;
 import java.util.ArrayList;
 import java.util.List;
 import logarlecTheGame.Skeleton.*;

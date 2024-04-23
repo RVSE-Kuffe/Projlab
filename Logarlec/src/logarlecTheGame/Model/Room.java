@@ -34,9 +34,13 @@ public class Room {
      * kiveszi a listából
      * @param i az item amit ki akarunk venni
      */
-    public void removeItem(Item i){
+    public boolean removeItem(Item i){
         System.out.println(sk.names.get(this) + "removeItem");
-        itemList.remove(i);
+        if(stickyCount < 5){
+            itemList.remove(i);
+            return true;
+        }
+        return false;
     }
     /**
      * szobából egy player eltávolítását végzi
@@ -109,7 +113,7 @@ public class Room {
     /**
      * játék megnyerését jelzi
      */
-    void win(){System.out.println(sk.names.get(this) + "win");}
+    public void win(){System.out.println(sk.names.get(this) + "win");}
 
     /**
      * játékos ajtón keresztül léptetését kezdeményezi

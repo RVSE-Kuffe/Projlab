@@ -54,7 +54,7 @@ public class TestOktato {
         Room r1 = new Room(s, "r1", 0, 1);
         Room r2 = new Room(s, "r2", 1, 2);
         Door d = new Door(s, "d", r1, r2);
-        Tvsz tv = new Tvsz(s, "tv", 3);
+        Tvsz tv = new Tvsz(s, "tv", 3, false);
         Student st = new Student(s, "st", 0, r2);
 
         r1.addDoor(d);

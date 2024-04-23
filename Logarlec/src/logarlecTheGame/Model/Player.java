@@ -33,21 +33,26 @@ public class Player implements PickUp, GasProtect{
      * Tárgyak felvételét kezdeményezi
      * @param i     Felvett tárgy
      */
-    public void pickUpItem(Item i){
+    public boolean pickUpItem(Item i){
         System.out.println(sk.names.get(this) + ".pickUpItem(" + sk.names.get(i) + ")");
-        i.acceptPickUp(this);
+        if(i.acceptPickUp(this)){
+            return true;
+        }
         System.out.println(sk.names.get(this) + ".pickUpItem(" + sk.names.get(i) + ") returned");
+        return false;
     }
 
     /**
      * Tárgyak felvételét valósítja meg
      * @param i     A felvenni kívánt tárgy
      */
-    public void pickUp(Item i){
+    public boolean pickUp(Item i){
         System.out.println(sk.names.get(this) + ".pickUp(" + sk.names.get(i) + ")");
-        location.removeItem(i);
-        this.addItem(i);
-        System.out.println(sk.names.get(this) + ".pickUp(" + sk.names.get(i) + ") returned");
+        if(location.removeItem(i)){
+            this.addItem(i);
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -56,22 +61,29 @@ public class Player implements PickUp, GasProtect{
      * Teacher felüldefiniálja
      * @param i     Logarléc
      */
-    public void pickUp(Logarlec i){
+    public boolean pickUp(Logarlec i){
         System.out.println(sk.names.get(this) + ".pickUp(" + sk.names.get(i) + ")");
-        location.win();
+        if(location.removeItem(i)){
+            location.win();
+            return true;
+        }
         System.out.println(sk.names.get(this) + ".pickUp(" + sk.names.get(i) + ") returned");
+        return false;
     }
 
     /**
      * A sör felvételét kezeli, mivel ez egy speckó eset
      * @param i Sör
      */
-    public void pickUp(Beer i){
+    public boolean pickUp(Beer i){
         System.out.println(sk.names.get(this) + ".pickUp(" + sk.names.get(i) + ")");
-        location.removeItem(i);
-        this.addItem(i);
-        i.activate();
+        if(location.removeItem(i)){
+            this.addItem(i);
+            i.activate();
+            return true;
+        }
         System.out.println(sk.names.get(this) + ".pickUp(" + sk.names.get(i) + ") returned");
+        return false;
     }
 
 

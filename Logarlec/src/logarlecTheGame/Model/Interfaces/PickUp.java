@@ -10,9 +10,9 @@ public interface PickUp {
      * bárki vehet fel tárgyat
      * csak a logarlec és a Beer felvétele speciális
      */ 
-    void pickUp(Logarlec l);
+    boolean pickUp(Logarlec l);
 
-    void pickUp(Beer b);
+    boolean pickUp(Beer b);
 
-    void pickUp(Item i);
+    boolean pickUp(Item i);
 }
