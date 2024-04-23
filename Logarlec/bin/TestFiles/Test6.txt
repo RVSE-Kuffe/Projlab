@@ -1,0 +1,13 @@
+addRoom room r1 2
+addRoom room r2 1
+addDoor d12 r1 r2 true true
+addPlayerToRoom student s r1
+addItemToPlayer Beer, b, 3, s
+addPlayerToRoom teacher t r2
+listRoom r1
+listRoom r2
+listPlayerItem s
+useDoor d12 t
+listRoom r1
+listRoom r2
+listPlayerItem s

@@ -5,10 +5,13 @@ import java.util.ArrayList;
 import java.util.List;
 import logarlecTheGame.Skeleton.*;
 import logarlecTheGame.*;
+import logarlecTheGame.Model.Interfaces.CycleBased;
+import java.util.Random;
 
-public class Board {
+public class Board implements CycleBased{
     List<Room> roomList = new ArrayList<>();
     private Skeleton sk;
+    private static Random random=new Random();
 
     /**
         *Board osztáy konstruktora
@@ -85,5 +88,27 @@ public class Board {
      */
 
     public void win(){System.out.println(sk.names.get(this) + "win");}
+
+    @Override
+    public void iterate() {
+        int choice= random.nextInt(3);
+        switch(choice){
+            case 0:
+                break;
+            case 1:
+                int index1=random.nextInt(roomList.size());
+                int index2=random.nextInt(roomList.size());
+                while(index2==index1){
+                    index2=random.nextInt(roomList.size());
+                }
+                forceMerge(roomList.get(index1), roomList.get(index2));
+                break;
+            case 2:
+                int index=random.nextInt(roomList.size());
+                forceSplit(roomList.get(index));
+                break;
+        }
+        
+    }
 
 }

@@ -7,7 +7,12 @@ import logarlecTheGame.Model.Interfaces.*;
 
 public class Janitor extends Player {
     
-     /**
+     public Janitor(Skeleton s, String n, int i, Room l) {
+        super(s, n, i, l);
+        //TODO Auto-generated constructor stub
+    }
+
+    /**
      * Tárgyak felvételét kezdeményezi
      * @param i     Felvett tárgy
      */
@@ -60,8 +65,8 @@ public class Janitor extends Player {
      * Teacher felüldefiniálja, mert ez csak rá van hatással 
      */
     @Override
-    public void stunTeacher(){
-        return;
+    public boolean stunTeacher(){
+        return false;
     }
 
     /**
@@ -150,14 +155,14 @@ public class Janitor extends Player {
     public void setRoom(Room r){
         this.location=r;
     }
-
+    @Override
     public void cleanRoom(){
         this.location.makeUnGassed();
-       // this.location.sendOut(this);
+      
     }
-
-    //public void sendPlayersOut(){
-      //  this.location.sendOut(this);
-    //}
+    @Override
+    public void sendPlayersOut(){
+        this.location.sendOut(this);
+    }
 
 }

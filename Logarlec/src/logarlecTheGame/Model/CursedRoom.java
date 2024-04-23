@@ -2,9 +2,11 @@ package logarlecTheGame.Model;
 
 import logarlecTheGame.Skeleton.*;
 import logarlecTheGame.*;
+import logarlecTheGame.Model.Interfaces.CycleBased;
+import java.util.Random;
 
-public class CursedRoom extends Room {
-
+public class CursedRoom extends Room implements CycleBased {
+    private static Random random=new Random();
     /**
      * Átkozot szoba konstruktora
      * beállítja a megfelelő paramétereket
@@ -43,5 +45,22 @@ public class CursedRoom extends Room {
      */
     public boolean acceptPairing(Board b, Room r){System.out.println(sk.names.get(this) + "acceptPairing");
     return true;}
+    @Override
+    public void iterate() {
+        int choice= random.nextInt(3);
+        switch(choice){
+            case 0:
+                break;
+            case 1:
+               for(Door d:doorList){
+                this.closeDoor();
+               }
+            case 2:
+            for(Door d:doorList){
+                this.openDoor(); 
+               }
+        }
+        
+    }
 
 }

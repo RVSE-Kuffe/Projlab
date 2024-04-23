@@ -1,0 +1,11 @@
+addRoom room r 1
+addItemToRoom beer b6 1 r
+addPlayerToRoom student s r
+addItemToPlayer beer b1 1 s
+addItemToPlayer beer b2 1 s
+addItemToPlayer beer b3 1 s
+addItemToPlayer beer b4 1 s
+addItemToPlayer beer b5 1 s
+pickUp b6 s
+putDown b1 s
+pickUp b6 s

@@ -99,8 +99,9 @@ public class Player implements PickUp, GasProtect{
      * Az Oktatók bénítását végzi
      * Teacher felüldefiniálja, mert ez csak rá van hatással 
      */
-    public void stunTeacher(){
+    public boolean stunTeacher(){
         System.out.println(sk.names.get(this) + ".stunTeacher()");
+        return false;
     }
 
     /**
@@ -152,16 +153,6 @@ public class Player implements PickUp, GasProtect{
     }
         System.out.println(sk.names.get(this) + ".changeR(" + sk.names.get(d) + ") returned False");
         return false;
-    }
-
-    /**
-     * Tárgy törlése, putDownal ellentétben itt teljesen eltűnik
-     * @param i     A törölt tárgy
-     */
-    public void destroyItem(Item i){
-        System.out.println(sk.names.get(this) + " destroyItem(" + sk.names.get(i) + ")");
-        itemList.remove(i);
-        System.out.println(sk.names.get(this) + " return destroyItem(" + sk.names.get(i) + ")");
     }
 
     /**
@@ -247,6 +238,15 @@ public class Player implements PickUp, GasProtect{
      */
     public void setRoom(Room r){
         this.location=r;
+    }
+
+    public void cleanRoom(){
+        return;
+      
+    }
+
+    public void sendPlayersOut(){
+        return;
     }
 
 }
