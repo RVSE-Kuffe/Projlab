@@ -89,7 +89,7 @@ public class Transistor extends Item  {
      */
     public boolean teleportPlayer(Student s){
         System.out.println(sk.names.get(this) + "teleportPlayer");
-       return this.arrivingPlayer(s);
+       return this.pair.arrivingPlayer(s);
         
     }
 
@@ -99,7 +99,7 @@ public class Transistor extends Item  {
          * @return igaz, ha hozzá lehet adni, hamis, ha nem
      */
     public boolean arrivingPlayer(Student s){  
-        return this.pair.location.addPlayer(s);
+        return this.location.addPlayer(s);
         
     }
 
