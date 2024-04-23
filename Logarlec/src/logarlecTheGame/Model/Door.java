@@ -31,11 +31,12 @@ public class Door {
      * @param p     a karakter, akit át kell léptetni 
      * @return      Igaz, ha a whereTo szobába van elég hely, tehát át lehet lépni. Különben Hamis
      */
-    public boolean transferPlayer(Player p){
+    public boolean transferPlayer(Player p, Room from){
         System.out.println(sk.names.get(this) + "transferPlayer");
 
         if(! closed){
-            if(whereTo.addPlayer(p)){
+            if(whereTo!=from&&validTo){
+                if(whereTo.addPlayer(p)){
 
                 whereFrom.removePlayer(p);
 
@@ -44,10 +45,25 @@ public class Door {
 
                 System.out.println(sk.names.get(this) + " transferplayer returned true");
                 return true;
-            }
-        }       
+                 }
+
+             }
+             else if(whereTo==from&&validFrom){
+                if(whereFrom.addPlayer(p)){
+
+                    whereTo.removePlayer(p);
+    
+                    whereFrom.killAll(p);
+                    whereFrom.pvp(p);
+    
+                    System.out.println(sk.names.get(this) + " transferplayer returned true");
+                    return true;
+                }
+            } 
+        }         
         System.out.println(sk.names.get(this) + " transferplayer returned false");
         return false;
+    
     }
     void changeVisibility(){System.out.println(sk.names.get(this) + "changeVisibility");}
     void changeRoom(){System.out.println(sk.names.get(this) + "changeRoom");}

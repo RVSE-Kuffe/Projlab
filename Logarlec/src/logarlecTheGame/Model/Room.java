@@ -72,15 +72,17 @@ public class Room {
         //System.out.println(sk.names.get(this) + "addPlayer");
         if(playerList.size()<capacity){
             playerList.add(p);
+            p.setRoom(this);
+            this.stickyCount++;
             if(gassed){
                 p.stun();
-                //p.cleanRoom();
+                p.cleanRoom();
             }
             if(cleaner){
                 p.stunTeacher();
             }
 
-            //p.sendPlayersOut();
+            p.sendPlayersOut();
 
             //System.out.println(sk.names.get(this) + " addPlayer returned true");
             return true;
@@ -118,7 +120,7 @@ public class Room {
 
     boolean changeRoom(Player p, Door d){
         System.out.println(sk.names.get(this) + "changeRoom(" + sk.names.get(p) + ", " + sk.names.get(d) + ")");
-        if(d.transferPlayer(p)){
+        if(d.transferPlayer(p,this)){
             System.out.println(sk.names.get(this) + "changeRoom returned true");
             return true;
         } 
@@ -200,7 +202,7 @@ public class Room {
 
         for(Player pl : playerList){
             if(! p.equals(pl)){
-                pl.die();
+                p.kill(pl);
             }
         }
     }
@@ -217,6 +219,10 @@ public class Room {
                 }
             }
         }
+    }
+
+    public void resetStickyCount() {//stickycount nullazasra van, ha belép a takarito
+        this.stickyCount=0;
     }
 
 }

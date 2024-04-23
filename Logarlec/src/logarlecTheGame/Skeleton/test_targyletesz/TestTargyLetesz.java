@@ -57,9 +57,9 @@ public class TestTargyLetesz {
         Room r2 = new Room(s,"r2", 1, 2);
 
         Student stud = new Student(s, "s", 1, r1);
-        Transistor t2 = new Transistor(s, null, null);
-        Transistor t1 = new Transistor(s, "transistor1",t2);
-        t2 = new Transistor(s, "transistor2",t1);
+        Transistor t2 = new Transistor(s, "Transistor2");
+        Transistor t1 = new Transistor(s, "transistor1");
+        
 
 
         r1.addPlayer(stud);

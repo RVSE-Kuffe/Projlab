@@ -33,10 +33,11 @@ public class Teacher extends Player {
      * Mivel ez ellen nem tud védekezni
      */
     @Override
-    public void stunTeacher(){
+    public boolean stunTeacher(){
         System.out.println(sk.names.get(this) + " stunTeacher");
         stunned = true;
         System.out.println(sk.names.get(this) + " return stunTeacher");
+        return true;
     }
     /**
      * Teacher logarléc felvétele

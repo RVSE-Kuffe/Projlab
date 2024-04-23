@@ -4,9 +4,11 @@ import java.util.logging.Logger;
 import logarlecTheGame.Skeleton.*;
 import logarlecTheGame.Model.Item.*;
 import logarlecTheGame.Model.Interfaces.*;
+import java.util.Random;
 
 public class Student extends Player implements StudentProtection, PutDown, Pairing {
     Logger logger = Logger.getLogger(getClass().getName());
+    Random random=new Random();
     
     /**
      * Student osztály konstruktora
@@ -131,10 +133,12 @@ public class Student extends Player implements StudentProtection, PutDown, Pairi
      */
     public void use(Transistor i) {
         System.out.println(sk.names.get(this) + ".use("+sk.names.get(i)+")\n");
+        
         if(i.teleportPlayer(this)){
             this.location.removePlayer(this);
-            dropItem(i);
         }
+        dropItem(i);
+        i.setRoom(this.location);
         System.out.println(sk.names.get(this) + ".use("+sk.names.get(i)+") returned");
     }
 
@@ -184,8 +188,8 @@ public class Student extends Player implements StudentProtection, PutDown, Pairi
      * hallgatót nem érinti
      */
     @Override
-    public void stunTeacher(){
-        return;
+    public boolean stunTeacher(){
+        return false;
     }
 
     /**
@@ -209,6 +213,11 @@ public class Student extends Player implements StudentProtection, PutDown, Pairi
      * @return      Minden esetben igaz, köszönhetően a sör tulajdonságainak.
      */
     public boolean protect(Beer i) {
+        if(!itemList.isEmpty()){
+            int index=random.nextInt(itemList.size());
+            Item selectedItem=itemList.get(index);
+            this.dropItem(selectedItem);
+        }
         return true;
     }
 }

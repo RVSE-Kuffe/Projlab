@@ -174,7 +174,7 @@ public class Skeleton {
             switch(chooser){
                 case('a'): test.testTargyLetesz(this);
                     break;
-                case('b'): test.testTransistorPairing(this);
+                case('b'): test.testTransistorUsage(this);
                     break;
                 case('x'): break;
                 default: break;
