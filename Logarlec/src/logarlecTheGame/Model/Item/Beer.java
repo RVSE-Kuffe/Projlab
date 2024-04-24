@@ -45,9 +45,12 @@ public class Beer extends Item implements CycleBased {
      * @param p     a player aki fel akarja venni (visitor)
      */
     @Override
-    public void acceptPickUp(Player p){
-        p.pickUp(this);
+    public boolean acceptPickUp(Player p){
+        if(p.pickUp(this)){
+            return true;
+        }
         System.out.println(sk.names.get(this) + "acceptPickUp");
+        return false;
     }    
 
      /**

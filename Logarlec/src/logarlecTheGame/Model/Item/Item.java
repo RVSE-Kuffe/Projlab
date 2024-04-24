@@ -48,8 +48,11 @@ public abstract class Item {
        * meghívja a player tárgyfelvétel függvényét
          * meghívja a student use függvényét, aki használja
      */
-    public void acceptPickUp(Player p){
-        p.pickUp(this);
+    public boolean acceptPickUp(Player p){
+        if(p.pickUp(this)){
+            return true;
+        }
+        return false;
     }
 
       /**

@@ -7,18 +7,10 @@ import java.util.*;
 
 public class App {
 
-    static boolean toConsole = true;
+    //static boolean toConsole = true;
     static char chooser = 'd';
     static Scanner scanner = new Scanner(System.in);
 
-    static void testfv(){
-        if(toConsole){
-            System.out.println("A konzolra kell irnom");
-        }
-        else{
-            //fileba kell irnia
-        }
-    }
 
     static void writeToFile(File outputFile, List<String> output){  //Paraméterként egy file-t kap, amibe írnia kell és egy string listát, melynek elemeit külön sorokba írja ki
         BufferedWriter writer;
@@ -42,8 +34,6 @@ public class App {
             chooser = scanner.next().charAt(0);
 
             if(chooser == 'a'){
-                CommandHandler ch= new CommandHandler();
-                toConsole = false;
                 String testFile = "proba.txt";              //Ennek a stringnek az értékét kell majd megváltoztatni a kiválasztott teszt függvénéyben
                 String outFile= "out.txt";
                 System.out.println("Valassz teszteket");    //Itt kilistázza a választható teszteket
@@ -58,12 +48,14 @@ public class App {
                 }
                 reader.close();
 
+                CommandHandler ch = new CommandHandler(outFile);
+
                 for(String s : commands){
                     ch.executeCommand(s, outFile);         //A stringek parseolását és végrehajtását meghívja az összes kiolvasott parancsra
                 }
             }
             else if(chooser == 'b'){
-                toConsole = true;
+                
                 System.out.println("Parancsolvaso es parseolo logika helye");
             }
         }

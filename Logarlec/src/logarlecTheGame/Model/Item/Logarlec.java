@@ -26,10 +26,14 @@ public class Logarlec extends Item {
      * @param p     a player aki fel akarja venni (visitor)
      */
     @Override
-    public void acceptPickUp(Player p){
+    public boolean acceptPickUp(Player p){
         if(!isFake){
-        p.pickUp(this);
-    }
+            if(p.pickUp(this)){
+                return true;
+            }
+            return false;
+        }
+        return false;
         //System.out.println(sk.names.get(this) + "acceptPickUp");
     }
     

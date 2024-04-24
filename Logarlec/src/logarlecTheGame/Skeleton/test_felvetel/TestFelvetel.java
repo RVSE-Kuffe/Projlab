@@ -13,7 +13,7 @@ public class TestFelvetel {
     public void targyfelvesz1(Skeleton s){
         Room r1 = new Room(s,"r1", 0, 2);
         Student stud = new Student(s, "s", 1, r1);
-        Logarlec logar = new Logarlec(s, "logar");
+        Logarlec logar = new Logarlec(s, "logar", false);
 
         r1.addPlayer(stud);
         r1.addItem(logar);
@@ -28,7 +28,7 @@ public class TestFelvetel {
     public void targyfelvesz2(Skeleton s){
         Room r1 = new Room(s,"r1", 0, 2);
         Student stud = new Student(s, "s", 1, r1);
-        Tvsz t = new Tvsz(s, "tvsz", 3);
+        Tvsz t = new Tvsz(s, "tvsz", 3, false);
 
         r1.addPlayer(stud);
         r1.addItem(t);
