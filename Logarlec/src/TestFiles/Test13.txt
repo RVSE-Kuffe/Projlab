@@ -1,0 +1,15 @@
+addRoom room r1
+addRoom room r2
+addRoom room r3
+addDoor d12 r1 r2 true true
+addDoor d23 r2 r3 true true
+addPlayerToRoom student s1 r1
+addPlayerToRoom teacher t1 r2
+addPlayerToRoom teacher t2 r3
+AddItemToPlayer beer b1 1 s1
+useDoor d12 s1
+beerIterate
+useDoor d23 s1
+listRoom r1
+listRoom r2
+listRoom r3

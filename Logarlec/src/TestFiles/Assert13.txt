@@ -1,0 +1,6 @@
+d12: s1 –OK
+b1 iterate
+d23 s1 –OK
+r1:
+r2: t1
+r3: t2

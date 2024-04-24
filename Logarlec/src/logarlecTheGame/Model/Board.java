@@ -68,13 +68,17 @@ public class Board implements CycleBased{
          * @param r2 a másik szoba
          * mindenképp mergel két szobát
      */
-    public boolean forceMerge(Room r1, Room r2){System.out.println(sk.names.get(this) + "forceMerge");return true;}
+    public boolean forceMerge(Room r1, Room r2){
+        System.out.println(sk.names.get(this) + "forceMerge");return true;
+        pair(r1,r2);
+    }
 
       /**
          * Szobák mergelése függvény
          * @param r a szoba amit feloszt
          * mindenképp splitel egy szobát, és létrehoz egy újat
      */
+
     public void forceSplit(Room r){
         System.out.println(sk.names.get(this) + "forceSplit(" + sk.names.get(r) + ")");
         Room newRoom= r.newRoom();

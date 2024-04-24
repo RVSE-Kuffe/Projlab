@@ -8,7 +8,7 @@ import logarlecTheGame.Model.Item.Item;
 
 public class Room {
     protected Skeleton sk;
-    protected List<Door> doorList = new ArrayList<>();
+    public List<Door> doorList = new ArrayList<>();
     protected List<Player> playerList = new ArrayList<>();
     protected List<Item> itemList = new ArrayList<>();
     protected boolean gassed=false;
@@ -26,6 +26,9 @@ public class Room {
         sk.names.put(this, n);
         roomid=rid;
         capacity=cap;
+    }
+    public int getCapacity(){
+        return capacity;
     }
 
     
@@ -95,7 +98,10 @@ public class Room {
         return false;
     }
 
-    boolean mergeRoom(Room r1, Room r2){System.out.println(sk.names.get(this) + "mergeRoom");return true;}
+    boolean mergeRoom(Room r1, Room r2){
+        System.out.println(sk.names.get(this) + "mergeRoom");return true;
+        
+    }
 
     /**
      * szobába hozzáad egy door-t
