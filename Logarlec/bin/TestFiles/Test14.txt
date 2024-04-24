@@ -1,0 +1,7 @@
+addRoom room r1
+addRoom room r2
+addDoor d12 r1 r2 true true
+gasRoom r2
+addPlayerToRoom janitor j1 r1
+useDoor d12 j1
+listRoomAttribs r2
