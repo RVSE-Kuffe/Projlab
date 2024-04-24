@@ -87,7 +87,7 @@ public class TestOktato {
         Room r1 = new Room(s, "r1", 0, 1);
         Room r2 = new Room(s, "r2", 1, 1);
         Door d = new Door(s, "d", r1, r2);
-        Mask m = new Mask(s, "m", 3);
+        Mask m = new Mask(s, "m", 3, false);
 
         r1.addDoor(d);
         r2.addDoor(d);

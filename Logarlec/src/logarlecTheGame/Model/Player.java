@@ -261,4 +261,7 @@ public class Player implements PickUp, GasProtect{
         return;
     }
 
+    public Room getLocation(){
+        return location;
+    }
 }

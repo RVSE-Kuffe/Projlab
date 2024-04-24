@@ -37,7 +37,7 @@ public class TestHallgato{
 
         r2.makeGassed();
 
-        Mask mask = new Mask(s, "m", 1);    
+        Mask mask = new Mask(s, "m", 1, false);    
         
         stud.addItem(mask);
 

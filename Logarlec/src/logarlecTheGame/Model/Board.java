@@ -1,17 +1,24 @@
 package logarlecTheGame.Model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import logarlecTheGame.Skeleton.*;
 import logarlecTheGame.*;
 import logarlecTheGame.Model.Interfaces.CycleBased;
+import logarlecTheGame.Model.Item.Item;
+
 import java.util.Random;
 
 public class Board implements CycleBased{
-    List<Room> roomList = new ArrayList<>();
+    private List<Room> roomList = new ArrayList<>();
     private Skeleton sk;
     private static Random random=new Random();
-    List itemList = new ArrayList<>();
+    private List<CycleBased> cycleList = new ArrayList<>();
+    public Map<String, Object> bObjects = new HashMap<>();
+    public Map<Object, String> bNames = new HashMap<>();
 
     /**
         *Board osztáy konstruktora
@@ -19,6 +26,10 @@ public class Board implements CycleBased{
     public Board(Skeleton s, String n) {
         sk = s;
         sk.names.put(this, n);
+    }
+
+    public void addIterating(CycleBased c){
+        cycleList.add(c);
     }
 
     /**
@@ -78,7 +89,8 @@ public class Board implements CycleBased{
     public void forceSplit(Room r){
         System.out.println(sk.names.get(this) + "forceSplit(" + sk.names.get(r) + ")");
         Room newRoom= r.newRoom();
-    
+        bObjects.put("split", newRoom);
+        bNames.put(newRoom, "split");
         addRoom(newRoom);
         System.out.println(sk.names.get(this) + " return forceSplit(" + sk.names.get(r) + ")");
     }
@@ -107,6 +119,9 @@ public class Board implements CycleBased{
                 int index=random.nextInt(roomList.size());
                 forceSplit(roomList.get(index));
                 break;
+        }
+        for (CycleBased cycleBased : cycleList) {
+            cycleBased.iterate();
         }
         
     }
