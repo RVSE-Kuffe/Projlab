@@ -1,17 +1,24 @@
 package logarlecTheGame.Model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import logarlecTheGame.Skeleton.*;
 import logarlecTheGame.*;
 import logarlecTheGame.Model.Interfaces.CycleBased;
+import logarlecTheGame.Model.Item.Item;
+
 import java.util.Random;
 
 public class Board implements CycleBased{
-    List<Room> roomList = new ArrayList<>();
+    private List<Room> roomList = new ArrayList<>();
     private Skeleton sk;
     private static Random random=new Random();
-    List itemList = new ArrayList<>();
+    private List<CycleBased> cycleList = new ArrayList<>();
+    public Map<String, Object> bObjects = new HashMap<>();
+    public Map<Object, String> bNames = new HashMap<>();
 
     /**
         *Board osztáy konstruktora
@@ -19,6 +26,10 @@ public class Board implements CycleBased{
     public Board(Skeleton s, String n) {
         sk = s;
         sk.names.put(this, n);
+    }
+
+    public void addIterating(CycleBased c){
+        cycleList.add(c);
     }
 
     /**
@@ -68,21 +79,18 @@ public class Board implements CycleBased{
          * @param r2 a másik szoba
          * mindenképp mergel két szobát
      */
-    public boolean forceMerge(Room r1, Room r2){
-        System.out.println(sk.names.get(this) + "forceMerge");return true;
-        pair(r1,r2);
-    }
+    public boolean forceMerge(Room r1, Room r2){System.out.println(sk.names.get(this) + "forceMerge");return true;}
 
       /**
          * Szobák mergelése függvény
          * @param r a szoba amit feloszt
          * mindenképp splitel egy szobát, és létrehoz egy újat
      */
-
     public void forceSplit(Room r){
         System.out.println(sk.names.get(this) + "forceSplit(" + sk.names.get(r) + ")");
         Room newRoom= r.newRoom();
-    
+        bObjects.put("split", newRoom);
+        bNames.put(newRoom, "split");
         addRoom(newRoom);
         System.out.println(sk.names.get(this) + " return forceSplit(" + sk.names.get(r) + ")");
     }
@@ -112,7 +120,14 @@ public class Board implements CycleBased{
                 forceSplit(roomList.get(index));
                 break;
         }
+        for (CycleBased cycleBased : cycleList) {
+            cycleBased.iterate();
+        }
         
+    }
+
+    public List<CycleBased> getCycles(){
+        return cycleList;
     }
 
 }
