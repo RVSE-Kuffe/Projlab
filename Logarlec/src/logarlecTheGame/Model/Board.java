@@ -142,4 +142,24 @@ public class Board implements CycleBased{
         return cycleList;
     }
 
+    public String listRooms(boolean withPlayers, boolean withItems){
+        String returnString = "";
+        if(withPlayers){
+        for (Room r : roomList) {
+                returnString += r.listMe(this, true, false) + ", ";
+            }
+            return returnString;
+        }
+        if(withItems){
+            for (Room r : roomList) {
+                returnString += r.listMe(this, false, true);
+            }
+            return returnString;
+        }
+        
+        for(Room r : roomList){
+            returnString += objectToString(r) + ", ";
+        }
+        return returnString;
+    }
 }

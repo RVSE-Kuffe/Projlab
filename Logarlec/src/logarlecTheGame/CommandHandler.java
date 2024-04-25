@@ -18,7 +18,7 @@ import logarlecTheGame.Model.Item.Mask;
 public class CommandHandler {
 
     private Board board;
-    private static File outFile;
+    private File outFile;
     boolean isRandom;
 
     public CommandHandler(String output){
@@ -37,7 +37,7 @@ public class CommandHandler {
         }
     }
 
-    static void outWriter(String output){  //Paraméterként egy file-t kap, amibe írnia kell és egy string listát, melynek elemeit külön sorokba írja ki
+    public void outWriter(String output){  //Paraméterként egy file-t kap, amibe írnia kell és egy string listát, melynek elemeit külön sorokba írja ki
         if(outFile == null){ //Ha a file, amit kapott null értékű, akkor csak a konzolra írja ki a stringet
             System.out.println(output);
             return;
@@ -86,6 +86,36 @@ public class CommandHandler {
             case "pair":
                 pair(cmd);
                 break; 
+            case "listPlayers":
+                listPlayers(cmd);
+                break;
+            case "listRoom":
+                listRoom(cmd);
+                break;
+            case "listAllRoom":
+                listAllRoom(cmd);
+                break;
+            case "listItem":
+                listItem(cmd);
+                break;
+            case "listPlayerItem":
+                listPlayerItem(cmd);
+                break;
+            case "listPlayerAttribs":
+                listPlayerAttribs(cmd);
+                break;
+            case "listRoomAttribs":
+                listRoomAttribs(cmd);
+                break;
+            case "gasRoom":
+                gasRoom(cmd);
+                break;
+            case "cleanRoom":
+                cleanRoom(cmd);
+                break;
+            case "stickyRoom":
+                stickyRoom(cmd);
+                break;
             default:
                 System.out.println("Ismeretlen parancs: " + commandType);
         }
@@ -239,5 +269,98 @@ public class CommandHandler {
         }
         outputString += "párosítás : " + item1 + ", " + item2;
         outWriter(outputString);
+    }
+
+    public void listPlayers(String[] cmd){
+        String outoutString = board.listRooms(true, false);
+        outWriter(outoutString);
+    }
+
+    public void listRoom(String[] cmd){
+        if(cmd.length < 2){
+            outWriter("invalid arguments");
+        }
+            String room = cmd[1];
+        String outputString = "";
+
+        Room roomRef = (Room)board.stringToObject(room);
+        outputString += roomRef.listMe(board, false, false, false);
+
+        outWriter(outputString);
+    }
+
+    public void listAllRoom(String[] cmd){
+        String outputString = board.listRooms(false, false);
+        outWriter(outputString);
+    }
+
+    public void listItem(String [] cmd){
+        String outputString = board.listRooms(false, false);
+        outWriter(outputString);
+    }
+
+    public void listPlayerItem(String[] cmd){
+        if(cmd.length < 2){
+            outWriter("invalid arguments");
+            return;
+        }
+        String player = cmd[1];
+        String outputStream = "";
+
+        Player playerRef = (Player)board.stringToObject(player);
+        outputStream += playerRef.listMe(board, true, false);
+        outWriter(outputStream);
+    }
+
+    public void listPlayerAttribs(String cmd[]){
+        if(cmd.length < 2){
+            outWriter("invalid arguments");
+            return;
+        }
+        String player = cmd[1];
+        Player playerRef = (Player)board.stringToObject(player);
+        String outputString = playerRef.listMe(board, false, true);
+        outWriter(outputString);
+    }
+
+    public void listRoomAttribs(String cmd[]){
+        if(cmd.length < 2){
+            outWriter("invalid arguments");
+            return;
+        }
+        String room = cmd[1];
+        Room roomRef = (Room)board.stringToObject(room);
+        String outputString = roomRef.listMe(board, false, false, true);
+        outWriter(outputString);
+    }
+
+    public void gasRoom(String[] cmd){
+        if(cmd.length < 2){
+            outWriter("invalid arguments");
+            return;
+        }
+        String room = cmd[1];
+        Room roomRef = (Room)board.stringToObject(room); 
+        roomRef.makeGassed();
+    }
+
+    public void cleanRoom(String[] cmd){
+        if(cmd.length < 2){
+            outWriter("invalid arguments");
+            return;
+        }
+        String room = cmd[1];
+        Room roomRef = (Room)board.stringToObject(room); 
+        roomRef.makeClean();
+    }
+
+    public void stickyRoom(String[] cmd){
+        if(cmd.length < 2){
+            outWriter("invalid arguments");
+            return;
+        }
+        String room = cmd[1];
+        Room roomRef = (Room)board.stringToObject(room); 
+        roomRef.make
     }
 }

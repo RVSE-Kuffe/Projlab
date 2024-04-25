@@ -235,4 +235,26 @@ public class Room {
         this.stickyCount=0;
     }
 
+    public String listMe(Board b, boolean withPlayers, boolean withItems, boolean withAttribs){
+        String returnString = b.objectToString(this) + ": ";
+        if(withPlayers){
+            for (Player player : playerList) {
+                returnString += b.objectToString(player) + ", ";
+            }
+        }
+        if(withItems){
+            for (Item item : itemList) {
+                returnString += b.objectToString(item) + ", ";
+            }
+        }
+        if(withAttribs){
+            if(gassed){
+                returnString += "gassed, ";
+            }
+            if(cleaner){
+                returnString += "cleaner, ";
+            }
+        }
+        return returnString;
+    }
 }

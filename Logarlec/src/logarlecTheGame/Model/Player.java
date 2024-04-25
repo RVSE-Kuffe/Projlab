@@ -264,4 +264,23 @@ public class Player implements PickUp, GasProtect{
     public Room getLocation(){
         return location;
     }
+
+    public String listMe(Board b, boolean withItems, boolean withAttribs){
+        String outputString = "";
+        outputString += b.objectToString(this) + ": ";
+        if(withItems){
+            for(Item i : itemList){
+                outputString += b.objectToString(i) + ", ";
+            }
+        }
+        if(withAttribs){
+            if(stunned){
+                outputString += "stunned, "; 
+            }
+            if(isProtected){
+                outputString += "protected";
+            }
+        }
+        return outputString;
+    }
 }
