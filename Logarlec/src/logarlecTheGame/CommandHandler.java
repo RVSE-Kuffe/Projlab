@@ -94,21 +94,21 @@ public class CommandHandler {
     private void pickUpItem(String[] cmd) {
         if(cmd.length < 3){
             outWriter("invalid arguments");
-            return;
+            throw new IllegalArgumentException("Too many arguments");
         }
         String item = cmd[1];
         String player = cmd[2];
 
         String outputString = player + item;
 
-        Item itemRef = (Item)board.bObjects.get(item);
-        Player playerRef = (Player)board.bObjects.get(player);
+        Item itemRef = (Item)board.stringToObject(item);
+        Player playerRef = (Player)board.stringToObject(player);
 		
 		if(playerRef.pickUpItem(itemRef)){
-            outputString += "OK";
+            outputString += " - OK";
         }
         else{
-            outputString += "FAIL";
+            outputString += " - FAIL";
         }
 		outWriter(outputString);
     }
@@ -122,14 +122,14 @@ public class CommandHandler {
         String student = cmd[2];
         String outputString = "";
 
-        Item itemRef = (Item)board.bObjects.get(item);
-        Student playerRef = (Student)board.bObjects.get(student);
+        Item itemRef = (Item)board.stringToObject(item);
+        Student playerRef = (Student)board.stringToObject(student);
         
         playerRef.putDown(itemRef);
 
         outputString += student;
         outputString += " : ";
-        outputString += board.bNames.get(playerRef.getLocation());
+        outputString += board.objectToString(playerRef.getLocation());
         outputString += " ";
         outputString += item;
         outputString += " putDown";
@@ -146,8 +146,8 @@ public class CommandHandler {
         String door = cmd[1];
         String player = cmd[2];
 
-        Door doorRef = (Door)board.bObjects.get(door);
-        Player playerRef = (Player)board.bObjects.get(player);
+        Door doorRef = (Door)board.stringToObject(door);
+        Player playerRef = (Player)board.stringToObject(player);
 
         playerRef.changeR(doorRef);
 
@@ -181,7 +181,7 @@ public class CommandHandler {
             String outputString="";
             String room = cmd[1];
 
-            Room roomRef = (Room)board.bObjects.get(room);
+            Room roomRef = (Room)board.stringToObject(room);
             board.forceSplit(roomRef);
 
             outputString += room;
@@ -195,7 +195,7 @@ public class CommandHandler {
         String outString = "iterated: ";
         board.iterate();
         for (CycleBased c : board.getCycles()) {
-            outString += board.bNames.get(c);
+            outString += board.objectToString(c);
             outString += "\n";
         }
         outWriter(outString);
@@ -210,7 +210,7 @@ public class CommandHandler {
         String outputString = "";
         outputString += beer;
 
-        Beer beerRef = (Beer)board.bObjects.get(beer);
+        Beer beerRef = (Beer)board.stringToObject(beer);
         beerRef.iterate();
 
         outputString += "iterated";
@@ -227,9 +227,9 @@ public class CommandHandler {
         String item1 = cmd[2];
         String item2 = cmd[3];
         
-        Player playerRef = (Player)board.bObjects.get(player);
-        Item itemRef1 = (Item)board.bObjects.get(item1);
-        Item itemRef2 = (Item)board.bObjects.get(item2);
+        Player playerRef = (Player)board.stringToObject(player);
+        Item itemRef1 = (Item)board.stringToObject(item1);
+        Item itemRef2 = (Item)board.stringToObject(item2);
 
         if(itemRef1.makePair(itemRef2)){
             outputString += "Sikeres ";

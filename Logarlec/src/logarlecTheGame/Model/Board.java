@@ -17,8 +17,20 @@ public class Board implements CycleBased{
     private Skeleton sk;
     private static Random random=new Random();
     private List<CycleBased> cycleList = new ArrayList<>();
-    public Map<String, Object> bObjects = new HashMap<>();
-    public Map<Object, String> bNames = new HashMap<>();
+    private Map<String, Object> bObjects = new HashMap<>();
+    private Map<Object, String> bNames = new HashMap<>();
+
+    public Object stringToObject(String name){
+        Object o = bObjects.get(name);
+        if(o == null) throw new NullPointerException("Object is not in the Map");
+        return o;
+    }
+
+    public String objectToString(Object o){
+        String name = bNames.get(o);
+        if(name == null) throw new NullPointerException("Object is not in the Map");
+        return name;
+    }
 
     /**
         *Board osztáy konstruktora
