@@ -12,7 +12,7 @@ import logarlecTheGame.Model.Item.Item;
 
 import java.util.Random;
 
-public class Board implements CycleBased{
+public class Board implements CycleBased, RoomPairing{
     private List<Room> roomList = new ArrayList<>();
     private Skeleton sk;
     private static Random random=new Random();
@@ -91,7 +91,30 @@ public class Board implements CycleBased{
          * @param r2 a másik szoba
          * mindenképp mergel két szobát
      */
-    public boolean forceMerge(Room r1, Room r2){System.out.println(sk.names.get(this) + "forceMerge");return true;}
+    public boolean forceMerge(Room r1, Room r2){
+        System.out.println(sk.names.get(this) + "forceMerge");
+        if(r1.getCapacity()>=r2.getCapacity() && (r1.getPlayerCount()+r2.getPlayerCount()<=r1.getCapacity())){
+            return r1.acceptPairing(this,r2);
+        }
+        if(r2.getCapacity()>=r1.getCapacity() && (r1.getPlayerCount()+r2.getPlayerCount()<=r2.getCapacity())){
+            return r1.acceptPairing(this,r2);
+        }
+        return false;
+    }
+    public boolean pair(Room r1, Room r2){
+        r2.mergeRoom(r1);
+        this.removeRoom(r2);
+        return true;
+    }
+    public boolean pair(Room r1, CursedRoom r2){
+        return false;
+    }
+    public boolean pair(CursedRoom r1, Room r2){
+        return false;
+    }
+    public boolean pair(CursedRoom r1, CursedRoom r2){
+        return false;
+    }
 
       /**
          * Szobák mergelése függvény

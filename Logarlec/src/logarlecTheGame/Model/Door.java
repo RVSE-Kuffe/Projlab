@@ -65,8 +65,20 @@ public class Door {
         return false;
     
     }
-    void changeVisibility(){System.out.println(sk.names.get(this) + "changeVisibility");}
-    void changeRoom(){System.out.println(sk.names.get(this) + "changeRoom");}
+    //elso parameter hogy mire valtoztatunk, masodik hogy melyiket--mergenel r1 volt a nagyobb
+    public void changeRoom(Room r1,Room r2){
+        System.out.println(sk.names.get(this) + "changeRoom");
+        if(r2==whereTo){
+            whereTo=r1;
+        }
+        if(r2==whereFrom){
+            whereFrom=r1;
+        }
+        if(whereFrom==whereTo){
+            whereTo=null;
+            whereFrom=null;
+        }
+    }
 
     /**
      * ajtók kinyitását végzi

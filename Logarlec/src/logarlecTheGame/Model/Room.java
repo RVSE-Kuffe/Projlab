@@ -8,7 +8,7 @@ import logarlecTheGame.Model.Item.Item;
 
 public class Room {
     protected Skeleton sk;
-    public List<Door> doorList = new ArrayList<>();
+    protected List<Door> doorList = new ArrayList<>();
     protected List<Player> playerList = new ArrayList<>();
     protected List<Item> itemList = new ArrayList<>();
     protected boolean gassed=false;
@@ -29,6 +29,9 @@ public class Room {
     }
     public int getCapacity(){
         return capacity;
+    }
+    public int getPlayerCount(){
+        return playerList.size();
     }
 
     
@@ -98,9 +101,18 @@ public class Room {
         return false;
     }
 
-    boolean mergeRoom(Room r1, Room r2){
-        System.out.println(sk.names.get(this) + "mergeRoom");return true;
-        
+    public boolean mergeRoom(Room r1){
+        System.out.println(sk.names.get(this) + "mergeRoom");
+        for(Item i:itemList ){
+            r1.addItem(i);
+        }
+        for(Player p:playerList ){
+            r1.addPlayer(p);
+        }
+        for(Door d:doorList ){
+            d.changeRoom(r1,this);
+        }
+        return true;
     }
 
     /**
@@ -216,7 +228,10 @@ public class Room {
             }
         }
     }
-    public boolean acceptPairing(Board b,Room r){System.out.println(sk.names.get(this) + "acceptPairing");return true;}
+    public boolean acceptPairing(Board b,Room r2){
+        System.out.println(sk.names.get(this) + "acceptPairing");
+        return b.pair(this,r2);
+    }
 
     public void sendOut(Janitor j){
         for(Door d : doorList){
