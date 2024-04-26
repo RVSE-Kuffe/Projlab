@@ -1,5 +1,11 @@
 package logarlecTheGame.Model;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -8,11 +14,12 @@ import java.util.Map;
 import logarlecTheGame.Skeleton.*;
 import logarlecTheGame.*;
 import logarlecTheGame.Model.Interfaces.CycleBased;
+import logarlecTheGame.Model.Interfaces.RoomPairing;
 import logarlecTheGame.Model.Item.Item;
 
 import java.util.Random;
 
-public class Board implements CycleBased, RoomPairing{
+public class Board implements CycleBased, RoomPairing, Serializable{
     private List<Room> roomList = new ArrayList<>();
     private Skeleton sk;
     private static Random random=new Random();
@@ -169,13 +176,13 @@ public class Board implements CycleBased, RoomPairing{
         String returnString = "";
         if(withPlayers){
         for (Room r : roomList) {
-                returnString += r.listMe(this, true, false) + ", ";
+                returnString += r.listMe(this, true, false, false) + ", ";
             }
             return returnString;
         }
         if(withItems){
             for (Room r : roomList) {
-                returnString += r.listMe(this, false, true);
+                returnString += r.listMe(this, false, true, false);
             }
             return returnString;
         }
@@ -184,5 +191,38 @@ public class Board implements CycleBased, RoomPairing{
             returnString += objectToString(r) + ", ";
         }
         return returnString;
+    }
+
+    public void addToObjects(String s, Object o){
+        bObjects.put(s, o);
+    }
+
+    public void addToStrings(String s, Object o){
+        bNames.put(o,s);
+    }
+
+    public void serialize(){
+        try{
+            FileOutputStream fileOut = new FileOutputStream("C:/Bálint/HF-k/projlab/Projlab/Logarlec/src/logarlecTheGame/board.ser");
+            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            out.writeObject(this);
+            out.close();
+            fileOut.close();
+        }
+        catch(IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void deserialize(){
+        try {
+            FileInputStream fileIn = new FileInputStream("C:/Bálint/HF-k/projlab/Projlab/Logarlec/src/logarlecTheGame/board.ser");
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+            this = (Board)in.readObject();
+            in.close();
+            fileIn.close();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 }
