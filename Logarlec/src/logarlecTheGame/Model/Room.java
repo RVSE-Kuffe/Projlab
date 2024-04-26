@@ -1,14 +1,10 @@
 package logarlecTheGame.Model;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import logarlecTheGame.Skeleton.*;
-import logarlecTheGame.*;
-import logarlecTheGame.Model.Item.Item;
+import logarlecTheGame.Model.Item.*;
 
 public class Room {
-    protected Skeleton sk;
     protected List<Door> doorList = new ArrayList<>();
     protected List<Player> playerList = new ArrayList<>();
     protected List<Item> itemList = new ArrayList<>();
@@ -22,9 +18,7 @@ public class Room {
      * Szoba osztály konstruktora
      * beállítja a megfelelő attribútumokat
      */
-    public Room(Skeleton s, String n,int rid, int cap) {
-        sk = s;
-        sk.names.put(this, n);
+    public Room(int rid, int cap) {
         roomid=rid;
         capacity=cap;
     }
@@ -35,14 +29,12 @@ public class Room {
         return playerList.size();
     }
 
-    
     /**
      * szobából egy item eltávolítását végzi
      * kiveszi a listából
      * @param i az item amit ki akarunk venni
      */
     public boolean removeItem(Item i){
-        System.out.println(sk.names.get(this) + "removeItem");
         if(stickyCount < 5){
             itemList.remove(i);
             return true;
@@ -55,7 +47,6 @@ public class Room {
      * @param p az player akit el akarunk távolítani
      */
     void removePlayer(Player p){
-        System.out.println(sk.names.get(this) + "removePlayer");
         playerList.remove(p);
     }
 
@@ -65,7 +56,6 @@ public class Room {
      * @param i az player amit hozzá akarunk adni
      */
     public void addItem(Item i){
-        System.out.println(sk.names.get(this) + "addItem");
         itemList.add(i);
         //ha ragacsos vagy valami akkor removeItem, tehár törlődik, nem lezs a játékban többet
     }
@@ -80,7 +70,6 @@ public class Room {
      * @return true ha hozzá lehet adni, false ha nem
      */
     public boolean addPlayer(Player p){
-        //System.out.println(sk.names.get(this) + "addPlayer");
         if(playerList.size()<capacity){
             playerList.add(p);
             p.setRoom(this);
@@ -94,16 +83,12 @@ public class Room {
             }
 
             p.sendPlayersOut();
-
-            //System.out.println(sk.names.get(this) + " addPlayer returned true");
             return true;
         }
-        //System.out.println(sk.names.get(this) + " addPlayer returned false");
         return false;
     }
 
     public boolean mergeRoom(Room r1){
-        System.out.println(sk.names.get(this) + "mergeRoom");
         for(Item i:itemList ){
             r1.addItem(i);
         }
@@ -122,17 +107,15 @@ public class Room {
      * @param d a door amit hozzá akarunk adni
      */
     public void addDoor(Door d){
-        System.out.println(sk.names.get(this) + " addDoor");
         doorList.add(d);
-        System.out.println(sk.names.get(this) + " addDoor returned");
     }
 
-    boolean killPlayer(Player p){System.out.println(sk.names.get(this) + "killPlayer");return true;}
+    boolean killPlayer(Player p){return true;}
     
     /**
      * játék megnyerését jelzi
      */
-    public void win(){System.out.println(sk.names.get(this) + "win");}
+    public void win(){}
 
     /**
      * játékos ajtón keresztül léptetését kezdeményezi
@@ -142,13 +125,7 @@ public class Room {
      */
 
     boolean changeRoom(Player p, Door d){
-        System.out.println(sk.names.get(this) + "changeRoom(" + sk.names.get(p) + ", " + sk.names.get(d) + ")");
-        if(d.transferPlayer(p,this)){
-            System.out.println(sk.names.get(this) + "changeRoom returned true");
-            return true;
-        } 
-        System.out.println(sk.names.get(this) + "changeRoom returned false");
-        return false;
+        return (d.transferPlayer(p,this));
     }
 
     /**
@@ -158,24 +135,20 @@ public class Room {
      * @return room2 a létreött szoba
      */
     Room newRoom(){
-        System.out.println(sk.names.get(this) + " newRoom");
-        Room room2 =new Room(this.sk, "splitNewRoom", this.roomid + 1, this.capacity);
-        Door splitDoor = new Door(this.sk, "splitDoor", this, room2,true,true);
+        Room room2 =new Room(this.roomid + 1, this.capacity);
+        Door splitDoor = new Door(this, room2,true,true);
         this.addDoor(splitDoor);
         room2.addDoor(splitDoor);
-
-        System.out.println(sk.names.get(this) + " newRoom returned");
         return room2;
     }
 
-    void stunRoom(){System.out.println(sk.names.get(this) + "stunRoom");}
+    void stunRoom(){}
 
     /**
      * szobába érkező játékost megpróbálja megöletni mindenkivel
      * @param  p player akit megpróbálnak megölni(önmagát nem próbálja)
      */
     public void pvp(Player p){
-        System.out.println(sk.names.get(this) + " pvp(" + sk.names.get(this) + ")");
         for(Player pl : playerList){
             if(!pl.equals(p)){
                 pl.kill(p);
@@ -188,13 +161,10 @@ public class Room {
      * minden benne lévő játékost megpróbál stunolni is
      */
     public void makeGassed(){
-        System.out.println(sk.names.get(this) + " makeGassed");
         gassed=true;
         for(Player p : playerList){
             p.stun();
         }
-        System.out.println(sk.names.get(this) + " makeGassed returned with void");
-        return;
     }
 
     public void makeUnGassed(){
@@ -206,13 +176,10 @@ public class Room {
      * minden benne lévő játékost megpróbál stunolni is a megfelelő módon
      */
     public void makeClean(){
-        System.out.println(sk.names.get(this) + "makeClean");
         cleaner=true;
         for(Player p : playerList){
             p.stunTeacher();
         }
-        System.out.println(sk.names.get(this) + "makeClean returned with void");
-        return;
     }
 
     /**
@@ -221,8 +188,6 @@ public class Room {
      * @return      void
      */
     void killAll(Player p){
-        System.out.println(sk.names.get(this) + "killAll(" + sk.names.get(p) + ")");
-
         for(Player pl : playerList){
             if(! p.equals(pl)){
                 p.kill(pl);
@@ -230,7 +195,6 @@ public class Room {
         }
     }
     public boolean acceptPairing(Board b,Room r2){
-        System.out.println(sk.names.get(this) + "acceptPairing");
         return b.pair(this,r2);
     }
 
@@ -252,26 +216,26 @@ public class Room {
     }
 
     public String listMe(Board b, boolean withPlayers, boolean withItems, boolean withAttribs){
-        String returnString = b.objectToString(this) + ": ";
+        StringBuilder returnString = new StringBuilder(b.objectToString(this) + ": ");
         if(withPlayers){
             for (Player player : playerList) {
-                returnString += b.objectToString(player) + ", ";
+                returnString.append(b.objectToString(player) + ", ");
             }
         }
         if(withItems){
             for (Item item : itemList) {
-                returnString += b.objectToString(item) + ", ";
+                returnString.append(b.objectToString(item) + ", ");
             }
         }
         if(withAttribs){
             if(gassed){
-                returnString += "gassed, ";
+                returnString.append("gassed, ");
             }
             if(cleaner){
-                returnString += "cleaner, ";
+                returnString.append("cleaner, ");
             }
         }
-        return returnString;
+        return returnString.toString();
     }
 
     public List<Door> doors(){
