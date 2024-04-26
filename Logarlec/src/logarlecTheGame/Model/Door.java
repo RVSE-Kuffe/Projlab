@@ -10,11 +10,13 @@ public class Door {
     Room whereFrom;
     boolean validFrom = true;
     boolean closed=false;
-    public Door(Skeleton s, String n,Room r1,Room r2) {
+    public Door(Skeleton s, String n,Room r1,Room r2, boolean vf, boolean vt) {
         sk = s;
         whereFrom=r1;
         whereTo=r2;
         sk.names.put(this, n);
+        validFrom = vf;
+        validTo = vt;
     }
     /**
      * ajtók bezárását végzi
@@ -88,6 +90,15 @@ public class Door {
         this.closed=false;
         System.out.println(sk.names.get(this) + "acceptOpenDoor returned with void");
         return;
+    }
+
+    public void switchMe(boolean toOpen){
+        if(toOpen){
+            closed = false;
+        }
+        else{
+            closed = true;
+        }
     }
 
 }

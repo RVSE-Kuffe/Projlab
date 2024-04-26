@@ -6,20 +6,31 @@ import java.util.Map;
 import java.io.*;
 
 import logarlecTheGame.Model.Board;
+import logarlecTheGame.Model.CursedRoom;
 import logarlecTheGame.Model.Door;
+import logarlecTheGame.Model.Janitor;
 import logarlecTheGame.Model.Player;
 import logarlecTheGame.Model.Room;
 import logarlecTheGame.Model.Student;
+import logarlecTheGame.Model.Teacher;
 import logarlecTheGame.Model.Interfaces.CycleBased;
+import logarlecTheGame.Model.Item.Airfreshener;
 import logarlecTheGame.Model.Item.Beer;
+import logarlecTheGame.Model.Item.Camambert;
 import logarlecTheGame.Model.Item.Item;
+import logarlecTheGame.Model.Item.Logarlec;
 import logarlecTheGame.Model.Item.Mask;
+import logarlecTheGame.Model.Item.Tablatorlo;
+import logarlecTheGame.Model.Item.Transistor;
+import logarlecTheGame.Model.Item.Tvsz;
 
 public class CommandHandler {
 
     private Board board;
     private File outFile;
     boolean isRandom;
+    int roomIds = 0;
+    int playerIds = 0;
 
     public CommandHandler(String output){
         board = new Board(null, null);
@@ -115,6 +126,33 @@ public class CommandHandler {
                 break;
             case "stickyRoom":
                 stickyRoom(cmd);
+                break;
+            case "closeDoor":
+                closeDoor(cmd);
+                break;
+            case "openDoor":
+                openDoor(cmd);
+                break;
+            case "addDoor":
+                addDoor(cmd);
+                break;
+            case "addRoom":
+                addRoom(cmd);
+                break;
+            case "addPlayerToRoom":
+                addPlayerToRoom(cmd);
+                break;
+            case "addItemToRoom":
+                addItemToRoom(cmd);
+                break;
+            case "addItemToPlayer":
+                addItemToPlayer(cmd);
+                break;
+            case "save":
+                save(cmd);
+                break;
+            case "load":
+                load(cmd);
                 break;
             default:
                 System.out.println("Ismeretlen parancs: " + commandType);
@@ -361,6 +399,220 @@ public class CommandHandler {
         }
         String room = cmd[1];
         Room roomRef = (Room)board.stringToObject(room); 
-        roomRef.make
+        roomRef.makeSticky();
+    }
+
+    public void closeDoor(String[] cmd){
+        if(cmd.length < 2){
+            outWriter("invalid arguments");
+            return;
+        }
+        String door = cmd[1];
+        Door doorRef = (Door)board.stringToObject(door);
+        doorRef.switchMe(false); 
+    }
+
+    public void openDoor(String[] cmd){
+        if(cmd.length < 2){
+            outWriter("invalid arguments");
+            return;
+        }
+        String door = cmd[1];
+        Door doorRef = (Door)board.stringToObject(door);
+        doorRef.switchMe(true); 
+    }
+
+    public void addDoor(String[] cmd){
+        if(cmd.length < 6){
+            outWriter("invalid arguments");
+            return;
+        }
+        String doorName = cmd[1];
+        String room1 = cmd[2];
+        String room2 = cmd[3];
+        boolean validFrom = false; 
+        boolean validTo = false;
+        if(cmd[4].equals("true")){
+            validFrom = true;
+        }
+        else if(cmd[4].equals("false")){
+            validTo = false;
+        }
+        else{
+            outWriter("invalid arguments");
+            return;
+        }
+        if(cmd[5].equals("true")){
+            validTo = true;
+        }
+        else if(cmd[5].equals("false")){
+            validTo = false;
+        }
+        else{
+            outWriter("invalid arguments");
+            return;
+        }
+        Room roomRef1 = (Room)board.stringToObject(room1);
+        Room roomRef2 = (Room)board.stringToObject(room2);
+        Door d = new Door(null, doorName,roomRef1 , roomRef2, validFrom, validTo);
+        board.addToObjects(doorName, d);
+        board.addToStrings(doorName, d);
+    }
+
+    public void addRoom(String[] cmd){
+        if(cmd.length < 4){
+            outWriter("invalid arguments");
+            return;
+        }
+        String roomName = cmd[2];
+        int capacity = Integer.parseInt(cmd[3]);
+        Room r;
+        if(cmd[1].equals("CursedRoom")){
+            r = new CursedRoom(null, roomName, roomIds++, capacity);
+        }
+        else if(cmd[1].equals("Room")){
+            r = new Room(null, roomName, roomIds++, capacity);
+        }
+        else{
+            outWriter("invalid arguments");
+            return;
+        }
+        board.addToObjects(roomName, r);
+        board.addToStrings(roomName, r);
+    }
+
+    public void addPlayerToRoom(String[] cmd){
+        if(cmd.length < 4){
+            outWriter("invalid arguments");
+            return;
+        }
+        String room = cmd[3];
+        String player = cmd[2];
+        Room roomRef = (Room)board.stringToObject(room);
+        Player p;
+        if(cmd[1].equals("Student")){
+            p = new Student(null, player, playerIds++, roomRef);
+        }
+        else if(cmd[1].equals("Teacher")){
+            p = new Teacher(null, player, playerIds++, roomRef);
+        }
+        else if(cmd[1].equals("Janitor")){
+            p = new Janitor(null, player, playerIds++, roomRef);
+        }
+        else{
+            outWriter("invalid arguments");
+            return;
+        }
+        board.addToObjects(player, p);
+        board.addToStrings(player, p);
+    }
+
+    public void addItemToRoom(String[] cmd){
+        if(cmd.length < 6){
+            outWriter("invalid arguments");
+            return;
+        }
+        boolean fake = false;
+        if(cmd[2].equals("false")){
+
+        }
+        else if(cmd[2].equals("true")){
+            fake = true;
+        }
+        else{
+            outWriter("invalid arguments");
+            return;
+        }
+        String itemName = cmd[3];
+        int durab = Integer.parseInt(cmd[4]);
+        String roomName = cmd[5];
+        Room roomRef = (Room)board.stringToObject(roomName);
+        Item i;
+        String itemType = cmd[1];
+        if(itemType.equals("Airfreshener")){
+            i = new Airfreshener();
+        }
+        else if(itemType.equals("Beer")){
+            i = new Beer(null, itemName, durab);
+        }
+        else if(itemType.equals("Camambert")){
+            i = new Camambert(null, itemName);
+        }
+        else if(itemType.equals("Logarlec")){
+            i = new Logarlec(null, itemName, fake);
+        }
+        else if(itemType.equals("Mask")){
+            i = new Mask(null, itemName, durab, fake);
+        }
+        else if(itemType.equals("Tablatorlo")){
+            i = new Tablatorlo(null, itemName, durab);
+        }
+        else if(itemType.equals("Transistor")){
+            i = new Transistor(null, itemName);
+        }
+        else if(itemType.equals("TVSZ")){
+            i = new Tvsz(null, itemName, durab, fake);
+        }
+        else{
+            outWriter("invalid arguments");
+            return;
+        }
+        roomRef.addItem(i);
+        board.addToObjects(itemName, i);
+        board.addToStrings(itemName, i);
+    }
+    
+    public void addItemToPlayer(String[] cmd){
+        if(cmd.length < 5){
+            outWriter("invalid arguments");
+            return;
+        }
+        String itemType = cmd[1];
+        String itemName = cmd[2];
+        int durab = Integer.parseInt(cmd[3]);
+        String player = cmd[4];
+        Player playerRef = (Player)board.stringToObject(player);
+        boolean fake = false;
+        Item i;
+
+        if(itemType.equals("Airfreshener")){
+            i = new Airfreshener();
+        }
+        else if(itemType.equals("Beer")){
+            i = new Beer(null, itemName, durab);
+        }
+        else if(itemType.equals("Camambert")){
+            i = new Camambert(null, itemName);
+        }
+        else if(itemType.equals("Logarlec")){
+            i = new Logarlec(null, itemName, fake);
+        }
+        else if(itemType.equals("Mask")){
+            i = new Mask(null, itemName, durab, fake);
+        }
+        else if(itemType.equals("Tablatorlo")){
+            i = new Tablatorlo(null, itemName, durab);
+        }
+        else if(itemType.equals("Transistor")){
+            i = new Transistor(null, itemName);
+        }
+        else if(itemType.equals("TVSZ")){
+            i = new Tvsz(null, itemName, durab, fake);
+        }
+        else{
+            outWriter("invalid arguments");
+            return;
+        }
+        playerRef.addItem(i);
+        board.addToObjects(itemName, i);
+        board.addToStrings(itemName, i);
+    }
+
+    public void save(String[] cmd){
+        board.serialize();
+    }
+
+    public void load(String[] cmd){
+        board.deserialize();
     }
 }
