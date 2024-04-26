@@ -12,14 +12,11 @@ import logarlecTheGame.Skeleton.*;
 public class Beer extends Item implements CycleBased {
     private int durability;
     private boolean active;
-    private Skeleton sk;
 
     /**
      * Sörosztály konstruktora, inicializlja az attribútumait
      */
-    public Beer(Skeleton s, String n, int durab) {
-        sk = s;
-        sk.names.put(this, n);
+    public Beer(int durab) {
         durability=durab;
         active=false;
         isFake=false;

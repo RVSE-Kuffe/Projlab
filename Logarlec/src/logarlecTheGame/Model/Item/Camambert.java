@@ -10,15 +10,11 @@ import logarlecTheGame.Model.Item.Item;
 
 
 public class Camambert extends Item {
-    private Skeleton sk;
-
     /**
      * Camambert osztály konstruktora, 
      * inicializálja az attribútumokat
      */
     public Camambert(Skeleton s, String n) {
-        sk = s;
-        sk.names.put(this, n);
         isFake=false;;
     }
     /**
