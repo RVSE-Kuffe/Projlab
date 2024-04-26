@@ -32,7 +32,7 @@ public abstract class Item {
          * @return igaz, ha sikeres, hamis ha nem
          * meghívja a student use függvényét, aki használja
      */
-    public boolean acceptGasProtect(){
+    public boolean acceptGasProtect(Player p){
        return false;
     }
   /**

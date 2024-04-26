@@ -1,25 +1,15 @@
 package logarlecTheGame.Model.Item;
 
-import java.util.ArrayList;
-import java.util.List;
-import logarlecTheGame.Skeleton.*;
-import logarlecTheGame.*;
-import logarlecTheGame.Model.Player;
-import logarlecTheGame.Model.Student;
-import logarlecTheGame.Model.Item.Transistor;
-import logarlecTheGame.Model.Item.Item;
+import logarlecTheGame.Model.*;
 
 
 public class Mask extends Item {
     private int durability;
-    private Skeleton sk;
 
     /**
       *Mask konstruktor, inicializálja az attribútumokat
      */
-    public Mask(Skeleton s, String n, int durab, boolean fake) {
-        sk = s;
-        sk.names.put(this, n);
+    public Mask(int durab, boolean fake) {
         durability=durab;
         isFake=fake;
     }
@@ -31,9 +21,7 @@ public class Mask extends Item {
      */
     @Override   
     public boolean acceptGasProtect(Player p){
-        System.out.println(sk.names.get(this) + "acceptGasProtect");
-        if(p.maskProtect(this)) return true;
-        return false;
+        return (p.maskProtect(this));
     }
 
     /**
@@ -41,13 +29,10 @@ public class Mask extends Item {
      * @return true ha sikerül, false egyébként
      */
     public boolean durabminus(){
-        System.out.println(sk.names.get(this) + "durabminus");
         if(this.durability>0){
             durability-=1;
-            System.out.println(sk.names.get(this) + "durabminus return true");
             return true;
         }
-        System.out.println(sk.names.get(this) + "durabminus return false");
         return false;
     }
 
