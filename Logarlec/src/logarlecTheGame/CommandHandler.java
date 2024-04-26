@@ -1,28 +1,10 @@
 package logarlecTheGame;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.io.*;
 
-import logarlecTheGame.Model.Board;
-import logarlecTheGame.Model.CursedRoom;
-import logarlecTheGame.Model.Door;
-import logarlecTheGame.Model.Janitor;
-import logarlecTheGame.Model.Player;
-import logarlecTheGame.Model.Room;
-import logarlecTheGame.Model.Student;
-import logarlecTheGame.Model.Teacher;
+import logarlecTheGame.Model.*;
 import logarlecTheGame.Model.Interfaces.CycleBased;
-import logarlecTheGame.Model.Item.Airfreshener;
-import logarlecTheGame.Model.Item.Beer;
-import logarlecTheGame.Model.Item.Camambert;
-import logarlecTheGame.Model.Item.Item;
-import logarlecTheGame.Model.Item.Logarlec;
-import logarlecTheGame.Model.Item.Mask;
-import logarlecTheGame.Model.Item.Tablatorlo;
-import logarlecTheGame.Model.Item.Transistor;
-import logarlecTheGame.Model.Item.Tvsz;
+import logarlecTheGame.Model.Item.*;
 
 public class CommandHandler {
 
@@ -32,13 +14,12 @@ public class CommandHandler {
     int roomIds = 0;
     int playerIds = 0;
 
-    public CommandHandler(String output){
-        board = new Board(null, null);
+    public CommandHandler(String output, Board b){
+        board = b;
         if(output != null){ //Minden CMDHandlernek van egy file-ja amibe adott esetben írni kell
             outFile = new File(output); //Ennek a tartalmát törli, minden létrehozáskor.
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(output))) {
                 writer.write("");
-                writer.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -54,11 +35,8 @@ public class CommandHandler {
             return;
         }
         
-        BufferedWriter writer;
-        try {
-            writer = new BufferedWriter(new FileWriter(outFile, true));
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(outFile, true))){
             writer.write(output + "\n");
-            writer.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -89,7 +67,7 @@ public class CommandHandler {
                 split(cmd);
                 break;
             case "iterateAll":
-                iterateAll(cmd);
+                iterateAll();
                 break;
             case "beerIterate":
                 beerIterate(cmd);
@@ -98,16 +76,16 @@ public class CommandHandler {
                 pair(cmd);
                 break; 
             case "listPlayers":
-                listPlayers(cmd);
+                listPlayers();
                 break;
             case "listRoom":
                 listRoom(cmd);
                 break;
             case "listAllRoom":
-                listAllRoom(cmd);
+                listAllRoom();
                 break;
             case "listItem":
-                listItem(cmd);
+                listItem();
                 break;
             case "listPlayerItem":
                 listPlayerItem(cmd);
@@ -149,10 +127,10 @@ public class CommandHandler {
                 addItemToPlayer(cmd);
                 break;
             case "save":
-                save(cmd);
+                save();
                 break;
             case "load":
-                load(cmd);
+                load();
                 break;
             default:
                 System.out.println("Ismeretlen parancs: " + commandType);
@@ -237,7 +215,6 @@ public class CommandHandler {
         else{
             outWriter("random off");
         }
-        return;
     }
 
     public void split(String[] cmd){
@@ -259,14 +236,13 @@ public class CommandHandler {
         }
     }
 
-    public void iterateAll(String[] cmd){
-        String outString = "iterated: ";
+    public void iterateAll(){
+        StringBuilder outString = new StringBuilder("iterated: ");
         board.iterate();
         for (CycleBased c : board.getCycles()) {
-            outString += board.objectToString(c);
-            outString += "\n";
+            outString.append(board.objectToString(c)+'\n');
         }
-        outWriter(outString);
+        outWriter(outString.toString());
     }
 
     public void beerIterate(String[] cmd){
@@ -309,7 +285,7 @@ public class CommandHandler {
         outWriter(outputString);
     }
 
-    public void listPlayers(String[] cmd){
+    public void listPlayers(){
         String outoutString = board.listRooms(true, false);
         outWriter(outoutString);
     }
@@ -327,13 +303,13 @@ public class CommandHandler {
         outWriter(outputString);
     }
 
-    public void listAllRoom(String[] cmd){
+    public void listAllRoom(){
         String outputString = board.listRooms(false, false);
         outWriter(outputString);
     }
 
-    public void listItem(String [] cmd){
-        String outputString = board.listRooms(false, false);
+    public void listItem(){
+        String outputString = board.listRooms(false, true);
         outWriter(outputString);
     }
 
@@ -350,7 +326,7 @@ public class CommandHandler {
         outWriter(outputStream);
     }
 
-    public void listPlayerAttribs(String cmd[]){
+    public void listPlayerAttribs(String[] cmd){
         if(cmd.length < 2){
             outWriter("invalid arguments");
             return;
@@ -361,7 +337,7 @@ public class CommandHandler {
         outWriter(outputString);
     }
 
-    public void listRoomAttribs(String cmd[]){
+    public void listRoomAttribs(String[] cmd){
         if(cmd.length < 2){
             outWriter("invalid arguments");
             return;
@@ -430,13 +406,13 @@ public class CommandHandler {
         String doorName = cmd[1];
         String room1 = cmd[2];
         String room2 = cmd[3];
-        boolean validFrom = false; 
-        boolean validTo = false;
+        boolean validFrom;
+        boolean validTo;
         if(cmd[4].equals("true")){
             validFrom = true;
         }
         else if(cmd[4].equals("false")){
-            validTo = false;
+            validFrom = false;
         }
         else{
             outWriter("invalid arguments");
@@ -454,7 +430,7 @@ public class CommandHandler {
         }
         Room roomRef1 = (Room)board.stringToObject(room1);
         Room roomRef2 = (Room)board.stringToObject(room2);
-        Door d = new Door(null, doorName,roomRef1 , roomRef2, validFrom, validTo);
+        Door d = new Door(roomRef1 , roomRef2, validFrom, validTo);
         board.addToObjects(doorName, d);
         board.addToStrings(doorName, d);
     }
@@ -468,10 +444,10 @@ public class CommandHandler {
         int capacity = Integer.parseInt(cmd[3]);
         Room r;
         if(cmd[1].equals("CursedRoom")){
-            r = new CursedRoom(null, roomName, roomIds++, capacity);
+            r = new CursedRoom(roomIds++, capacity);
         }
         else if(cmd[1].equals("Room")){
-            r = new Room(null, roomName, roomIds++, capacity);
+            r = new Room(roomIds++, capacity);
         }
         else{
             outWriter("invalid arguments");
@@ -491,13 +467,13 @@ public class CommandHandler {
         Room roomRef = (Room)board.stringToObject(room);
         Player p;
         if(cmd[1].equals("Student")){
-            p = new Student(null, player, playerIds++, roomRef);
+            p = new Student(playerIds++, roomRef);
         }
         else if(cmd[1].equals("Teacher")){
-            p = new Teacher(null, player, playerIds++, roomRef);
+            p = new Teacher(playerIds++, roomRef);
         }
         else if(cmd[1].equals("Janitor")){
-            p = new Janitor(null, player, playerIds++, roomRef);
+            p = new Janitor(playerIds++, roomRef);
         }
         else{
             outWriter("invalid arguments");
@@ -512,9 +488,9 @@ public class CommandHandler {
             outWriter("invalid arguments");
             return;
         }
-        boolean fake = false;
+        boolean fake;
         if(cmd[2].equals("false")){
-
+            fake = false;
         }
         else if(cmd[2].equals("true")){
             fake = true;
@@ -533,25 +509,25 @@ public class CommandHandler {
             i = new Airfreshener();
         }
         else if(itemType.equals("Beer")){
-            i = new Beer(null, itemName, durab);
+            i = new Beer(durab);
         }
         else if(itemType.equals("Camambert")){
-            i = new Camambert(null, itemName);
+            i = new Camambert();
         }
         else if(itemType.equals("Logarlec")){
-            i = new Logarlec(null, itemName, fake);
+            i = new Logarlec(fake);
         }
         else if(itemType.equals("Mask")){
-            i = new Mask(null, itemName, durab, fake);
+            i = new Mask(durab, fake);
         }
         else if(itemType.equals("Tablatorlo")){
-            i = new Tablatorlo(null, itemName, durab);
+            i = new Tablatorlo(durab);
         }
         else if(itemType.equals("Transistor")){
-            i = new Transistor(null, itemName);
+            i = new Transistor();
         }
         else if(itemType.equals("TVSZ")){
-            i = new Tvsz(null, itemName, durab, fake);
+            i = new Tvsz(durab, fake);
         }
         else{
             outWriter("invalid arguments");
@@ -579,25 +555,25 @@ public class CommandHandler {
             i = new Airfreshener();
         }
         else if(itemType.equals("Beer")){
-            i = new Beer(null, itemName, durab);
+            i = new Beer(durab);
         }
         else if(itemType.equals("Camambert")){
-            i = new Camambert(null, itemName);
+            i = new Camambert();
         }
         else if(itemType.equals("Logarlec")){
-            i = new Logarlec(null, itemName, fake);
+            i = new Logarlec(fake);
         }
         else if(itemType.equals("Mask")){
-            i = new Mask(null, itemName, durab, fake);
+            i = new Mask(durab, fake);
         }
         else if(itemType.equals("Tablatorlo")){
-            i = new Tablatorlo(null, itemName, durab);
+            i = new Tablatorlo(durab);
         }
         else if(itemType.equals("Transistor")){
-            i = new Transistor(null, itemName);
+            i = new Transistor();
         }
         else if(itemType.equals("TVSZ")){
-            i = new Tvsz(null, itemName, durab, fake);
+            i = new Tvsz(durab, fake);
         }
         else{
             outWriter("invalid arguments");
@@ -608,11 +584,11 @@ public class CommandHandler {
         board.addToStrings(itemName, i);
     }
 
-    public void save(String[] cmd){
+    public void save(){
         board.serialize();
     }
 
-    public void load(String[] cmd){
+    public void load(){
         board.deserialize();
     }
 }
