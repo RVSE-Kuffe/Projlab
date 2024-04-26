@@ -1,6 +1,5 @@
 package logarlecTheGame;
 import logarlecTheGame.Skeleton.*;
-import java.util.Scanner;
 
 import java.io.*;
 import java.util.*;
@@ -37,8 +36,13 @@ public class App {
                 String testFile = "proba.txt";              //Ennek a stringnek az értékét kell majd megváltoztatni a kiválasztott teszt függvénéyben
                 String outFile= "out.txt";
                 System.out.println("Valassz teszteket");    //Itt kilistázza a választható teszteket
-                System.out.println("...tesztek");
-                                                            //Ide kell majd egy switchcase, ami nevet ad a file-nak
+                for(int i = 1; i<16+1;i++)
+                    System.out.println("1. Teszteset"+i+'\n');
+
+                chooser = scanner.next().charAt(0);
+                testFile = "Test"+chooser+".txt";
+                outFile = "Assert"+chooser+".txt";
+                                                            
                 File inputFile = new File(testFile);        //File objektum létrehozása a kiválasztott file-val
                 BufferedReader reader = new BufferedReader(new FileReader(inputFile));  //Reader létrehozása
                 List<String> commands = new ArrayList<>();  //A parancsokat tartalmazó Lista, ezeket a parancsokat tovább kell majd még parse-olni

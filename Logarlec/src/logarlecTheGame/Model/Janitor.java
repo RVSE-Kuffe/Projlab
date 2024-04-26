@@ -1,9 +1,11 @@
 package logarlecTheGame.Model;
+import java.util.Random;
 import java.util.logging.Logger;
 
 import logarlecTheGame.Skeleton.*;
 import logarlecTheGame.Model.Item.*;
 import logarlecTheGame.Model.Interfaces.*;
+import java.util.random.*;
 
 public class Janitor extends Player {
     
@@ -11,6 +13,19 @@ public class Janitor extends Player {
         super(s, n, i, l);
         //TODO Auto-generated constructor stub
     }
+
+    //random lepes
+    
+    public boolean RandomJanitorMove(){
+        Random random=new Random();
+        int doorcounter=0;
+        for(Door d:this.location.doorList ){
+            doorcounter++;
+        }
+        int chosendoor=random.nextInt(doorcounter);
+        return this.changeR(this.location.doorList.get(chosendoor));
+    }
+
 
     /**
      * Tárgyak felvételét kezdeményezi

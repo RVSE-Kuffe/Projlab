@@ -159,7 +159,7 @@ public class Room {
     Room newRoom(){
         System.out.println(sk.names.get(this) + " newRoom");
         Room room2 =new Room(this.sk, "splitNewRoom", this.roomid + 1, this.capacity);
-        Door splitDoor = new Door(this.sk, "splitDoor", this, room2);
+        Door splitDoor = new Door(this.sk, "splitDoor", this, room2,true,true);
         this.addDoor(splitDoor);
         room2.addDoor(splitDoor);
 

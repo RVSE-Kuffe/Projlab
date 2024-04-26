@@ -1,6 +1,9 @@
 package logarlecTheGame.Model;
 
 import logarlecTheGame.Skeleton.*;
+
+import java.util.Random;
+
 import logarlecTheGame.*;
 import logarlecTheGame.Model.Item.*;
 
@@ -11,6 +14,33 @@ public class Teacher extends Player {
      */
     public Teacher(Skeleton s, String n, int i, Room l){
         super(s, n, i, l);
+    }
+
+
+    //Tanar random mozgasa
+    public boolean RandomTeacherMove(){
+
+        Random random=new Random();
+        int a=random.nextInt(2);
+        if(a==0){
+            int doorcounter=0;
+            for(Door d:this.location.doorList ){
+                doorcounter++;
+            }
+            int chosendoor=random.nextInt(doorcounter);
+            return this.changeR(this.location.doorList.get(chosendoor));
+        }
+        else{
+                int itemcounter=0;
+                for(Item i:this.location.itemList ){
+                    itemcounter++;
+                }
+                int chosenitem=random.nextInt(itemcounter);
+                if(this.itemList.size()==5){
+                    return false;
+                }
+                return this.pickUpItem(this.location.itemList.get(chosenitem));
+        }
     }
 
     /**
