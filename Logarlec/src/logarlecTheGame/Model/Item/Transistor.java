@@ -1,47 +1,28 @@
 package logarlecTheGame.Model.Item;
 
-import java.util.ArrayList;
-import java.util.List;
-import logarlecTheGame.Skeleton.*;
-import logarlecTheGame.*;
-import logarlecTheGame.Model.Player;
-import logarlecTheGame.Model.Student;
-import logarlecTheGame.Model.Room;
-import logarlecTheGame.Model.Item.Item;
+import logarlecTheGame.Model.*;
 
 
 public class Transistor extends Item  {
     private Transistor pair=null;
     private Room location =null;
     private boolean active = false;
-    private Skeleton sk;
 
   /**
    *Transistor osztály konstruktora,
    *inicializála az attribútumokat
      */
-    public Transistor(Skeleton s, String n) {
-        sk = s;
-        sk.names.put(this, n);
+    public Transistor() {
         isFake=false;
     }
-  /**
-   * *Transistor osztály konstruktora,
-   *inicializála az attribútumokat,
-   *alapvetően beállít egy párt, csak teszthez kell
-     */
-    public Transistor(Skeleton s, String n, Transistor p) {//teszteléshez kell csak, hogy legyen alapvető párja, amúgy nem használandó, amúgy túl hosszú teszt lenne
-        sk = s;
-        sk.names.put(this, n);
-        this.pair=p;
-    }
+
    /**
    *megnézi egy adott transistornak ki a párja,
    ha van egyáltalán
      */
     public Transistor getPair(){
-         System.out.println(sk.names.get(this) + "getPair");
-        return pair;}
+        return pair;
+    }
 
      /**
     *Tranistor párosító függvény
@@ -50,21 +31,19 @@ public class Transistor extends Item  {
     *hamis, ha nem
      */
     public boolean makePair(Transistor t2){
-        System.out.println(sk.names.get(this) + "makePair");
         if((this.pair==null&&t2.getPair()==null)||(this.pair==null && t2.getPair().equals(this))){
             this.pair=t2;
-         return true;
+            return true;
         }
          return false;
-
     }
-/**
+
+    /**
      * Aktiválja a tárgyat, ezesetben transistort a játékos, 
      * azzal, hogy használja
      * aktívra állítja az attribútumát
      */
     public void activate(){
-        System.out.println(sk.names.get(this) + "activate");
         this.active=true;
     }
 
@@ -76,7 +55,6 @@ public class Transistor extends Item  {
 
     @Override
     public void acceptPutDown(Student s){
-        System.out.println(sk.names.get(this) + "acceptPutDown");
         s.use(this);
     }
 
@@ -87,7 +65,6 @@ public class Transistor extends Item  {
          *  hamis ha nem
      */
     public boolean teleportPlayer(Student s){
-        System.out.println(sk.names.get(this) + "teleportPlayer");
        return this.pair.arrivingPlayer(s);
         
     }
@@ -107,7 +84,6 @@ public class Transistor extends Item  {
          * @param r a szoba amit beállítunk
      */
     public void setRoom(Room r){
-        System.out.println(sk.names.get(this) + "setRoom");
         this.location=r;
     }
       /**
@@ -119,7 +95,6 @@ public class Transistor extends Item  {
      */
     @Override
     public boolean acceptPairing(Student s, Transistor t){
-        System.out.println(sk.names.get(this) + "acceptPairing");
         return s.pair(this, t);
     }
   /**
@@ -130,7 +105,6 @@ public class Transistor extends Item  {
      */
     @Override
     public boolean acceptPairing(Student s, Item i){
-        System.out.println(sk.names.get(this) + "acceptPairing");
         return true;
     }
     
