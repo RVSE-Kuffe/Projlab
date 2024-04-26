@@ -241,4 +241,8 @@ public class Room {
     public List<Door> doors(){
         return doorList;
     }
+
+    public List<Item> items(){
+        return itemList;
+    }
 }
