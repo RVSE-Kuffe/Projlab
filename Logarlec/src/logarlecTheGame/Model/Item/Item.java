@@ -1,12 +1,14 @@
 package logarlecTheGame.Model.Item;
 
+import java.io.Serializable;
+
 import logarlecTheGame.Model.*;
 
   /**
    * Ennek az osztálynak a függvényeit felüldefiniálja,
    *  akinek kell
      */
-public abstract class Item {
+public abstract class Item{
     boolean isFake;
 
         /**

@@ -1,5 +1,6 @@
 package logarlecTheGame.Model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import logarlecTheGame.Skeleton.*;
