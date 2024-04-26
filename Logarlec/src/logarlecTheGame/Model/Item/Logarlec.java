@@ -1,10 +1,6 @@
-package logarlecTheGame.Model.Item;
 import java.util.ArrayList;
 import java.util.List;
-import logarlecTheGame.Skeleton.*;
-import logarlecTheGame.*;
-import logarlecTheGame.Model.Player;
-import logarlecTheGame.Model.Student;
+import logarlecTheGame.Model.*;
 import logarlecTheGame.Model.Item.Item;
 
 
