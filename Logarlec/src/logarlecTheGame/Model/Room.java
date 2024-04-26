@@ -273,4 +273,8 @@ public class Room {
         }
         return returnString;
     }
+
+    public List<Door> doors(){
+        return doorList;
+    }
 }
