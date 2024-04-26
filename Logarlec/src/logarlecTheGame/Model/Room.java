@@ -245,4 +245,7 @@ public class Room {
     public List<Item> items(){
         return itemList;
     }
+    public void makeSticky() {
+        stickyCount = 420;
+    }
 }
