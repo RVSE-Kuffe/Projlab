@@ -303,11 +303,11 @@ public class CommandHandler {
         if(cmd.length < 2){
             outWriter("invalid arguments");
         }
-            String room = cmd[1];
+        String room = cmd[1];
         String outputString = "";
 
         Room roomRef = (Room)board.stringToObject(room);
-        outputString += roomRef.listMe(board, false, true, false);
+        outputString += roomRef.listMe(board, true, true, false);
 
         outWriter(outputString);
     }
@@ -488,6 +488,7 @@ public class CommandHandler {
             outWriter("invalid arguments");
             return;
         }
+        roomRef.addPlayer(p);
         board.addToBoard(p, player);
     }
 
