@@ -36,30 +36,36 @@ public class App {
                 String outFile;
                 System.out.println("Valassz teszteket");    //Itt kilistázza a választható teszteket
                 for(int i = 1; i<16+1;i++)
-                    System.out.println("1. Teszteset"+i+'\n');
-
+                    System.out.println(i+" - Teszteset"+i);
+                System.out.println("Add meg a teszteset számát: ");
                 chooser = scanner.next().charAt(0);
-                testFile = "Test"+chooser+".txt";
-                outFile = "Assert"+chooser+".txt";
+                testFile = "Logarlec/src/TestFiles/Test"+chooser+".txt";
+                outFile = "out.txt";
                                                             
                 File inputFile = new File(testFile);        //File objektum létrehozása a kiválasztott file-val
                 try(BufferedReader reader = new BufferedReader(new FileReader(inputFile))){  //Reader létrehozása
                     List<String> commands = new ArrayList<>();  //A parancsokat tartalmazó Lista, ezeket a parancsokat tovább kell majd még parse-olni
                     String command;
                     while((command = reader.readLine()) != null){
+                        System.out.println(command);
                         commands.add(command);
                     }
                     CommandHandler ch = new CommandHandler(outFile, board);
                     for(String s : commands){
-                        ch.executeCommand(s, outFile);         //A stringek parseolását és végrehajtását meghívja az összes kiolvasott parancsra
+                        ch.executeCommand(s);         //A stringek parseolását és végrehajtását meghívja az összes kiolvasott parancsr
                     }
                 }catch(IOException e){
                     e.getStackTrace();
+                    System.err.println(e.getMessage());
                 }
             }
             else if(chooser == 'b'){
-                
-                System.out.println("Parancsolvaso es parseolo logika helye");
+                String cmd = null;
+                CommandHandler ch = new CommandHandler(null, board);
+                while(!"quit".equals(cmd)){
+                    cmd = scanner.nextLine();
+                    ch.executeCommand(cmd);
+                }
             }
         }
     }

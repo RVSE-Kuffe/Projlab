@@ -21,6 +21,16 @@ public class Board implements CycleBased, RoomPairing, Serializable{
     private Map<String, Object> bObjects = new HashMap<>();
     private Map<Object, String> bNames = new HashMap<>();
 
+    public void addToBoard(Object o, String str){
+        bObjects.put(str, o);
+        bNames.put(o, str);
+    }
+
+    public void deleteFromBoard(Object o, String str){
+        bObjects.remove(str, o);
+        bNames.remove(o, str);
+    }
+
     public Object stringToObject(String name){
         Object o = bObjects.get(name);
         if(o == null) throw new NullPointerException("Object is not in the Map");
@@ -176,14 +186,6 @@ public class Board implements CycleBased, RoomPairing, Serializable{
             sb.append(objectToString(r) + ", ");
         }
         return sb.toString();
-    }
-
-    public void addToObjects(String s, Object o){
-        bObjects.put(s, o);
-    }
-
-    public void addToStrings(String s, Object o){
-        bNames.put(o,s);
     }
 
     public void serialize(){

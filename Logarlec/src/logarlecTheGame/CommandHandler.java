@@ -43,7 +43,7 @@ public class CommandHandler {
     }
 
     //ha console akkor null a dstFile
-    public void executeCommand(String command, String dstFile) {
+    public void executeCommand(String command) {
         String[] cmd = command.split(" ");
         String commandType = cmd[0];
         
@@ -159,7 +159,7 @@ public class CommandHandler {
 		outWriter(outputString);
     }
 
-    public void putDown(String[] cmd){
+    private void putDown(String[] cmd){
         if(cmd.length < 3){
             outWriter("invalid arguments");
             return;
@@ -183,7 +183,7 @@ public class CommandHandler {
         outWriter(outputString);
     }
 
-    public void useDoor(String[] cmd){
+    private void useDoor(String[] cmd){
         String outputString = "";
         if(cmd.length < 3){
             outWriter("invalid arguments");
@@ -208,7 +208,7 @@ public class CommandHandler {
         outWriter(outputString);
     }
 
-    public void randomSwitch(boolean b){
+    private void randomSwitch(boolean b){
         if(b){
             outWriter("random on");
         }
@@ -217,7 +217,7 @@ public class CommandHandler {
         }
     }
 
-    public void split(String[] cmd){
+    private void split(String[] cmd){
         if(cmd.length < 2){
             outWriter("invalid arguments");
             return;
@@ -236,7 +236,7 @@ public class CommandHandler {
         }
     }
 
-    public void iterateAll(){
+    private void iterateAll(){
         StringBuilder outString = new StringBuilder("iterated: ");
         board.iterate();
         for (CycleBased c : board.getCycles()) {
@@ -245,7 +245,7 @@ public class CommandHandler {
         outWriter(outString.toString());
     }
 
-    public void beerIterate(String[] cmd){
+    private void beerIterate(String[] cmd){
         if(cmd.length < 2){
             outWriter("invalid arguments");
             return;
@@ -261,7 +261,7 @@ public class CommandHandler {
         outWriter(outputString);
     }
 
-    public void pair(String[] cmd){
+    private void pair(String[] cmd){
         if(cmd.length < 4){
             outWriter("invalid arguments");
             return;
@@ -285,12 +285,12 @@ public class CommandHandler {
         outWriter(outputString);
     }
 
-    public void listPlayers(){
+    private void listPlayers(){
         String outoutString = board.listRooms(true, false);
         outWriter(outoutString);
     }
 
-    public void listRoom(String[] cmd){
+    private void listRoom(String[] cmd){
         if(cmd.length < 2){
             outWriter("invalid arguments");
         }
@@ -303,17 +303,17 @@ public class CommandHandler {
         outWriter(outputString);
     }
 
-    public void listAllRoom(){
+    private void listAllRoom(){
         String outputString = board.listRooms(false, false);
         outWriter(outputString);
     }
 
-    public void listItem(){
+    private void listItem(){
         String outputString = board.listRooms(false, true);
         outWriter(outputString);
     }
 
-    public void listPlayerItem(String[] cmd){
+    private void listPlayerItem(String[] cmd){
         if(cmd.length < 2){
             outWriter("invalid arguments");
             return;
@@ -326,7 +326,7 @@ public class CommandHandler {
         outWriter(outputStream);
     }
 
-    public void listPlayerAttribs(String[] cmd){
+    private void listPlayerAttribs(String[] cmd){
         if(cmd.length < 2){
             outWriter("invalid arguments");
             return;
@@ -337,7 +337,7 @@ public class CommandHandler {
         outWriter(outputString);
     }
 
-    public void listRoomAttribs(String[] cmd){
+    private void listRoomAttribs(String[] cmd){
         if(cmd.length < 2){
             outWriter("invalid arguments");
             return;
@@ -348,7 +348,7 @@ public class CommandHandler {
         outWriter(outputString);
     }
 
-    public void gasRoom(String[] cmd){
+    private void gasRoom(String[] cmd){
         if(cmd.length < 2){
             outWriter("invalid arguments");
             return;
@@ -358,7 +358,7 @@ public class CommandHandler {
         roomRef.makeGassed();
     }
 
-    public void cleanRoom(String[] cmd){
+    private void cleanRoom(String[] cmd){
         if(cmd.length < 2){
             outWriter("invalid arguments");
             return;
@@ -368,7 +368,7 @@ public class CommandHandler {
         roomRef.makeClean();
     }
 
-    public void stickyRoom(String[] cmd){
+    private void stickyRoom(String[] cmd){
         if(cmd.length < 2){
             outWriter("invalid arguments");
             return;
@@ -378,7 +378,7 @@ public class CommandHandler {
         roomRef.makeSticky();
     }
 
-    public void closeDoor(String[] cmd){
+    private void closeDoor(String[] cmd){
         if(cmd.length < 2){
             outWriter("invalid arguments");
             return;
@@ -388,7 +388,7 @@ public class CommandHandler {
         doorRef.switchMe(false); 
     }
 
-    public void openDoor(String[] cmd){
+    private void openDoor(String[] cmd){
         if(cmd.length < 2){
             outWriter("invalid arguments");
             return;
@@ -398,7 +398,7 @@ public class CommandHandler {
         doorRef.switchMe(true); 
     }
 
-    public void addDoor(String[] cmd){
+    private void addDoor(String[] cmd){
         if(cmd.length < 6){
             outWriter("invalid arguments");
             return;
@@ -431,12 +431,11 @@ public class CommandHandler {
         Room roomRef1 = (Room)board.stringToObject(room1);
         Room roomRef2 = (Room)board.stringToObject(room2);
         Door d = new Door(roomRef1 , roomRef2, validFrom, validTo);
-        board.addToObjects(doorName, d);
-        board.addToStrings(doorName, d);
+        board.addToBoard(d,doorName);
     }
 
-    public void addRoom(String[] cmd){
-        if(cmd.length < 4){
+    private void addRoom(String[] cmd){
+        if(cmd.length != 4){
             outWriter("invalid arguments");
             return;
         }
@@ -444,20 +443,20 @@ public class CommandHandler {
         int capacity = Integer.parseInt(cmd[3]);
         Room r;
         if(cmd[1].equals("CursedRoom")){
-            r = new CursedRoom(roomIds++, capacity);
+            r = new CursedRoom(++roomIds, capacity);
         }
         else if(cmd[1].equals("Room")){
-            r = new Room(roomIds++, capacity);
+            r = new Room(++roomIds, capacity);
         }
         else{
             outWriter("invalid arguments");
             return;
         }
-        board.addToObjects(roomName, r);
-        board.addToStrings(roomName, r);
+        board.addToBoard(r, roomName);
+        System.out.println(board.objectToString(r));
     }
 
-    public void addPlayerToRoom(String[] cmd){
+    private void addPlayerToRoom(String[] cmd){
         if(cmd.length < 4){
             outWriter("invalid arguments");
             return;
@@ -479,11 +478,10 @@ public class CommandHandler {
             outWriter("invalid arguments");
             return;
         }
-        board.addToObjects(player, p);
-        board.addToStrings(player, p);
+        board.addToBoard(p, player);
     }
 
-    public void addItemToRoom(String[] cmd){
+    private void addItemToRoom(String[] cmd){
         if(cmd.length < 6){
             outWriter("invalid arguments");
             return;
@@ -534,11 +532,10 @@ public class CommandHandler {
             return;
         }
         roomRef.addItem(i);
-        board.addToObjects(itemName, i);
-        board.addToStrings(itemName, i);
+        board.addToBoard(i,itemName);
     }
     
-    public void addItemToPlayer(String[] cmd){
+    private void addItemToPlayer(String[] cmd){
         if(cmd.length < 5){
             outWriter("invalid arguments");
             return;
@@ -580,8 +577,7 @@ public class CommandHandler {
             return;
         }
         playerRef.addItem(i);
-        board.addToObjects(itemName, i);
-        board.addToStrings(itemName, i);
+        board.addToBoard(i, itemName);
     }
 
     public void save(){
