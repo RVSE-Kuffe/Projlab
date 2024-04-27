@@ -135,6 +135,12 @@ public class CommandHandler {
             case "merge":
                 merge(cmd);
                 break;
+            case "teacherRound":
+                teacherRound(cmd);
+                break;
+            case "janitorRound":
+                janitorRound(cmd);
+                break;
             default:
                 System.out.println("Ismeretlen parancs: " + commandType);
         }
@@ -628,5 +634,37 @@ public class CommandHandler {
         else{
             outWriter("sikertelen merge");
         }
+    }
+
+    public void teacherRound(String[] cmd){
+        if(!isRandom){
+            outWriter("random ki van kapcsolva");
+            return;
+        }
+        if(cmd.length < 2){
+            outWriter("invalid arguments");
+            return;
+        }
+
+        String teacher = cmd[1];
+        Teacher t = (Teacher)board.stringToObject(teacher);
+        t.RandomTeacherMove();
+        outWriter(teacher + " random lepett");
+    }
+
+    public void janitorRound(String[] cmd){
+        if(!isRandom){
+            outWriter("random ki van kapcsolva");
+            return;
+        }
+        if(cmd.length < 2){
+            outWriter("invalid arguments");
+            return;
+        }
+
+        String janitor = cmd[1];
+        Janitor j = (Janitor)board.stringToObject(janitor);
+        j.RandomJanitorMove();
+        outWriter(janitor + " random lepett");
     }
 }

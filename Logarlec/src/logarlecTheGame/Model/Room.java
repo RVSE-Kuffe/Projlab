@@ -63,6 +63,10 @@ public class Room {
         //ha ragacsos vagy valami akkor removeItem, tehár törlődik, nem lezs a játékban többet
     }
 
+    public void removeDoor(Door d){
+        doorList.remove(d);
+        myBoard.removeFromMap(d);
+    }
 
     /**
      * szobába hozzáad egy playert

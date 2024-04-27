@@ -59,6 +59,7 @@ public class Door {
         if(whereFrom==whereTo){
             whereTo=null;
             whereFrom=null;
+            whereFrom.removeDoor(this);
         }
     }
 
