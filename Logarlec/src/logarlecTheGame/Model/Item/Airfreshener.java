@@ -10,7 +10,14 @@ public class Airfreshener extends Item{
 
     @Override
      public void acceptPutDown(Student s){
+        if(isFake){
+            s.useFake(this);
+        }
         s.use(this);
      }
+
+     public void makeFake(){
+        isFake=true;
+    }
     
 }

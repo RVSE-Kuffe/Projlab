@@ -15,4 +15,6 @@ public interface PickUp {
     boolean pickUp(Beer b);
 
     boolean pickUp(Item i);
+
+    boolean pickUpFake(Logarlec l);
 }
