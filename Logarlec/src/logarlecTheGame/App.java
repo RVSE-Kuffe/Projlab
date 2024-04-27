@@ -30,6 +30,7 @@ public class App {
             System.out.println("b, Jatek vezerlese parancsokkal");
 
             chooser = scanner.next().charAt(0);
+            scanner.nextLine();
 
             if(chooser == 'a'){
                 String testFile;             //Ennek a stringnek az értékét kell majd megváltoztatni a kiválasztott teszt függvénéyben
