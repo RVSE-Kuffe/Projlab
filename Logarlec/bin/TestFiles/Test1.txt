@@ -1,4 +1,4 @@
-addRoom room 1 1
+addRoom room r1 1
 addRoom room r2 1
 addDoor d12 r1 r2 false true
 addPlayerToRoom student s r1

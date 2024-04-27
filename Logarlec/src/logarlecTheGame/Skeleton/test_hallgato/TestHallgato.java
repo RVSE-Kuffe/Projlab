@@ -14,7 +14,7 @@ public class TestHallgato{
         Room r1 = new Room(s,"r1", 0, 1);
         Room r2 = new Room(s, "r2", 1, 0);
         Student stud = new Student(s, "s", 1, r1);
-        Door d = new Door(s, "d", r1, r2);
+        Door d = new Door(s, "d", r1, r2, true, true);
 
         r1.addDoor(d);
         r2.addDoor(d);
@@ -28,7 +28,7 @@ public class TestHallgato{
         Room r1 = new Room(s,"r1", 0, 1);
         Room r2 = new Room(s, "r2", 1, 1);
         Student stud = new Student(s, "s", 1, r1);
-        Door d = new Door(s, "d", r1, r2);
+        Door d = new Door(s, "d", r1, r2, true, true);
 
         r1.addDoor(d);
         r2.addDoor(d);
@@ -48,7 +48,7 @@ public class TestHallgato{
         Room r1 = new Room(s,"r1", 0, 1);
         Room r2 = new Room(s, "r2", 0, 1);
         Student stud = new Student(s, "s", 1, r1);
-        Door d = new Door(s, "d", r1, r2);
+        Door d = new Door(s, "d", r1, r2, true, true);
 
         r1.addDoor(d);
         r2.addDoor(d);
@@ -64,7 +64,7 @@ public class TestHallgato{
         Room r1 = new Room(s,"r1", 0, 1);
         Room r2 = new Room(s, "r2",1, 2);
         Student stud = new Student(s, "s", 1, r1);
-        Door d = new Door(s, "d", r1, r2);
+        Door d = new Door(s, "d", r1, r2, true, true);
 
         r1.addDoor(d);
         r2.addDoor(d);
@@ -86,7 +86,7 @@ public class TestHallgato{
         Room r1 = new Room(s,"r1", 0, 1);
         Room r2 = new Room(s, "r2", 1, 2);
         Student stud = new Student(s, "s", 1, r1);
-        Door d = new Door(s, "d", r1, r2);
+        Door d = new Door(s, "d", r1, r2, true, true);
 
         r1.addDoor(d);
         r2.addDoor(d);
@@ -104,7 +104,7 @@ public class TestHallgato{
         Room r1 = new Room(s,"r1", 0, 1);
         Room r2 = new Room(s, "r2", 1, 2);
         Student stud = new Student(s, "s", 1, r1);
-        Door d = new Door(s, "d", r1, r2);
+        Door d = new Door(s, "d", r1, r2, true, true);
 
         r1.addDoor(d);
         r2.addDoor(d);
@@ -128,7 +128,7 @@ public class TestHallgato{
         Room r1 = new Room(s,"r1", 0, 1);
         Room r2 = new Room(s, "r2", 1, 3);
         Student stud = new Student(s, "s", 1, r1);
-        Door d = new Door(s, "d", r1, r2);
+        Door d = new Door(s, "d", r1, r2, true, true);
 
         r1.addDoor(d);
         r2.addDoor(d);

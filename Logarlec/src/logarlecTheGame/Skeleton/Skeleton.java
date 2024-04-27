@@ -215,7 +215,7 @@ public class Skeleton {
     public void testCloseDoor(){
         CursedRoom r1=new CursedRoom(this, "r",2,4);
         Room r2=new Room(this, "r",1,4);
-        Door d=new Door(this, "d",r1,r2);
+        Door d=new Door(this, "d",r1,r2, true, true);
         r1.addDoor(d);
         r2.addDoor(d);
         r1.closeDoor();
@@ -229,7 +229,7 @@ public class Skeleton {
     public void testOpenDoor(){
         CursedRoom r1=new CursedRoom(this, "r",2,4);
         Room r2=new Room(this, "r",1,4);
-        Door d=new Door(this, "d",r1,r2);
+        Door d=new Door(this, "d",r1,r2, true, true);
         r1.addDoor(d);
         r2.addDoor(d);
         r1.openDoor();

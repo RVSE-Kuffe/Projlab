@@ -1,21 +1,13 @@
 package logarlecTheGame.Model.Item;
-import java.util.ArrayList;
-import java.util.List;
-import logarlecTheGame.Skeleton.*;
-import logarlecTheGame.*;
-import logarlecTheGame.Model.Player;
-import logarlecTheGame.Model.Student;
-import logarlecTheGame.Model.Item.Item;
+
+import logarlecTheGame.Model.*;
 
 
 public class Logarlec extends Item {
-    private Skeleton sk;
 /**
  * Logarléc konstruktor
      */
-    public Logarlec(Skeleton s, String n, boolean fake) {
-        sk = s;
-        sk.names.put(this, n);
+    public Logarlec(boolean fake) {
         isFake=fake;
     }
 
@@ -27,14 +19,7 @@ public class Logarlec extends Item {
      */
     @Override
     public boolean acceptPickUp(Player p){
-        if(!isFake){
-            if(p.pickUp(this)){
-                return true;
-            }
-            return false;
-        }
-        return false;
-        //System.out.println(sk.names.get(this) + "acceptPickUp");
+        return (!isFake&&p.pickUp(this));
     }
     
 }

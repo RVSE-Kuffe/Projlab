@@ -1,4 +1,4 @@
-addRoom room r1
+addRoom room r1 5
 addPlayerToRoom student s1 r1
 addItemToRoom transistor true t1 r1
 split r1

@@ -1,18 +1,14 @@
 package logarlecTheGame.Model.Item;
 
-import java.util.ArrayList;
-import java.util.List;
-import logarlecTheGame.Skeleton.*;
-import logarlecTheGame.*;
-import logarlecTheGame.Model.Player;
-import logarlecTheGame.Model.Student;
-import logarlecTheGame.Model.Item.Transistor;
+import java.io.Serializable;
+
+import logarlecTheGame.Model.*;
 
   /**
    * Ennek az osztálynak a függvényeit felüldefiniálja,
    *  akinek kell
      */
-public abstract class Item {
+public abstract class Item{
     boolean isFake;
 
         /**
@@ -38,7 +34,6 @@ public abstract class Item {
          * @return igaz, ha sikeres, hamis ha nem
          * meghívja a student use függvényét, aki használja
      */
-
     public boolean acceptGasProtect(Player p){
        return false;
     }
@@ -49,10 +44,7 @@ public abstract class Item {
          * meghívja a student use függvényét, aki használja
      */
     public boolean acceptPickUp(Player p){
-        if(p.pickUp(this)){
-            return true;
-        }
-        return false;
+        return (p.pickUp(this));
     }
 
       /**

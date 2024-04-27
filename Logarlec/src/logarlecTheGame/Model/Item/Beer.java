@@ -1,25 +1,15 @@
 package logarlecTheGame.Model.Item;
-import java.util.ArrayList;
-import java.util.List;
-import logarlecTheGame.Skeleton.*;
-import logarlecTheGame.*;
-import logarlecTheGame.Model.Player;
-import logarlecTheGame.Model.Student;
-import logarlecTheGame.Model.Item.Item;
+import logarlecTheGame.Model.*;
 import logarlecTheGame.Model.Interfaces.*;
-import logarlecTheGame.Skeleton.*;
 
 public class Beer extends Item implements CycleBased {
     private int durability;
     private boolean active;
-    private Skeleton sk;
 
     /**
      * Sörosztály konstruktora, inicializlja az attribútumait
      */
-    public Beer(Skeleton s, String n, int durab) {
-        sk = s;
-        sk.names.put(this, n);
+    public Beer(int durab) {
         durability=durab;
         active=false;
         isFake=false;
@@ -32,12 +22,7 @@ public class Beer extends Item implements CycleBased {
      */
     @Override
      public boolean acceptSP(Student s){
-        if(!isFake){
-        //System.out.println(sk.names.get(this) + "acceptSP");
-        if(s.protect(this))
-            return true;
-        }
-        return false;   
+        return (!isFake && s.protect(this));
     }
     /**
      * A tárgyat fel akarja venni játékos
@@ -46,11 +31,7 @@ public class Beer extends Item implements CycleBased {
      */
     @Override
     public boolean acceptPickUp(Player p){
-        if(p.pickUp(this)){
-            return true;
-        }
-        System.out.println(sk.names.get(this) + "acceptPickUp");
-        return false;
+        return (p.pickUp(this));
     }    
 
      /**
@@ -66,12 +47,11 @@ public class Beer extends Item implements CycleBased {
      hogyha aktív és még lehet
      */
     private void csokkent(){
-        if(durability>0&&this.active==true){
-        durability-=1;
+        if(durability>0&&this.active)
+            durability-=1;
         if(durability<=0){
             isFake=true;
         }
-    }
     }
 
     /**

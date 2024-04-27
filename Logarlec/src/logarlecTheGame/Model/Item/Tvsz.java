@@ -1,27 +1,15 @@
 package logarlecTheGame.Model.Item;
 
-import logarlecTheGame.Skeleton.*;
-
-import java.util.ArrayList;
-import java.util.List;
-import logarlecTheGame.Skeleton.*;
-import logarlecTheGame.*;
-import logarlecTheGame.Model.Player;
-import logarlecTheGame.Model.Student;
-import logarlecTheGame.Model.Item.Transistor;
-import logarlecTheGame.Model.Item.Item;
+import logarlecTheGame.Model.*;
 
 
 public class Tvsz extends Item {
     private int durability;
-    private Skeleton sk;
 
     /**
          *TVSZ konstruktor, inicializálja az attribútumokat
      */
-    public Tvsz(Skeleton s, String n, int durab, boolean fake) {
-        sk = s;
-        sk.names.put(this, n);
+    public Tvsz(int durab, boolean fake) {
         durability=durab;
         isFake=fake;
     }
@@ -33,12 +21,7 @@ public class Tvsz extends Item {
      */
    @Override
     public boolean acceptSP(Student s){
-        if(!isFake){
-            //System.out.println(sk.names.get(this) + "acceptSP");
-            if(s.protect(this))
-                return true;
-            }
-            return false; 
+        return (!isFake&& s.protect(this));
     }
 
     /**
@@ -46,15 +29,15 @@ public class Tvsz extends Item {
      * @return true ha sikerül, false egyébként
      */
     public boolean durabminus(){
-        System.out.println(sk.names.get(this) + "durabminus");
         if(this.durability>0){
             durability-=1;
-            System.out.println(sk.names.get(this) + "durabminus return true");
             return true;
         }
-        //System.out.println(sk.names.get(this) + "durabminus return false");
-        isFake=true;
-        return false;
+        else{
+            isFake=true;
+            return false;
+        }
+        
     }
 
     

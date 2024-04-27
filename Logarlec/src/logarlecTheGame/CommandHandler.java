@@ -1,28 +1,10 @@
 package logarlecTheGame;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.io.*;
 
-import logarlecTheGame.Model.Board;
-import logarlecTheGame.Model.CursedRoom;
-import logarlecTheGame.Model.Door;
-import logarlecTheGame.Model.Janitor;
-import logarlecTheGame.Model.Player;
-import logarlecTheGame.Model.Room;
-import logarlecTheGame.Model.Student;
-import logarlecTheGame.Model.Teacher;
+import logarlecTheGame.Model.*;
 import logarlecTheGame.Model.Interfaces.CycleBased;
-import logarlecTheGame.Model.Item.Airfreshener;
-import logarlecTheGame.Model.Item.Beer;
-import logarlecTheGame.Model.Item.Camambert;
-import logarlecTheGame.Model.Item.Item;
-import logarlecTheGame.Model.Item.Logarlec;
-import logarlecTheGame.Model.Item.Mask;
-import logarlecTheGame.Model.Item.Tablatorlo;
-import logarlecTheGame.Model.Item.Transistor;
-import logarlecTheGame.Model.Item.Tvsz;
+import logarlecTheGame.Model.Item.*;
 
 public class CommandHandler {
 
@@ -32,13 +14,12 @@ public class CommandHandler {
     int roomIds = 0;
     int playerIds = 0;
 
-    public CommandHandler(String output){
-        board = new Board(null, null);
+    public CommandHandler(String output, Board b){
+        board = b;
         if(output != null){ //Minden CMDHandlernek van egy file-ja amibe adott esetben írni kell
             outFile = new File(output); //Ennek a tartalmát törli, minden létrehozáskor.
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(output))) {
                 writer.write("");
-                writer.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -54,18 +35,15 @@ public class CommandHandler {
             return;
         }
         
-        BufferedWriter writer;
-        try {
-            writer = new BufferedWriter(new FileWriter(outFile, true));
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(outFile, true))){
             writer.write(output + "\n");
-            writer.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     //ha console akkor null a dstFile
-    public void executeCommand(String command, String dstFile) {
+    public void executeCommand(String command) {
         String[] cmd = command.split(" ");
         String commandType = cmd[0];
         
@@ -89,7 +67,7 @@ public class CommandHandler {
                 split(cmd);
                 break;
             case "iterateAll":
-                iterateAll(cmd);
+                iterateAll();
                 break;
             case "beerIterate":
                 beerIterate(cmd);
@@ -98,16 +76,16 @@ public class CommandHandler {
                 pair(cmd);
                 break; 
             case "listPlayers":
-                listPlayers(cmd);
+                listPlayers();
                 break;
             case "listRoom":
                 listRoom(cmd);
                 break;
             case "listAllRoom":
-                listAllRoom(cmd);
+                listAllRoom();
                 break;
             case "listItem":
-                listItem(cmd);
+                listItem();
                 break;
             case "listPlayerItem":
                 listPlayerItem(cmd);
@@ -149,10 +127,10 @@ public class CommandHandler {
                 addItemToPlayer(cmd);
                 break;
             case "save":
-                save(cmd);
+                save();
                 break;
             case "load":
-                load(cmd);
+                load();
                 break;
             default:
                 System.out.println("Ismeretlen parancs: " + commandType);
@@ -167,7 +145,7 @@ public class CommandHandler {
         String item = cmd[1];
         String player = cmd[2];
 
-        String outputString = player + item;
+        String outputString = player+": "+item;
 
         Item itemRef = (Item)board.stringToObject(item);
         Player playerRef = (Player)board.stringToObject(player);
@@ -181,7 +159,7 @@ public class CommandHandler {
 		outWriter(outputString);
     }
 
-    public void putDown(String[] cmd){
+    private void putDown(String[] cmd){
         if(cmd.length < 3){
             outWriter("invalid arguments");
             return;
@@ -196,7 +174,7 @@ public class CommandHandler {
         playerRef.putDown(itemRef);
 
         outputString += student;
-        outputString += " : ";
+        outputString += ": ";
         outputString += board.objectToString(playerRef.getLocation());
         outputString += " ";
         outputString += item;
@@ -205,7 +183,7 @@ public class CommandHandler {
         outWriter(outputString);
     }
 
-    public void useDoor(String[] cmd){
+    private void useDoor(String[] cmd){
         String outputString = "";
         if(cmd.length < 3){
             outWriter("invalid arguments");
@@ -217,30 +195,26 @@ public class CommandHandler {
         Door doorRef = (Door)board.stringToObject(door);
         Player playerRef = (Player)board.stringToObject(player);
 
-        playerRef.changeR(doorRef);
-
-        outputString += "door";
-        outputString += "player";
+        outputString = door +": "+player;
         if(playerRef.changeR(doorRef)){
-            outputString += "OK";
+            outputString += " - OK";
         }
         else{
-            outputString += "FAIL";
+            outputString += " - FAIL";
         }
         outWriter(outputString);
     }
 
-    public void randomSwitch(boolean b){
+    private void randomSwitch(boolean b){
         if(b){
             outWriter("random on");
         }
         else{
             outWriter("random off");
         }
-        return;
     }
 
-    public void split(String[] cmd){
+    private void split(String[] cmd){
         if(cmd.length < 2){
             outWriter("invalid arguments");
             return;
@@ -250,26 +224,28 @@ public class CommandHandler {
             String room = cmd[1];
 
             Room roomRef = (Room)board.stringToObject(room);
-            board.forceSplit(roomRef);
+            Room newRoom = board.forceSplit(roomRef);
+            String roomName = ++roomIds +"";
+            board.addToBoard(newRoom, roomName);
 
             outputString += room;
-            outputString += "split, uj szoba: ";
-            outputString += "splitted";
+            outputString += " split, uj szoba: ";
+            outputString += board.objectToString(newRoom);
+
             outWriter(outputString);
         }
     }
 
-    public void iterateAll(String[] cmd){
-        String outString = "iterated: ";
+    private void iterateAll(){
+        StringBuilder outString = new StringBuilder("iterated: ");
         board.iterate();
         for (CycleBased c : board.getCycles()) {
-            outString += board.objectToString(c);
-            outString += "\n";
+            outString.append(board.objectToString(c)+'\n');
         }
-        outWriter(outString);
+        outWriter(outString.toString());
     }
 
-    public void beerIterate(String[] cmd){
+    private void beerIterate(String[] cmd){
         if(cmd.length < 2){
             outWriter("invalid arguments");
             return;
@@ -285,7 +261,7 @@ public class CommandHandler {
         outWriter(outputString);
     }
 
-    public void pair(String[] cmd){
+    private void pair(String[] cmd){
         if(cmd.length < 4){
             outWriter("invalid arguments");
             return;
@@ -305,16 +281,16 @@ public class CommandHandler {
         else{
             outputString += "Sikertelen ";
         }
-        outputString += "párosítás : " + item1 + ", " + item2;
+        outputString += "párosítás: " + item1 + ":" + item2;
         outWriter(outputString);
     }
 
-    public void listPlayers(String[] cmd){
+    private void listPlayers(){
         String outoutString = board.listRooms(true, false);
         outWriter(outoutString);
     }
 
-    public void listRoom(String[] cmd){
+    private void listRoom(String[] cmd){
         if(cmd.length < 2){
             outWriter("invalid arguments");
         }
@@ -327,17 +303,17 @@ public class CommandHandler {
         outWriter(outputString);
     }
 
-    public void listAllRoom(String[] cmd){
+    private void listAllRoom(){
         String outputString = board.listRooms(false, false);
         outWriter(outputString);
     }
 
-    public void listItem(String [] cmd){
-        String outputString = board.listRooms(false, false);
+    private void listItem(){
+        String outputString = board.listRooms(false, true);
         outWriter(outputString);
     }
 
-    public void listPlayerItem(String[] cmd){
+    private void listPlayerItem(String[] cmd){
         if(cmd.length < 2){
             outWriter("invalid arguments");
             return;
@@ -350,7 +326,7 @@ public class CommandHandler {
         outWriter(outputStream);
     }
 
-    public void listPlayerAttribs(String cmd[]){
+    private void listPlayerAttribs(String[] cmd){
         if(cmd.length < 2){
             outWriter("invalid arguments");
             return;
@@ -361,7 +337,7 @@ public class CommandHandler {
         outWriter(outputString);
     }
 
-    public void listRoomAttribs(String cmd[]){
+    private void listRoomAttribs(String[] cmd){
         if(cmd.length < 2){
             outWriter("invalid arguments");
             return;
@@ -372,7 +348,7 @@ public class CommandHandler {
         outWriter(outputString);
     }
 
-    public void gasRoom(String[] cmd){
+    private void gasRoom(String[] cmd){
         if(cmd.length < 2){
             outWriter("invalid arguments");
             return;
@@ -382,7 +358,7 @@ public class CommandHandler {
         roomRef.makeGassed();
     }
 
-    public void cleanRoom(String[] cmd){
+    private void cleanRoom(String[] cmd){
         if(cmd.length < 2){
             outWriter("invalid arguments");
             return;
@@ -392,7 +368,7 @@ public class CommandHandler {
         roomRef.makeClean();
     }
 
-    public void stickyRoom(String[] cmd){
+    private void stickyRoom(String[] cmd){
         if(cmd.length < 2){
             outWriter("invalid arguments");
             return;
@@ -402,7 +378,7 @@ public class CommandHandler {
         roomRef.makeSticky();
     }
 
-    public void closeDoor(String[] cmd){
+    private void closeDoor(String[] cmd){
         if(cmd.length < 2){
             outWriter("invalid arguments");
             return;
@@ -412,7 +388,7 @@ public class CommandHandler {
         doorRef.switchMe(false); 
     }
 
-    public void openDoor(String[] cmd){
+    private void openDoor(String[] cmd){
         if(cmd.length < 2){
             outWriter("invalid arguments");
             return;
@@ -422,7 +398,7 @@ public class CommandHandler {
         doorRef.switchMe(true); 
     }
 
-    public void addDoor(String[] cmd){
+    private void addDoor(String[] cmd){
         if(cmd.length < 6){
             outWriter("invalid arguments");
             return;
@@ -430,13 +406,13 @@ public class CommandHandler {
         String doorName = cmd[1];
         String room1 = cmd[2];
         String room2 = cmd[3];
-        boolean validFrom = false; 
-        boolean validTo = false;
+        boolean validFrom;
+        boolean validTo;
         if(cmd[4].equals("true")){
             validFrom = true;
         }
         else if(cmd[4].equals("false")){
-            validTo = false;
+            validFrom = false;
         }
         else{
             outWriter("invalid arguments");
@@ -454,34 +430,33 @@ public class CommandHandler {
         }
         Room roomRef1 = (Room)board.stringToObject(room1);
         Room roomRef2 = (Room)board.stringToObject(room2);
-        Door d = new Door(null, doorName,roomRef1 , roomRef2, validFrom, validTo);
-        board.addToObjects(doorName, d);
-        board.addToStrings(doorName, d);
+        Door d = new Door(roomRef1 , roomRef2, validFrom, validTo);
+        board.addToBoard(d,doorName);
     }
 
-    public void addRoom(String[] cmd){
-        if(cmd.length < 4){
+    private void addRoom(String[] cmd){
+        if(cmd.length != 4){
             outWriter("invalid arguments");
             return;
         }
         String roomName = cmd[2];
         int capacity = Integer.parseInt(cmd[3]);
         Room r;
-        if(cmd[1].equals("CursedRoom")){
-            r = new CursedRoom(null, roomName, roomIds++, capacity);
+        if(cmd[1].equals("cursedRoom")){
+            r = new CursedRoom(++roomIds, capacity);
         }
-        else if(cmd[1].equals("Room")){
-            r = new Room(null, roomName, roomIds++, capacity);
+        else if(cmd[1].equals("room")){
+            r = new Room(++roomIds, capacity);
         }
         else{
             outWriter("invalid arguments");
             return;
         }
-        board.addToObjects(roomName, r);
-        board.addToStrings(roomName, r);
+        board.addToBoard(r, roomName);
+        System.out.println(board.objectToString(r));
     }
 
-    public void addPlayerToRoom(String[] cmd){
+    private void addPlayerToRoom(String[] cmd){
         if(cmd.length < 4){
             outWriter("invalid arguments");
             return;
@@ -490,31 +465,30 @@ public class CommandHandler {
         String player = cmd[2];
         Room roomRef = (Room)board.stringToObject(room);
         Player p;
-        if(cmd[1].equals("Student")){
-            p = new Student(null, player, playerIds++, roomRef);
+        if(cmd[1].equals("student")){
+            p = new Student(playerIds++, roomRef);
         }
-        else if(cmd[1].equals("Teacher")){
-            p = new Teacher(null, player, playerIds++, roomRef);
+        else if(cmd[1].equals("teacher")){
+            p = new Teacher(playerIds++, roomRef);
         }
-        else if(cmd[1].equals("Janitor")){
-            p = new Janitor(null, player, playerIds++, roomRef);
+        else if(cmd[1].equals("janitor")){
+            p = new Janitor(playerIds++, roomRef);
         }
         else{
             outWriter("invalid arguments");
             return;
         }
-        board.addToObjects(player, p);
-        board.addToStrings(player, p);
+        board.addToBoard(p, player);
     }
 
-    public void addItemToRoom(String[] cmd){
+    private void addItemToRoom(String[] cmd){
         if(cmd.length < 6){
             outWriter("invalid arguments");
             return;
         }
-        boolean fake = false;
+        boolean fake;
         if(cmd[2].equals("false")){
-
+            fake = false;
         }
         else if(cmd[2].equals("true")){
             fake = true;
@@ -529,40 +503,49 @@ public class CommandHandler {
         Room roomRef = (Room)board.stringToObject(roomName);
         Item i;
         String itemType = cmd[1];
-        if(itemType.equals("Airfreshener")){
+        if(itemType.equals("airfreshener")){
             i = new Airfreshener();
         }
-        else if(itemType.equals("Beer")){
-            i = new Beer(null, itemName, durab);
+        else if(itemType.equals("beer")){
+            //i = new Beer(durab);
+            Beer b = new Beer(durab);
+            board.addIterating(b);
+            roomRef.addItem(b);
+            board.addToBoard(b, itemName);
+            return;
         }
-        else if(itemType.equals("Camambert")){
-            i = new Camambert(null, itemName);
+        else if(itemType.equals("camambert")){
+            i = new Camambert();
         }
-        else if(itemType.equals("Logarlec")){
-            i = new Logarlec(null, itemName, fake);
+        else if(itemType.equals("logarlec")){
+            i = new Logarlec(fake);
         }
-        else if(itemType.equals("Mask")){
-            i = new Mask(null, itemName, durab, fake);
+        else if(itemType.equals("mask")){
+            i = new Mask(durab, fake);
         }
-        else if(itemType.equals("Tablatorlo")){
-            i = new Tablatorlo(null, itemName, durab);
+        else if(itemType.equals("tablatorlo")){
+            //i = new Tablatorlo(durab);
+            Tablatorlo t = new Tablatorlo(durab);
+            board.addIterating(t);
+            roomRef.addItem(t);
+            board.addToBoard(t, itemName);
+            return;
         }
-        else if(itemType.equals("Transistor")){
-            i = new Transistor(null, itemName);
+        else if(itemType.equals("transistor")){
+            i = new Transistor();
         }
         else if(itemType.equals("TVSZ")){
-            i = new Tvsz(null, itemName, durab, fake);
+            i = new Tvsz(durab, fake);
         }
         else{
             outWriter("invalid arguments");
             return;
         }
         roomRef.addItem(i);
-        board.addToObjects(itemName, i);
-        board.addToStrings(itemName, i);
+        board.addToBoard(i,itemName);
     }
     
-    public void addItemToPlayer(String[] cmd){
+    private void addItemToPlayer(String[] cmd){
         if(cmd.length < 5){
             outWriter("invalid arguments");
             return;
@@ -575,44 +558,53 @@ public class CommandHandler {
         boolean fake = false;
         Item i;
 
-        if(itemType.equals("Airfreshener")){
+        if(itemType.equals("airfreshener")){
             i = new Airfreshener();
         }
-        else if(itemType.equals("Beer")){
-            i = new Beer(null, itemName, durab);
+        else if(itemType.equals("beer")){
+            //i = new Beer(durab);
+            Beer b = new Beer(durab);
+            board.addIterating(b);
+            playerRef.addItem(b);
+            board.addToBoard(b, itemName);
+            return;
         }
-        else if(itemType.equals("Camambert")){
-            i = new Camambert(null, itemName);
+        else if(itemType.equals("camambert")){
+            i = new Camambert();
         }
-        else if(itemType.equals("Logarlec")){
-            i = new Logarlec(null, itemName, fake);
+        else if(itemType.equals("logarlec")){
+            i = new Logarlec(fake);
         }
-        else if(itemType.equals("Mask")){
-            i = new Mask(null, itemName, durab, fake);
+        else if(itemType.equals("mask")){
+            i = new Mask(durab, fake);
         }
-        else if(itemType.equals("Tablatorlo")){
-            i = new Tablatorlo(null, itemName, durab);
+        else if(itemType.equals("tablatorlo")){
+            //i = new Tablatorlo(durab);
+            Tablatorlo t = new Tablatorlo(durab);
+            board.addIterating(t);
+            playerRef.addItem(t);
+            board.addToBoard(t, itemName);
+            return;
         }
-        else if(itemType.equals("Transistor")){
-            i = new Transistor(null, itemName);
+        else if(itemType.equals("transistor")){
+            i = new Transistor();
         }
         else if(itemType.equals("TVSZ")){
-            i = new Tvsz(null, itemName, durab, fake);
+            i = new Tvsz(durab, fake);
         }
         else{
             outWriter("invalid arguments");
             return;
         }
         playerRef.addItem(i);
-        board.addToObjects(itemName, i);
-        board.addToStrings(itemName, i);
+        board.addToBoard(i, itemName);
     }
 
-    public void save(String[] cmd){
+    public void save(){
         board.serialize();
     }
 
-    public void load(String[] cmd){
+    public void load(){
         board.deserialize();
     }
 }

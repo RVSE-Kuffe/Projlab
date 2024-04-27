@@ -1,16 +1,26 @@
 package logarlecTheGame.Model;
+import java.util.Random;
 import java.util.logging.Logger;
 
-import logarlecTheGame.Skeleton.*;
 import logarlecTheGame.Model.Item.*;
 import logarlecTheGame.Model.Interfaces.*;
+import java.util.random.*;
 
 public class Janitor extends Player {
+    Random random = new Random();
     
-     public Janitor(Skeleton s, String n, int i, Room l) {
-        super(s, n, i, l);
-        //TODO Auto-generated constructor stub
+     public Janitor(int i, Room l) {
+        super(i, l);
     }
+
+    //random lepes
+    
+    public boolean RandomJanitorMove(){
+        int doorcounter=this.location.doors().size();
+        int chosendoor=random.nextInt(doorcounter);
+        return this.changeR(this.location.doors().get(chosendoor));
+    }
+
 
     /**
      * Tárgyak felvételét kezdeményezi
@@ -75,9 +85,7 @@ public class Janitor extends Player {
      * @param i     Az eldobott tárgy
      */
     @Override
-    public void dropItem(Item i){
-        return;
-    }
+    public void dropItem(Item i){/*This shouldn't do enything at all */}
 
     /**
      * Játékosok megölésével próbálkozik, kezdeményezi azt
@@ -86,9 +94,7 @@ public class Janitor extends Player {
      */
     
     @Override
-    public void kill(Player p){
-        return;
-    }
+    public void kill(Player p){/*This shouldn't do enything at all */}
 
     /**
      * A játékosok megölését végzi. A student ezt felüldefiniálja, így ez csak az oktatókra hívódik, ők pedig nem tudnak meghalni
@@ -106,13 +112,7 @@ public class Janitor extends Player {
      */
     @Override
     public boolean changeR(Door d){
-        //System.out.println(sk.names.get(this) + " changeR(" + sk.names.get(d) + ")");
-        if(this.location.changeRoom(this, d)){
-           // System.out.println(sk.names.get(this) + ".changeR(" + sk.names.get(d) + ") returned True");
-            return true;
-        }
-       // System.out.println(sk.names.get(this) + ".changeR(" + sk.names.get(d) + ") returned False");
-        return false;
+        return (this.location.changeRoom(this, d));
     }
 
 
@@ -121,9 +121,7 @@ public class Janitor extends Player {
      */
     @Override
     public void heal(){
-        //System.out.println(sk.names.get(this) + ".heal()");
         stunned = false;
-        //System.out.println(sk.names.get(this) + ".heal() returned");
     }
 
 

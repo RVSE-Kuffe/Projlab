@@ -11,21 +11,25 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import logarlecTheGame.Skeleton.*;
-import logarlecTheGame.*;
-import logarlecTheGame.Model.Interfaces.CycleBased;
-import logarlecTheGame.Model.Interfaces.RoomPairing;
-import logarlecTheGame.Model.Item.Item;
-
+import logarlecTheGame.Model.Interfaces.*;
 import java.util.Random;
 
 public class Board implements CycleBased, RoomPairing, Serializable{
     private List<Room> roomList = new ArrayList<>();
-    private Skeleton sk;
-    private static Random random=new Random();
+    private Random random=new Random();
     private List<CycleBased> cycleList = new ArrayList<>();
     private Map<String, Object> bObjects = new HashMap<>();
     private Map<Object, String> bNames = new HashMap<>();
+
+    public void addToBoard(Object o, String str){
+        bObjects.put(str, o);
+        bNames.put(o, str);
+    }
+
+    public void deleteFromBoard(Object o, String str){
+        bObjects.remove(str, o);
+        bNames.remove(o, str);
+    }
 
     public Object stringToObject(String name){
         Object o = bObjects.get(name);
@@ -39,13 +43,7 @@ public class Board implements CycleBased, RoomPairing, Serializable{
         return name;
     }
 
-    /**
-        *Board osztáy konstruktora
-     */
-    public Board(Skeleton s, String n) {
-        sk = s;
-        sk.names.put(this, n);
-    }
+    public Board() { /* Board osztáy konstruktora */ }
 
     public void addIterating(CycleBased c){
         cycleList.add(c);
@@ -55,19 +53,19 @@ public class Board implements CycleBased, RoomPairing, Serializable{
         Pálya inicializálás függvény
      */
 
-    public void init(){System.out.println(sk.names.get(this) + "init");}
+    public void init(){/*TODO*/}
 
     /**
         Játék végét jelző függvény
      */
 
-    public void gameOver(){System.out.println(sk.names.get(this) + "gameOver");}
+    public void gameOver(){/*TODO*/}
 
     /**
         *Tábla módosítását jelző függvény
      */
 
-    public void modify(){System.out.println(sk.names.get(this) + "modify");}
+    public void modify(){/*TODO*/}
 
     /**
          * Szoba hozzáadása a pályához,
@@ -77,9 +75,6 @@ public class Board implements CycleBased, RoomPairing, Serializable{
 
     public void addRoom(Room r1){
         roomList.add(r1);
-        System.out.println(sk.names.get(this) + " addRoom(" + sk.names.get(r1) + ")");
-
-        System.out.println(sk.names.get(this) + " addRoom returned");
     }
 
       /**
@@ -89,7 +84,6 @@ public class Board implements CycleBased, RoomPairing, Serializable{
      */
     public void removeRoom(Room r1){
         roomList.remove(r1);
-        System.out.println(sk.names.get(this) + "removeRoom");
     }
 
     /**
@@ -99,7 +93,6 @@ public class Board implements CycleBased, RoomPairing, Serializable{
          * mindenképp mergel két szobát
      */
     public boolean forceMerge(Room r1, Room r2){
-        System.out.println(sk.names.get(this) + "forceMerge");
         if(r1.getCapacity()>=r2.getCapacity() && (r1.getPlayerCount()+r2.getPlayerCount()<=r1.getCapacity())){
             return r1.acceptPairing(this,r2);
         }
@@ -108,17 +101,21 @@ public class Board implements CycleBased, RoomPairing, Serializable{
         }
         return false;
     }
+
     public boolean pair(Room r1, Room r2){
         r2.mergeRoom(r1);
         this.removeRoom(r2);
         return true;
     }
+
     public boolean pair(Room r1, CursedRoom r2){
         return false;
     }
+
     public boolean pair(CursedRoom r1, Room r2){
         return false;
     }
+
     public boolean pair(CursedRoom r1, CursedRoom r2){
         return false;
     }
@@ -128,27 +125,24 @@ public class Board implements CycleBased, RoomPairing, Serializable{
          * @param r a szoba amit feloszt
          * mindenképp splitel egy szobát, és létrehoz egy újat
      */
-    public void forceSplit(Room r){
-        System.out.println(sk.names.get(this) + "forceSplit(" + sk.names.get(r) + ")");
+    public Room forceSplit(Room r){
         Room newRoom= r.newRoom();
         bObjects.put("split", newRoom);
         bNames.put(newRoom, "split");
         addRoom(newRoom);
-        System.out.println(sk.names.get(this) + " return forceSplit(" + sk.names.get(r) + ")");
+        return newRoom;
     }
 
     /**
          *játékos általi játék megnyerését jelző függvény
      */
 
-    public void win(){System.out.println(sk.names.get(this) + "win");}
+    public void win(){/*TODO*/}
 
     @Override
     public void iterate() {
         int choice= random.nextInt(3);
         switch(choice){
-            case 0:
-                break;
             case 1:
                 int index1=random.nextInt(roomList.size());
                 int index2=random.nextInt(roomList.size());
@@ -160,6 +154,8 @@ public class Board implements CycleBased, RoomPairing, Serializable{
             case 2:
                 int index=random.nextInt(roomList.size());
                 forceSplit(roomList.get(index));
+                break;
+            default: //case 0
                 break;
         }
         for (CycleBased cycleBased : cycleList) {
@@ -173,41 +169,31 @@ public class Board implements CycleBased, RoomPairing, Serializable{
     }
 
     public String listRooms(boolean withPlayers, boolean withItems){
-        String returnString = "";
+        StringBuilder sb = new StringBuilder("");
         if(withPlayers){
         for (Room r : roomList) {
-                returnString += r.listMe(this, true, false, false) + ", ";
+                sb.append(r.listMe(this, true, false, false) + ", ");
             }
-            return returnString;
+            return sb.toString();
         }
         if(withItems){
             for (Room r : roomList) {
-                returnString += r.listMe(this, false, true, false);
+                sb.append(r.listMe(this, false, true, false));
             }
-            return returnString;
+            return sb.toString();
         }
         
         for(Room r : roomList){
-            returnString += objectToString(r) + ", ";
+            sb.append(objectToString(r) + ", ");
         }
-        return returnString;
-    }
-
-    public void addToObjects(String s, Object o){
-        bObjects.put(s, o);
-    }
-
-    public void addToStrings(String s, Object o){
-        bNames.put(o,s);
+        return sb.toString();
     }
 
     public void serialize(){
-        try{
-            FileOutputStream fileOut = new FileOutputStream("C:/Bálint/HF-k/projlab/Projlab/Logarlec/src/logarlecTheGame/board.ser");
+        try(FileOutputStream fileOut = new FileOutputStream("Logarlec/board.ser");){
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
             out.writeObject(this);
             out.close();
-            fileOut.close();
         }
         catch(IOException e) {
             e.printStackTrace();
@@ -215,12 +201,15 @@ public class Board implements CycleBased, RoomPairing, Serializable{
     }
 
     public void deserialize(){
-        try {
-            FileInputStream fileIn = new FileInputStream("C:/Bálint/HF-k/projlab/Projlab/Logarlec/src/logarlecTheGame/board.ser");
+        try (FileInputStream fileIn = new FileInputStream("Logarlec/board.ser");){
             ObjectInputStream in = new ObjectInputStream(fileIn);
-            this = (Board)in.readObject();
+            Board temp = (Board)in.readObject();
+            this.roomList = temp.roomList;
+            this.random = temp.random;
+            this.cycleList = temp.cycleList;
+            this.bObjects = temp.bObjects;
+            this.bNames = temp.bNames;
             in.close();
-            fileIn.close();
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }

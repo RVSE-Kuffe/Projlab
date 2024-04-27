@@ -4,10 +4,8 @@ import java.util.List;
 
 import logarlecTheGame.Model.Interfaces.*;
 import logarlecTheGame.Model.Item.*;
-import logarlecTheGame.Skeleton.*;
 
 public class Player implements PickUp, GasProtect{
-    protected Skeleton sk;
     protected int id;
     protected boolean stunned;
     protected boolean isProtected;    //Simán protected-nek nem nevezhetem el a változót, mert rinyál a fordító
@@ -18,15 +16,12 @@ public class Player implements PickUp, GasProtect{
      * player osztály konstruktora
      * beállítja a megfelelő attribútumokat
      */
-    public Player(Skeleton s, String n, int i, Room l){
-        sk = s;
-        sk.names.put(this, n);
+    public Player(int i, Room l){
         id = i;
         location = l;
         itemList = new ArrayList<>();
         stunned = false;
         isProtected = false;
-        System.out.println(n + ".ctor()");
     }
 
     /**
@@ -34,12 +29,7 @@ public class Player implements PickUp, GasProtect{
      * @param i     Felvett tárgy
      */
     public boolean pickUpItem(Item i){
-        System.out.println(sk.names.get(this) + ".pickUpItem(" + sk.names.get(i) + ")");
-        if(i.acceptPickUp(this)){
-            return true;
-        }
-        System.out.println(sk.names.get(this) + ".pickUpItem(" + sk.names.get(i) + ") returned");
-        return false;
+        return (i.acceptPickUp(this));
     }
 
     /**
@@ -47,7 +37,6 @@ public class Player implements PickUp, GasProtect{
      * @param i     A felvenni kívánt tárgy
      */
     public boolean pickUp(Item i){
-        System.out.println(sk.names.get(this) + ".pickUp(" + sk.names.get(i) + ")");
         if(location.removeItem(i)){
             this.addItem(i);
             return true;
@@ -62,12 +51,10 @@ public class Player implements PickUp, GasProtect{
      * @param i     Logarléc
      */
     public boolean pickUp(Logarlec i){
-        System.out.println(sk.names.get(this) + ".pickUp(" + sk.names.get(i) + ")");
         if(location.removeItem(i)){
             location.win();
             return true;
         }
-        System.out.println(sk.names.get(this) + ".pickUp(" + sk.names.get(i) + ") returned");
         return false;
     }
 
@@ -76,13 +63,11 @@ public class Player implements PickUp, GasProtect{
      * @param i Sör
      */
     public boolean pickUp(Beer i){
-        System.out.println(sk.names.get(this) + ".pickUp(" + sk.names.get(i) + ")");
         if(location.removeItem(i)){
             this.addItem(i);
             i.activate();
             return true;
         }
-        System.out.println(sk.names.get(this) + ".pickUp(" + sk.names.get(i) + ") returned");
         return false;
     }
 
@@ -92,10 +77,8 @@ public class Player implements PickUp, GasProtect{
      * @return  Hamissal tér vissza, ha a Hallgatót egy tárgya megvédte, különben Igaz
      */
     public boolean stun(){
-        System.out.println(sk.names.get(this) + ".stun()");
         for(Item i: itemList){
             if(i.acceptGasProtect(this)){
-                System.out.println(sk.names.get(this) + ".stun() returned False");
                 return false;
             }
         }
@@ -103,7 +86,6 @@ public class Player implements PickUp, GasProtect{
         for(Item i : itemList){
             dropItem(i);
         }
-        System.out.println(sk.names.get(this) + ".stun() returned True");
         return true;
     }
 
@@ -112,7 +94,6 @@ public class Player implements PickUp, GasProtect{
      * Teacher felüldefiniálja, mert ez csak rá van hatással 
      */
     public boolean stunTeacher(){
-        System.out.println(sk.names.get(this) + ".stunTeacher()");
         return false;
     }
 
@@ -122,10 +103,8 @@ public class Player implements PickUp, GasProtect{
      * @param i     Az eldobott tárgy
      */
     public void dropItem(Item i){
-        System.out.println(sk.names.get(this) + ".dropItem(" + sk.names.get(i) + ")");
         this.location.addItem(i);
         itemList.remove(i);
-        System.out.println(sk.names.get(this) + ".dropItem(" + sk.names.get(i) + ") returned");
     }
 
     /**
@@ -134,11 +113,8 @@ public class Player implements PickUp, GasProtect{
      * @return      Igazzal tér vissza, ha a játékos meghalt, különben hamis
      */
     public void kill(Player p){
-        System.out.println(sk.names.get(this) + ".kill(" + sk.names.get(p) + ")");
-        if(!p.equals(this) && (p.die())){
-            System.out.println(sk.names.get(this) + ".kill(" + sk.names.get(p) + ") returned True");
-        }
-        System.out.println(sk.names.get(this) + ".kill(" + sk.names.get(p) + ") returned False");
+        if(!p.equals(this))
+            p.die();
     }
 
     /**
@@ -155,45 +131,30 @@ public class Player implements PickUp, GasProtect{
      * @return      Igaz, ha az 'r' szobába van elég hely, tehát át lehet lépni. Különben Hamis
      */
     public boolean changeR(Door d){
-        if(!stunned){
-        //System.out.println(sk.names.get(this) + " changeR(" + sk.names.get(d) + ")");
-        
-        if(this.location.changeRoom(this, d)){
-            System.out.println(sk.names.get(this) + ".changeR(" + sk.names.get(d) + ") returned True");
-            return true;
-        }
-    }
-        System.out.println(sk.names.get(this) + ".changeR(" + sk.names.get(d) + ") returned False");
-        return false;
+        return (!stunned && this.location.changeRoom(this, d));
     }
 
     /**
      * Jelzi a szobának hogy nyertek a hallgatók
      */
     public void win(){
-        System.out.println(sk.names.get(this) + ".win()");
         this.location.win();
-        System.out.println(sk.names.get(this) + ".win() returned");
     }
 
     /**
      * A játékos kábítását oldja fel
      */
     public void heal(){
-        System.out.println(sk.names.get(this) + ".heal()");
         stunned = false;
-        System.out.println(sk.names.get(this) + ".heal() returned");
     }
 
     /**
      * A játékos összes tárgyának az elvesztését kezeli
      */
     public void loseItem(){
-        System.out.println(sk.names.get(this) + ".loseItem()");
         for(Item i : itemList){
             this.dropItem(i);
         }
-        System.out.println(sk.names.get(this) + ".loseItem() returned");
     }
 
     /**
@@ -202,9 +163,7 @@ public class Player implements PickUp, GasProtect{
      * @param t2    Második tranzisztor
      * @return      Ha sikerrel párosította, akkor Igazzal tér vissza, különben hamis
      */
-    public boolean pairing(Transistor t1, Transistor t2){
-        System.out.println(sk.names.get(this) + ".pairing(" + sk.names.get(t1) +", " +sk.names.get(t2)+ ")");
-        
+    public boolean pairing(Transistor t1, Transistor t2){  
         return false;
     }
 
@@ -213,9 +172,7 @@ public class Player implements PickUp, GasProtect{
      * @param i     A tárgy ami a játékoshoz kerül
      */
     public void addItem(Item i){
-        System.out.println(sk.names.get(this) + ".addItem(" + sk.names.get(i) + ")");
         itemList.add(i);
-        System.out.println(sk.names.get(this) + ".addItem(" + sk.names.get(i) + ") returned");
     }
 
     /**
@@ -224,13 +181,7 @@ public class Player implements PickUp, GasProtect{
      * @return      Ha sikerült a védés, Igazzal, ha nem, akkor Hamissal tér vssza
      */
     public boolean maskProtect(Mask m){
-        System.out.println(sk.names.get(this) + ".maskProtect(" + sk.names.get(m) + ")");
-        if(m.durabminus()){
-            System.out.println(sk.names.get(this) + ".maskProtect(" + sk.names.get(m) + ") returned True");
-            return true;
-        }
-        System.out.println(sk.names.get(this) + ".maskProtect(" + sk.names.get(m) + ") returned False");
-        return false;
+        return (m.durabminus());
     }
 
      /**
@@ -239,8 +190,6 @@ public class Player implements PickUp, GasProtect{
      * @return      Ha sikerült a védés, Igazzal, ha nem, akkor Hamissal tér vssza
      */
     public boolean maskProtect(Item i){
-        System.out.println(sk.names.get(this) + ".maskProtect(" + sk.names.get(i) + ")");
-        System.out.println(sk.names.get(this) + ".maskProtect(" + sk.names.get(i) + ") returned False");
         return false;
     }
 
@@ -253,12 +202,9 @@ public class Player implements PickUp, GasProtect{
     }
 
     public void cleanRoom(){
-        return;
-      
     }
 
     public void sendPlayersOut(){
-        return;
     }
 
     public Room getLocation(){
@@ -266,21 +212,21 @@ public class Player implements PickUp, GasProtect{
     }
 
     public String listMe(Board b, boolean withItems, boolean withAttribs){
-        String outputString = "";
-        outputString += b.objectToString(this) + ": ";
+        StringBuilder sb = new StringBuilder("");
+        sb.append(b.objectToString(this) + ": ");
         if(withItems){
             for(Item i : itemList){
-                outputString += b.objectToString(i) + ", ";
+                sb.append(b.objectToString(i) + ", ");
             }
         }
         if(withAttribs){
             if(stunned){
-                outputString += "stunned, "; 
+                sb.append("stunned, "); 
             }
             if(isProtected){
-                outputString += "protected";
+                sb.append("protected");
             }
         }
-        return outputString;
+        return sb.toString();
     }
 }

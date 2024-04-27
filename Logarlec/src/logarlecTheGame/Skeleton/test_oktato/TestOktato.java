@@ -13,7 +13,7 @@ public class TestOktato {
     public void testOkatoLep1(Skeleton s){
         Room r1 = new Room(s, "r1", 0, 1);
         Room r2 = new Room(s, "r2", 1, 1);
-        Door d = new Door(s, "d", r1, r2);
+        Door d = new Door(s, "d", r1, r2, true, true);
         r1.addDoor(d);
         r2.addDoor(d);
         Teacher t = new Teacher(s, "t", 0, r1);
@@ -25,7 +25,7 @@ public class TestOktato {
     public void testOktatoLep7(Skeleton s){
         Room r1 = new Room(s, "r1", 0, 1);
         Room r2 = new Room(s, "r2", 1, 0);
-        Door d = new Door(s, "d", r1, r2);
+        Door d = new Door(s, "d", r1, r2, true, true);
         r1.addDoor(d);
         r2.addDoor(d);
         Teacher t = new Teacher(s, "t", 0, r1);
@@ -37,7 +37,7 @@ public class TestOktato {
     public void testOktatoLep2(Skeleton s){
         Room r1 = new Room(s, "r1", 0, 1);
         Room r2 = new Room(s, "r2", 1, 2);
-        Door d = new Door(s, "d", r1, r2);
+        Door d = new Door(s, "d", r1, r2, true, true);
         Student st = new Student(s, "st", 0, r2);
 
         r1.addDoor(d);
@@ -53,7 +53,7 @@ public class TestOktato {
     public void testOktatoLep3(Skeleton s){
         Room r1 = new Room(s, "r1", 0, 1);
         Room r2 = new Room(s, "r2", 1, 2);
-        Door d = new Door(s, "d", r1, r2);
+        Door d = new Door(s, "d", r1, r2, true, true);
         Tvsz tv = new Tvsz(s, "tv", 3, false);
         Student st = new Student(s, "st", 0, r2);
 
@@ -71,7 +71,7 @@ public class TestOktato {
     public void testOktatoLep4(Skeleton s){
         Room r1 = new Room(s, "r1", 0, 1);
         Room r2 = new Room(s, "r2", 1, 1);
-        Door d = new Door(s, "d", r1, r2);
+        Door d = new Door(s, "d", r1, r2, true, true);
 
         r1.addDoor(d);
         r2.addDoor(d);
@@ -86,7 +86,7 @@ public class TestOktato {
     public void testOktatoLep5(Skeleton s){
         Room r1 = new Room(s, "r1", 0, 1);
         Room r2 = new Room(s, "r2", 1, 1);
-        Door d = new Door(s, "d", r1, r2);
+        Door d = new Door(s, "d", r1, r2, true, true);
         Mask m = new Mask(s, "m", 3, false);
 
         r1.addDoor(d);
@@ -103,7 +103,7 @@ public class TestOktato {
     public void testOktatoLep6(Skeleton s){
         Room r1 = new Room(s, "r1", 0, 1);
         Room r2 = new Room(s, "r2", 1, 1);
-        Door d = new Door(s, "d", r1, r2);
+        Door d = new Door(s, "d", r1, r2, true, true);
 
         r1.addDoor(d);
         r2.addDoor(d);

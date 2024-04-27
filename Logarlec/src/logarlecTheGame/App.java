@@ -1,9 +1,9 @@
 package logarlecTheGame;
-import logarlecTheGame.Skeleton.*;
-import java.util.Scanner;
 
 import java.io.*;
 import java.util.*;
+
+import logarlecTheGame.Model.Board;
 
 public class App {
 
@@ -13,19 +13,17 @@ public class App {
 
 
     static void writeToFile(File outputFile, List<String> output){  //Paraméterként egy file-t kap, amibe írnia kell és egy string listát, melynek elemeit külön sorokba írja ki
-        BufferedWriter writer;
-        try {
-            writer = new BufferedWriter(new FileWriter(outputFile));
+        try(BufferedWriter writer = new BufferedWriter(new FileWriter(outputFile))) {  
             for(String s : output){
                 writer.write(s + "\n");
             }
-            writer.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     public static void main(String[] args) throws Exception {
+        Board board = new Board();
         while(chooser != 'c'){
             System.out.println("Valassz modszert");
             System.out.println("a, Tesztek beolvasasa");
@@ -34,29 +32,40 @@ public class App {
             chooser = scanner.next().charAt(0);
 
             if(chooser == 'a'){
-                String testFile = "proba.txt";              //Ennek a stringnek az értékét kell majd megváltoztatni a kiválasztott teszt függvénéyben
-                String outFile= "out.txt";
+                String testFile;             //Ennek a stringnek az értékét kell majd megváltoztatni a kiválasztott teszt függvénéyben
+                String outFile;
                 System.out.println("Valassz teszteket");    //Itt kilistázza a választható teszteket
-                System.out.println("...tesztek");
-                                                            //Ide kell majd egy switchcase, ami nevet ad a file-nak
+                for(int i = 1; i<16+1;i++)
+                    System.out.println(i+" - Teszteset"+i);
+                System.out.println("Add meg a teszteset számát: ");
+                chooser = scanner.next().charAt(0);
+                testFile = "Logarlec/src/TestFiles/Test"+chooser+".txt";
+                outFile = "out.txt";
+                                                            
                 File inputFile = new File(testFile);        //File objektum létrehozása a kiválasztott file-val
-                BufferedReader reader = new BufferedReader(new FileReader(inputFile));  //Reader létrehozása
-                List<String> commands = new ArrayList<>();  //A parancsokat tartalmazó Lista, ezeket a parancsokat tovább kell majd még parse-olni
-                String command;
-                while((command = reader.readLine()) != null){
-                    commands.add(command);
-                }
-                reader.close();
-
-                CommandHandler ch = new CommandHandler(outFile);
-
-                for(String s : commands){
-                    ch.executeCommand(s, outFile);         //A stringek parseolását és végrehajtását meghívja az összes kiolvasott parancsra
+                try(BufferedReader reader = new BufferedReader(new FileReader(inputFile))){  //Reader létrehozása
+                    List<String> commands = new ArrayList<>();  //A parancsokat tartalmazó Lista, ezeket a parancsokat tovább kell majd még parse-olni
+                    String command;
+                    while((command = reader.readLine()) != null){
+                        System.out.println(command);
+                        commands.add(command);
+                    }
+                    CommandHandler ch = new CommandHandler(outFile, board);
+                    for(String s : commands){
+                        ch.executeCommand(s);         //A stringek parseolását és végrehajtását meghívja az összes kiolvasott parancsr
+                    }
+                }catch(IOException e){
+                    e.getStackTrace();
+                    System.err.println(e.getMessage());
                 }
             }
             else if(chooser == 'b'){
-                
-                System.out.println("Parancsolvaso es parseolo logika helye");
+                String cmd = null;
+                CommandHandler ch = new CommandHandler(null, board);
+                while(!"quit".equals(cmd)){
+                    cmd = scanner.nextLine();
+                    ch.executeCommand(cmd);
+                }
             }
         }
     }
