@@ -9,8 +9,8 @@ public class CursedRoom extends Room implements CycleBased {
      * Átkozot szoba konstruktora
      * beállítja a megfelelő paramétereket
      */
-    public CursedRoom(int i, int c) {
-        super(i,c);
+    public CursedRoom(int i, int c, Board b) {
+        super(i,c, b);
     }
     /**
      * ajtók bezárását végzi a szobában

@@ -105,7 +105,14 @@ public class Board implements CycleBased, RoomPairing, Serializable{
     public boolean pair(Room r1, Room r2){
         r2.mergeRoom(r1);
         this.removeRoom(r2);
+        this.removeFromMap(r2);
         return true;
+    }
+
+    public void removeFromMap(Object o){
+        String name = objectToString(o);
+        bObjects.remove(0);
+        bNames.remove(name);
     }
 
     public boolean pair(Room r1, CursedRoom r2){

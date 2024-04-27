@@ -13,14 +13,17 @@ public class Room {
     protected int capacity;
     protected boolean cleaner=false;
     protected int stickyCount = 0;
+    protected Board myBoard;
+    protected int splitCounter = 0;
 
     /**
      * Szoba osztály konstruktora
      * beállítja a megfelelő attribútumokat
      */
-    public Room(int rid, int cap) {
+    public Room(int rid, int cap, Board b) {
         roomid=rid;
         capacity=cap;
+        myBoard = b;
     }
     public int getCapacity(){
         return capacity;
@@ -110,7 +113,10 @@ public class Room {
         doorList.add(d);
     }
 
-    boolean killPlayer(Player p){return true;}
+    public boolean killPlayer(Player p){
+        myBoard.removeFromMap(p);
+        return true;
+    }
     
     /**
      * játék megnyerését jelzi
@@ -135,10 +141,11 @@ public class Room {
      * @return room2 a létreött szoba
      */
     Room newRoom(){
-        Room room2 =new Room(this.roomid + 1, this.capacity);
+        Room room2 =new Room(this.roomid + 1, this.capacity, myBoard);
         Door splitDoor = new Door(this, room2,true,true);
         this.addDoor(splitDoor);
         room2.addDoor(splitDoor);
+        myBoard.addToBoard(room2, myBoard.objectToString(this) + " splitted" + ++splitCounter);
         return room2;
     }
 

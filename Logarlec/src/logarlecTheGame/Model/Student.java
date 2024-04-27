@@ -27,6 +27,7 @@ public class Student extends Player implements StudentProtection, PutDown, Pairi
                 return false;
             }
         }
+        location.killPlayer(this);
         return true;
     } 
     

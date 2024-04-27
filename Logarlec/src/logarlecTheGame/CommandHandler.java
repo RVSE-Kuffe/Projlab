@@ -132,6 +132,9 @@ public class CommandHandler {
             case "load":
                 load();
                 break;
+            case "merge":
+                merge(cmd);
+                break;
             default:
                 System.out.println("Ismeretlen parancs: " + commandType);
         }
@@ -443,16 +446,17 @@ public class CommandHandler {
         int capacity = Integer.parseInt(cmd[3]);
         Room r;
         if(cmd[1].equals("cursedRoom")){
-            r = new CursedRoom(++roomIds, capacity);
+            r = new CursedRoom(++roomIds, capacity, board);
         }
         else if(cmd[1].equals("room")){
-            r = new Room(++roomIds, capacity);
+            r = new Room(++roomIds, capacity, board);
         }
         else{
             outWriter("invalid arguments");
             return;
         }
         board.addToBoard(r, roomName);
+        board.addRoom(r);
         System.out.println(board.objectToString(r));
     }
 
@@ -606,5 +610,23 @@ public class CommandHandler {
 
     public void load(){
         board.deserialize();
+    }
+
+    public void merge(String[] cmd){
+        if(cmd.length < 3){
+            outWriter("invalid arguments");
+        }
+        String room1 = cmd[1];
+        String room2 = cmd[2];
+
+        Room roomRef1 = (Room)board.stringToObject(room1);
+        Room roomRef2 = (Room)board.stringToObject(room2);
+
+        if(board.forceMerge(roomRef1, roomRef2)){
+            outWriter("sikeres merge");
+        }
+        else{
+            outWriter("sikertelen merge");
+        }
     }
 }
