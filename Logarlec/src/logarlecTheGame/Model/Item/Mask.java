@@ -21,7 +21,7 @@ public class Mask extends Item {
      */
     @Override   
     public boolean acceptGasProtect(Player p){
-        return (p.maskProtect(this));
+        return (!isFake&&p.maskProtect(this));
     }
 
     /**
@@ -31,6 +31,7 @@ public class Mask extends Item {
     public boolean durabminus(){
         if(this.durability>0){
             durability-=1;
+            if(durability==0){this.isFake=true;}
             return true;
         }
         return false;

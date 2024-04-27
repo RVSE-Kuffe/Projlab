@@ -19,7 +19,10 @@ public class Logarlec extends Item {
      */
     @Override
     public boolean acceptPickUp(Player p){
-        return (!isFake&&p.pickUp(this));
+        if(isFake){
+            return p.pickUpFake(this);
+        }
+        return p.pickUp(this);
     }
     
 }

@@ -65,7 +65,11 @@ public class Transistor extends Item  {
          *  hamis ha nem
      */
     public boolean teleportPlayer(Student s){
-       return this.pair.arrivingPlayer(s);
+       if(this.pair.arrivingPlayer(s)){
+            this.active=false;
+            return true;
+       }
+       return false;
         
     }
 
@@ -75,8 +79,11 @@ public class Transistor extends Item  {
          * @return igaz, ha hozzá lehet adni, hamis, ha nem
      */
     public boolean arrivingPlayer(Student s){  
-        return this.location.addPlayer(s);
-        
+        if(active&&this.location.addPlayer(s)){
+            this.active =false;
+            return true;
+        }
+        return false;
     }
 
       /**

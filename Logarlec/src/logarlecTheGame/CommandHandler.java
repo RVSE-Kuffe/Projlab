@@ -132,6 +132,15 @@ public class CommandHandler {
             case "load":
                 load();
                 break;
+            case "merge":
+                merge(cmd);
+                break;
+            case "teacherRound":
+                teacherRound(cmd);
+                break;
+            case "janitorRound":
+                janitorRound(cmd);
+                break;
             default:
                 System.out.println("Ismeretlen parancs: " + commandType);
         }
@@ -265,17 +274,17 @@ public class CommandHandler {
         if(cmd.length < 4){
             outWriter("invalid arguments");
             return;
-        }
+        } 
         String outputString = "";
         String player = cmd[1];
         String item1 = cmd[2];
         String item2 = cmd[3];
         
-        Player playerRef = (Player)board.stringToObject(player);
+        Student playerRef = (Student)board.stringToObject(player);
         Item itemRef1 = (Item)board.stringToObject(item1);
         Item itemRef2 = (Item)board.stringToObject(item2);
 
-        if(itemRef1.makePair(itemRef2)){
+        if(playerRef.pairing(itemRef1,itemRef2)){
             outputString += "Sikeres ";
         }
         else{
@@ -298,7 +307,7 @@ public class CommandHandler {
         String outputString = "";
 
         Room roomRef = (Room)board.stringToObject(room);
-        outputString += roomRef.listMe(board, false, false, false);
+        outputString += roomRef.listMe(board, false, true, false);
 
         outWriter(outputString);
     }
@@ -443,16 +452,17 @@ public class CommandHandler {
         int capacity = Integer.parseInt(cmd[3]);
         Room r;
         if(cmd[1].equals("cursedRoom")){
-            r = new CursedRoom(++roomIds, capacity);
+            r = new CursedRoom(++roomIds, capacity, board);
         }
         else if(cmd[1].equals("room")){
-            r = new Room(++roomIds, capacity);
+            r = new Room(++roomIds, capacity, board);
         }
         else{
             outWriter("invalid arguments");
             return;
         }
         board.addToBoard(r, roomName);
+        board.addRoom(r);
         System.out.println(board.objectToString(r));
     }
 
@@ -508,11 +518,8 @@ public class CommandHandler {
         }
         else if(itemType.equals("beer")){
             //i = new Beer(durab);
-            Beer b = new Beer(durab);
-            board.addIterating(b);
-            roomRef.addItem(b);
-            board.addToBoard(b, itemName);
-            return;
+            i = new Beer(durab);
+            board.addIterating((Beer)i);
         }
         else if(itemType.equals("camambert")){
             i = new Camambert();
@@ -525,11 +532,8 @@ public class CommandHandler {
         }
         else if(itemType.equals("tablatorlo")){
             //i = new Tablatorlo(durab);
-            Tablatorlo t = new Tablatorlo(durab);
-            board.addIterating(t);
-            roomRef.addItem(t);
-            board.addToBoard(t, itemName);
-            return;
+            i = new Tablatorlo(durab);
+            board.addIterating((Tablatorlo)i);
         }
         else if(itemType.equals("transistor")){
             i = new Transistor();
@@ -606,5 +610,55 @@ public class CommandHandler {
 
     public void load(){
         board.deserialize();
+    }
+
+    public void merge(String[] cmd){
+        if(cmd.length < 3){
+            outWriter("invalid arguments");
+        }
+        String room1 = cmd[1];
+        String room2 = cmd[2];
+
+        Room roomRef1 = (Room)board.stringToObject(room1);
+        Room roomRef2 = (Room)board.stringToObject(room2);
+
+        if(board.forceMerge(roomRef1, roomRef2)){
+            outWriter("sikeres merge");
+        }
+        else{
+            outWriter("sikertelen merge");
+        }
+    }
+
+    public void teacherRound(String[] cmd){
+        if(!isRandom){
+            outWriter("random ki van kapcsolva");
+            return;
+        }
+        if(cmd.length < 2){
+            outWriter("invalid arguments");
+            return;
+        }
+
+        String teacher = cmd[1];
+        Teacher t = (Teacher)board.stringToObject(teacher);
+        t.RandomTeacherMove();
+        outWriter(teacher + " random lepett");
+    }
+
+    public void janitorRound(String[] cmd){
+        if(!isRandom){
+            outWriter("random ki van kapcsolva");
+            return;
+        }
+        if(cmd.length < 2){
+            outWriter("invalid arguments");
+            return;
+        }
+
+        String janitor = cmd[1];
+        Janitor j = (Janitor)board.stringToObject(janitor);
+        j.RandomJanitorMove();
+        outWriter(janitor + " random lepett");
     }
 }

@@ -51,6 +51,11 @@ public class Janitor extends Player {
         return false;
     }
 
+    @Override
+    public boolean pickUpFake(Logarlec i){
+        return false;
+    }
+
     /**
      * A sör felvételét kezeli, mivel ez egy speckó eset
      * @param i Sör
@@ -161,6 +166,7 @@ public class Janitor extends Player {
     @Override
     public void sendPlayersOut(){
         this.location.sendOut(this);
+        this.location.resetStickyCount();
     }
 
 }

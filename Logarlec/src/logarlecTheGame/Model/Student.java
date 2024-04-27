@@ -27,6 +27,7 @@ public class Student extends Player implements StudentProtection, PutDown, Pairi
                 return false;
             }
         }
+        location.killPlayer(this);
         return true;
     } 
     
@@ -104,11 +105,12 @@ public class Student extends Player implements StudentProtection, PutDown, Pairi
      * @param i     Tranzisztor
      */
     public void use(Transistor i) {
+        dropItem(i);
+        i.setRoom(this.location);
+        i.activate();
         if(i.teleportPlayer(this)){
             this.location.removePlayer(this);
         }
-        dropItem(i);
-        i.setRoom(this.location);
     }
 
     /**
@@ -121,8 +123,14 @@ public class Student extends Player implements StudentProtection, PutDown, Pairi
     }
 
     public void use(Airfreshener a) {
-        itemList.remove(a);
+        dropItem(a);
         this.location.makeUnGassed();
+        a.makeFake();
+
+    }
+
+    public void useFake(Airfreshener a) {
+        dropItem(a);
     }
 
     /**

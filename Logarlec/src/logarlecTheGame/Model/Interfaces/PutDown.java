@@ -13,4 +13,5 @@ public interface PutDown {
     void use(Camambert i);
     void use(Tablatorlo i);
     void use(Airfreshener a);
+    void useFake(Airfreshener a);
 }
