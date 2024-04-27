@@ -1,5 +1,5 @@
-addRoom room r1
-addRoom room r2
+addRoom room r1 3
+addRoom room r2 3
 addDoor d12 r1 r2 true true
 gasRoom r2
 addPlayerToRoom janitor j1 r1

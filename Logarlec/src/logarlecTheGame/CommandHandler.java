@@ -507,7 +507,12 @@ public class CommandHandler {
             i = new Airfreshener();
         }
         else if(itemType.equals("beer")){
-            i = new Beer(durab);
+            //i = new Beer(durab);
+            Beer b = new Beer(durab);
+            board.addIterating(b);
+            roomRef.addItem(b);
+            board.addToBoard(b, itemName);
+            return;
         }
         else if(itemType.equals("camambert")){
             i = new Camambert();
@@ -519,7 +524,12 @@ public class CommandHandler {
             i = new Mask(durab, fake);
         }
         else if(itemType.equals("tablatorlo")){
-            i = new Tablatorlo(durab);
+            //i = new Tablatorlo(durab);
+            Tablatorlo t = new Tablatorlo(durab);
+            board.addIterating(t);
+            roomRef.addItem(t);
+            board.addToBoard(t, itemName);
+            return;
         }
         else if(itemType.equals("transistor")){
             i = new Transistor();
@@ -552,7 +562,12 @@ public class CommandHandler {
             i = new Airfreshener();
         }
         else if(itemType.equals("beer")){
-            i = new Beer(durab);
+            //i = new Beer(durab);
+            Beer b = new Beer(durab);
+            board.addIterating(b);
+            playerRef.addItem(b);
+            board.addToBoard(b, itemName);
+            return;
         }
         else if(itemType.equals("camambert")){
             i = new Camambert();
@@ -564,7 +579,12 @@ public class CommandHandler {
             i = new Mask(durab, fake);
         }
         else if(itemType.equals("tablatorlo")){
-            i = new Tablatorlo(durab);
+            //i = new Tablatorlo(durab);
+            Tablatorlo t = new Tablatorlo(durab);
+            board.addIterating(t);
+            playerRef.addItem(t);
+            board.addToBoard(t, itemName);
+            return;
         }
         else if(itemType.equals("transistor")){
             i = new Transistor();
