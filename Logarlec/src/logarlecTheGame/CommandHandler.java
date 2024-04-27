@@ -307,7 +307,7 @@ public class CommandHandler {
         String outputString = "";
 
         Room roomRef = (Room)board.stringToObject(room);
-        outputString += roomRef.listMe(board, false, false, false);
+        outputString += roomRef.listMe(board, false, true, false);
 
         outWriter(outputString);
     }
@@ -518,11 +518,8 @@ public class CommandHandler {
         }
         else if(itemType.equals("beer")){
             //i = new Beer(durab);
-            Beer b = new Beer(durab);
-            board.addIterating(b);
-            roomRef.addItem(b);
-            board.addToBoard(b, itemName);
-            return;
+            i = new Beer(durab);
+            board.addIterating((Beer)i);
         }
         else if(itemType.equals("camambert")){
             i = new Camambert();
@@ -535,11 +532,8 @@ public class CommandHandler {
         }
         else if(itemType.equals("tablatorlo")){
             //i = new Tablatorlo(durab);
-            Tablatorlo t = new Tablatorlo(durab);
-            board.addIterating(t);
-            roomRef.addItem(t);
-            board.addToBoard(t, itemName);
-            return;
+            i = new Tablatorlo(durab);
+            board.addIterating((Tablatorlo)i);
         }
         else if(itemType.equals("transistor")){
             i = new Transistor();
