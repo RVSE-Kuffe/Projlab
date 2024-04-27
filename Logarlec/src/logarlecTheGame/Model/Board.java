@@ -125,11 +125,12 @@ public class Board implements CycleBased, RoomPairing, Serializable{
          * @param r a szoba amit feloszt
          * mindenképp splitel egy szobát, és létrehoz egy újat
      */
-    public void forceSplit(Room r){
+    public Room forceSplit(Room r){
         Room newRoom= r.newRoom();
         bObjects.put("split", newRoom);
         bNames.put(newRoom, "split");
         addRoom(newRoom);
+        return newRoom;
     }
 
     /**

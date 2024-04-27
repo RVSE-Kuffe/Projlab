@@ -145,7 +145,7 @@ public class CommandHandler {
         String item = cmd[1];
         String player = cmd[2];
 
-        String outputString = player + item;
+        String outputString = player+": "+item;
 
         Item itemRef = (Item)board.stringToObject(item);
         Player playerRef = (Player)board.stringToObject(player);
@@ -174,7 +174,7 @@ public class CommandHandler {
         playerRef.putDown(itemRef);
 
         outputString += student;
-        outputString += " : ";
+        outputString += ": ";
         outputString += board.objectToString(playerRef.getLocation());
         outputString += " ";
         outputString += item;
@@ -195,15 +195,12 @@ public class CommandHandler {
         Door doorRef = (Door)board.stringToObject(door);
         Player playerRef = (Player)board.stringToObject(player);
 
-        playerRef.changeR(doorRef);
-
-        outputString += "door";
-        outputString += "player";
+        outputString = door +": "+player;
         if(playerRef.changeR(doorRef)){
-            outputString += "OK";
+            outputString += " - OK";
         }
         else{
-            outputString += "FAIL";
+            outputString += " - FAIL";
         }
         outWriter(outputString);
     }
@@ -227,11 +224,14 @@ public class CommandHandler {
             String room = cmd[1];
 
             Room roomRef = (Room)board.stringToObject(room);
-            board.forceSplit(roomRef);
+            Room newRoom = board.forceSplit(roomRef);
+            String roomName = ++roomIds +"";
+            board.addToBoard(newRoom, roomName);
 
             outputString += room;
-            outputString += "split, uj szoba: ";
-            outputString += "splitted";
+            outputString += " split, uj szoba: ";
+            outputString += board.objectToString(newRoom);
+
             outWriter(outputString);
         }
     }
@@ -281,7 +281,7 @@ public class CommandHandler {
         else{
             outputString += "Sikertelen ";
         }
-        outputString += "párosítás : " + item1 + ", " + item2;
+        outputString += "párosítás: " + item1 + ":" + item2;
         outWriter(outputString);
     }
 
@@ -442,10 +442,10 @@ public class CommandHandler {
         String roomName = cmd[2];
         int capacity = Integer.parseInt(cmd[3]);
         Room r;
-        if(cmd[1].equals("CursedRoom")){
+        if(cmd[1].equals("cursedRoom")){
             r = new CursedRoom(++roomIds, capacity);
         }
-        else if(cmd[1].equals("Room")){
+        else if(cmd[1].equals("room")){
             r = new Room(++roomIds, capacity);
         }
         else{
@@ -465,13 +465,13 @@ public class CommandHandler {
         String player = cmd[2];
         Room roomRef = (Room)board.stringToObject(room);
         Player p;
-        if(cmd[1].equals("Student")){
+        if(cmd[1].equals("student")){
             p = new Student(playerIds++, roomRef);
         }
-        else if(cmd[1].equals("Teacher")){
+        else if(cmd[1].equals("teacher")){
             p = new Teacher(playerIds++, roomRef);
         }
-        else if(cmd[1].equals("Janitor")){
+        else if(cmd[1].equals("janitor")){
             p = new Janitor(playerIds++, roomRef);
         }
         else{
@@ -503,25 +503,25 @@ public class CommandHandler {
         Room roomRef = (Room)board.stringToObject(roomName);
         Item i;
         String itemType = cmd[1];
-        if(itemType.equals("Airfreshener")){
+        if(itemType.equals("airfreshener")){
             i = new Airfreshener();
         }
-        else if(itemType.equals("Beer")){
+        else if(itemType.equals("beer")){
             i = new Beer(durab);
         }
-        else if(itemType.equals("Camambert")){
+        else if(itemType.equals("camambert")){
             i = new Camambert();
         }
-        else if(itemType.equals("Logarlec")){
+        else if(itemType.equals("logarlec")){
             i = new Logarlec(fake);
         }
-        else if(itemType.equals("Mask")){
+        else if(itemType.equals("mask")){
             i = new Mask(durab, fake);
         }
-        else if(itemType.equals("Tablatorlo")){
+        else if(itemType.equals("tablatorlo")){
             i = new Tablatorlo(durab);
         }
-        else if(itemType.equals("Transistor")){
+        else if(itemType.equals("transistor")){
             i = new Transistor();
         }
         else if(itemType.equals("TVSZ")){
@@ -548,25 +548,25 @@ public class CommandHandler {
         boolean fake = false;
         Item i;
 
-        if(itemType.equals("Airfreshener")){
+        if(itemType.equals("airfreshener")){
             i = new Airfreshener();
         }
-        else if(itemType.equals("Beer")){
+        else if(itemType.equals("beer")){
             i = new Beer(durab);
         }
-        else if(itemType.equals("Camambert")){
+        else if(itemType.equals("camambert")){
             i = new Camambert();
         }
-        else if(itemType.equals("Logarlec")){
+        else if(itemType.equals("logarlec")){
             i = new Logarlec(fake);
         }
-        else if(itemType.equals("Mask")){
+        else if(itemType.equals("mask")){
             i = new Mask(durab, fake);
         }
-        else if(itemType.equals("Tablatorlo")){
+        else if(itemType.equals("tablatorlo")){
             i = new Tablatorlo(durab);
         }
-        else if(itemType.equals("Transistor")){
+        else if(itemType.equals("transistor")){
             i = new Transistor();
         }
         else if(itemType.equals("TVSZ")){
