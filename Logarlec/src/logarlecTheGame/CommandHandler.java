@@ -274,17 +274,17 @@ public class CommandHandler {
         if(cmd.length < 4){
             outWriter("invalid arguments");
             return;
-        }
+        } 
         String outputString = "";
         String player = cmd[1];
         String item1 = cmd[2];
         String item2 = cmd[3];
         
-        Player playerRef = (Player)board.stringToObject(player);
+        Student playerRef = (Student)board.stringToObject(player);
         Item itemRef1 = (Item)board.stringToObject(item1);
         Item itemRef2 = (Item)board.stringToObject(item2);
 
-        if(itemRef1.makePair(itemRef2)){
+        if(playerRef.pairing(itemRef1,itemRef2)){
             outputString += "Sikeres ";
         }
         else{

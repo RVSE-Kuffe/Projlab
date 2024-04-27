@@ -20,7 +20,6 @@ public class App {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
 
     public static void main(String[] args) throws Exception {
         Board board = new Board();

@@ -58,6 +58,13 @@ public class Player implements PickUp, GasProtect{
         return false;
     }
 
+    public boolean pickUpFake(Logarlec l){
+        if(location.removeItem(l)){
+            return true;
+        }
+        return false;
+    }
+
     /**
      * A sör felvételét kezeli, mivel ez egy speckó eset
      * @param i Sör
