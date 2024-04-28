@@ -39,8 +39,8 @@ public class App {
                 for(int i = 1; i<16+1;i++)
                     System.out.println(i+" - Teszteset"+i);
                 System.out.println("Add meg a teszteset számát: ");
-                chooser = scanner.next().charAt(0);
-                testFile = "Logarlec/src/TestFiles/Test"+chooser+".txt";
+                String testnum = scanner.nextLine();
+                testFile = "Logarlec/src/TestFiles/Test"+testnum+".txt";
                 outFile = "out.txt";
                                                             
                 File inputFile = new File(testFile);        //File objektum létrehozása a kiválasztott file-val

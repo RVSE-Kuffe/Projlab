@@ -236,6 +236,7 @@ public class CommandHandler {
             Room newRoom = board.forceSplit(roomRef);
             String roomName = ++roomIds +"";
             board.addToBoard(newRoom, roomName);
+            board.addRoom(newRoom);
 
             outputString += room;
             outputString += " split, uj szoba: ";
@@ -307,7 +308,7 @@ public class CommandHandler {
         String outputString = "";
 
         Room roomRef = (Room)board.stringToObject(room);
-        outputString += roomRef.listMe(board, false, true, false);
+        outputString += roomRef.listMe(board, true, true, false);
 
         outWriter(outputString);
     }
@@ -465,7 +466,6 @@ public class CommandHandler {
         }
         board.addToBoard(r, roomName);
         board.addRoom(r);
-        System.out.println(board.objectToString(r));
     }
 
     private void addPlayerToRoom(String[] cmd){
@@ -520,7 +520,6 @@ public class CommandHandler {
             i = new Airfreshener();
         }
         else if(itemType.equals("beer")){
-            //i = new Beer(durab);
             i = new Beer(durab);
             board.addIterating((Beer)i);
         }
@@ -534,7 +533,6 @@ public class CommandHandler {
             i = new Mask(durab, fake);
         }
         else if(itemType.equals("tablatorlo")){
-            //i = new Tablatorlo(durab);
             i = new Tablatorlo(durab);
             board.addIterating((Tablatorlo)i);
         }
@@ -549,7 +547,7 @@ public class CommandHandler {
             return;
         }
         roomRef.addItem(i);
-        board.addToBoard(i,itemName);
+        board.addToBoard(i, itemName);
     }
     
     private void addItemToPlayer(String[] cmd){
@@ -569,7 +567,6 @@ public class CommandHandler {
             i = new Airfreshener();
         }
         else if(itemType.equals("beer")){
-            //i = new Beer(durab);
             Beer b = new Beer(durab);
             board.addIterating(b);
             playerRef.addItem(b);
@@ -586,7 +583,6 @@ public class CommandHandler {
             i = new Mask(durab, fake);
         }
         else if(itemType.equals("tablatorlo")){
-            //i = new Tablatorlo(durab);
             Tablatorlo t = new Tablatorlo(durab);
             board.addIterating(t);
             playerRef.addItem(t);

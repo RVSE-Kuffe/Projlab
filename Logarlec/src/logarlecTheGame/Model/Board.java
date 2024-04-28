@@ -33,7 +33,7 @@ public class Board implements CycleBased, RoomPairing, Serializable{
 
     public Object stringToObject(String name){
         Object o = bObjects.get(name);
-        if(o == null) throw new NullPointerException("Object is not in the Map");
+        if(o == null) throw new NullPointerException(name+" is not in the Map");
         return o;
     }
 

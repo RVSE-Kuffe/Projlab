@@ -83,16 +83,22 @@ public class Player implements PickUp, GasProtect{
      * A Hallgatók bénítását végzi (stunned = true és itemek eldobása)
      * @return  Hamissal tér vissza, ha a Hallgatót egy tárgya megvédte, különben Igaz
      */
-    public boolean stun(){
-        for(Item i: itemList){
-            if(i.acceptGasProtect(this)){
-                return false;
+    public boolean stun() {
+        // Ellenőrizzük, hogy valamelyik tárgy meg tudja-e védeni
+        for (Item i : itemList) {
+            if (i.acceptGasProtect(this)) {
+                return false; // Ha van olyan tárgy, ami meg tud védeni, akkor kilépünk
             }
         }
-        stunned = true;
-        for(Item i : itemList){
-            dropItem(i);
+    
+        // Ha egyik tárgy sem tud védeni, akkor eldobhatjuk őket
+        for (int i = 0; i < itemList.size(); i++) {
+            dropItem(itemList.get(i)); // Az "i" indexű elemet eldobjuk
         }
+        this.stunned =true;
+        // Az "itemList" üres lesz a ciklusok végeztével
+    
+        // Visszatérünk, hogy sikeres volt-e a stun
         return true;
     }
 

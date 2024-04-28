@@ -36,14 +36,23 @@ public class Student extends Player implements StudentProtection, PutDown, Pairi
      * @return      Hamis, ha sikerült valamelyik tárgynak megvédenie a hallgatót, ellenkező esetben igaz
      */
     @Override
-    public boolean stun(){
-        for (Item item : itemList) {
-            if(item.acceptGasProtect(this)){
-                return true;
+    public boolean stun() {
+        // Ellenőrizzük, hogy valamelyik tárgy meg tudja-e védeni
+        for (Item i : itemList) {
+            if (i.acceptGasProtect(this)) {
+                return false; // Ha van olyan tárgy, ami meg tud védeni, akkor kilépünk
             }
         }
-        stunned =true;
-        return false;
+    
+        // Ha egyik tárgy sem tud védeni, akkor eldobhatjuk őket
+        for (int i = 0; i < itemList.size(); i++) {
+            dropItem(itemList.get(i)); // Az "i" indexű elemet eldobjuk
+        }
+        this.stunned =true;
+        // Az "itemList" üres lesz a ciklusok végeztével
+    
+        // Visszatérünk, hogy sikeres volt-e a stun
+        return true;
     }
 
     /**

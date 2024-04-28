@@ -1,8 +1,8 @@
-addRoom Room r1 2
-addRoom Room r2 2
+addRoom room r1 2
+addRoom room r2 2
 addDoor d12 r1 r2 true true
 addPlayerToRoom student s r1
-addItemToPlayer Tablatorlo ta 3 s
+addItemToPlayer tablatorlo ta 3 s
 addPlayerToRoom teacher t r2
 listRoomAttribs r1
 listPlayerAttribs t
