@@ -39,7 +39,7 @@ public class App {
                 for(int i = 1; i<16+1;i++)
                     System.out.println(i+" - Teszteset"+i);
                 System.out.println("Add meg a teszteset számát: ");
-                chooser = scanner.next().charAt(0);
+                String chooser = scanner.nextLine();
                 testFile = "Logarlec/src/TestFiles/Test"+chooser+".txt";
                 outFile = "out.txt";
                                                             

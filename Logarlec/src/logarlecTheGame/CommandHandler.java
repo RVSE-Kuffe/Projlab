@@ -307,7 +307,7 @@ public class CommandHandler {
         String outputString = "";
 
         Room roomRef = (Room)board.stringToObject(room);
-        outputString += roomRef.listMe(board, false, true, false);
+        outputString += roomRef.listMe(board, true, true, false);
 
         outWriter(outputString);
     }
