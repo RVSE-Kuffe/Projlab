@@ -10,7 +10,7 @@ public class CommandHandler {
 
     private Board board;
     private File outFile;
-    boolean isRandom;
+    boolean isRandom = false;
     int roomIds = 0;
     int playerIds = 0;
 
@@ -228,7 +228,7 @@ public class CommandHandler {
             outWriter("invalid arguments");
             return;
         }
-        if(isRandom){
+        if(!isRandom){
             String outputString="";
             String room = cmd[1];
 
@@ -303,11 +303,11 @@ public class CommandHandler {
         if(cmd.length < 2){
             outWriter("invalid arguments");
         }
-        String room = cmd[1];
+            String room = cmd[1];
         String outputString = "";
 
         Room roomRef = (Room)board.stringToObject(room);
-        outputString += roomRef.listMe(board, true, true, false);
+        outputString += roomRef.listMe(board, false, true, false);
 
         outWriter(outputString);
     }
@@ -440,6 +440,8 @@ public class CommandHandler {
         Room roomRef1 = (Room)board.stringToObject(room1);
         Room roomRef2 = (Room)board.stringToObject(room2);
         Door d = new Door(roomRef1 , roomRef2, validFrom, validTo);
+        roomRef1.addDoor(d);
+        roomRef2.addDoor(d);
         board.addToBoard(d,doorName);
     }
 
