@@ -234,9 +234,6 @@ public class CommandHandler {
 
             Room roomRef = (Room)board.stringToObject(room);
             Room newRoom = board.forceSplit(roomRef);
-            String roomName = ++roomIds +"";
-            board.addToBoard(newRoom, roomName);
-            board.addRoom(newRoom);
 
             outputString += room;
             outputString += " split, uj szoba: ";
@@ -267,7 +264,7 @@ public class CommandHandler {
         Beer beerRef = (Beer)board.stringToObject(beer);
         beerRef.iterate();
 
-        outputString += "iterated";
+        outputString += " iterated";
         outWriter(outputString);
     }
 

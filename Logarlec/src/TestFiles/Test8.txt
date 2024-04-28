@@ -1,7 +1,7 @@
 addRoom room r1 1
 addPlayerToRoom student s r1
-addItemToRoom logarlec false L1 1 r1
-addItemToRoom logarlec true L2 1 r1
+addItemToRoom logarlec true L1 1 r1
+addItemToRoom logarlec false L2 1 r1
 listRoom r1
 pickUp L1 s
 listRoom r1

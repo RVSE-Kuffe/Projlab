@@ -150,7 +150,8 @@ public class Room {
         Door splitDoor = new Door(this, room2,true,true);
         this.addDoor(splitDoor);
         room2.addDoor(splitDoor);
-        myBoard.addToBoard(room2, myBoard.objectToString(this) + " splitted" + ++splitCounter);
+        String newRoomName =  "from " + myBoard.objectToString(this) + " splitted " + splitCounter++;
+        myBoard.addToBoard(room2, newRoomName);
         return room2;
     }
 
