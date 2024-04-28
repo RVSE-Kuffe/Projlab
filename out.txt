@@ -1,0 +1,6 @@
+Sikeres párosítás: t1:t2
+s1: r1 t1 putDown
+d12: s1 - OK
+s1: r1 t2 putDown
+r1: s1, t1, 
+r2: t2, 

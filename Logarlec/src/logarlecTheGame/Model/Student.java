@@ -118,8 +118,11 @@ public class Student extends Player implements StudentProtection, PutDown, Pairi
         dropItem(i);
         i.setRoom(this.location);
         i.activate();
+        Room temp = this.location;
         if(i.teleportPlayer(this)){
-            this.location.removePlayer(this);
+            //this.location.removePlayer(this);
+            temp.removePlayer(this);
+            return;
         }
     }
 

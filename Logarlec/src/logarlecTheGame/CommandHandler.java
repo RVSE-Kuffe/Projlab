@@ -282,8 +282,8 @@ public class CommandHandler {
         String item2 = cmd[3];
         
         Student playerRef = (Student)board.stringToObject(player);
-        Item itemRef1 = (Item)board.stringToObject(item1);
-        Item itemRef2 = (Item)board.stringToObject(item2);
+        Transistor itemRef1 = (Transistor)board.stringToObject(item1);
+        Transistor itemRef2 = (Transistor)board.stringToObject(item2);
 
         if(playerRef.pairing(itemRef1,itemRef2)){
             outputString += "Sikeres ";
@@ -304,7 +304,7 @@ public class CommandHandler {
         if(cmd.length < 2){
             outWriter("invalid arguments");
         }
-            String room = cmd[1];
+        String room = cmd[1];
         String outputString = "";
 
         Room roomRef = (Room)board.stringToObject(room);
@@ -393,9 +393,9 @@ public class CommandHandler {
             outWriter("invalid arguments");
             return;
         }
-        String door = cmd[1];
-        Door doorRef = (Door)board.stringToObject(door);
-        doorRef.switchMe(false); 
+        String room = cmd[1];
+        CursedRoom roomRef = (CursedRoom)board.stringToObject(room);
+        roomRef.closeDoor(); 
     }
 
     private void openDoor(String[] cmd){

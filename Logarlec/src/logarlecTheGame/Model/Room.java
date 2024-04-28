@@ -78,8 +78,8 @@ public class Room {
      */
     public boolean addPlayer(Player p){
         if(playerList.size()<capacity){
-            playerList.add(p);
             p.setRoom(this);
+            playerList.add(p);
             this.stickyCount++;
             if(gassed){
                 p.stun();

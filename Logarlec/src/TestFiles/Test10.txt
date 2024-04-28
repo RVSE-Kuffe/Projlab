@@ -7,7 +7,7 @@ listRoom r2
 useDoor d12 s
 listRoom r1
 listRoom r2
-closeDoor d12
+closeDoor r1
 useDoor d12 s
 listRoom r1
 listRoom r2
