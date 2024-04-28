@@ -1,5 +1,5 @@
 r1: s
-r2: s
+r2: t
 s: b
 d12: t – OK
 r1: s t b

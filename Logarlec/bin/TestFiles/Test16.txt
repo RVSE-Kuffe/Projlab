@@ -1,8 +1,8 @@
-addRoom Room r1 2
-addRoom Room r2 1
-AddPlayerToRoom student s r1
-AddItemToRoom Beer true b 3 r2
+addRoom room r1 2
+addRoom room r2 1
+addPlayerToRoom student s r1
+addItemToRoom beer true b 3 r2
 listRoom r1
 listRoom r2
-Merge r1 r2
+merge r1 r2
 listRoom r1
