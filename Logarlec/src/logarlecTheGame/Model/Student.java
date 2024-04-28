@@ -42,6 +42,7 @@ public class Student extends Player implements StudentProtection, PutDown, Pairi
                 return true;
             }
         }
+        stunned =true;
         return false;
     }
 
