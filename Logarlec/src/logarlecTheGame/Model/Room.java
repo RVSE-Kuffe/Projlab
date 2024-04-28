@@ -119,6 +119,7 @@ public class Room {
 
     public boolean killPlayer(Player p){
         myBoard.removeFromMap(p);
+        playerList.remove(p);
         return true;
     }
     
@@ -160,9 +161,9 @@ public class Room {
      * @param  p player akit megpróbálnak megölni(önmagát nem próbálja)
      */
     public void pvp(Player p){
-        for(Player pl : playerList){
-            if(!pl.equals(p)){
-                pl.kill(p);
+        for(int i=0;i<playerList.size();i++){
+            if(! playerList.get(i).equals(p)){
+                playerList.get(i).kill(p);
             }
         }
     }
@@ -199,9 +200,9 @@ public class Room {
      * @return      void
      */
     void killAll(Player p){
-        for(Player pl : playerList){
-            if(! p.equals(pl)){
-                p.kill(pl);
+        for(int i=0;i<playerList.size();i++){
+            if(! p.equals(playerList.get(i))){
+                p.kill(playerList.get(i));
             }
         }
     }

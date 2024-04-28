@@ -60,6 +60,7 @@ public class Player implements PickUp, GasProtect{
 
     public boolean pickUpFake(Logarlec l){
         if(location.removeItem(l)){
+            itemList.add(l);
             return true;
         }
         return false;
