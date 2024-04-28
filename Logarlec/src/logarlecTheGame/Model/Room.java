@@ -209,13 +209,13 @@ public class Room {
         return b.pair(this,r2);
     }
 
-    public void sendOut(Janitor j){
-        for(Door d : doorList){
-            for(Player p : playerList){
-                if(p==j){
+    public void sendOut(Janitor j) {
+        for (int i = 0; i < doorList.size(); i++) { // Az "i" változó érvényessége itt kezdődik
+            for (int p = 0; p < playerList.size(); p++) { // A "p" változó érvényessége itt kezdődik
+                if (playerList.get(p) == j) {
                     continue;
                 }
-                if(!p.changeR(d)){
+                if (!playerList.get(p).changeR(doorList.get(i))) { // Az "i" változó itt is érvényes
                     break;
                 }
             }
