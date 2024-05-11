@@ -1,10 +1,11 @@
 addRoom room r1 1
-addRoom room r2 1
+addRoom room r2 2
 addDoor d12 r1 r2 true true
 addPlayerToRoom student s1 r1
 addPlayerToRoom student s2 r1
 addItemToPlayer beer b1 1 s1
 addItemToPlayer mask m 1 s2
+gasRoom r2
 useDoor d12 s1
 listRoom r2
 listPlayerItem s1

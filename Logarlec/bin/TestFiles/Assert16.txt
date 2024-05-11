@@ -1,4 +1,4 @@
-r1: s
-r2: b
-r1 r2 sikeres merge
-r1: s b
+r1: s,
+r2: b,
+sikeres merge
+r1: s, b,
