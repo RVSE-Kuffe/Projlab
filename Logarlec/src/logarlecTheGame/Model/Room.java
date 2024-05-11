@@ -232,20 +232,20 @@ public class Room {
         StringBuilder returnString = new StringBuilder(b.objectToString(this) + ": ");
         if(withPlayers){
             for (Player player : playerList) {
-                returnString.append(b.objectToString(player) + ", ");
+                returnString.append(b.objectToString(player) + '\n');
             }
         }
         if(withItems){
             for (Item item : itemList) {
-                returnString.append(b.objectToString(item) + ", ");
+                returnString.append(b.objectToString(item) + '\n');
             }
         }
         if(withAttribs){
             if(gassed){
-                returnString.append("gassed, ");
+                returnString.append("gassed\n");
             }
             if(cleaner){
-                returnString.append("cleaner, ");
+                returnString.append("cleaner\n");
             }
         }
         return returnString.toString();
