@@ -16,7 +16,9 @@ public class Teacher extends Player {
 
 
     //Tanar random mozgasa
-    public boolean RandomTeacherMove(){
+    @Override
+    public boolean randomAction(){
+        if(!stunned){
         int a=random.nextInt(2);
         if(a==0){
             int doorcounter=this.location.doors().size();
@@ -31,6 +33,8 @@ public class Teacher extends Player {
             }
             return this.pickUpItem(this.location.itemList.get(chosenitem));
         }
+    }
+        return false;
     }
 
     /**

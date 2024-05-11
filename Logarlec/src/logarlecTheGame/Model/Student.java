@@ -29,7 +29,10 @@ public class Student extends Player implements StudentProtection, PutDown, Pairi
         }
         location.killPlayer(this);
         return true;
-    } 
+    }
+    
+    @Override
+    public void kill(Player p){/*This shouldn't do enything at all */}
     
     /**
      * A hallgatót próbálja stunnolni
