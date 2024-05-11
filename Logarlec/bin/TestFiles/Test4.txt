@@ -1,5 +1,5 @@
 addRoom room r 1
-addItemToRoom beer b6 1 r
+addItemToRoom beer false b6 1 r
 addPlayerToRoom student s r
 addItemToPlayer beer b1 1 s
 addItemToPlayer beer b2 1 s
