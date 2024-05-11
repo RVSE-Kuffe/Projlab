@@ -61,8 +61,8 @@ public class View {
     public void update(){
         Player p=gameLogic.getCurrentPlayer();
         Board b=gameLogic.getBoard();
-        actionPanel.update(p);
-        roomPanel.update(p);
+        actionPanel.update(p,b);
+        roomPanel.update(p,b);
         boardPanel.update(p,b);
     }
 }
