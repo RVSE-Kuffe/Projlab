@@ -14,11 +14,14 @@ public class Janitor extends Player {
     }
 
     //random lepes
-    
-    public boolean RandomJanitorMove(){
+    @Override
+    public boolean randomAction(){
+        if(!stunned){
         int doorcounter=this.location.doors().size();
         int chosendoor=random.nextInt(doorcounter);
         return this.changeR(this.location.doors().get(chosendoor));
+        }
+        return false;
     }
 
 

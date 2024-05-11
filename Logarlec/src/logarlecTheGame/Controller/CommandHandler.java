@@ -638,7 +638,7 @@ public class CommandHandler {
 
         String teacher = cmd[1];
         Teacher t = (Teacher)board.stringToObject(teacher);
-        t.RandomTeacherMove();
+        t.randomAction();
         outWriter(teacher + " random lepett");
     }
 
@@ -654,7 +654,7 @@ public class CommandHandler {
 
         String janitor = cmd[1];
         Janitor j = (Janitor)board.stringToObject(janitor);
-        j.RandomJanitorMove();
+        j.randomAction();
         outWriter(janitor + " random lepett");
     }
 }
