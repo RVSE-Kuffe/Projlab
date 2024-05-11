@@ -3,6 +3,7 @@ package logarlecTheGame;
 import java.io.*;
 import java.util.*;
 
+import logarlecTheGame.Controller.CommandHandler;
 import logarlecTheGame.Model.Board;
 
 public class App {

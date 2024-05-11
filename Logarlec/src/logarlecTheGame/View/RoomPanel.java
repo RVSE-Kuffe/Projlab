@@ -1,5 +1,5 @@
 package logarlecTheGame.View;
 
-public class RoomPanel extends View {
+public class RoomPanel {
     
 }

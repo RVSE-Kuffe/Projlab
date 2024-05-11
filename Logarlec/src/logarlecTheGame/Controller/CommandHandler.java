@@ -1,4 +1,4 @@
-package logarlecTheGame;
+package logarlecTheGame.Controller;
 
 import java.io.*;
 
