@@ -7,6 +7,6 @@ addItemToPlayer transistor t2 1 s1
 pair s1 t1 t2
 putDown t1 s1
 useDoor d12 s1
-putDown t2 s2
+putDown t2 s1
 listRoom r1
 listRoom r2

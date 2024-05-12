@@ -78,8 +78,8 @@ public class Room {
      */
     public boolean addPlayer(Player p){
         if(playerList.size()<capacity){
-            playerList.add(p);
             p.setRoom(this);
+            playerList.add(p);
             this.stickyCount++;
             if(gassed){
                 p.stun();
@@ -119,6 +119,7 @@ public class Room {
 
     public boolean killPlayer(Player p){
         myBoard.removeFromMap(p);
+        playerList.remove(p);
         return true;
     }
     
@@ -149,7 +150,8 @@ public class Room {
         Door splitDoor = new Door(this, room2,true,true);
         this.addDoor(splitDoor);
         room2.addDoor(splitDoor);
-        myBoard.addToBoard(room2, myBoard.objectToString(this) + " splitted" + ++splitCounter);
+        String newRoomName =  "from " + myBoard.objectToString(this) + " splitted " + splitCounter++;
+        myBoard.addToBoard(room2, newRoomName);
         return room2;
     }
 
@@ -160,9 +162,9 @@ public class Room {
      * @param  p player akit megpróbálnak megölni(önmagát nem próbálja)
      */
     public void pvp(Player p){
-        for(Player pl : playerList){
-            if(!pl.equals(p)){
-                pl.kill(p);
+        for(int i=0;i<playerList.size();i++){
+            if(! playerList.get(i).equals(p)){
+                playerList.get(i).kill(p);
             }
         }
     }
@@ -199,9 +201,9 @@ public class Room {
      * @return      void
      */
     void killAll(Player p){
-        for(Player pl : playerList){
-            if(! p.equals(pl)){
-                p.kill(pl);
+        for(int i=0;i<playerList.size();i++){
+            if(! p.equals(playerList.get(i))){
+                p.kill(playerList.get(i));
             }
         }
     }
@@ -209,13 +211,13 @@ public class Room {
         return b.pair(this,r2);
     }
 
-    public void sendOut(Janitor j){
-        for(Door d : doorList){
-            for(Player p : playerList){
-                if(p==j){
+    public void sendOut(Janitor j) {
+        for (int i = 0; i < doorList.size(); i++) { // Az "i" változó érvényessége itt kezdődik
+            for (int p = 0; p < playerList.size(); p++) { // A "p" változó érvényessége itt kezdődik
+                if (playerList.get(p) == j) {
                     continue;
                 }
-                if(!p.changeR(d)){
+                if (!playerList.get(p).changeR(doorList.get(i))) { // Az "i" változó itt is érvényes
                     break;
                 }
             }
@@ -230,20 +232,20 @@ public class Room {
         StringBuilder returnString = new StringBuilder(b.objectToString(this) + ": ");
         if(withPlayers){
             for (Player player : playerList) {
-                returnString.append(b.objectToString(player) + ", ");
+                returnString.append(b.objectToString(player) + '\n');
             }
         }
         if(withItems){
             for (Item item : itemList) {
-                returnString.append(b.objectToString(item) + ", ");
+                returnString.append(b.objectToString(item) + '\n');
             }
         }
         if(withAttribs){
             if(gassed){
-                returnString.append("gassed, ");
+                returnString.append("gassed\n");
             }
             if(cleaner){
-                returnString.append("cleaner, ");
+                returnString.append("cleaner\n");
             }
         }
         return returnString.toString();

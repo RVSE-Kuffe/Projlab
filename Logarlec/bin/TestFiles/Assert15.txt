@@ -1,6 +1,6 @@
 d12: s1 –OK
 d12: s2 –OK
 d12: j1 –OK
-r1: s1
-r2: s2 j1
+r1: s1,
+r2: s2, j1,
 r2:

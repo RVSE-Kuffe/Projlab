@@ -29,7 +29,7 @@ public class Player implements PickUp, GasProtect{
      * @param i     Felvett tárgy
      */
     public boolean pickUpItem(Item i){
-        return (i.acceptPickUp(this));
+        return (itemList.size()<5&&i.acceptPickUp(this));
     }
 
     /**
@@ -60,6 +60,7 @@ public class Player implements PickUp, GasProtect{
 
     public boolean pickUpFake(Logarlec l){
         if(location.removeItem(l)){
+            itemList.add(l);
             return true;
         }
         return false;
@@ -222,6 +223,13 @@ public class Player implements PickUp, GasProtect{
 
     public Room getLocation(){
         return location;
+    }
+
+    public boolean randomAction(){
+        return false;
+    }
+    public boolean getIsStunned(){
+        return stunned;
     }
 
     public String listMe(Board b, boolean withItems, boolean withAttribs){

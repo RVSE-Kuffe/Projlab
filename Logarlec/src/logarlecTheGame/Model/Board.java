@@ -134,8 +134,6 @@ public class Board implements CycleBased, RoomPairing, Serializable{
      */
     public Room forceSplit(Room r){
         Room newRoom= r.newRoom();
-        bObjects.put("split", newRoom);
-        bNames.put(newRoom, "split");
         addRoom(newRoom);
         return newRoom;
     }

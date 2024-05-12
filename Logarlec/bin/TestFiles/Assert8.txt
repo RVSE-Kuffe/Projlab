@@ -1,5 +1,5 @@
-r1: s L1 L2
+r1: s, L1, L2,
 s: L1 – OK
-r1: s L2
+r1: s, L2,
 s: L1
 s: L2 – OK

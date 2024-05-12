@@ -1,5 +1,5 @@
 addRoom cursedRoom r1 1
-addRoom room r2 1
+addRoom room r2 2
 addPlayerToRoom student s r2
 addDoor d12 r1 r2 true true
 listRoom r1
@@ -7,7 +7,7 @@ listRoom r2
 useDoor d12 s
 listRoom r1
 listRoom r2
-closeDoor d12
+closeDoor r1
 useDoor d12 s
 listRoom r1
 listRoom r2

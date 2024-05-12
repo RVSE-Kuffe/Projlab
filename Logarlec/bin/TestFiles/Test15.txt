@@ -3,9 +3,9 @@ addRoom room r2 5
 addDoor d12 r1 r2 true true
 gasRoom r2
 addPlayerToRoom janitor j1 r1
-addPlayerToRoom janitor s1 r1
-addPlayerToRoom janitor s2 r1
-addItemToPlayer mask mask 1 s1
+addPlayerToRoom student s1 r1
+addPlayerToRoom student s2 r1
+addItemToPlayer mask m 1 s1
 useDoor d12 s1
 useDoor d12 s2
 useDoor d12 j1

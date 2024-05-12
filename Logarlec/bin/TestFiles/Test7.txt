@@ -7,6 +7,6 @@ addPlayerToRoom teacher t r2
 listRoomAttribs r1
 listPlayerAttribs t
 putDown ta s
-listRoomAttribs
+listRoomAttribs r1
 useDoor d12 t
 listPlayerAttribs t
