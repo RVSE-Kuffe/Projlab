@@ -22,9 +22,9 @@ public class GameLogic {
 
 
 
-    public void decreaseActionPoints() {
-        if (actionPoints > 0) {
-            actionPoints--;
+    public void healAll(){
+        for(int i = 0; i < students.size(); i++){
+            students.get(i).heal();
         }
     }
 
@@ -37,6 +37,7 @@ public class GameLogic {
 
     public void turn() {
         if (!isGameEnded()) {
+            actionPoints --;
             if (currentPlayer.getIsStunned() || actionPoints == 0) {
                 currentPlayerIndex++;
                 if (currentPlayerIndex >= students.size()) {
@@ -44,6 +45,7 @@ public class GameLogic {
                         player.randomAction();
                         
                     }
+                    board.iterate();
                     currentPlayerIndex = 0;
                     actionPoints = 3; //új kör kezdete: visszaállítjuk az actionPoints-ot
                 }

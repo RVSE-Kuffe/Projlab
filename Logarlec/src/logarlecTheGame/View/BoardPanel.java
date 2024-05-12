@@ -7,16 +7,13 @@ import logarlecTheGame.Model.*;
 import java.awt.*;
 
 
-public class BoardPanel extends JFrame {
+public class BoardPanel extends JPanel {
 
     Player player;
     Board board;
 
     public BoardPanel() {
-        setTitle("Pálya");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(400, 400);
-        setLocationRelativeTo(null);
 
         JPanel panel = new JPanel(null);
         panel.setBackground(Color.YELLOW);

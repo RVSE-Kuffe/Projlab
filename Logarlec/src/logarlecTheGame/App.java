@@ -3,8 +3,13 @@ package logarlecTheGame;
 import java.io.*;
 import java.util.*;
 
+import javax.swing.JFrame;
+
 import logarlecTheGame.Controller.CommandHandler;
 import logarlecTheGame.Model.Board;
+import logarlecTheGame.Model.Player;
+import logarlecTheGame.Model.Room;
+import logarlecTheGame.View.ActionPanel;
 
 public class App {
 
@@ -24,6 +29,7 @@ public class App {
     }
 
     public static void main(String[] args) throws Exception {
+
         Board board = new Board();
         while(chooser != 'c'){
             System.out.println("Valassz modszert");

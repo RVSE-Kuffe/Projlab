@@ -250,4 +250,8 @@ public class Player implements PickUp, GasProtect{
         }
         return sb.toString();
     }
+
+    public List<Item> items(){
+        return itemList;
+    }
 }

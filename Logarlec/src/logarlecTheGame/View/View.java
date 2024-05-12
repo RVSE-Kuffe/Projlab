@@ -25,7 +25,7 @@ public class View {
 
         roomPanel = new RoomPanel();
         frame.add(roomPanel);
-        actionPanel = new ActionPanel();
+        actionPanel = new ActionPanel(gameLogic.getCurrentPlayer(), gameLogic.getBoard(), this);
         frame.add(actionPanel);
         boardPanel = new BoardPanel();
         frame.add(boardPanel);
@@ -64,5 +64,9 @@ public class View {
         actionPanel.update(p,b);
         roomPanel.update(p,b);
         boardPanel.update(p,b);
+    }
+
+    public void vTurn(){
+        gameLogic.turn();
     }
 }
