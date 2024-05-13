@@ -1,11 +1,9 @@
 package logarlecTheGame.View;
 
 import javax.swing.*;
-
-import logarlecTheGame.Model.Board;
-import logarlecTheGame.Model.Player;
-
 import java.awt.*;
+
+import logarlecTheGame.Model.*;
 
 public class RoomPanel extends JPanel {
     Player player;
