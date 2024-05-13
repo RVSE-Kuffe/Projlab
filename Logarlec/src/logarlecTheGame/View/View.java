@@ -4,6 +4,7 @@ import javax.swing.*;
 import logarlecTheGame.Controller.GameLogic;
 import logarlecTheGame.Model.Board;
 import logarlecTheGame.Model.Player;
+import logarlecTheGame.Model.Student;
 
 import java.awt.*;
 
@@ -28,7 +29,7 @@ public class View {
 
         boardPanel = new BoardPanel();
         frame.add(boardPanel);
-        roomPanel = new RoomPanel();
+        roomPanel = new RoomPanel(gameLogic.getCurrentPlayer(), gameLogic.getBoard());
         frame.add(roomPanel);
         actionPanel = new ActionPanel(gameLogic.getCurrentPlayer(), gameLogic.getBoard(), this);
         frame.add(actionPanel);
@@ -62,7 +63,7 @@ public class View {
     }
 
     public void update(){
-        Player p=gameLogic.getCurrentPlayer();
+        Student p=gameLogic.getCurrentPlayer();
         Board b=gameLogic.getBoard();
         actionPanel.update(p,b);
         roomPanel.update(p,b);
