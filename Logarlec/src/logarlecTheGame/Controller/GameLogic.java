@@ -19,7 +19,7 @@ public class GameLogic implements Serializable{
     private Board board;
     private List<Student> students;
     private List<Player> otherPlayers;
-    private Player currentPlayer;
+    private Student currentPlayer;
     private int currentPlayerIndex;
     private int actionPoints;
     private View view;
@@ -81,6 +81,7 @@ public class GameLogic implements Serializable{
 
         actionPoints=3;
         board.init(students, otherPlayers);
+        setCurrentPlayer(students.get(currentPlayerIndex));
     }
 
     public void healAll(){
@@ -127,11 +128,11 @@ public class GameLogic implements Serializable{
         System.exit(0);
     }
 
-    public void setCurrentPlayer(Player player) {
+    public void setCurrentPlayer(Student player) {
         this.currentPlayer = player;
     }
 
-    public Player getCurrentPlayer() {
+    public Student getCurrentPlayer() {
         return this.currentPlayer;
     }
 

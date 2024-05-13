@@ -71,11 +71,13 @@ public class App {
                         System.err.println(e.getMessage());
                     }
                 }else{
-                    JFrame frame = new JFrame("Game by ripgyork");
+                    /*JFrame frame = new JFrame("Game by ripgyork");
                     frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
                     frame.setSize(800, 600);
                     frame.add(new BoardPanel());
-                    frame.setVisible(true);
+                    frame.setVisible(true);*/
+                    GameMenu gm = new GameMenu();
+                    gm.setVisible(true);
                 }
             }
             else if(chooser == 'b'){

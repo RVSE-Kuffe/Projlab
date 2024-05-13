@@ -102,6 +102,9 @@ public class GameMenu extends JFrame {
             GameLogic gl = new GameLogic(playerCount);
             this.setVisible(false);
             View view = new View(gl);
+            gl.setView(view);
+            view.init();
+
         }
         catch(NumberFormatException e){
             playerCountField.setText("");
