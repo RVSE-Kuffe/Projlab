@@ -141,9 +141,16 @@ public class CommandHandler {
             case "janitorRound":
                 janitorRound(cmd);
                 break;
+            case "gameLogic":
+                gameLogic();
+                break;
             default:
                 System.out.println("Ismeretlen parancs: " + commandType);
         }
+    }
+
+    private void gameLogic() {
+       GameLogic gl = new GameLogic(2);
     }
 
     private void pickUpItem(String[] cmd) {

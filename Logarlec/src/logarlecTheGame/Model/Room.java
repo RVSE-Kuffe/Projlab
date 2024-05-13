@@ -120,13 +120,16 @@ public class Room {
     public boolean killPlayer(Player p){
         myBoard.removeFromMap(p);
         playerList.remove(p);
+        myBoard.studentDied(p);
         return true;
     }
     
     /**
      * játék megnyerését jelzi
      */
-    public void win(){}
+    public void win(){
+        myBoard.win();
+    }
 
     /**
      * játékos ajtón keresztül léptetését kezdeményezi

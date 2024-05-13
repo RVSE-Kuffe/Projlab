@@ -135,7 +135,7 @@ public class ActionPanel extends JPanel{
 
     public void pickUp(){
         Item i = (Item)board.stringToObject((String)roomItemBox.getSelectedItem());
-        student.pickUp(i);
+        student.pickUpItem(i);
     }
 
     public void putDown(){
