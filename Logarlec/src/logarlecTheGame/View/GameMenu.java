@@ -7,6 +7,10 @@ import logarlecTheGame.Controller.GameLogic;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 
 public class GameMenu extends JFrame {
     private JTextField playerCountField;
@@ -22,6 +26,11 @@ public class GameMenu extends JFrame {
         // Gombok létrehozása és beállítása
         //JButton saveButton = new JButton("Save");
         JButton loadButton = new JButton("Load");
+        loadButton.addActionListener(new ActionListener() {    
+            public void actionPerformed(ActionEvent e) {
+                load();
+            }
+        });
         JButton startButton = new JButton("Start");
         startButton.addActionListener(new ActionListener() {    
             public void actionPerformed(ActionEvent e) {
@@ -97,6 +106,25 @@ public class GameMenu extends JFrame {
         catch(NumberFormatException e){
             playerCountField.setText("");
             warningMessage.setVisible(true);
+        }
+    }
+
+    public void load(){
+        JFileChooser fileChooser = new JFileChooser();
+        int result = fileChooser.showOpenDialog(this);
+
+        if (result == JFileChooser.APPROVE_OPTION) {
+            File selectedFile = fileChooser.getSelectedFile();
+            try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(selectedFile))) {
+                GameLogic gl = (GameLogic)in.readObject();
+                View view = new View(gl);
+                this.setVisible(false);
+                JOptionPane.showMessageDialog(this, "Loaded successfully!");
+            } 
+            catch (IOException | ClassNotFoundException e) {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(this, "Error loading.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
         }
     }
 }
