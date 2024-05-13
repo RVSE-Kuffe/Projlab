@@ -1,10 +1,6 @@
 package logarlecTheGame.Model;
 import java.util.Random;
-import java.util.logging.Logger;
-
 import logarlecTheGame.Model.Item.*;
-import logarlecTheGame.Model.Interfaces.*;
-import java.util.random.*;
 
 public class Janitor extends Player {
     Random random = new Random();

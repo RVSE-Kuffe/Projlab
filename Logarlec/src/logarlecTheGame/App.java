@@ -3,13 +3,9 @@ package logarlecTheGame;
 import java.io.*;
 import java.util.*;
 
-import javax.swing.JFrame;
-
 import logarlecTheGame.Controller.CommandHandler;
 import logarlecTheGame.Model.Board;
-import logarlecTheGame.Model.Player;
-import logarlecTheGame.Model.Room;
-import logarlecTheGame.View.ActionPanel;
+import logarlecTheGame.View.GameMenu;
 
 public class App {
 
@@ -45,26 +41,32 @@ public class App {
                 System.out.println("Valassz teszteket");    //Itt kilistázza a választható teszteket
                 for(int i = 1; i<16+1;i++)
                     System.out.println(i+" - Teszteset"+i);
+                System.out.println("17. Grafikus felület");
                 System.out.println("Add meg a teszteset számát: ");
                 String testnum = scanner.nextLine();
-                testFile = "Logarlec/src/TestFiles/Test"+testnum+".txt";
-                outFile = "out.txt";
-                                                            
-                File inputFile = new File(testFile);        //File objektum létrehozása a kiválasztott file-val
-                try(BufferedReader reader = new BufferedReader(new FileReader(inputFile))){  //Reader létrehozása
-                    List<String> commands = new ArrayList<>();  //A parancsokat tartalmazó Lista, ezeket a parancsokat tovább kell majd még parse-olni
-                    String command;
-                    while((command = reader.readLine()) != null){
-                        System.out.println(command);
-                        commands.add(command);
+
+                if(!testnum.equals("17")){
+                    testFile = "Logarlec/src/TestFiles/Test"+testnum+".txt";
+                    outFile = "out.txt";
+                    
+                    File inputFile = new File(testFile);        //File objektum létrehozása a kiválasztott file-val
+                    try(BufferedReader reader = new BufferedReader(new FileReader(inputFile))){  //Reader létrehozása
+                        List<String> commands = new ArrayList<>();  //A parancsokat tartalmazó Lista, ezeket a parancsokat tovább kell majd még parse-olni
+                        String command;
+                        while((command = reader.readLine()) != null){
+                            System.out.println(command);
+                            commands.add(command);
+                        }
+                        CommandHandler ch = new CommandHandler(outFile, board);
+                        for(String s : commands){
+                            ch.executeCommand(s);         //A stringek parseolását és végrehajtását meghívja az összes kiolvasott parancsr
+                        }
+                    }catch(IOException e){
+                        e.getStackTrace();
+                        System.err.println(e.getMessage());
                     }
-                    CommandHandler ch = new CommandHandler(outFile, board);
-                    for(String s : commands){
-                        ch.executeCommand(s);         //A stringek parseolását és végrehajtását meghívja az összes kiolvasott parancsr
-                    }
-                }catch(IOException e){
-                    e.getStackTrace();
-                    System.err.println(e.getMessage());
+                }else{
+                    GameMenu gm = new GameMenu();
                 }
             }
             else if(chooser == 'b'){

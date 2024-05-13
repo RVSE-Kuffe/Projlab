@@ -5,11 +5,7 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
-import logarlecTheGame.Model.Board;
-import logarlecTheGame.Model.Janitor;
-import logarlecTheGame.Model.Player;
-import logarlecTheGame.Model.Student;
-import logarlecTheGame.Model.Teacher;
+import logarlecTheGame.Model.*;
 import logarlecTheGame.View.View;
 
 public class GameLogic {

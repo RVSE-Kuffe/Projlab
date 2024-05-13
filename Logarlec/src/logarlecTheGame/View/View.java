@@ -18,7 +18,7 @@ public class View {
 
     public void init() {
         frame = new JFrame("Game by ripgyork");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setSize(800, 600);
 
         frame.setLayout(new GridLayout(2, 2));

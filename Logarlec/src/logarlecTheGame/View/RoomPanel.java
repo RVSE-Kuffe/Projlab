@@ -38,8 +38,4 @@ public class RoomPanel extends JPanel {
         updateRoomAttributes();
         updatePlayers();
     }
-
-    public void redraw(){
-        update(player, board);
-    }
 }
