@@ -20,9 +20,11 @@ public class ActionPanel extends JPanel{
     JComboBox<String> playerItemBox2;
     JComboBox<String> roomDoorBox;
 
-    public ActionPanel(Player s, Board b, View v) {
+    public ActionPanel(Student s, Board b, View v) {
         //JPanel mainPanel = new JPanel();
         //mainPanel.setLayout(null);
+        this.student=s;
+        this.board=b;
         view = v;
         //JPanel panel = new JPanel();
         this.setLayout(new GridLayout(0, 3, 10, 10));

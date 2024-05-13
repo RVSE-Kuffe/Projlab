@@ -25,12 +25,13 @@ public class View {
 
         frame.setLayout(new GridLayout(2, 2));
 
+
+        boardPanel = new BoardPanel();
+        frame.add(boardPanel);
         roomPanel = new RoomPanel();
         frame.add(roomPanel);
         actionPanel = new ActionPanel(gameLogic.getCurrentPlayer(), gameLogic.getBoard(), this);
         frame.add(actionPanel);
-        boardPanel = new BoardPanel();
-        frame.add(boardPanel);
         JPanel emptyPanel = new JPanel();
         frame.add(emptyPanel);
         frame.setVisible(true);
