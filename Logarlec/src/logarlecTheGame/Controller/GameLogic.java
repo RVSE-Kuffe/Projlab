@@ -100,9 +100,13 @@ public class GameLogic implements Serializable{
     public void turn() {
         if (!isGameEnded()) {
             actionPoints --;
+            System.out.println("before"+actionPoints);
             if (currentPlayer.getIsStunned() || actionPoints == 0) {
+                System.out.println(actionPoints);
                 currentPlayerIndex++;
+                System.out.println(currentPlayerIndex);
                 if (currentPlayerIndex >= students.size()) {
+                    System.out.println("itt");
                     for (Player player : otherPlayers) {
                         player.randomAction();
                     }
@@ -110,9 +114,11 @@ public class GameLogic implements Serializable{
                     
                     board.iterate();
                     currentPlayerIndex = 0;
-                    actionPoints = 3; //új kör kezdete: visszaállítjuk az actionPoints-ot
                 }
+                actionPoints = 3; //új kör kezdete: visszaállítjuk az actionPoints-ot
                 currentPlayer = students.get(currentPlayerIndex);
+                System.out.println("currentPlayer "+ currentPlayerIndex);
+                System.out.println("at end: "+actionPoints);
             }
             view.update();
         }

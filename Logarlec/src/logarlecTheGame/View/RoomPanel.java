@@ -6,13 +6,16 @@ import java.awt.*;
 import logarlecTheGame.Model.*;
 
 public class RoomPanel extends JPanel {
-    Player player;
+    Student player;
     Board board;
     private JTextField roomAttributesField;
     private JTextField playersField;
+    private JTextField currentPlayerField;
     private JButton saveButton;
 
-    public RoomPanel() {
+    public RoomPanel(Student s, Board board) {
+        this.player=s;
+        this.board=board;
         setLayout(new BorderLayout());
 
         JPanel textFieldsPanel = new JPanel(new GridLayout(2, 1));
@@ -25,12 +28,17 @@ public class RoomPanel extends JPanel {
         playersField.setEditable(false);
         textFieldsPanel.add(playersField);
 
+        currentPlayerField = new JTextField();
+        currentPlayerField.setEditable(false);
+        textFieldsPanel.add(currentPlayerField);
+
         add(textFieldsPanel, BorderLayout.CENTER);
 
         saveButton = new JButton("Save");
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         buttonPanel.add(saveButton);
         add(buttonPanel, BorderLayout.NORTH);
+        update(s, board);
     }
 
     public void updateRoomAttributes() {
@@ -41,10 +49,15 @@ public class RoomPanel extends JPanel {
         playersField.setText(player.getLocation().listMe(board, true, false, false));
     }
 
-    public void update(Player p, Board b){
+    public void updateCurrentPlayer() {
+        currentPlayerField.setText("current player: "+ board.objectToString(player));
+    }
+
+    public void update(Student p, Board b){
         player = p;
         board = b;
         updateRoomAttributes();
         updatePlayers();
+        updateCurrentPlayer();
     }
 }

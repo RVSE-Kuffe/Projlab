@@ -65,7 +65,7 @@ public class Transistor extends Item  {
          *  hamis ha nem
      */
     public boolean teleportPlayer(Student s){
-       if(this.pair.arrivingPlayer(s)){
+       if((this.pair!=null)&&this.pair.arrivingPlayer(s)){
             this.active=false;
             return true;
        }

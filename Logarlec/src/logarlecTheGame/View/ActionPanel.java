@@ -99,19 +99,19 @@ public class ActionPanel extends JPanel{
     }
 
     public void updateBoxes(){
-        roomItemBox.removeAll();
+        roomItemBox.removeAllItems();
         for (int i = 0; i < student.getLocation().items().size(); i++) {
             roomItemBox.addItem(board.objectToString(student.getLocation().items().get(i)));
         }
 
-        playerItemBox1.removeAll();
-        playerItemBox2.removeAll();
+        playerItemBox1.removeAllItems();
+        playerItemBox2.removeAllItems();
         for (int i = 0; i < student.items().size(); i++) {
             playerItemBox1.addItem(board.objectToString(student.items().get(i)));
             playerItemBox2.addItem(board.objectToString(student.items().get(i)));
         }
 
-        roomDoorBox.removeAll();
+        roomDoorBox.removeAllItems();
         for (int i = 0; i < student.getLocation().doors().size(); i++) {
             roomDoorBox.addItem(board.objectToString(student.getLocation().doors().get(i)));
         } 
@@ -131,17 +131,24 @@ public class ActionPanel extends JPanel{
     }
 
     public void move(){
+        if(roomItemBox.getSelectedItem()!=null){
         Door temp = (Door)board.stringToObject((String)roomDoorBox.getSelectedItem());
         student.changeR(temp);
+        }
+        else JOptionPane.showMessageDialog(null, "rontott kör!");
     }
 
     public void pickUp(){
+        if(roomItemBox.getSelectedItem()!=null){
         Item i = (Item)board.stringToObject((String)roomItemBox.getSelectedItem());
         student.pickUpItem(i);
+        }
+        else JOptionPane.showMessageDialog(null, "rontott kör!");
     }
 
     public void putDown(){
+        if(roomItemBox.getSelectedItem()!=null){
         Item i = (Item)board.stringToObject((String)playerItemBox1.getSelectedItem());
-        student.putDown(i);
+        student.putDown(i);}
     }
 }
