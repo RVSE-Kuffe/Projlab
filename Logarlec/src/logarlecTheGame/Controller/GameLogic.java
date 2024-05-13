@@ -1,5 +1,6 @@
 package logarlecTheGame.Controller;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,8 +9,9 @@ import javax.swing.JOptionPane;
 import logarlecTheGame.Model.*;
 import logarlecTheGame.View.View;
 
-public class GameLogic {
+public class GameLogic implements Serializable{
     
+    private static final long SerialVersionUID = 2L;
     private Board board;
     private List<Student> students;
     private List<Player> otherPlayers;

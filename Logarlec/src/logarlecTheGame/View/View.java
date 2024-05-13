@@ -14,7 +14,9 @@ public class View {
     private BoardPanel boardPanel;
     private GameLogic gameLogic;
 
-    public View(){}
+    public View(GameLogic gl){
+        gameLogic = gl;
+    }
 
     public void init() {
         frame = new JFrame("Game by ripgyork");
