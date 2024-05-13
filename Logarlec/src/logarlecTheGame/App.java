@@ -3,9 +3,14 @@ package logarlecTheGame;
 import java.io.*;
 import java.util.*;
 
+import javax.swing.JFrame;
+import javax.swing.WindowConstants;
+
 import logarlecTheGame.Controller.CommandHandler;
 import logarlecTheGame.Model.Board;
+import logarlecTheGame.View.BoardPanel;
 import logarlecTheGame.View.GameMenu;
+import logarlecTheGame.View.View;
 
 public class App {
 
@@ -66,7 +71,11 @@ public class App {
                         System.err.println(e.getMessage());
                     }
                 }else{
-                    GameMenu gm = new GameMenu();
+                    JFrame frame = new JFrame("Game by ripgyork");
+                    frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+                    frame.setSize(800, 600);
+                    frame.add(new BoardPanel());
+                    frame.setVisible(true);
                 }
             }
             else if(chooser == 'b'){
