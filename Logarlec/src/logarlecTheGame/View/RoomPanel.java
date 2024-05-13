@@ -2,7 +2,8 @@ package logarlecTheGame.View;
 
 import javax.swing.*;
 
-import logarlecTheGame.Model.*;
+import logarlecTheGame.Model.Board;
+import logarlecTheGame.Model.Player;
 
 import java.awt.*;
 
@@ -11,17 +12,27 @@ public class RoomPanel extends JPanel {
     Board board;
     private JTextField roomAttributesField;
     private JTextField playersField;
+    private JButton saveButton;
 
     public RoomPanel() {
-        setLayout(new GridLayout(1, 2));
+        setLayout(new BorderLayout());
+
+        JPanel textFieldsPanel = new JPanel(new GridLayout(2, 1));
 
         roomAttributesField = new JTextField();
         roomAttributesField.setEditable(false);
-        add(roomAttributesField);
+        textFieldsPanel.add(roomAttributesField);
 
         playersField = new JTextField();
         playersField.setEditable(false);
-        add(playersField);
+        textFieldsPanel.add(playersField);
+
+        add(textFieldsPanel, BorderLayout.CENTER);
+
+        saveButton = new JButton("Save");
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        buttonPanel.add(saveButton);
+        add(buttonPanel, BorderLayout.NORTH);
     }
 
     public void updateRoomAttributes() {
