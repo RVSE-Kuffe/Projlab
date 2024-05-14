@@ -27,8 +27,9 @@ public class View {
         frame.setLayout(new GridLayout(2, 2));
 
 
-        boardPanel = new BoardPanel();
+        boardPanel = new BoardPanel(gameLogic.getCurrentPlayer(), gameLogic.getBoard());
         frame.add(boardPanel);
+        boardPanel.update(gameLogic.getCurrentPlayer(), gameLogic.getBoard());
         roomPanel = new RoomPanel(gameLogic.getCurrentPlayer(), gameLogic.getBoard());
         frame.add(roomPanel);
         actionPanel = new ActionPanel(gameLogic.getCurrentPlayer(), gameLogic.getBoard(), this);

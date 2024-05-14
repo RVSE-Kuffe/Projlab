@@ -55,6 +55,10 @@ public class Board implements CycleBased, RoomPairing, Serializable{
     public Board() { 
     }
 
+    public List<Room> rooms(){
+        return roomList;
+    }
+
     public void addIterating(CycleBased c){
         cycleList.add(c);
     }
