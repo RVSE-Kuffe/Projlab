@@ -182,6 +182,7 @@ public class GameLogic implements Serializable{
         this.otherPlayers.add(p);
     }
 
-
-
+    public int getRemainingRounds(){
+        return actionPoints;
+    }
 }

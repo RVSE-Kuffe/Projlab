@@ -18,6 +18,7 @@ public class RoomPanel extends JPanel {
     private JTextField roomAttributesField;
     private JTextField playersField;
     private JTextField currentPlayerField;
+    private JTextField remainingRoundsField;
     private JButton saveButton;
     private GameLogic gameLogic;
 
@@ -40,6 +41,10 @@ public class RoomPanel extends JPanel {
         currentPlayerField = new JTextField();
         currentPlayerField.setEditable(false);
         textFieldsPanel.add(currentPlayerField);
+
+        remainingRoundsField = new JTextField();
+        remainingRoundsField.setEditable(false);
+        textFieldsPanel.add(remainingRoundsField);
 
         add(textFieldsPanel, BorderLayout.CENTER);
 
@@ -67,12 +72,17 @@ public class RoomPanel extends JPanel {
         currentPlayerField.setText("current player: "+ board.objectToString(player));
     }
 
+    public void updateRemainingRounds(){
+        remainingRoundsField.setText("Hátralévő körök száma: " + gameLogic.getRemainingRounds());
+    }
+
     public void update(Student p, Board b){
         player = p;
         board = b;
         updateRoomAttributes();
         updatePlayers();
         updateCurrentPlayer();
+        updateRemainingRounds();
     }
 
     public void save(){
