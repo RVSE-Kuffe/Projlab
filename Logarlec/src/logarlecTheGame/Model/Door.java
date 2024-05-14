@@ -49,7 +49,7 @@ public class Door {
     
     }
     //elso parameter hogy mire valtoztatunk, masodik hogy melyiket--mergenel r1 volt a nagyobb
-    public void changeRoom(Room r1,Room r2){
+    public Door changeRoom(Room r1,Room r2){
         if(r2==whereTo){
             whereTo=r1;
         }
@@ -61,6 +61,7 @@ public class Door {
             whereFrom=null;
             r1.removeDoor(this);
         }
+        return this;
     }
 
     /**
