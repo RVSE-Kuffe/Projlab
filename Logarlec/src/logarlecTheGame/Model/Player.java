@@ -8,7 +8,6 @@ import logarlecTheGame.Model.Item.*;
 public class Player implements PickUp, GasProtect{
     protected int id;
     protected boolean stunned;
-    protected boolean isProtected;    //Simán protected-nek nem nevezhetem el a változót, mert rinyál a fordító
     protected Room location;
     protected List<Item> itemList;
 
@@ -21,7 +20,6 @@ public class Player implements PickUp, GasProtect{
         location = l;
         itemList = new ArrayList<>();
         stunned = false;
-        isProtected = false;
     }
 
     /**
@@ -31,6 +29,7 @@ public class Player implements PickUp, GasProtect{
     public boolean pickUpItem(Item i){
         return (itemList.size()<5&&i.acceptPickUp(this));
     }
+
 
     /**
      * Tárgyak felvételét valósítja meg
@@ -243,9 +242,6 @@ public class Player implements PickUp, GasProtect{
         if(withAttribs){
             if(stunned){
                 sb.append("stunned, "); 
-            }
-            if(isProtected){
-                sb.append("protected");
             }
         }
         return sb.toString();

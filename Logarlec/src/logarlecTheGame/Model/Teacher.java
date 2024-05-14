@@ -27,7 +27,8 @@ public class Teacher extends Player {
         }
         else{
             int itemcounter=this.location.items().size();
-            int chosenitem=random.nextInt(itemcounter);
+            if(itemcounter==0)return false;
+            int chosenitem=random.nextInt( itemcounter);
             if(this.itemList.size()>=5){
                 return false;
             }

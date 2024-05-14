@@ -148,12 +148,13 @@ public class Room {
      * létrehoz egy ajtót a két szoba közt és hozzá is adja a két szobához
      * @return room2 a létreött szoba
      */
-    Room newRoom(){
+   public Room newRoom(){
         Room room2 =new Room(this.roomid + 1, this.capacity, myBoard);
         Door splitDoor = new Door(this, room2,true,true);
         this.addDoor(splitDoor);
+        myBoard.addToBoard(splitDoor, "splitDoor"+splitCounter);
         room2.addDoor(splitDoor);
-        String newRoomName =  "from " + myBoard.objectToString(this) + " splitted " + splitCounter++;
+        String newRoomName =   myBoard.objectToString(this) + "s" + splitCounter++;
         myBoard.addToBoard(room2, newRoomName);
         return room2;
     }
