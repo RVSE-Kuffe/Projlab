@@ -17,6 +17,8 @@ import logarlecTheGame.Model.Item.*;
 
 import java.util.Random;
 
+import javax.swing.JOptionPane;
+
 public class Board implements CycleBased, RoomPairing, Serializable{
     private List<Room> roomList = new ArrayList<>();
     private Random random=new Random();
@@ -87,9 +89,11 @@ public class Board implements CycleBased, RoomPairing, Serializable{
      */
     public boolean forceMerge(Room r1, Room r2){
         if(r1.getCapacity()>=r2.getCapacity() && (r1.getPlayerCount()+r2.getPlayerCount()<=r1.getCapacity())){
+            JOptionPane.showMessageDialog(null, "merge!"+ objectToString(r1)+ " másik: "+ objectToString(r2));
             return r1.acceptPairing(this,r2);
         }
         if(r2.getCapacity()>=r1.getCapacity() && (r1.getPlayerCount()+r2.getPlayerCount()<=r2.getCapacity())){
+            JOptionPane.showMessageDialog(null, "merge!"+ objectToString(r2)+ " másik: "+ objectToString(r1));
             return r1.acceptPairing(this,r2);
         }
         return false;
@@ -104,7 +108,7 @@ public class Board implements CycleBased, RoomPairing, Serializable{
 
     public void removeFromMap(Object o){
         String name = objectToString(o);
-        bObjects.remove(0);
+        bObjects.remove(o);
         bNames.remove(name);
     }
 
@@ -125,10 +129,11 @@ public class Board implements CycleBased, RoomPairing, Serializable{
          * @param r a szoba amit feloszt
          * mindenképp splitel egy szobát, és létrehoz egy újat
      */
-    public Room forceSplit(Room r){
+    public void forceSplit(Room r){
+        JOptionPane.showMessageDialog(null, "split!"+objectToString(r));
         Room newRoom= r.newRoom();
-        addRoom(newRoom);
-        return newRoom;
+        this.addRoom(newRoom);
+       //return newRoom;
     }
 
     /**

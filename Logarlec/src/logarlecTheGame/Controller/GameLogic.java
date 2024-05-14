@@ -92,9 +92,25 @@ public class GameLogic implements Serializable{
 
     public void deadStudent(Player student) {
         students.remove(student);
+        JOptionPane.showMessageDialog(null, "died: "+ board.objectToString(student));
         if (students.isEmpty()) {
             endGame(false);
-        }
+        }if(student==currentPlayer){
+        currentPlayerIndex++;
+                System.out.println(currentPlayerIndex);
+                if (currentPlayerIndex >= students.size()) {
+                    System.out.println("itt");
+                    for (Player player : otherPlayers) {
+                        player.randomAction();
+                    }
+                    //TODO: heal
+                    
+                    board.iterate();
+                    currentPlayerIndex = 0;
+                }
+                actionPoints = 3; //új kör kezdete: visszaállítjuk az actionPoints-ot
+                currentPlayer = students.get(currentPlayerIndex);
+            }
     }
 
     public void turn() {

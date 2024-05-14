@@ -131,7 +131,7 @@ public class ActionPanel extends JPanel{
     }
 
     public void move(){
-        if(roomItemBox.getSelectedItem()!=null){
+        if(roomDoorBox.getSelectedItem()!=null){
         Door temp = (Door)board.stringToObject((String)roomDoorBox.getSelectedItem());
         student.changeR(temp);
         }
@@ -147,7 +147,7 @@ public class ActionPanel extends JPanel{
     }
 
     public void putDown(){
-        if(roomItemBox.getSelectedItem()!=null){
+        if(playerItemBox1.getSelectedItem()!=null){
         Item i = (Item)board.stringToObject((String)playerItemBox1.getSelectedItem());
         student.putDown(i);}
     }
