@@ -14,6 +14,7 @@ public class Janitor extends Player {
     public boolean randomAction(){
         if(!stunned){
         int doorcounter=this.location.doors().size();
+        if(doorcounter==0) return false;
         int chosendoor=random.nextInt(doorcounter);
         return this.changeR(this.location.doors().get(chosendoor));
         }
