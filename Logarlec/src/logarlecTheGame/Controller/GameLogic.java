@@ -110,6 +110,7 @@ public class GameLogic implements Serializable{
                 }
                 actionPoints = 3; //új kör kezdete: visszaállítjuk az actionPoints-ot
                 currentPlayer = students.get(currentPlayerIndex);
+                JOptionPane.showMessageDialog(null, "Következő játékos: "+board.objectToString(currentPlayer));
             }
     }
 
