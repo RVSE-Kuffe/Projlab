@@ -2,18 +2,27 @@ package logarlecTheGame.View;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 
+import logarlecTheGame.Controller.GameLogic;
 import logarlecTheGame.Model.*;
 
 public class RoomPanel extends JPanel {
-    Student player;
-    Board board;
+    private Student player;
+    private Board board;
     private JTextField roomAttributesField;
     private JTextField playersField;
     private JTextField currentPlayerField;
     private JButton saveButton;
+    private GameLogic gameLogic;
 
-    public RoomPanel(Student s, Board board) {
+    public RoomPanel(Student s, Board board, GameLogic gl) {
+        gameLogic = gl;
         this.player=s;
         this.board=board;
         setLayout(new BorderLayout());
@@ -35,6 +44,11 @@ public class RoomPanel extends JPanel {
         add(textFieldsPanel, BorderLayout.CENTER);
 
         saveButton = new JButton("Save");
+        saveButton.addActionListener(new ActionListener(){    
+            public void actionPerformed(ActionEvent e) {
+                save();
+            }
+        });
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         buttonPanel.add(saveButton);
         add(buttonPanel, BorderLayout.NORTH);
@@ -59,5 +73,21 @@ public class RoomPanel extends JPanel {
         updateRoomAttributes();
         updatePlayers();
         updateCurrentPlayer();
+    }
+
+    public void save(){
+        JFileChooser fileChooser = new JFileChooser();
+        int result = fileChooser.showSaveDialog(this);
+
+        if (result == JFileChooser.APPROVE_OPTION) {
+            File selectedFile = fileChooser.getSelectedFile();
+            try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(selectedFile))) {
+                out.writeObject(gameLogic);
+                JOptionPane.showMessageDialog(this, "Saved successfully!");
+            } catch (IOException e) {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(this, "Error saving.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
     }
 }

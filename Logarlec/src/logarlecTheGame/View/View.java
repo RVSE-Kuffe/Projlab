@@ -30,7 +30,7 @@ public class View {
         boardPanel = new BoardPanel(gameLogic.getCurrentPlayer(), gameLogic.getBoard());
         frame.add(boardPanel);
         boardPanel.update(gameLogic.getCurrentPlayer(), gameLogic.getBoard());
-        roomPanel = new RoomPanel(gameLogic.getCurrentPlayer(), gameLogic.getBoard());
+        roomPanel = new RoomPanel(gameLogic.getCurrentPlayer(), gameLogic.getBoard(), gameLogic);
         frame.add(roomPanel);
         actionPanel = new ActionPanel(gameLogic.getCurrentPlayer(), gameLogic.getBoard(), this);
         frame.add(actionPanel);
