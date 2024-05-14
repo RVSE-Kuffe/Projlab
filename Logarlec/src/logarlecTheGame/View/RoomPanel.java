@@ -23,11 +23,11 @@ public class RoomPanel extends JPanel {
 
     public RoomPanel(Student s, Board board, GameLogic gl) {
         gameLogic = gl;
-        this.player = s;
-        this.board = board;
+        this.player=s;
+        this.board=board;
         setLayout(new BorderLayout());
 
-        JPanel textFieldsPanel = new JPanel(new GridLayout(3, 1)); // Changed grid layout to include 3 rows
+        JPanel textFieldsPanel = new JPanel(new GridLayout(2, 1));
 
         roomAttributesField = new JTextField();
         roomAttributesField.setEditable(false);
@@ -39,12 +39,12 @@ public class RoomPanel extends JPanel {
 
         currentPlayerField = new JTextField();
         currentPlayerField.setEditable(false);
-        textFieldsPanel.add(currentPlayerField); // Added the new text field for current player
+        textFieldsPanel.add(currentPlayerField);
 
         add(textFieldsPanel, BorderLayout.CENTER);
 
         saveButton = new JButton("Save");
-        saveButton.addActionListener(new ActionListener() {
+        saveButton.addActionListener(new ActionListener(){    
             public void actionPerformed(ActionEvent e) {
                 save();
             }
@@ -64,10 +64,10 @@ public class RoomPanel extends JPanel {
     }
 
     public void updateCurrentPlayer() {
-        currentPlayerField.setText("Current player: " + board.objectToString(player)); // Displaying the current player's name
+        currentPlayerField.setText("current player: "+ board.objectToString(player));
     }
 
-    public void update(Student p, Board b) {
+    public void update(Student p, Board b){
         player = p;
         board = b;
         updateRoomAttributes();
@@ -75,7 +75,7 @@ public class RoomPanel extends JPanel {
         updateCurrentPlayer();
     }
 
-    public void save() {
+    public void save(){
         JFileChooser fileChooser = new JFileChooser();
         int result = fileChooser.showSaveDialog(this);
 
