@@ -135,6 +135,7 @@ public class GameLogic implements Serializable{
                 currentPlayer = students.get(currentPlayerIndex);
                 System.out.println("currentPlayer "+ currentPlayerIndex);
                 System.out.println("at end: "+actionPoints);
+                JOptionPane.showMessageDialog(null, "Következő játékos: "+board.objectToString(currentPlayer));
             }
             view.update();
         }
