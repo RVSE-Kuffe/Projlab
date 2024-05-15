@@ -22,7 +22,6 @@ public class GameLogic implements Serializable{
     private Student currentPlayer;
     private int currentPlayerIndex;
     private int actionPoints;
-    private View view;
 
     public GameLogic(int numberOfStudents){
         board = new Board(this);
@@ -138,7 +137,6 @@ public class GameLogic implements Serializable{
                 System.out.println("at end: "+actionPoints);
                 JOptionPane.showMessageDialog(null, "Következő játékos: "+board.objectToString(currentPlayer));
             }
-            view.update();
         }
     }
 
@@ -174,10 +172,6 @@ public class GameLogic implements Serializable{
             return true;
         }
         return false;
-    }
-
-    public void setView(View view){
-        this.view=view;
     }
 
     public void addToOtherPlayers(Player p){

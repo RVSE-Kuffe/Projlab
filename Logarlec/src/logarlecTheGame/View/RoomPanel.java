@@ -8,12 +8,11 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
-import java.io.Serializable;
 
 import logarlecTheGame.Controller.GameLogic;
 import logarlecTheGame.Model.*;
 
-public class RoomPanel extends JPanel implements Serializable{
+public class RoomPanel extends JPanel {
     private Student player;
     private Board board;
     private JTextField roomAttributesField;
@@ -22,11 +21,14 @@ public class RoomPanel extends JPanel implements Serializable{
     private JTextField remainingRoundsField;
     private JButton saveButton;
     private GameLogic gameLogic;
+    private transient JFileChooser fileChooser;
+
 
     public RoomPanel(Student s, Board board, GameLogic gl) {
         gameLogic = gl;
         this.player=s;
         this.board=board;
+        fileChooser = new JFileChooser();
         setLayout(new BorderLayout());
 
         JPanel textFieldsPanel = new JPanel(new GridLayout(2, 1));
@@ -87,7 +89,6 @@ public class RoomPanel extends JPanel implements Serializable{
     }
 
     public void save(){
-        JFileChooser fileChooser = new JFileChooser();
         int result = fileChooser.showSaveDialog(this);
 
         if (result == JFileChooser.APPROVE_OPTION) {

@@ -15,9 +15,15 @@ public class View implements Serializable{
     private ActionPanel actionPanel;
     private BoardPanel boardPanel;
     private GameLogic gameLogic;
+    private WinImage win;
+    private LostImage loose;
 
     public View(GameLogic gl){
         gameLogic = gl;
+        win = new WinImage();
+        loose = new LostImage();
+        win.setVisible(false);
+        loose.setVisible(false);
     }
 
     public void init() {

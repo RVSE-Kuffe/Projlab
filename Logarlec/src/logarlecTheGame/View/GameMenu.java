@@ -15,6 +15,7 @@ import java.io.ObjectInputStream;
 public class GameMenu extends JFrame {
     private JTextField playerCountField;
     private JLabel warningMessage;
+    private transient JFileChooser fileChooser;
 
     public GameMenu() {
         setTitle("Játék Menü");
@@ -102,7 +103,6 @@ public class GameMenu extends JFrame {
             GameLogic gl = new GameLogic(playerCount);
             this.setVisible(false);
             View view = new View(gl);
-            gl.setView(view);
             view.init();
 
         }
@@ -113,7 +113,7 @@ public class GameMenu extends JFrame {
     }
 
     public void load(){
-        JFileChooser fileChooser = new JFileChooser();
+        fileChooser = new JFileChooser();
         int result = fileChooser.showOpenDialog(this);
 
         if (result == JFileChooser.APPROVE_OPTION) {
@@ -122,6 +122,7 @@ public class GameMenu extends JFrame {
                 GameLogic gl = (GameLogic)in.readObject();
                 View view = new View(gl);
                 this.setVisible(false);
+                view.init();
                 JOptionPane.showMessageDialog(this, "Loaded successfully!");
             } 
             catch (IOException | ClassNotFoundException e) {

@@ -9,7 +9,6 @@ import logarlecTheGame.Model.Item.Transistor;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.Serializable;
 
 public class ActionPanel extends JPanel{
 
@@ -44,6 +43,7 @@ public class ActionPanel extends JPanel{
             public void actionPerformed(ActionEvent e) {
                 pickUp();
                 view.vTurn();
+                view.update();
             }
         });
         this.add(pickUpButton);
@@ -58,6 +58,7 @@ public class ActionPanel extends JPanel{
             public void actionPerformed(ActionEvent e) {
                 putDown();
                 view.vTurn();
+                view.update();
             }
         });
         this.add(putDownButton);
@@ -72,6 +73,7 @@ public class ActionPanel extends JPanel{
             public void actionPerformed(ActionEvent e) {
                 pair();
                 view.vTurn();
+                view.update();
             }
         });
         this.add(pairButton);
@@ -86,6 +88,7 @@ public class ActionPanel extends JPanel{
             public void actionPerformed(ActionEvent e) {
                 move();
                 view.vTurn();
+                view.update();
             }
         });
         this.add(moveButton);
