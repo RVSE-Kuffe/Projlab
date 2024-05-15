@@ -1,10 +1,11 @@
 package logarlecTheGame.Model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import logarlecTheGame.Model.Item.*;
 
-public class Room {
+public class Room implements Serializable{
     protected List<Door> doorList = new ArrayList<>();
     protected List<Player> playerList = new ArrayList<>();
     protected List<Item> itemList = new ArrayList<>();

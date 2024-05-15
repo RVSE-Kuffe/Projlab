@@ -1,11 +1,12 @@
 package logarlecTheGame.Model;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import logarlecTheGame.Model.Interfaces.*;
 import logarlecTheGame.Model.Item.*;
 
-public class Player implements PickUp, GasProtect{
+public class Player implements PickUp, GasProtect, Serializable{
     protected int id;
     protected boolean stunned;
     protected Room location;

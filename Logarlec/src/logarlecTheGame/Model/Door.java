@@ -1,6 +1,8 @@
 package logarlecTheGame.Model;
 
-public class Door {
+import java.io.Serializable;
+
+public class Door implements Serializable {
     boolean validTo = true;
     Room whereTo;
     Room whereFrom;

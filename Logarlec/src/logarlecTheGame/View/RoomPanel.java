@@ -8,11 +8,12 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 
 import logarlecTheGame.Controller.GameLogic;
 import logarlecTheGame.Model.*;
 
-public class RoomPanel extends JPanel {
+public class RoomPanel extends JPanel implements Serializable{
     private Student player;
     private Board board;
     private JTextField roomAttributesField;

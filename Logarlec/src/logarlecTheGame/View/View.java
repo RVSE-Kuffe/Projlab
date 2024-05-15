@@ -7,8 +7,9 @@ import logarlecTheGame.Model.Player;
 import logarlecTheGame.Model.Student;
 
 import java.awt.*;
+import java.io.Serializable;
 
-public class View {
+public class View implements Serializable{
     private JFrame frame;
     private RoomPanel roomPanel;
     private ActionPanel actionPanel;

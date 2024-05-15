@@ -8,7 +8,7 @@ import logarlecTheGame.Model.*;
    * Ennek az osztálynak a függvényeit felüldefiniálja,
    *  akinek kell
      */
-public abstract class Item{
+public abstract class Item implements Serializable{
     boolean isFake;
 
         /**

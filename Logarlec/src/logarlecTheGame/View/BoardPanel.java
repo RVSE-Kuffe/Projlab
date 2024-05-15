@@ -8,7 +8,7 @@ import java.awt.*;
 
 
 
-public class BoardPanel extends JPanel {
+public class BoardPanel extends JPanel{
     private Student currentPlayer;
     private Board board;
 
