@@ -8,16 +8,18 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 
 import logarlecTheGame.Controller.GameLogic;
 import logarlecTheGame.Model.*;
 
-public class RoomPanel extends JPanel {
+public class RoomPanel extends JPanel implements Serializable{
     private Student player;
     private Board board;
     private JTextField roomAttributesField;
     private JTextField playersField;
     private JTextField currentPlayerField;
+    private JTextField remainingRoundsField;
     private JButton saveButton;
     private GameLogic gameLogic;
 
@@ -40,6 +42,10 @@ public class RoomPanel extends JPanel {
         currentPlayerField = new JTextField();
         currentPlayerField.setEditable(false);
         textFieldsPanel.add(currentPlayerField);
+
+        remainingRoundsField = new JTextField();
+        remainingRoundsField.setEditable(false);
+        textFieldsPanel.add(remainingRoundsField);
 
         add(textFieldsPanel, BorderLayout.CENTER);
 
@@ -67,12 +73,17 @@ public class RoomPanel extends JPanel {
         currentPlayerField.setText("current player: "+ board.objectToString(player));
     }
 
+    public void updateRemainingRounds(){
+        remainingRoundsField.setText("Hátralévő körök száma: " + gameLogic.getRemainingRounds());
+    }
+
     public void update(Student p, Board b){
         player = p;
         board = b;
         updateRoomAttributes();
         updatePlayers();
         updateCurrentPlayer();
+        updateRemainingRounds();
     }
 
     public void save(){

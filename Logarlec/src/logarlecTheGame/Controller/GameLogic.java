@@ -110,6 +110,7 @@ public class GameLogic implements Serializable{
                 }
                 actionPoints = 3; //új kör kezdete: visszaállítjuk az actionPoints-ot
                 currentPlayer = students.get(currentPlayerIndex);
+                JOptionPane.showMessageDialog(null, "Következő játékos: "+board.objectToString(currentPlayer));
             }
     }
 
@@ -135,6 +136,7 @@ public class GameLogic implements Serializable{
                 currentPlayer = students.get(currentPlayerIndex);
                 System.out.println("currentPlayer "+ currentPlayerIndex);
                 System.out.println("at end: "+actionPoints);
+                JOptionPane.showMessageDialog(null, "Következő játékos: "+board.objectToString(currentPlayer));
             }
             view.update();
         }
@@ -182,6 +184,7 @@ public class GameLogic implements Serializable{
         this.otherPlayers.add(p);
     }
 
-
-
+    public int getRemainingRounds(){
+        return actionPoints;
+    }
 }
