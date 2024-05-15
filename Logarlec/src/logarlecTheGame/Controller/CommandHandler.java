@@ -240,11 +240,11 @@ public class CommandHandler {
             String room = cmd[1];
 
             Room roomRef = (Room)board.stringToObject(room);
-            Room newRoom = board.forceSplit(roomRef);
+            //Room newRoom = board.forceSplit(roomRef);
 
             outputString += room;
             outputString += " split, uj szoba: ";
-            outputString += board.objectToString(newRoom);
+           // outputString += board.objectToString(newRoom);
 
             outWriter(outputString);
         }
