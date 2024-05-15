@@ -7,7 +7,6 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 import logarlecTheGame.Model.Board;
-import logarlecTheGame.Model.Janitor;
 import logarlecTheGame.Model.Player;
 import logarlecTheGame.Model.Student;
 import logarlecTheGame.Model.Teacher;
@@ -95,7 +94,8 @@ public class GameLogic implements Serializable{
         JOptionPane.showMessageDialog(null, "died: "+ board.objectToString(student));
         if (students.isEmpty()) {
             endGame(false);
-        }if(student==currentPlayer){
+        }
+        if(student==currentPlayer){
         currentPlayerIndex++;
                 System.out.println(currentPlayerIndex);
                 if (currentPlayerIndex >= students.size()) {

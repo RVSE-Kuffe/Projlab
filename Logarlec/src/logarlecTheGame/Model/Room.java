@@ -97,7 +97,6 @@ public class Room implements Serializable{
     }
 
     public boolean mergeRoom(Room r1){
-        ArrayList<Door> newDoors = new ArrayList<>();
         for(Item i:itemList ){
             r1.addItem(i);
         }
@@ -105,9 +104,8 @@ public class Room implements Serializable{
             r1.addPlayer(p);
         }
         for(Door d:doorList ){
-            newDoors.add(d.changeRoom(r1,this));
+            d.changeRoom(r1,this);
         }
-        doorList.addAll(newDoors);
         return true;
     }
 
