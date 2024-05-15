@@ -3,18 +3,12 @@ package logarlecTheGame;
 import java.io.*;
 import java.util.*;
 
-import javax.swing.JFrame;
-import javax.swing.WindowConstants;
-
 import logarlecTheGame.Controller.CommandHandler;
 import logarlecTheGame.Model.Board;
-import logarlecTheGame.View.BoardPanel;
 import logarlecTheGame.View.GameMenu;
-import logarlecTheGame.View.View;
 
 public class App {
 
-    //static boolean toConsole = true;
     static char chooser = 'd';
     static Scanner scanner = new Scanner(System.in);
 
