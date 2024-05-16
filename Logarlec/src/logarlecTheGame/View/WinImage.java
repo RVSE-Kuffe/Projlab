@@ -38,12 +38,5 @@ public class WinImage extends JFrame {
 
         add(panel);
     }
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            WinImage winImage = new WinImage();
-            winImage.setVisible(true);
-        });
-    }
 }
 

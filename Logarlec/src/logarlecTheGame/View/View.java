@@ -71,6 +71,9 @@ public class View implements Serializable{
     }
 
     public void update(){
+        if(gameLogic.isGameEnded()){
+            endGame();
+        }
         Student p=gameLogic.getCurrentPlayer();
         Board b=gameLogic.getBoard();
         actionPanel.update(p,b);
@@ -80,5 +83,18 @@ public class View implements Serializable{
 
     public void vTurn(){
         gameLogic.turn();
+    }
+
+    public void endGame(){
+        if(gameLogic.getWin()){
+            //gameLogic.endGame(false);
+            frame.setVisible(false);
+            win.setVisible(true);
+        }
+        else{
+            frame.setVisible(false);
+            loose.setVisible(true);
+        }
+        System.exit(0);
     }
 }

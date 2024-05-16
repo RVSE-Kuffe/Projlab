@@ -21,6 +21,7 @@ public class GameLogic implements Serializable{
     private Student currentPlayer;
     private int currentPlayerIndex;
     private int actionPoints;
+    private boolean win;
 
     public GameLogic(int numberOfStudents){
         board = new Board(this);
@@ -80,6 +81,10 @@ public class GameLogic implements Serializable{
         actionPoints=3;
         board.init(students, otherPlayers);
         setCurrentPlayer(students.get(currentPlayerIndex));
+    }
+
+    public boolean getWin(){
+        return win;
     }
 
     public void healAll(){
@@ -143,11 +148,12 @@ public class GameLogic implements Serializable{
 
     public void endGame(boolean won) {
         if (won) {
+            win=true;
             JOptionPane.showMessageDialog(null, "Gratulálunk, nyertek!");
         } else {
+            win=false;
             JOptionPane.showMessageDialog(null, "Sajnos vesztettetek...");
         }
-        System.exit(0);
     }
 
     public void setCurrentPlayer(Student player) {
@@ -166,7 +172,7 @@ public class GameLogic implements Serializable{
         this.currentPlayerIndex =index;
     }
 
-    private boolean isGameEnded() {
+    public boolean isGameEnded() {
         if (students.isEmpty()) {
             endGame(false); // Ha üres a diákok listája, akkor veszítettek
             return true;
