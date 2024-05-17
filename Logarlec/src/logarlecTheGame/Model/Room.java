@@ -105,7 +105,6 @@ public class Room implements Serializable{
         }
         for(Door d:doorList ){
             d.changeRoom(r1,this);
-            r1.addDoor(d);
         }
         return true;
     }
