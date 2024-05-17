@@ -133,11 +133,12 @@ public class GameLogic implements Serializable{
                     //System.out.println("itt");
                     for (Player player : otherPlayers) {
                         player.randomAction();
+                        if(board.objectToString(player)=="janitor1")System.out.println(board.objectToString(player.getLocation()));
                     }
                     healAll();
                     
                     board.iterate();
-                    currentPlayerIndex = 0;
+                     currentPlayerIndex = 0;
                 }
                 actionPoints = 3; //új kör kezdete: visszaállítjuk az actionPoints-ot
                 currentPlayer = students.get(currentPlayerIndex);
@@ -177,7 +178,7 @@ public class GameLogic implements Serializable{
 
     public boolean isGameEnded() {
         if (students.isEmpty()) {
-            //endGame(false); // Ha üres a diákok listája, akkor veszítettek
+            endGame(false); // Ha üres a diákok listája, akkor veszítettek
             return true;
         }
         return false;
