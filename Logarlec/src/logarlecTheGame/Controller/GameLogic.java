@@ -126,7 +126,7 @@ public class GameLogic implements Serializable{
             actionPoints --;
             //System.out.println("before"+actionPoints);
             if (currentPlayer.getIsStunned() || actionPoints == 0) {
-                System.out.println(actionPoints);
+                //System.out.println(actionPoints);
                 currentPlayerIndex++;
                 //System.out.println(currentPlayerIndex);
                 if (currentPlayerIndex >= students.size()) {
@@ -177,7 +177,7 @@ public class GameLogic implements Serializable{
 
     public boolean isGameEnded() {
         if (students.isEmpty()) {
-            endGame(false); // Ha üres a diákok listája, akkor veszítettek
+            //endGame(false); // Ha üres a diákok listája, akkor veszítettek
             return true;
         }
         return false;

@@ -253,6 +253,9 @@ public class Room implements Serializable{
             if(cleaner){
                 returnString.append("cleaner\n");
             }
+            if(stickyCount>=5){
+                returnString.append("sticky\n");
+            }
         }
         return returnString.toString();
     }
