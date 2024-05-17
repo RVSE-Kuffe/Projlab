@@ -25,6 +25,7 @@ public class ActionPanel extends JPanel{
         //mainPanel.setLayout(null);
         this.student=s;
         this.board=b;
+        this.setBackground(Color.YELLOW);
         view = v;
         //JPanel panel = new JPanel();
         this.setLayout(new GridLayout(0, 3, 10, 10));
@@ -37,6 +38,7 @@ public class ActionPanel extends JPanel{
         s1.setFont(font);
         this.add(s1);
         roomItemBox = new JComboBox<>();
+        roomItemBox.setBackground(Color.CYAN);
         this.add(roomItemBox);
         JButton pickUpButton = new JButton("Tárgyfelvétel");
         pickUpButton.addActionListener(new ActionListener() {    
@@ -51,6 +53,7 @@ public class ActionPanel extends JPanel{
         s2.setFont(font);
         this.add(s2);
         playerItemBox1 = new JComboBox<>();
+        playerItemBox1.setBackground(Color.CYAN);
         this.add(playerItemBox1);
         JButton putDownButton = new JButton("Tárgyletétel");
         putDownButton.addActionListener(new ActionListener() {    
@@ -65,6 +68,7 @@ public class ActionPanel extends JPanel{
         s3.setFont(font);
         this.add(s3);
         playerItemBox2 = new JComboBox<>();
+        playerItemBox2.setBackground(Color.CYAN);
         this.add(playerItemBox2);
         JButton pairButton = new JButton("Párosítás");
         pairButton.addActionListener(new ActionListener() {    
@@ -79,6 +83,7 @@ public class ActionPanel extends JPanel{
         s4.setFont(font);
         this.add(s4);
         roomDoorBox = new JComboBox<>();
+        roomDoorBox.setBackground(Color.CYAN);
         this.add(roomDoorBox);
         JButton moveButton = new JButton("Ajtóhasználat");
         moveButton.addActionListener(new ActionListener() {    

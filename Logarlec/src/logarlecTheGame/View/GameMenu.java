@@ -75,6 +75,7 @@ public class GameMenu extends JFrame {
         playerCountField.setFont(buttonFont); // Betűméret beállítása
         playerPanel.add(playerCountField);
         warningMessage = new JLabel("Egy számot kell megadnod betűk nélkül");
+        warningMessage.setForeground(Color.RED);
         warningMessage.setVisible(false);
         playerPanel.add(warningMessage);
 

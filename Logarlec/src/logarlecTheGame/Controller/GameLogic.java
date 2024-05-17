@@ -21,7 +21,6 @@ public class GameLogic implements Serializable{
     private Student currentPlayer;
     private int currentPlayerIndex;
     private int actionPoints;
-    private boolean win;
     private transient View view;
 
     public GameLogic(int numberOfStudents){
@@ -157,11 +156,11 @@ public class GameLogic implements Serializable{
 
     public void endGame(boolean won) {
         if (won) {
-            win=true;
             JOptionPane.showMessageDialog(null, "Gratulálunk, nyertek!");
+            view.won();
         } else {
-            win=false;
             JOptionPane.showMessageDialog(null, "Sajnos vesztettetek...");
+            view.lost();
         }
     }
 

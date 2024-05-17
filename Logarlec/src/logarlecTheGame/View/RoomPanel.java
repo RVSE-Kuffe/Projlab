@@ -32,20 +32,31 @@ public class RoomPanel extends JPanel {
         setLayout(new BorderLayout());
 
         JPanel textFieldsPanel = new JPanel(new GridLayout(2, 1));
+        textFieldsPanel.setBackground(Color.YELLOW);
+
+        Font font = new Font("Arial", Font.PLAIN, 20);
 
         roomAttributesField = new JTextField();
+        roomAttributesField.setBackground(Color.YELLOW);
+        roomAttributesField.setFont(font);
         roomAttributesField.setEditable(false);
         textFieldsPanel.add(roomAttributesField);
 
         playersField = new JTextField();
+        playersField.setBackground(Color.YELLOW);
+        playersField.setFont(font);
         playersField.setEditable(false);
         textFieldsPanel.add(playersField);
 
         currentPlayerField = new JTextField();
+        currentPlayerField.setBackground(Color.YELLOW);
+        currentPlayerField.setFont(font);
         currentPlayerField.setEditable(false);
         textFieldsPanel.add(currentPlayerField);
 
         remainingRoundsField = new JTextField();
+        remainingRoundsField.setBackground(Color.YELLOW);
+        remainingRoundsField.setFont(font);
         remainingRoundsField.setEditable(false);
         textFieldsPanel.add(remainingRoundsField);
 
@@ -58,6 +69,7 @@ public class RoomPanel extends JPanel {
             }
         });
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        buttonPanel.setBackground(Color.YELLOW);
         buttonPanel.add(saveButton);
         add(buttonPanel, BorderLayout.NORTH);
         update(s, board);

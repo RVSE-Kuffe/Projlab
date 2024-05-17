@@ -33,7 +33,6 @@ public class View implements Serializable{
 
         frame.setLayout(new GridLayout(2, 2));
 
-
         boardPanel = new BoardPanel(gameLogic.getCurrentPlayer(), gameLogic.getBoard());
         frame.add(boardPanel);
         boardPanel.update(gameLogic.getCurrentPlayer(), gameLogic.getBoard());
@@ -42,6 +41,7 @@ public class View implements Serializable{
         actionPanel = new ActionPanel(gameLogic.getCurrentPlayer(), gameLogic.getBoard(), this);
         frame.add(actionPanel);
         JPanel emptyPanel = new JPanel();
+        emptyPanel.setBackground(Color.YELLOW);
         frame.add(emptyPanel);
         frame.setVisible(true);
     }
@@ -71,9 +71,6 @@ public class View implements Serializable{
     }
 
     public void update(){
-        if(gameLogic.isGameEnded()){
-            endGame();
-        }
         Student p=gameLogic.getCurrentPlayer();
         Board b=gameLogic.getBoard();
         actionPanel.update(p,b);
@@ -85,16 +82,13 @@ public class View implements Serializable{
         gameLogic.turn();
     }
 
-    public void endGame(){
-        if(gameLogic.getWin()){
-            //gameLogic.endGame(false);
-            frame.setVisible(false);
-            win.setVisible(true);
-        }
-        else{
-            frame.setVisible(false);
-            loose.setVisible(true);
-        }
-        System.exit(0);
+    public void lost(){
+        frame.setVisible(false);
+        loose.setVisible(true);
+    }
+
+    public void won(){
+        frame.setVisible(false);
+        win.setVisible(true);
     }
 }

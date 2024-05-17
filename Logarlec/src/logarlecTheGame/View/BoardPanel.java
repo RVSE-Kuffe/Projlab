@@ -15,6 +15,7 @@ public class BoardPanel extends JPanel{
     public BoardPanel(Student currentPlayer, Board board) {
         this.currentPlayer = currentPlayer;
         this.board = board;
+        this.setBackground(Color.YELLOW);
         // Azonnal kirajzolunk valamit
     }
 
@@ -31,6 +32,7 @@ public class BoardPanel extends JPanel{
         int gapy = 10;
         int gapx=25;
 
+        
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < cols; col++) {
                 int x = col * (circleSize + gapx);
