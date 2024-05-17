@@ -103,6 +103,7 @@ public class GameMenu extends JFrame {
             GameLogic gl = new GameLogic(playerCount);
             this.setVisible(false);
             View view = new View(gl);
+            gl.setView(view);
             view.init();
 
         }
@@ -121,6 +122,7 @@ public class GameMenu extends JFrame {
             try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(selectedFile))) {
                 GameLogic gl = (GameLogic)in.readObject();
                 View view = new View(gl);
+                gl.setView(view);
                 this.setVisible(false);
                 view.init();
                 JOptionPane.showMessageDialog(this, "Loaded successfully!");
