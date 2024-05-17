@@ -1,3 +1,4 @@
-s: b6 - FAIL
-s: r b1 putDown
-s: b6 - OK
+r1 split, uj szoba: 
+r1: s1
+
+r1, 
