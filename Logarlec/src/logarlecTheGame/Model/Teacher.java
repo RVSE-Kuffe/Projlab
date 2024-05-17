@@ -45,7 +45,7 @@ public class Teacher extends Player {
      */
     @Override
     public void kill(Player p){
-        p.die();
+        if(!stunned) p.die();
     }
 
 

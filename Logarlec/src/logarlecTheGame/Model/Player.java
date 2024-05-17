@@ -11,6 +11,7 @@ public class Player implements PickUp, GasProtect, Serializable{
     protected boolean stunned;
     protected Room location;
     protected List<Item> itemList;
+    protected int stunCounter;
 
     /**
      * player osztály konstruktora
@@ -21,6 +22,7 @@ public class Player implements PickUp, GasProtect, Serializable{
         location = l;
         itemList = new ArrayList<>();
         stunned = false;
+        stunCounter=0;
     }
 
     /**
@@ -159,7 +161,12 @@ public class Player implements PickUp, GasProtect, Serializable{
      * A játékos kábítását oldja fel
      */
     public void heal(){
-        stunned = false;
+        if(stunned) stunCounter++;
+        if(stunned&&stunCounter==2){
+            stunned=false;
+            stunCounter=0;
+            System.out.println("heal");
+        }
     }
 
     /**
