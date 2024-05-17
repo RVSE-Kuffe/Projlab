@@ -123,14 +123,18 @@ public class ActionPanel extends JPanel{
 
     public void pair(){
         try{
+            if(playerItemBox1.getSelectedItem()!=null &&playerItemBox2.getSelectedItem()!=null){
             Transistor t1 = (Transistor)board.stringToObject((String)playerItemBox1.getSelectedItem());
             Transistor t2 = (Transistor)board.stringToObject((String)playerItemBox2.getSelectedItem());
             student.pair(t1, t2);
+            }
         }
         catch(ClassCastException e){
+            if(playerItemBox1.getSelectedItem()!=null &&playerItemBox2.getSelectedItem()!=null){
             Item i1 = (Item)board.stringToObject((String)playerItemBox1.getSelectedItem());
             Item i2 = (Item)board.stringToObject((String)playerItemBox2.getSelectedItem());
             student.pair(i1, i2);
+            }
         }
     }
 
