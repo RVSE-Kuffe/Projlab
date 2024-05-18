@@ -83,10 +83,6 @@ public class GameLogic implements Serializable{
         setCurrentPlayer(students.get(currentPlayerIndex));
     }
 
-    public boolean getWin(){
-        return win;
-    }
-
     public void healAll(){
         for(int i = 0; i < students.size(); i++){
             students.get(i).heal();
@@ -101,6 +97,7 @@ public class GameLogic implements Serializable{
         JOptionPane.showMessageDialog(null, "died: "+ board.objectToString(student));
         if (students.isEmpty()) {
             endGame(false);
+            return;
         }
         if(student==currentPlayer){
         currentPlayerIndex++;
@@ -156,10 +153,10 @@ public class GameLogic implements Serializable{
 
     public void endGame(boolean won) {
         if (won) {
-            JOptionPane.showMessageDialog(null, "Gratulálunk, nyertek!");
+            //JOptionPane.showMessageDialog(null, "Gratulálunk, nyertek!");
             view.won();
         } else {
-            JOptionPane.showMessageDialog(null, "Sajnos vesztettetek...");
+            //JOptionPane.showMessageDialog(null, "Sajnos vesztettetek...");
             view.lost();
         }
     }
