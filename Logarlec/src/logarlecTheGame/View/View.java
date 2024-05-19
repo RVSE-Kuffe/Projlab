@@ -3,7 +3,6 @@ import javax.swing.*;
 
 import logarlecTheGame.Controller.GameLogic;
 import logarlecTheGame.Model.Board;
-import logarlecTheGame.Model.Player;
 import logarlecTheGame.Model.Student;
 
 import java.awt.*;
@@ -85,6 +84,9 @@ public class View implements Serializable{
     public void lost(){
         frame.setVisible(false);
         loose.setVisible(true);
+        //ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+        //Runnable task = () -> System.exit(0);
+        //scheduler.schedule(task, 10, TimeUnit.SECONDS);
     }
 
     public void won(){
