@@ -133,6 +133,10 @@ public class GameLogic implements Serializable{
                         if(board.objectToString(player)=="janitor1")System.out.println(board.objectToString(player.getLocation()));
                     }
                     healAll();
+
+                    if(students.size() == 0){
+                        return;
+                    }
                     
                     board.iterate();
                      currentPlayerIndex = 0;
