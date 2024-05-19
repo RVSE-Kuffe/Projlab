@@ -2,6 +2,8 @@ package logarlecTheGame.Model;
 
 import java.io.Serializable;
 
+import javax.swing.JOptionPane;
+
 public class Door implements Serializable {
     boolean validTo = true;
     Room whereTo;
@@ -46,7 +48,7 @@ public class Door implements Serializable {
                     whereFrom.pvp(p);
                     return true;
             }
-        }         
+        }   
         return false;
     
     }

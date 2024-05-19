@@ -93,13 +93,31 @@ public class Board implements CycleBased, RoomPairing, Serializable{
      */
     public boolean forceMerge(Room r1, Room r2){
         if(r1.getCapacity()>=r2.getCapacity() && (r1.getPlayerCount()+r2.getPlayerCount()<=r1.getCapacity())){
-            JOptionPane.showMessageDialog(null, "merge!"+ objectToString(r1)+ " másik: "+ objectToString(r2));
-            return r1.acceptPairing(this,r2);
+            //JOptionPane.showMessageDialog(null, "merge!"+ objectToString(r1)+ " másik: "+ objectToString(r2));
+            //return r1.acceptPairing(this,r2);
+            if((r1.acceptPairing(this,r2)==true)){
+                JOptionPane.showMessageDialog(null, "merge!"+ objectToString(r1)+ " másik: "+ objectToString(r2));
+                return true;
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Sikertelen merge");
+                return false;
+            }
         }
         if(r2.getCapacity()>r1.getCapacity() && (r1.getPlayerCount()+r2.getPlayerCount()<=r2.getCapacity())){
-            JOptionPane.showMessageDialog(null, "merge!"+ objectToString(r2)+ " másik: "+ objectToString(r1));
-            return r1.acceptPairing(this,r2);
+            //JOptionPane.showMessageDialog(null, "merge!"+ objectToString(r2)+ " másik: "+ objectToString(r1));
+            //return r1.acceptPairing(this,r2);
+            if((r1.acceptPairing(this,r2)==true)){
+                JOptionPane.showMessageDialog(null, "merge!"+ objectToString(r2)+ " másik: "+ objectToString(r1));
+                return true;
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Sikertelen merge");
+                return false;
+            }
+           
         }
+        JOptionPane.showMessageDialog(null, "Sikertelen merge");
         return false;
     }
 

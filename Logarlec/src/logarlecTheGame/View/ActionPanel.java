@@ -142,7 +142,9 @@ public class ActionPanel extends JPanel{
     public void move(){
         if(roomDoorBox.getSelectedItem()!=null){
         Door temp = (Door)board.stringToObject((String)roomDoorBox.getSelectedItem());
-        student.changeR(temp);
+        if(!student.changeR(temp)){
+            JOptionPane.showMessageDialog(null, "Sikertelen átlépés");
+        }
         }
         else JOptionPane.showMessageDialog(null, "rontott kör!");
     }

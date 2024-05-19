@@ -29,7 +29,7 @@ public class View implements Serializable{
     public void init() {
         frame = new JFrame("Game by ripgyork");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(800, 600);
+        frame.setSize(1000, 700);
 
         frame.setLayout(new GridLayout(2, 2));
 

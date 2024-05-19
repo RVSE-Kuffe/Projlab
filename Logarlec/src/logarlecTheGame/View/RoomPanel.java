@@ -88,7 +88,7 @@ public class RoomPanel extends JPanel {
     }
 
     public void updateRemainingRounds(){
-        remainingRoundsField.setText("Hátralévő körök száma: " + gameLogic.getRemainingRounds());
+        remainingRoundsField.setText("Hátralévő akciók száma: " + gameLogic.getRemainingRounds());
     }
 
     public void update(Student p, Board b){
