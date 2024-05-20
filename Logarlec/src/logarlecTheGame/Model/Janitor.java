@@ -9,7 +9,13 @@ public class Janitor extends Player {
         super(i, l);
     }
 
-    //random lepes
+   /**
+ * Véletlenszerű cselekvést hajt végre a takarító.
+ * Ha a takarító nem stunned, akkor véletlenszerűen dönt
+ * Ha nincsenek ajtók a jelenlegi szobában(de ez nem lehetséges), akkor a függvény false értékkel tér vissza.
+ * Ha van legalább egy ajtó a jelenlegi szobában, akkor a takarító véletlenszerűen választ egyet és megpróbál rajta átmenni.
+ * @return true, ha a takarító sikeresen változtat szobát, egyébként false
+ */
     @Override
     public boolean randomAction(){
         if(!stunned){
@@ -90,7 +96,7 @@ public class Janitor extends Player {
      * @param i     Az eldobott tárgy
      */
     @Override
-    public void dropItem(Item i){/*This shouldn't do enything at all */}
+    public void dropItem(Item i){/*This shouldn't do anything at all */}
 
     /**
      * Játékosok megölésével próbálkozik, kezdeményezi azt
@@ -158,11 +164,19 @@ public class Janitor extends Player {
     public void setRoom(Room r){
         this.location=r;
     }
+
+    /**
+ * Szobatisztítást végez a takarító jelenlegi szobában.
+ */
     @Override
     public void cleanRoom(){
         this.location.makeUnGassed();
       
     }
+    /**
+ * A játékosok kiküldését végzi el a takarító jelenlegi szobájából.
+ * A metódus kiküldi a játékosokat a szobából, majd visszaállítja a szoba ragadósságát.
+ */
     @Override
     public void sendPlayersOut(){
         this.location.sendOut(this);

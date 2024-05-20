@@ -7,11 +7,22 @@ import logarlecTheGame.Controller.CommandHandler;
 import logarlecTheGame.Model.Board;
 import logarlecTheGame.View.GameMenu;
 
+
+/**
+ * Az alkalmazás belépési pontját tartalmazó osztály.
+ */
 public class App {
 
     static char chooser = 'd';
     static Scanner scanner = new Scanner(System.in);
 
+
+    /**
+     * Fájlba írja a megadott kimeneti listát soronként.
+     * 
+     * @param outputFile    A kimeneti fájl, amibe írni kell.
+     * @param output        A kimeneti lista, amelyet a fájlba kell írni.
+     */
 
     static void writeToFile(File outputFile, List<String> output){  //Paraméterként egy file-t kap, amibe írnia kell és egy string listát, melynek elemeit külön sorokba írja ki
         try(BufferedWriter writer = new BufferedWriter(new FileWriter(outputFile))) {  
@@ -22,6 +33,10 @@ public class App {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Tesztek futtatása a megadott tesztfájlokból.
+     */
 
     public static void runTests(){
         Board board = new Board();
@@ -60,6 +75,9 @@ public class App {
         }
     }
 
+    /**
+     * Konzolos játék futtatása.
+     */
     public static void runConsoleGame(){
         Board board = new Board();
         String cmd = null;
@@ -70,11 +88,20 @@ public class App {
         }
     }
 
+    /**
+     * Grafikus játék futtatása.
+     */
     public static void runGraphicalGame(){
         GameMenu gm = new GameMenu();
         gm.setVisible(true);
     }
 
+    /**
+     * Az alkalmazás belépési pontja.
+     * 
+     * @param args  A parancssori argumentumok.
+     * @throws Exception    Kivétel dobása, ha hiba történik.
+     */
     public static void main(String[] args) throws Exception {
         
         if(args.length != 1){
