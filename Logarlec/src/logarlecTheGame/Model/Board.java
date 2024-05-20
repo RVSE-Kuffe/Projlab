@@ -261,6 +261,9 @@ public class Board implements CycleBased, RoomPairing, Serializable{
         int choice= random.nextInt(3);
         switch(choice){
             case 1:
+                if(roomList.size()<=3){
+                    break;
+                }
                 int index1=random.nextInt(roomList.size());
                 int index2=random.nextInt(roomList.size());
                 while(index2==index1){
@@ -269,6 +272,9 @@ public class Board implements CycleBased, RoomPairing, Serializable{
                 forceMerge(roomList.get(index1), roomList.get(index2));
                 break;
             case 2:
+                if(roomList.size()>=16){
+                    break;
+                }
                 int index=random.nextInt(roomList.size());
                 forceSplit(roomList.get(index));
                 break;
