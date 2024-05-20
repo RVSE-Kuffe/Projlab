@@ -20,6 +20,12 @@ public class ActionPanel extends JPanel{
     JComboBox<String> playerItemBox2;
     JComboBox<String> roomDoorBox;
 
+    /**
+     * konstruktor, inicializálja és elrendezi az elemeket a panelen
+     * @param s     a student, akinek a köre van 
+     * @param b     a board, amin rajta vannak
+     * @param v     a view, aminek a része a panel
+     */
     public ActionPanel(Student s, Board b, View v) {
         //JPanel mainPanel = new JPanel();
         //mainPanel.setLayout(null);
@@ -97,12 +103,20 @@ public class ActionPanel extends JPanel{
         this.update(s, b);
     }
 
+    /**
+     * beállítja, hogy ki az éppen aktuális játékos, és milyen pályán vannak
+     * @param s     az éppen aktuális student      
+     * @param b     az éppen aktuális pálya
+     */
     public void update(Player s, Board b){
         student = (Student)s;
         board = b;
         updateBoxes();
     }
 
+    /**
+     * törli a comboBoxok tartalmát, majd feltölti az éppen aktuális játékos és szoba dolgaival
+     */
     public void updateBoxes(){
         roomItemBox.removeAllItems();
         for (int i = 0; i < student.getLocation().items().size(); i++) {
@@ -122,6 +136,9 @@ public class ActionPanel extends JPanel{
         } 
     }
 
+    /**
+     * megpróbálja összepárosítani a comboboxokban kiválasztott tárgyakat
+     */
     public void pair(){
         try{
             if(playerItemBox1.getSelectedItem()!=null &&playerItemBox2.getSelectedItem()!=null){
@@ -139,6 +156,9 @@ public class ActionPanel extends JPanel{
         }
     }
 
+    /**
+     * kezdeményezi az éppen aktuális játékos átlépését a comboboxban kiválasztott ajtón
+     */
     public void move(){
         if(roomDoorBox.getSelectedItem()!=null){
         Door temp = (Door)board.stringToObject((String)roomDoorBox.getSelectedItem());
@@ -149,6 +169,9 @@ public class ActionPanel extends JPanel{
         else JOptionPane.showMessageDialog(null, "rontott kör!");
     }
 
+    /**
+     * az éppen aktuális játékos felveszi a comboboxban kiválasztott tárgyat a szobából
+     */
     public void pickUp(){
         if(roomItemBox.getSelectedItem()!=null){
         Item i = (Item)board.stringToObject((String)roomItemBox.getSelectedItem());
@@ -157,6 +180,9 @@ public class ActionPanel extends JPanel{
         else JOptionPane.showMessageDialog(null, "rontott kör!");
     }
 
+    /**
+     * az éppen aktuális játékos leteszi a comboboxban kiválasztott tárgyát
+     */
     public void putDown(){
         if(playerItemBox1.getSelectedItem()!=null){
         Item i = (Item)board.stringToObject((String)playerItemBox1.getSelectedItem());
