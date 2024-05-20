@@ -57,17 +57,5 @@ public class LostImage extends JFrame {
 
         add(panel);
     }
-
-    /**
-     * A főmetódus, ami létrehozza és megjeleníti az "You lost" feliratot tartalmazó ablakot.
-     *
-     * @param args Parancssori argumentumok (nem használjuk).
-     */
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            LostImage lostImage = new LostImage();
-            lostImage.setVisible(true);
-        });
-    }
 }
 
