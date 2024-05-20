@@ -19,6 +19,12 @@ import java.util.Random;
 
 import javax.swing.JOptionPane;
 
+/**
+ * A Board osztály a játék tábláját reprezentálja.
+ * Kezeli a játék elemeinek hozzáadását és eltávolítását, 
+ * valamint azok nevét és objektumokat tartalmazó "térképeket".
+ * Körfüggő és szerializálható
+ */
 public class Board implements CycleBased, RoomPairing, Serializable{
     private List<Room> roomList = new ArrayList<>();
     private Random random=new Random();
@@ -27,69 +33,116 @@ public class Board implements CycleBased, RoomPairing, Serializable{
     private  Map<Object, String> bNames = new HashMap<>();
     private GameLogic gl;
 
+
+     /**
+     * Objektum hozzáadása a táblához névvel együtt.
+     *
+     * @param o   A hozzáadni kívánt objektum.
+     * @param str Az objektumhoz tartozó név.
+     */
     public void addToBoard(Object o, String str){
         bObjects.put(str, o);
         bNames.put(o, str);
     }
 
+
+    /**
+     * Objektum eltávolítása a tábláról a nevével együtt.
+     *
+     * @param o   Az eltávolítandó objektum.
+     * @param str Az objektumhoz tartozó név.
+     */
     public void deleteFromBoard(Object o, String str){
         bObjects.remove(str, o);
         bNames.remove(o, str);
     }
 
+
+    /**
+     * Név alapján objektum lekérése a tábláról.
+     *
+     * @param name Az objektum neve.
+     * @return A keresett objektum.
+     * @throws NullPointerException Ha az objektum nincs a térképen.
+     */
     public Object stringToObject(String name){
         Object o = bObjects.get(name);
         if(o == null) throw new NullPointerException(name+" is not in the Map");
         return o;
     }
-
+/**
+     * Objektum alapján név lekérése a tábláról.
+     *
+     * @param o A keresett objektum.
+     * @return Az objektumhoz tartozó név.
+     * @throws NullPointerException Ha az objektum nincs a térképen.
+     */
     public String objectToString(Object o){
         String name = bNames.get(o);
         if(name == null) throw new NullPointerException("Object is not in the Map");
         return name;
     }
 
+
+     /**
+     * Konstruktor a Board osztály példányosítására GameLogic paraméterrel.
+     *
+     * @param gl A játék logikáját kezelő GameLogic objektum.
+     */
     public Board(GameLogic gl) { 
         this.gl=gl;
     }
+
+    /**
+     * Alapértelmezett konstruktor a Board osztály példányosítására.
+     */
     public Board() { 
     }
 
+
+    /**
+     * Visszaadja a szobák listáját.
+     *
+     * @return A szobák listája.
+     */
     public List<Room> rooms(){
         return roomList;
     }
 
+
+    /**
+     * Iterálható objektum hozzáadása a iterálható listához.
+     *
+     * @param c Az iterálható objektum.
+     */
     public void addIterating(CycleBased c){
         cycleList.add(c);
     }
-    /**
-        Játék végét jelző függvény
-     */
 
-    public void gameOver(){/*TODO*/}
-    /**
-         * Szoba hozzáadása a pályához,
-         * pl. Splitnél
-         * @param r az új szoba
+     /**
+     * Szoba hozzáadása a pályához, pl. Splitnél.
+     *
+     * @param r1 Az új szoba.
      */
     public void addRoom(Room r1){
         roomList.add(r1);
     }
 
       /**
-         * Szoba törlése a pályáról
-         * pl. Mergenél
-         * @param r1 az törlendő szoba
+     * Szoba törlése a pályáról, pl. Mergenél.
+     *
+     * @param r1 Az törlendő szoba.
      */
     public void removeRoom(Room r1){
         roomList.remove(r1);
     }
 
     /**
-         * Szobák mergelése függvény
-         * @param r1 az egyik szoba
-         * @param r2 a másik szoba
-         * mindenképp mergel két szobát
+     * Szobák mergelése függvény.
+     *
+     * @param r1 Az egyik szoba.
+     * @param r2 A másik szoba.
+     * @return true, ha a merge sikeres, egyébként false.
      */
     public boolean forceMerge(Room r1, Room r2){
         if(r1.getCapacity()>=r2.getCapacity() && (r1.getPlayerCount()+r2.getPlayerCount()<=r1.getCapacity())){
@@ -121,6 +174,14 @@ public class Board implements CycleBased, RoomPairing, Serializable{
         return false;
     }
 
+
+    /**
+     * Két szoba párosítása.
+     *
+     * @param r1 Az első szoba.
+     * @param r2 A második szoba.
+     * @return true, ha a párosítás sikeres.
+     */
     public boolean pair(Room r1, Room r2){
         r2.mergeRoom(r1);
         this.removeRoom(r2);
@@ -128,29 +189,51 @@ public class Board implements CycleBased, RoomPairing, Serializable{
         return true;
     }
 
+    /**
+    * Eltávolítja az objektumot a térképről.
+    * @param o az objektum, amit el kell távolítani
+     */
     public void removeFromMap(Object o){
         String name = objectToString(o);
         bObjects.remove(o);
         bNames.remove(name);
     }
 
+    /**
+    * Párosít egy szobát egy elátkozott szobával.
+    * @param r1 az első szoba
+    * @param r2 az elátkozott szoba
+    * @return mindig false, mivel a párosítás nem megengedett
+    */
     public boolean pair(Room r1, CursedRoom r2){
         return false;
     }
 
+    /**
+    * Párosít egy elátkozott szobát egy szobával.
+    * @param r1 az elátkozott szoba
+    * @param r2 a szoba
+    * @return mindig false, mivel a párosítás nem megengedett
+    */
     public boolean pair(CursedRoom r1, Room r2){
         return false;
     }
 
+    /**
+ * Párosít két elátkozott szobát.
+ * @param r1 az első elátkozott szoba
+ * @param r2 a második elátkozott szoba
+ * @return mindig false, mivel a párosítás nem megengedett
+ */
     public boolean pair(CursedRoom r1, CursedRoom r2){
         return false;
     }
 
       /**
-         * Szobák mergelése függvény
-         * @param r a szoba amit feloszt
-         * mindenképp splitel egy szobát, és létrehoz egy újat
-     */
+ * Szobák felosztása függvény.
+ * @param r a szoba, amit fel kell osztani
+ * Mindig feloszt(split) egy szobát, és létrehoz egy újat.
+ */
     public void forceSplit(Room r){
         JOptionPane.showMessageDialog(null, "split!"+objectToString(r));
         Room newRoom= r.newRoom();
@@ -158,14 +241,21 @@ public class Board implements CycleBased, RoomPairing, Serializable{
        //return newRoom;
     }
 
-    /**
-         *játékos általi játék megnyerését jelző függvény
-     */
-
+   /**
+ * Jelzi, hogy a játékos megnyerte a játékot.
+ * Hívja a logika endGame függvényét
+ */
     public void win(){
         gl.endGame(true);
     }
 
+
+    /**
+ * Az iterációs ciklusokat végrehajtó függvény.
+ * Véletlenszerűen választ egy műveletet: 
+ * szobák összevonása, szobák felosztása, vagy semmi. 
+ * Ezután minden iteráció alapú objektum végrehajtja saját iterációs ciklusát.
+ */
     @Override
     public void iterate() {
         int choice= random.nextInt(3);
@@ -191,10 +281,21 @@ public class Board implements CycleBased, RoomPairing, Serializable{
         
     }
 
+    /**
+ * Visszaadja az iterációs ciklusokat tartalmazó listát.
+ * @return a ciklusok listája
+ */
+
     public List<CycleBased> getCycles(){
         return cycleList;
     }
 
+    /**
+ * Listázza a szobákat.
+ * @param withPlayers ha igaz, a szobákban lévő játékosokat is listázza
+ * @param withItems ha igaz, a szobákban lévő tárgyakat is listázza
+ * @return a szobák listája stringként
+ */
     public String listRooms(boolean withPlayers, boolean withItems){
         StringBuilder sb = new StringBuilder("");
         if(withPlayers){
@@ -216,6 +317,9 @@ public class Board implements CycleBased, RoomPairing, Serializable{
         return sb.toString();
     }
 
+    /**
+ * Serializálja a táblát.
+ */
     public void serialize(){
         try(FileOutputStream fileOut = new FileOutputStream("Logarlec/board.ser");){
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
@@ -227,6 +331,9 @@ public class Board implements CycleBased, RoomPairing, Serializable{
         }
     }
 
+    /**
+ * Deserializálja a táblát.
+ */
     public void deserialize(){
         try (FileInputStream fileIn = new FileInputStream("Logarlec/board.ser");){
             ObjectInputStream in = new ObjectInputStream(fileIn);
@@ -244,12 +351,16 @@ public class Board implements CycleBased, RoomPairing, Serializable{
 
     
     /**
-        Pálya inicializálás függvény
-     */
+ * Inicializálja a szobákat, ajtókat és tárgyakat a játék kezdete előtt.
+ * A megadott diákokat és egyéb játékosokat is elhelyezi a megfelelő szobákban.
+ *
+ * @param students A játékban résztvevő diákok listája.
+ * @param otherPlayers Az egyéb játékosok listája.
+ */
 
     public void init(List<Student> students, List<Player> otherPlayers){
     
-    //szobak
+     // Szobák inicializálása
     Room room1= new Room(1,students.size(), this);
     this.addRoom(room1);
     this.addToBoard(room1, "Room1");
@@ -302,7 +413,7 @@ public class Board implements CycleBased, RoomPairing, Serializable{
 //---------------------------------------------------
 //---------------------------------------------------
     
-    //ajtok
+     // Ajtók inicializálása
     Door door12 = new Door(room1, room2, true, true);
     room1.addDoor(door12);
     room2.addDoor(door12);
@@ -404,6 +515,8 @@ public class Board implements CycleBased, RoomPairing, Serializable{
     addToBoard(door1011, "Door1011");
 //---------------------------------------------------
 //---------------------------------------------------
+
+ // Tárgyak inicializálása, és helyükre tétele
     Transistor transistor1 =new Transistor();
     addToBoard(transistor1, "transistor1");
     room1.addItem(transistor1);
@@ -489,7 +602,7 @@ public class Board implements CycleBased, RoomPairing, Serializable{
     room4.addItem(logarlec2);
 //-------------------------------------------------------
 //-------------------------------------------------------
-
+//Játékosok szobákhoz adása
     for(int i =0; i<students.size();i++){
         room1.addPlayer(students.get(i));
     }
@@ -505,6 +618,12 @@ public class Board implements CycleBased, RoomPairing, Serializable{
 
     }
 
+    /**
+ * Egy diák halálakor hívódik meg ez a függvény. A függvény értesíti a logikát
+ * a diák haláláról.
+ *
+ * @param p A halott diák
+ */
     public void studentDied(Player p) {
         gl.deadStudent(p);
     }
