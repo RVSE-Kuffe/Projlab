@@ -160,7 +160,7 @@ public class Board implements CycleBased, RoomPairing, Serializable{
         if(r2.getCapacity()>r1.getCapacity() && (r1.getPlayerCount()+r2.getPlayerCount()<=r2.getCapacity())){
             //JOptionPane.showMessageDialog(null, "merge!"+ objectToString(r2)+ " másik: "+ objectToString(r1));
             //return r1.acceptPairing(this,r2);
-            if((r1.acceptPairing(this,r2)==true)){
+            if((r2.acceptPairing(this,r1)==true)){
                 JOptionPane.showMessageDialog(null, "merge!"+ objectToString(r2)+ " másik: "+ objectToString(r1));
                 return true;
             }
