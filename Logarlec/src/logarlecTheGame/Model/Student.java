@@ -138,6 +138,15 @@ public class Student extends Player implements StudentProtection, PutDown, Pairi
         this.location.makeGassed();
     }
 
+    
+
+/**
+ * A légfrissítő használata.
+ * A karakter ledobja a légfrissítőt, és a jelenlegi szoba gáztalan lesz.
+ * Emellett hamissá teszi a légfrissítőt.
+ * 
+ * @param a A használt légfrissítő objektum.
+ */
     public void use(Airfreshener a) {
         dropItem(a);
         this.location.makeUnGassed();
@@ -145,6 +154,12 @@ public class Student extends Player implements StudentProtection, PutDown, Pairi
 
     }
 
+    /**
+ * Hamis légfrissítő használata.
+ * A karakter ledobja a hamis légfrissítőt.
+ * 
+ * @param a A használt hamis légfrissítő objektum.
+ */
     public void useFake(Airfreshener a) {
         dropItem(a);
     }

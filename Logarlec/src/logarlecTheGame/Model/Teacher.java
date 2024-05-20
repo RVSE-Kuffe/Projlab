@@ -3,6 +3,9 @@ package logarlecTheGame.Model;
 import java.util.Random;
 import logarlecTheGame.Model.Item.*;
 
+/**
+     * Tanárt reprezentáló osztály, aki ugyan úgy játékos
+     */
 public class Teacher extends Player {
     Random random=new Random();
 
@@ -15,7 +18,18 @@ public class Teacher extends Player {
     }
 
 
-    //Tanar random mozgasa
+    /**
+ * Véletlenszerű cselekvés végrehajtása
+ * Ha a tanár nem stunnolt, véletlenszerűen választ a lehetőségek között.
+ * Ha a véletlenszerűen választott cselekvés ajtón átlépés,
+ * akkor megpróbálja megváltoztatni a szobát.
+ * Ha az ajtón nem lehet átmenni vagy nincs ajtó a szobában, akkor nem hajt végre semmilyen cselekvést.
+ * Ha a véletlenszerűen választott cselekvés tárgy felvétele,
+ * akkor megpróbálja felvenni az adott szobában található tárgyat.
+ * Ha a tanárnak már 5 tárgya van, akkor nem vesz fel további tárgyat.
+ * 
+ * @return Igaz, ha a tanár véletlenszerű cselekvést hajtott végre, különben Hamis.
+ */
     @Override
     public boolean randomAction(){
         if(!stunned){
