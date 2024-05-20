@@ -3,8 +3,17 @@ package logarlecTheGame.View;
 import javax.swing.*;
 import java.awt.*;
 
+
+/**
+ * Egy ablak, ami "You lost" feliratot jelenít meg.
+ */
 public class LostImage extends JFrame {
 
+    /**
+     * Konstruktor az "You lost" felirat megjelenítéséhez.
+     * Beállítja az ablak címét, méretét és helyzetét.
+     * Létrehoz egy panelt, amire a szöveget és a háttér színt rajzolja.
+     */
     public LostImage() {
         setTitle("Lost Image");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -19,11 +28,21 @@ public class LostImage extends JFrame {
                 drawText(g);
             }
 
+            /**
+             * Kirajzolja a panel háttérszínét.
+             *
+             * @param g A Graphics objektum, amire rajzolunk.
+             */
             private void drawBackground(Graphics g) {
                 g.setColor(Color.BLACK); // Fekete háttér
                 g.fillRect(0, 0, getWidth(), getHeight());
             }
 
+            /**
+             * Kirajzolja az "You lost" feliratot.
+             *
+             * @param g A Graphics objektum, amire rajzolunk.
+             */
             private void drawText(Graphics g) {
                 Font font = new Font("Arial", Font.BOLD | Font.ITALIC, 150); // Nagyobb betűméret
                 g.setFont(font);
@@ -39,6 +58,11 @@ public class LostImage extends JFrame {
         add(panel);
     }
 
+    /**
+     * A főmetódus, ami létrehozza és megjeleníti az "You lost" feliratot tartalmazó ablakot.
+     *
+     * @param args Parancssori argumentumok (nem használjuk).
+     */
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             LostImage lostImage = new LostImage();

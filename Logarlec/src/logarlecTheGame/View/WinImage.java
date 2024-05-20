@@ -3,8 +3,16 @@ package logarlecTheGame.View;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Egy ablak, ami "You win" feliratot jelenít meg.
+ */
 public class WinImage extends JFrame {
 
+    /**
+     * Konstruktor az "You win" felirat megjelenítéséhez.
+     * Beállítja az ablak címét, méretét és helyzetét.
+     * Létrehoz egy panelt, amire a szöveget és a háttér színt rajzolja.
+     */
     public WinImage() {
         setTitle("Win Image");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -19,11 +27,21 @@ public class WinImage extends JFrame {
                 drawText(g);
             }
 
+            /**
+             * Kirajzolja a panel háttérszínét.
+             *
+             * @param g A Graphics objektum, amire rajzolunk.
+             */
             private void drawBackground(Graphics g) {
                 g.setColor(new Color(255, 255, 102)); // Citromsárga háttér
                 g.fillRect(0, 0, getWidth(), getHeight());
             }
 
+            /**
+             * Kirajzolja az "You win" feliratot.
+             *
+             * @param g A Graphics objektum, amire rajzolunk.
+             */
             private void drawText(Graphics g) {
                 Font font = new Font("Arial", Font.BOLD | Font.ITALIC, 150); // Kisebb betűméret
                 g.setFont(font);

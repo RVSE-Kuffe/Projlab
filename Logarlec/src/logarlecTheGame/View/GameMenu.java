@@ -12,11 +12,18 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 
+/**
+ * Egy menü ablak a játékhoz.
+ */
 public class GameMenu extends JFrame {
-    private JTextField playerCountField;
-    private JLabel warningMessage;
-    private transient JFileChooser fileChooser;
+    private JTextField playerCountField; // Játékosok számát megadó mező
+    private JLabel warningMessage; // Figyelmeztető üzenet
+    private transient JFileChooser fileChooser; // Fájlkiválasztó
 
+    /**
+     * Konstruktor a menü ablak létrehozásához.
+     * Beállítja az ablak címét és a felhasználói felület komponenseit.
+     */
     public GameMenu() {
         setTitle("Játék Menü");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -97,6 +104,11 @@ public class GameMenu extends JFrame {
         setVisible(true);
     }
 
+
+    /**
+     * Az indítás gomb eseménykezelője.
+     * Ellenőrzi a játékosok számának helyességét, majd elindítja a játékot.
+     */
     public void start(){
         String playerCountString = playerCountField.getText();
         try{
@@ -114,6 +126,10 @@ public class GameMenu extends JFrame {
         }
     }
 
+    /**
+     * A betöltés gomb eseménykezelője.
+     * Megnyit egy fájlkiválasztó dialógust, és betölti a kiválasztott játékállapotot.
+     */
     public void load(){
         fileChooser = new JFileChooser();
         int result = fileChooser.showOpenDialog(this);
