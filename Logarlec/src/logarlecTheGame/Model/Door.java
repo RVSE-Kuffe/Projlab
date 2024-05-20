@@ -80,8 +80,8 @@ public class Door implements Serializable {
             whereFrom=r1;
         }
         if(whereFrom==whereTo){
-            //whereTo=null;
-            //whereFrom=null;
+            whereTo=null;
+            whereFrom=null;
             r1.removeDoor(this);
             return;
         }
