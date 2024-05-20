@@ -141,16 +141,9 @@ public class CommandHandler {
             case "janitorRound":
                 janitorRound(cmd);
                 break;
-            case "gameLogic":
-                gameLogic();
-                break;
             default:
                 System.out.println("Ismeretlen parancs: " + commandType);
         }
-    }
-
-    private void gameLogic() {
-       GameLogic gl = new GameLogic(2);
     }
 
     private void pickUpItem(String[] cmd) {
@@ -239,12 +232,8 @@ public class CommandHandler {
             String outputString="";
             String room = cmd[1];
 
-            Room roomRef = (Room)board.stringToObject(room);
-            //Room newRoom = board.forceSplit(roomRef);
-
             outputString += room;
             outputString += " split, uj szoba: ";
-           // outputString += board.objectToString(newRoom);
 
             outWriter(outputString);
         }

@@ -2,8 +2,6 @@ package logarlecTheGame.Model;
 
 import java.io.Serializable;
 
-import javax.swing.JOptionPane;
-
 /**
  * Az ajtókat reprezentáló osztály, melyek két szoba közötti átjárók.
  */

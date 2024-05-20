@@ -121,7 +121,6 @@ public class App {
 
             default:
                 throw new IllegalArgumentException("No matching arguments. You should use [-play], [-test] or [-console]");
-                //break;
         }
     }
 }

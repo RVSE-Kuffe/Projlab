@@ -17,7 +17,6 @@ import logarlecTheGame.View.View;
  */
 public class GameLogic implements Serializable{
     
-    private static final long SerialVersionUID = 2L;
     /** A játék táblája. */
     private Board board;
 
@@ -167,7 +166,7 @@ public class GameLogic implements Serializable{
                     }
                     healAll();
 
-                    if(students.size() == 0){
+                    if(students.isEmpty()){
                         return;
                     }
                     
