@@ -12,17 +12,40 @@ import logarlecTheGame.Model.Student;
 import logarlecTheGame.Model.Teacher;
 import logarlecTheGame.View.View;
 
+/**
+ * A játék logikáját kezelő osztály.
+ */
 public class GameLogic implements Serializable{
     
     private static final long SerialVersionUID = 2L;
+    /** A játék táblája. */
     private Board board;
+
+    /** A játékban lévő diákok listája, őket irányítják a felhasználók */
     private List<Student> students;
+
+    /** A játékban lévő egyéb játékosok (tanárok, takarítók) listája */
     private List<Player> otherPlayers;
+
+    /** Az aktuális diák, akinek a köre van */
     private Student currentPlayer;
+
+    /** Az aktuális diák indexe */
     private int currentPlayerIndex;
+
+    /** Az aktuális körben megmaradt, felhasználható akciópontok száma */
     private int actionPoints;
+
+    /** A játék nézetét reprezentáló objektum */
     private transient View view;
 
+
+    /**
+     * Konstruktor, amely inicializálja a játékot a megadott számú diákkal, 
+     * ami a GameMenu-ben állítható be
+     * Ezen felül beállítja a kezdő játékost
+     * @param numberOfStudents A játékban résztvevő diákok száma
+     */
     public GameLogic(int numberOfStudents){
         board = new Board(this);
         students = new ArrayList<>();
@@ -83,6 +106,10 @@ public class GameLogic implements Serializable{
         setCurrentPlayer(students.get(currentPlayerIndex));
     }
 
+    /**
+     * Minden diákot és egyéb játékost megpróbál meggyógyítani
+     * Ciklusok (mindenki köre) után hívódik
+     */
     public void healAll(){
         for(int i = 0; i < students.size(); i++){
             students.get(i).heal();
@@ -92,18 +119,22 @@ public class GameLogic implements Serializable{
         }
     }
 
+
+    /**
+     * Kezeli a diák halálát, eltávolítja a listából és ellenőrzi a játék végét
+     * Ha az épp aktuális játékos halt meg továbbadja a kört
+     * @param student A meghalt diák.
+     */
     public void deadStudent(Player student) {
         students.remove(student);
-        JOptionPane.showMessageDialog(null, "died: "+ board.objectToString(student));
+        JOptionPane.showMessageDialog(null, "Student died: "+ board.objectToString(student));
         if (students.isEmpty()) {
             endGame(false);
             return;
         }
         if(student==currentPlayer){
         currentPlayerIndex++;
-                //System.out.println(currentPlayerIndex);
                 if (currentPlayerIndex >= students.size()) {
-                   // System.out.println("itt");
                     for (Player player : otherPlayers) {
                         player.randomAction();
                     }
@@ -114,23 +145,25 @@ public class GameLogic implements Serializable{
                 }
                 actionPoints = 3; //új kör kezdete: visszaállítjuk az actionPoints-ot
                 currentPlayer = students.get(currentPlayerIndex);
-                JOptionPane.showMessageDialog(null, "Következő játékos: "+board.objectToString(currentPlayer));
+                JOptionPane.showMessageDialog(null, "Next player: "+board.objectToString(currentPlayer));
             }
     }
-
+    /**
+     * A kör továbbadását kezelő függvény, vizsgálja a játék végét is
+     * Ha még van akciópontja az aktuális játékosnak, akkor csak csökkenti azt és frissíti a nézetet
+     * Ha már nincs vagy stunolva van akkor továbbadja a kört
+     * Ha már nincs diák akinek tovább lehetne adni (ő a lista legkésőbbi eleme), akkor elvégzi az egyéb játékosok lépéseit,
+     * megpróbál mindenkit gyógyítani és lépteti a körfüggő játékelemeket
+     */
     public void turn() {
         if (!isGameEnded()) {
             actionPoints --;
-            //System.out.println("before"+actionPoints);
+
             if (currentPlayer.getIsStunned() || actionPoints == 0) {
-                //System.out.println(actionPoints);
                 currentPlayerIndex++;
-                //System.out.println(currentPlayerIndex);
                 if (currentPlayerIndex >= students.size()) {
-                    //System.out.println("itt");
                     for (Player player : otherPlayers) {
                         player.randomAction();
-                        if(board.objectToString(player)=="janitor1")System.out.println(board.objectToString(player.getLocation()));
                     }
                     healAll();
 
@@ -143,44 +176,80 @@ public class GameLogic implements Serializable{
                 }
                 actionPoints = 3; //új kör kezdete: visszaállítjuk az actionPoints-ot
                 currentPlayer = students.get(currentPlayerIndex);
-                //System.out.println("currentPlayer "+ currentPlayerIndex);
-                //System.out.println("at end: "+actionPoints);
-                JOptionPane.showMessageDialog(null, "Következő játékos: "+board.objectToString(currentPlayer));
+                JOptionPane.showMessageDialog(null, "Next player: "+board.objectToString(currentPlayer));
             }
         }
         view.update();
     }
 
+
+    /**
+     * Beállítja a játék nézetét
+     * 
+     * @param v A játék nézete
+     */
     public void setView(View v){
         view = v;
     }
 
+
+    /**
+     * Befejezi a játékot, attól függően, hogy győzelem (true) vagy vesztés történt
+     * és meghívja a nézet megfelelő metódusát
+     * 
+     * @param won Igaz, ha a játékosok nyertek, hamis, ha vesztettek.
+     */
     public void endGame(boolean won) {
         if (won) {
-            //JOptionPane.showMessageDialog(null, "Gratulálunk, nyertek!");
             view.won();
         } else {
-            //JOptionPane.showMessageDialog(null, "Sajnos vesztettetek...");
             view.lost();
         }
     }
 
+    /**
+     * Beállítja az aktuális játékost
+     * 
+     * @param player Az aktuális játékos referenciája
+     */
     public void setCurrentPlayer(Student player) {
         this.currentPlayer = player;
     }
 
+    /**
+     * Visszaadja az aktuális játékost.
+     * 
+     * @return Az aktuális játékos.
+     */
     public Student getCurrentPlayer() {
         return this.currentPlayer;
     }
 
+
+     /**
+     * Visszaadja a játék tábláját
+     * 
+     * @return A játék táblája
+     */
     public Board getBoard() {
         return this.board;
     }
 
+     /**
+     * Beállítja az aktuális játékos indexét
+     * 
+     * @param index Az aktuális játékos indexe
+     */
     public void setCurrentPlayerIndex(int index) {
         this.currentPlayerIndex =index;
     }
 
+
+    /**
+     * Ellenőrzi, hogy véget ért-e a játék
+     * Akkor ér véget ebben az esetben ha már nincs több diák, ilyenkor vesztettek
+     * @return Igaz, ha véget ért, különben hamis
+     */
     public boolean isGameEnded() {
         if (students.isEmpty()) {
             endGame(false); // Ha üres a diákok listája, akkor veszítettek
@@ -189,10 +258,20 @@ public class GameLogic implements Serializable{
         return false;
     }
 
+    /**
+     * Hozzáad egy játékost az egyéb játékosok listájához
+     * 
+     * @param p A hozzáadandó játékos
+     */
     public void addToOtherPlayers(Player p){
         this.otherPlayers.add(p);
     }
 
+    /**
+     * Visszaadja az aktuális körben megmaradt akciópontokat
+     * 
+     * @return Az aktuális körben megmaradt akciópontok száma
+     */
     public int getRemainingRounds(){
         return actionPoints;
     }

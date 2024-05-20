@@ -25,7 +25,7 @@ public class GameMenu extends JFrame {
      * Beállítja az ablak címét és a felhasználói felület komponenseit.
      */
     public GameMenu() {
-        setTitle("Játék Menü");
+        setTitle("Game Menu");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JPanel mainPanel = new JPanel(new GridBagLayout());
@@ -75,13 +75,13 @@ public class GameMenu extends JFrame {
         playerPanel.setBackground(Color.LIGHT_GRAY);
         playerPanel.setLayout(new FlowLayout());
         playerPanel.setBorder(BorderFactory.createEmptyBorder(30, 10, 30, 10));
-        JLabel playerLabel = new JLabel("Játékosok száma: ");
+        JLabel playerLabel = new JLabel("No. of players: ");
         playerLabel.setFont(buttonFont); // Betűméret beállítása
         playerPanel.add(playerLabel);
         playerCountField = new JTextField(10);
         playerCountField.setFont(buttonFont); // Betűméret beállítása
         playerPanel.add(playerCountField);
-        warningMessage = new JLabel("Egy számot kell megadnod betűk nélkül");
+        warningMessage = new JLabel("You need to give a number (integer)");
         warningMessage.setForeground(Color.RED);
         warningMessage.setVisible(false);
         playerPanel.add(warningMessage);
