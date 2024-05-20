@@ -179,7 +179,7 @@ public class ActionPanel extends JPanel{
         if(roomDoorBox.getSelectedItem()!=null){
         Door temp = (Door)board.stringToObject((String)roomDoorBox.getSelectedItem());
         if(!student.changeR(temp)){
-            JOptionPane.showMessageDialog(null, "You can!t use this door (it is either closed or a one-way door)");
+            JOptionPane.showMessageDialog(null, "You can't use this door (it is either closed or a one-way door)");
         }
         }
         else JOptionPane.showMessageDialog(null, "No selected door, you wasted an actionpoint!");
@@ -191,7 +191,7 @@ public class ActionPanel extends JPanel{
     public void pickUp(){
         if(roomItemBox.getSelectedItem()!=null){
         Item i = (Item)board.stringToObject((String)roomItemBox.getSelectedItem());
-        if(!student.pickUpItem(i)) JOptionPane.showMessageDialog(null, "Your inventory is full, you wasted an actionpoint!");
+        if(!student.pickUpItem(i)) JOptionPane.showMessageDialog(null, "Either your inventory is full or the room is sticky, you can't pick up the selected item. You wasted an actionpoint!");
            }
         else JOptionPane.showMessageDialog(null, "No selected item, you wasted an actionpoint!");
     }
