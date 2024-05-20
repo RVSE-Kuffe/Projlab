@@ -4,6 +4,9 @@ import java.io.Serializable;
 
 import javax.swing.JOptionPane;
 
+/**
+ * Az ajtókat reprezentáló osztály, melyek két szoba közötti átjárók.
+ */
 public class Door implements Serializable {
     boolean validTo = true;
     Room whereTo;
@@ -11,22 +14,33 @@ public class Door implements Serializable {
     boolean validFrom = true;
     boolean closed=false;
 
+/**
+     * Konstruktor az ajtó létrehozásához.
+     * 
+     * @param r1    "Ahonnan"" szoba.
+     * @param r2    "Ahova" szoba.
+     * @param vf    Az ajtó érvényessége az induló szobából.
+     * @param vt    Az ajtó érvényessége a cél szobába.
+    */
+
     public Door(Room r1, Room r2, boolean vf, boolean vt) {
         whereFrom=r1;
         whereTo=r2;
         validFrom = vf;
         validTo = vt;
     }
-    /**
-     * ajtók bezárását végzi
+     /**
+     * Az ajtó bezárását végző metódus.
      */
     void acceptCloseDoor(){
         this.closed=true;
     }
 
-    /**
-     * Intézi a játékos eltávolítását az előző és hozzáadását a következő szobához
+   /**
+     * Az ajtón átlépést végző metódus, amely eltávolítja a játékost az előző szobából
+     * és hozzáadja a következő szobához.
      * @param p     a karakter, akit át kell léptetni 
+     * @param from  "Ahonnan"" szoba.
      * @return      Igaz, ha a whereTo szobába van elég hely, tehát át lehet lépni. Különben Hamis
      */
     public boolean transferPlayer(Player p, Room from){
@@ -52,7 +66,12 @@ public class Door implements Serializable {
         return false;
     
     }
-    //elso parameter hogy mire valtoztatunk, masodik hogy melyiket--mergenel r1 volt a nagyobb
+    /**
+     * Szobák cseréjét végző metódus, amelynek során egy szobát egy másikra cserél ki az ajtó.
+     * 
+     * @param r1    Az új szoba, amire kell állítani.
+     * @param r2    Az a szoba, amelyről az ajtó át van állítva.
+     */
     public void changeRoom(Room r1,Room r2){
         if(r2==whereTo){
             whereTo=r1;
@@ -69,12 +88,17 @@ public class Door implements Serializable {
     }
 
     /**
-     * ajtók kinyitását végzi
+     * Az ajtó kinyitását elfogadó metódus.
      */
     public void acceptOpenDoor(){
         this.closed=false;
     }
 
+    /**
+     * Az ajtó állapotát váltó metódus, amely lehetővé teszi az ajtó nyitását vagy zárását.
+     * 
+     * @param toOpen    Ha igaz, az ajtó nyitva lesz, ha hamis, akkor zárva.
+     */
     public void switchMe(boolean toOpen){
         if(toOpen){
             closed = false;

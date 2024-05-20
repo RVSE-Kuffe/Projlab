@@ -2,7 +2,10 @@ package logarlecTheGame.Model;
 
 import logarlecTheGame.Model.Interfaces.CycleBased;
 import java.util.Random;
-
+  /**
+     * Átkozot szobaát reprezentáló osztály, 
+     * mely a Szoba osztály leszármazottja
+     */
 public class CursedRoom extends Room implements CycleBased {
     private static Random random=new Random();
     /**
@@ -40,6 +43,13 @@ public class CursedRoom extends Room implements CycleBased {
         return true;
     }
 
+    /**
+ * A szobában történő iteráció során végrehajtott műveleteket definiáló metódus.
+ * A szoba véletlenszerűen választ egy műveletet a három lehetőség közül:
+ * 1. Ajtó bezárása.
+ * 2. Ajtó kinyitása.
+ * 3. Semmi
+ */
     @Override
     public void iterate() {
         int choice= random.nextInt(3);
