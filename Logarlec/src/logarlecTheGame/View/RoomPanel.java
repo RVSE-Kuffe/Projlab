@@ -84,11 +84,11 @@ public class RoomPanel extends JPanel {
     }
 
     public void updateCurrentPlayer() {
-        currentPlayerField.setText("current player: "+ board.objectToString(player));
+        currentPlayerField.setText("Current player: "+ board.objectToString(player));
     }
 
     public void updateRemainingRounds(){
-        remainingRoundsField.setText("Hátralévő akciók száma: " + gameLogic.getRemainingRounds());
+        remainingRoundsField.setText("Remaining actionpoints: " + gameLogic.getRemainingRounds());
     }
 
     public void update(Student p, Board b){

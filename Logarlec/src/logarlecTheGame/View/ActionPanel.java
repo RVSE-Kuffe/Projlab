@@ -40,13 +40,13 @@ public class ActionPanel extends JPanel{
         //String[] options = {"Opció 1", "Opció 2", "Opció 3"};
         Font font = new Font("Arial", Font.PLAIN, 20);
 
-        JLabel s1 = new JLabel("Szoba tárgyai:");
+        JLabel s1 = new JLabel("Room's doors:");
         s1.setFont(font);
         this.add(s1);
         roomItemBox = new JComboBox<>();
         roomItemBox.setBackground(Color.CYAN);
         this.add(roomItemBox);
-        JButton pickUpButton = new JButton("Tárgyfelvétel");
+        JButton pickUpButton = new JButton("Pick Up Item");
         pickUpButton.addActionListener(new ActionListener() {    
             public void actionPerformed(ActionEvent e) {
                 pickUp();
@@ -55,13 +55,13 @@ public class ActionPanel extends JPanel{
         });
         this.add(pickUpButton);
 
-        JLabel s2 = new JLabel("Játékos tárgyai:");
+        JLabel s2 = new JLabel("Player's inventory:");
         s2.setFont(font);
         this.add(s2);
         playerItemBox1 = new JComboBox<>();
         playerItemBox1.setBackground(Color.CYAN);
         this.add(playerItemBox1);
-        JButton putDownButton = new JButton("Tárgyletétel");
+        JButton putDownButton = new JButton("Put Down Item");
         putDownButton.addActionListener(new ActionListener() {    
             public void actionPerformed(ActionEvent e) {
                 putDown();
@@ -70,13 +70,13 @@ public class ActionPanel extends JPanel{
         });
         this.add(putDownButton);
 
-        JLabel s3 = new JLabel("Játékos tárgyai:");
+        JLabel s3 = new JLabel("Player's inventory:");
         s3.setFont(font);
         this.add(s3);
         playerItemBox2 = new JComboBox<>();
         playerItemBox2.setBackground(Color.CYAN);
         this.add(playerItemBox2);
-        JButton pairButton = new JButton("Párosítás");
+        JButton pairButton = new JButton("Pair");
         pairButton.addActionListener(new ActionListener() {    
             public void actionPerformed(ActionEvent e) {
                 pair();
@@ -85,13 +85,13 @@ public class ActionPanel extends JPanel{
         });
         this.add(pairButton);
 
-        JLabel s4 = new JLabel("Szoba ajtói:");
+        JLabel s4 = new JLabel("Room's doors:");
         s4.setFont(font);
         this.add(s4);
         roomDoorBox = new JComboBox<>();
         roomDoorBox.setBackground(Color.CYAN);
         this.add(roomDoorBox);
-        JButton moveButton = new JButton("Ajtóhasználat");
+        JButton moveButton = new JButton("Use Door");
         moveButton.addActionListener(new ActionListener() {    
             public void actionPerformed(ActionEvent e) {
                 move();
@@ -144,14 +144,30 @@ public class ActionPanel extends JPanel{
             if(playerItemBox1.getSelectedItem()!=null &&playerItemBox2.getSelectedItem()!=null){
             Transistor t1 = (Transistor)board.stringToObject((String)playerItemBox1.getSelectedItem());
             Transistor t2 = (Transistor)board.stringToObject((String)playerItemBox2.getSelectedItem());
-            student.pair(t1, t2);
+            if(student.pair(t1, t2)){
+                JOptionPane.showMessageDialog(null, "Selected items successfully paired!");
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Selected items could not be paired!");
+            }
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "You have to select two items to pair, you wasted an actionpoint!");
             }
         }
         catch(ClassCastException e){
             if(playerItemBox1.getSelectedItem()!=null &&playerItemBox2.getSelectedItem()!=null){
             Item i1 = (Item)board.stringToObject((String)playerItemBox1.getSelectedItem());
             Item i2 = (Item)board.stringToObject((String)playerItemBox2.getSelectedItem());
-            student.pair(i1, i2);
+            if(student.pair(i1, i2)){
+                JOptionPane.showMessageDialog(null, "Selected items successfully paired!");
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Selected items could not be paired!");
+            }
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "You have to select two items to pair, you wasted an actionpoint!");
             }
         }
     }
@@ -163,10 +179,10 @@ public class ActionPanel extends JPanel{
         if(roomDoorBox.getSelectedItem()!=null){
         Door temp = (Door)board.stringToObject((String)roomDoorBox.getSelectedItem());
         if(!student.changeR(temp)){
-            JOptionPane.showMessageDialog(null, "Sikertelen átlépés");
+            JOptionPane.showMessageDialog(null, "You can!t use this door (it is either closed or a one-way door)");
         }
         }
-        else JOptionPane.showMessageDialog(null, "rontott kör!");
+        else JOptionPane.showMessageDialog(null, "No selected door, you wasted an actionpoint!");
     }
 
     /**
@@ -175,9 +191,9 @@ public class ActionPanel extends JPanel{
     public void pickUp(){
         if(roomItemBox.getSelectedItem()!=null){
         Item i = (Item)board.stringToObject((String)roomItemBox.getSelectedItem());
-        student.pickUpItem(i);
-        }
-        else JOptionPane.showMessageDialog(null, "rontott kör!");
+        if(!student.pickUpItem(i)) JOptionPane.showMessageDialog(null, "Your inventory is full, you wasted an actionpoint!");
+           }
+        else JOptionPane.showMessageDialog(null, "No selected item, you wasted an actionpoint!");
     }
 
     /**
@@ -186,6 +202,8 @@ public class ActionPanel extends JPanel{
     public void putDown(){
         if(playerItemBox1.getSelectedItem()!=null){
         Item i = (Item)board.stringToObject((String)playerItemBox1.getSelectedItem());
-        student.putDown(i);}
+        student.putDown(i);
+    }
+        else JOptionPane.showMessageDialog(null, "No selected item, you wasted an actionpoint!");
     }
 }
