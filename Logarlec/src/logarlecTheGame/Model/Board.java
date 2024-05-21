@@ -149,11 +149,11 @@ public class Board implements CycleBased, RoomPairing, Serializable{
             //JOptionPane.showMessageDialog(null, "merge!"+ objectToString(r1)+ " másik: "+ objectToString(r2));
             //return r1.acceptPairing(this,r2);
             if((r1.acceptPairing(this,r2)==true)){
-                JOptionPane.showMessageDialog(null, "merge!"+ objectToString(r1)+ " másik: "+ objectToString(r2));
+                JOptionPane.showMessageDialog(null, "Merge! "+ objectToString(r1)+ " with: "+ objectToString(r2));
                 return true;
             }
             else{
-                JOptionPane.showMessageDialog(null, "Sikertelen merge");
+                JOptionPane.showMessageDialog(null, "There was an unsuccessful merge attempt");
                 return false;
             }
         }
@@ -161,16 +161,18 @@ public class Board implements CycleBased, RoomPairing, Serializable{
             //JOptionPane.showMessageDialog(null, "merge!"+ objectToString(r2)+ " másik: "+ objectToString(r1));
             //return r1.acceptPairing(this,r2);
             if((r2.acceptPairing(this,r1)==true)){
-                JOptionPane.showMessageDialog(null, "merge!"+ objectToString(r2)+ " másik: "+ objectToString(r1));
+                JOptionPane.showMessageDialog(null, "Merge! "+ objectToString(r2)+ " with: "+ objectToString(r1));
                 return true;
             }
             else{
-                JOptionPane.showMessageDialog(null, "Sikertelen merge");
+                JOptionPane.showMessageDialog(null, "There was an unsuccessful merge attempt");
                 return false;
             }
            
         }
-        JOptionPane.showMessageDialog(null, "Sikertelen merge");
+        JOptionPane.showMessageDialog(null, "There was an unsuccessful merge attempt");
+        
+        
         return false;
     }
 
@@ -235,7 +237,7 @@ public class Board implements CycleBased, RoomPairing, Serializable{
  * Mindig feloszt(split) egy szobát, és létrehoz egy újat.
  */
     public void forceSplit(Room r){
-        JOptionPane.showMessageDialog(null, "split!"+objectToString(r));
+        JOptionPane.showMessageDialog(null, "Split!: "+objectToString(r));
         Room newRoom= r.newRoom();
         this.addRoom(newRoom);
        //return newRoom;

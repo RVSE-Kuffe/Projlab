@@ -40,7 +40,7 @@ public class ActionPanel extends JPanel{
         //String[] options = {"Opció 1", "Opció 2", "Opció 3"};
         Font font = new Font("Arial", Font.PLAIN, 20);
 
-        JLabel s1 = new JLabel("Room's doors:");
+        JLabel s1 = new JLabel("Room's items:");
         s1.setFont(font);
         this.add(s1);
         roomItemBox = new JComboBox<>();

@@ -80,7 +80,6 @@ public class Room implements Serializable{
      */
     public void addItem(Item i){
         itemList.add(i);
-        //ha ragacsos vagy valami akkor removeItem, tehár törlődik, nem lezs a játékban többet
     }
 
 
@@ -188,14 +187,12 @@ public class Room implements Serializable{
         Room room2 =new Room(this.roomid + 1, this.capacity, myBoard);
         Door splitDoor = new Door(this, room2,true,true);
         this.addDoor(splitDoor);
-        myBoard.addToBoard(splitDoor, "splitDoor"+splitCounter);
+        myBoard.addToBoard(splitDoor, "splitDoor"+myBoard.objectToString(this)+"-"+splitCounter);
         room2.addDoor(splitDoor);
         String newRoomName =   myBoard.objectToString(this) + "s" + splitCounter++;
         myBoard.addToBoard(room2, newRoomName);
         return room2;
     }
-
-    void stunRoom(){}
 
     /**
      * szobába érkező játékost megpróbálja megöletni mindenkivel
