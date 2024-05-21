@@ -40,7 +40,7 @@ public class CursedRoom extends Room implements CycleBased {
      */
     @Override
     public boolean acceptPairing(Board b, Room r){
-        return true;
+        return false;
     }
 
     /**

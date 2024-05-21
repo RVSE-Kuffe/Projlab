@@ -165,7 +165,7 @@ public class Player implements PickUp, GasProtect, Serializable{
         if(stunned&&stunCounter==2){
             stunned=false;
             stunCounter=0;
-            System.out.println("heal");
+            
         }
     }
 

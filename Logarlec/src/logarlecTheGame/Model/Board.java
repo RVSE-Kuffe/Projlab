@@ -160,7 +160,7 @@ public class Board implements CycleBased, RoomPairing, Serializable{
         if(r2.getCapacity()>r1.getCapacity() && (r1.getPlayerCount()+r2.getPlayerCount()<=r2.getCapacity())){
             //JOptionPane.showMessageDialog(null, "merge!"+ objectToString(r2)+ " másik: "+ objectToString(r1));
             //return r1.acceptPairing(this,r2);
-            if((r1.acceptPairing(this,r2)==true)){
+            if((r2.acceptPairing(this,r1)==true)){
                 JOptionPane.showMessageDialog(null, "merge!"+ objectToString(r2)+ " másik: "+ objectToString(r1));
                 return true;
             }
@@ -261,6 +261,9 @@ public class Board implements CycleBased, RoomPairing, Serializable{
         int choice= random.nextInt(3);
         switch(choice){
             case 1:
+                if(roomList.size()<=3){
+                    break;
+                }
                 int index1=random.nextInt(roomList.size());
                 int index2=random.nextInt(roomList.size());
                 while(index2==index1){
@@ -269,6 +272,9 @@ public class Board implements CycleBased, RoomPairing, Serializable{
                 forceMerge(roomList.get(index1), roomList.get(index2));
                 break;
             case 2:
+                if(roomList.size()>=16){
+                    break;
+                }
                 int index=random.nextInt(roomList.size());
                 forceSplit(roomList.get(index));
                 break;
