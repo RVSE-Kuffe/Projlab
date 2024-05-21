@@ -25,6 +25,7 @@ public class Airfreshener extends Item{
      public void acceptPutDown(Student s){
         if(isFake){
             s.useFake(this);
+            return;
         }
         s.use(this);
      }
