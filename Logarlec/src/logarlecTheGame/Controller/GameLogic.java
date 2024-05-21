@@ -39,6 +39,8 @@ public class GameLogic implements Serializable{
     /** A játék nézetét reprezentáló objektum */
     private transient View view;
 
+    public boolean won;
+
 
     /**
      * Konstruktor, amely inicializálja a játékot a megadott számú diákkal, 
@@ -50,6 +52,7 @@ public class GameLogic implements Serializable{
         board = new Board(this);
         students = new ArrayList<>();
         otherPlayers = new ArrayList<>();
+        won=false;
         int id=1;
         for(int i=0; i<numberOfStudents;i++){
             Student student = new Student(id, null);
@@ -156,7 +159,7 @@ public class GameLogic implements Serializable{
      * megpróbál mindenkit gyógyítani és lépteti a körfüggő játékelemeket
      */
     public void turn() {
-        if (!isGameEnded()) {
+        if (!isGameEnded()&&!isWon()) {
             actionPoints --;
 
             if (currentPlayer.getIsStunned() || actionPoints == 0) {
@@ -201,10 +204,15 @@ public class GameLogic implements Serializable{
      */
     public void endGame(boolean won) {
         if (won) {
+            this.won=true;
             view.won();
         } else {
             view.lost();
         }
+    }
+
+    public boolean isWon(){
+        return this.won;
     }
 
     /**
